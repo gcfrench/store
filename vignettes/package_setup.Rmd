@@ -116,6 +116,24 @@ navbar:
       href: https://github.com/gcfrench
 ```
 
+# Add to github
+
+**usethis::use_git** initiates a Git repository, making the initial commits
+```{r}
+usethis::use_git()
+```
+
+**usethis::use_github** creates the repository on Github and pushes the initial commits. This needs a Github Personal Access Token (PAT) which can be created using **usethis::create_github_token**. Information on how to do this can be found in [Happy Git and Github for the useR](https://happygitwithr.com/credential-caching.html)
+```{r}
+usethis::use_github()
+# usethis::create_github_token()
+```
+
+**usethis::use_github_action** configures files to use github to host package website
+```{r}
+usethis::use_github_action("pkgdown")
+```
+
 # Add and edit script files
 
 ## Add new script --------------------------------------------------------------
