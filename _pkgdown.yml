@@ -1,0 +1,20 @@
+template:
+  params:
+    bootswatch: flatly
+
+navbar:
+  title: score
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "information"
+      menu:
+      - text: "package setup"
+        href: articles/package_setup.html
+    - text: "versions"
+      href: news/index.html
+  right:
+    - icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/gcfrench
+    - icon: "fab fa-github fa-lg"
+      href: https://github.com/gcfrench

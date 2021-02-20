@@ -1,0 +1,249 @@
+---
+title: ""
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r packages, echo=FALSE}
+library(store)
+```
+
+# Create the skeleton package
+
+**usethis::create_package** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
+```{r}
+usethis::create_package("C:/Files/packages/store")
+```
+
+**usethis::use_description** update the title, author and description details in the description file
+```{r}
+usethis::use_description(fields = list(Title = "Store commonly used functions and lookups",
+                                       `Authors@R` = person("Graham", "French", 
+                                                            role = c("aut", "cre"),
+                                                            email = "gcfrench@googlemail.com"),
+                                       Description = "This package stores the commonly used
+                                       functions and lookups, along with function tests and
+                                       documentation. These can be then used when creating new
+                                       packages by copy and pasting the relevant R scripts and
+                                       associated test scripts into the new package, as well as
+                                       updating the pkgdown file"))
+```
+
+**usethis::use_cc0_license** add one of the license options for the package
+```{r}
+usethis::use_cc0_license()
+```
+
+**usethis::use_readme_rmd** add a readme file, removing the default text from the file. This file is displayed as the front home page in the pkgdown website
+```{r}
+usethis::use_readme_rmd()
+```
+
+**usethis::use_news_md** add a news file, removing the default text from the file. This file will contain the news on each version release
+```{r}
+usethis::use_news_md()
+```
+
+**usethis::use_pipe** add the %>% pipe operator with the addition of the utils-pipe.R file and magrittr package to the imports field in the description file
+```{r}
+usethis::use_pipe()
+```
+
+**usethis::use_data_raw** add the data-raw directory and empty lookup_raw containing the scripts used to format and add lookup datasets
+```{r}
+usethis::use_data_raw("lookup_raw")
+```
+
+**usethis::use_testthat** add the testthat directory used to contain the test scripts and testthat package to suggests field in the description file
+```{r}
+usethis::use_testthat()
+```
+
+**devtools::document** add the man directory containing the document .Rd files. Documents can also be updated using Ctlr-shift-D or through the Build:Document menu
+```{r}
+devtools::document()
+```
+
+**usethis::use_pgkdown** add the _pkgdown.yml file used to create the menu structure for the package website
+```{r}
+usethis::use_pkgdown()
+```
+
+pkgdown.yml template
+```{}
+template:
+  params:
+    bootswatch: flatly
+    
+reference:
+- title: ""
+  desc: ""
+- contents:
+  - function_name
+  
+navbar:
+  title: package_name
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "information"
+      menu:
+      - text: ""
+        href: articles/script_name.html
+    - text: "lookups and functions"
+      href: reference/script_name.html
+    - text: "analyses"
+      menu:
+      - text: ""
+        href: articles/script_name.html
+    - text: "versions"
+      href: news/index.html
+   right:
+    - icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/gcfrench
+    - icon: "fab fa-github fa-lg"
+      href: https://github.com/gcfrench
+```
+
+# Add and edit script files
+
+## Add new script --------------------------------------------------------------
+
+**usethis::use_vignette**("vignette_name"): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.
+```{r}
+usethis::use_vignette("script_name")
+```
+
+**pkgdown::build_articles** builds the html files in the articles sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+```{r}
+pkgdown::build_article("script_name")
+# pkgdown::build_articles()
+pkgdown::build_articles_index()
+```
+
+## Add new function ------------------------------------------------------------
+
+**usethis::use_r** add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
+```{r}
+usethis::use_r("function_script_name")
+```
+
+**usethis::use_package** add packages to the imports section of the description file
+```{r}
+usethis::use_package("package_name")
+```
+
+**devtools::document** update documentation, can also use Ctlr-shift-D or through the Build:Document menu
+```{r}
+devtools::document()
+```
+
+**pkgdown::build_reference** builds the html files in the reference sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+```{r}
+pkgdown::build_reference
+pkgdown::build_reference_index()
+```
+
+## Add new test script ---------------------------------------------------------
+
+**usethis::use_test** add unit tests for function
+```{r}
+usethis::use_test("test_script_name")
+```
+
+**devtools::test** run all tests, can also use Ctrl-Shift_T or Build-Test Package
+```{r}
+devtools::test()
+```
+
+## Add new data script ---------------------------------------------------------
+
+**usethis::use_data_raw** add a new data_raw script
+```{r}
+usethis::use_data_raw("data_raw_script_name")
+```
+
+**usethis::use_data** add the .rda data file in the data directory, after running the data raw script so that the data frame is stored in the global environment
+```{r}
+usethis::use_data(data_frame_name)
+```
+
+**usethis::use_r** document the data frame in a R script. Running **devtools::document** afterwards
+```{r}
+usethis::use_r("lookup")
+```
+
+Data frame documentation template
+```
+#' Data frame name
+#'
+#' Data frame description
+#'
+#' @format A tibble with xx rows and x variables
+#' \describe{
+#'   \item{field_name}{field description}
+#'   \item{field_name}{field description}
+#' }
+"data_frame_name"
+```
+
+**pkgdown::build_reference** builds the html files in the reference sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+```{r}
+pkgdown::build_reference
+pkgdown::build_reference_index()
+```
+
+## Edit news file --------------------------------------------------------------
+
+**usethis::use_version** update the package version
+```{r}
+usethis::use_version()
+```
+
+**usethis::edit_file** edit the news file with the new package version
+```{r}
+usethis::edit_file("News.md")
+```
+
+**pkgdown::build_news** builds the index.html file in the news sub-directory of the docs directory
+```{r}
+pkgdown::build_news()
+```
+
+## Edit the README file --------------------------------------------------------
+
+**usethis::edit_file** edit the README.Rmd file
+```{r}
+usethis::edit_file("README.Rmd")
+```
+
+**pkgdown::build_home** builds the index.html file in the docs directory
+```{r}
+pkgdown::build_home()
+```
+
+# Install package
+
+Build documentation, test functions and build website, then run **Install and Restart** to build and install package
+
+```{r}
+devtools::document()
+devtools::test()
+pkgdown::build_site()
+```
+
+
+
+
+

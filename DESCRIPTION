@@ -1,0 +1,23 @@
+Package: store
+Title: Store commonly used functions and lookups
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Graham",
+           family = "French",
+           role = c("aut", "cre"),
+           email = "gcfrench@googlemail.com")
+Description: This package stores the commonly used
+    functions and lookups, along with function tests and documentation.
+    These can be then used when creating new packages by copy and pasting
+    the relevant R scripts and associated test scripts into the new
+    package, as well as updating the pkgdown file
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    magrittr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
