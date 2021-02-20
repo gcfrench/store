@@ -9,7 +9,7 @@ navbar:
       href: index.html
     - text: "information"
       menu:
-      - text: "package setup"
+      - text: "Create and update a package"
         href: articles/package_setup.html
     - text: "versions"
       href: news/index.html

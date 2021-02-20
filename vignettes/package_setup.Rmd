@@ -1,8 +1,8 @@
 ---
-title: ""
+title: "Create and update a package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{}
+  %\VignetteIndexEntry{Create and update a package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,13 @@ knitr::opts_chunk$set(
 library(store)
 ```
 
-# Create the skeleton package
+This documents the functions to run to help create and update a R package. Further information can be found at
+
+* [usethis documentation](https://usethis.r-lib.org/)
+* [pkgdown documentation](https://pkgdown.r-lib.org/)
+* [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
+
+## Create the skeleton package --------------------------------------------
 
 **usethis::create_package** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
 ```{r}
@@ -126,7 +132,7 @@ usethis::use_lifecycle()
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
 ```
 
-# Add to github --------------------------------------------
+## Add to github --------------------------------------------
 
 **usethis::use_git** initiates a Git repository, making the initial commits
 ```{r}
@@ -144,7 +150,7 @@ usethis::use_github()
 usethis::use_github_action("pkgdown")
 ```
 
-# Add package versioning --------------------------------------------
+## Add package versioning --------------------------------------------
 
 Navigate to the home project directory first
 
@@ -177,9 +183,9 @@ renv::activate()
 renv::restore()
 ```
 
-# Add and edit script files
+## Add and edit script files
 
-## Add new script --------------------------------------------
+### Add new script --------------------------------------------
 
 **usethis::use_vignette**("vignette_name"): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.
 ```{r}
@@ -193,7 +199,7 @@ pkgdown::build_article("script_name")
 pkgdown::build_articles_index()
 ```
 
-## Add new function --------------------------------------------
+### Add new function --------------------------------------------
 
 **usethis::use_r** add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
 ```{r}
@@ -216,7 +222,7 @@ pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-## Add new test script --------------------------------------------
+### Add new test script --------------------------------------------
 
 **usethis::use_test** add unit tests for function
 ```{r}
@@ -228,7 +234,7 @@ usethis::use_test("test_script_name")
 devtools::test()
 ```
 
-## Add new data script --------------------------------------------
+### Add new data script --------------------------------------------
 
 **usethis::use_data_raw** add a new data_raw script
 ```{r}
@@ -265,7 +271,7 @@ pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-## Edit news file --------------------------------------------
+### Edit news file --------------------------------------------
 
 **usethis::use_version** update the package version
 ```{r}
@@ -282,7 +288,7 @@ usethis::edit_file("News.md")
 pkgdown::build_news()
 ```
 
-## Edit the README file --------------------------------------------
+### Edit the README file --------------------------------------------
 
 **usethis::edit_file** edit the README.Rmd file
 ```{r}
@@ -294,7 +300,7 @@ usethis::edit_file("README.Rmd")
 pkgdown::build_home()
 ```
 
-# Install package
+## Install package
 
 Build documentation, test functions and build website, then run **Install and Restart** to build and install package
 
