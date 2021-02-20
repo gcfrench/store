@@ -113,10 +113,20 @@ navbar:
     - icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/gcfrench
     - icon: "fab fa-github fa-lg"
-      href: https://github.com/gcfrench
+      href: https://github.com/gcfrench/store
 ```
 
-# Add to github
+**usethis::use_lifecycle** add the lifecycle badges in the man directory
+```{r}
+usethis::use_lifecycle()
+```
+
+**usethis::use_lifecycle_badge** add lifecycle badge to home page
+```{r}
+usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
+```
+
+# Add to github --------------------------------------------
 
 **usethis::use_git** initiates a Git repository, making the initial commits
 ```{r}
@@ -134,9 +144,42 @@ usethis::use_github()
 usethis::use_github_action("pkgdown")
 ```
 
+# Add package versioning --------------------------------------------
+
+Navigate to the home project directory first
+
+**renv::init** initiates the renv environment, creating the renv folder and adding the renv.lock file, linking the relevant packages from the renv cache
+```{r}
+renv::init()
+```
+
+**renv::status** check the renv lock file is up-to-date, run **renv::snapshot** to update the renv lock file if not
+
+```{r}
+renv::status()
+renv::snapshot()
+```
+
+**renv::deactivate** turn off the renv environment, then manually delete the renv folder and .Rprofile file
+```{r}
+renv::deactivate()
+```
+
+Navigate to the home project directory first
+
+**renv::activate** turn on the renv environment
+```{r}
+renv::activate()
+```
+
+**renv::restore** restore the package versions contained within the renv lock file
+```{r}
+renv::restore()
+```
+
 # Add and edit script files
 
-## Add new script --------------------------------------------------------------
+## Add new script --------------------------------------------
 
 **usethis::use_vignette**("vignette_name"): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.
 ```{r}
@@ -150,7 +193,7 @@ pkgdown::build_article("script_name")
 pkgdown::build_articles_index()
 ```
 
-## Add new function ------------------------------------------------------------
+## Add new function --------------------------------------------
 
 **usethis::use_r** add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
 ```{r}
@@ -173,7 +216,7 @@ pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-## Add new test script ---------------------------------------------------------
+## Add new test script --------------------------------------------
 
 **usethis::use_test** add unit tests for function
 ```{r}
@@ -185,7 +228,7 @@ usethis::use_test("test_script_name")
 devtools::test()
 ```
 
-## Add new data script ---------------------------------------------------------
+## Add new data script --------------------------------------------
 
 **usethis::use_data_raw** add a new data_raw script
 ```{r}
@@ -222,7 +265,7 @@ pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-## Edit news file --------------------------------------------------------------
+## Edit news file --------------------------------------------
 
 **usethis::use_version** update the package version
 ```{r}
@@ -239,7 +282,7 @@ usethis::edit_file("News.md")
 pkgdown::build_news()
 ```
 
-## Edit the README file --------------------------------------------------------
+## Edit the README file --------------------------------------------
 
 **usethis::edit_file** edit the README.Rmd file
 ```{r}
