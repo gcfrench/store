@@ -2,6 +2,13 @@ template:
   params:
     bootswatch: flatly
 
+reference:
+- title: "Formatting"
+  desc: "Data formatting"
+- contents:
+  - extract_comma_delimited_list
+  - extract_semicolon_delimited_list
+
 navbar:
   title: score
   left:
@@ -11,6 +18,8 @@ navbar:
       menu:
       - text: "Create and update a package"
         href: articles/package_setup.html
+    - text: "lookups and functions"
+      href: reference/index.html
     - text: "versions"
       href: news/index.html
   right:

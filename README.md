@@ -28,4 +28,31 @@ document in the information section.
 
 ## Installation
 
+The package can be installed from GitHub
+
+``` r
+devtools::install_github("gcfrench/store")
+```
+
 ## Usage
+
+The **information section** is the place where my useful documents are
+stored. These documents provide information and guidance when writing R
+scripts, for example **creating and updating a R package**.
+
+The **lookups and functions** section contain my useful functions and
+lookup tables. These can be used either directly by installing and
+loading this package or by copying and pasting the R code from the
+package’s data-raw or R sub-directories, into your R script. The
+functions contain examples within their documentation to demonstrate
+their use.
+
+The **versions** section lists the version history of this package,
+along with a summary of the documents, lookups and functions added.
+
+## Code of Conduct
+
+Please note that the store project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
