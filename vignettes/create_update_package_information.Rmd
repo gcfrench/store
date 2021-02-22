@@ -21,6 +21,7 @@ library(store)
 
 This documents the functions to run to help create and update a R package. Further information can be found at
 
+* [devtools documentation](https://devtools.r-lib.org/)
 * [usethis documentation](https://usethis.r-lib.org/)
 * [pkgdown documentation](https://pkgdown.r-lib.org/)
 * [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
