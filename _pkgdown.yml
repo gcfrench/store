@@ -3,11 +3,26 @@ template:
     bootswatch: flatly
 
 reference:
-- title: "Formatting"
-  desc: "Data formatting"
+- title: "Data manipulation"
+  desc: "Format data"
 - contents:
   - extract_comma_delimited_list
   - extract_semicolon_delimited_list
+- title: "Store credentials"
+  desc: "Securely store and retrive database connections using the keyring package"
+- contents:
+  - create_locked_keyring
+  - get_keyring_status
+  - list_keys
+  - unlock_keyring
+  - add_key
+  - delete_key
+  - lock_keyring
+- title: "Database connections"
+  desc: "Connect to databases"
+- contents:
+  - get_mysql_connection
+  - get_sqlserver_connection
 
 navbar:
   title: score
