@@ -2,6 +2,7 @@
 
 export("%>%")
 export(add_key)
+export(add_tibble_to_list)
 export(create_locked_keyring)
 export(delete_key)
 export(extract_comma_delimited_list)

@@ -17,6 +17,13 @@ character, comma delimited list
 \description{
 This function extracts a comma delimited list from a data frame's column
 }
+\details{
+The function is an example of the use of a \href{https://adv-r.hadley.nz/function-factories.html}{function factory},
+\href{https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/}{tidy evaluation}
+and purrr's \href{https://purrr.tidyverse.org/reference/map.html}{map function}.
+The function may be called on a \href{https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html}{nested data frame}
+to extract the comma delimited list
+}
 \examples{
 suppressPackageStartupMessages({
  library(dplyr)

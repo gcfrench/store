@@ -8,6 +8,7 @@ reference:
 - contents:
   - extract_comma_delimited_list
   - extract_semicolon_delimited_list
+  - add_tibble_to_list
 - title: "Store credentials"
   desc: "Securely store and retrive database connections using the keyring package"
 - contents:

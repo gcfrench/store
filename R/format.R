@@ -23,6 +23,13 @@ extract_delimited_list <- function(delimiter) {
 #' extract_comma_delimited_list
 #'
 #' This function extracts a comma delimited list from a data frame's column
+#'
+#' The function is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
+#' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+#' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
+#' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
+#' to extract the comma delimited list
+#'
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #'
@@ -56,6 +63,13 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #' extract_semicolon_delimited_list
 #'
 #' This function extracts a semi-colon delimited list from a data frame's column
+#'
+#' The function is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
+#' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+#' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
+#' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
+#' to extract the semi-colon delimited list
+#'
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #'
@@ -85,6 +99,36 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #'  select(-penguins)
 #' heaviest_penguins
 extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
+
+#' add tibble to list
+#'
+#' This function prepends tibbles to a list, creating the list
+#' in the global environment if not already present
+#'
+#' The function is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
+#'
+#' @param .data tibble, tibble to be added
+#' @param .name character, name of tibble to be added
+#'
+#' @return tibble, original tibble is returned invisibly
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' add_tibble_to_list(tibble, "tibble_name")
+#' }
+add_tibble_to_list <- function(.data, .name) {
+  if(!exists("tibble_list", envir = globalenv())) {
+    assign("tibble_list", list(), envir = globalenv())
+  }
+  tibble_list <- get("tibble_list", envir = globalenv())
+  .data <- .data %>%
+    list() %>%
+    purrr::set_names(.name) %>%
+    purrr::prepend(tibble_list)
+  assign("tibble_list", .data, envir = globalenv())
+  invisible(.data)
+}
 
 
 
