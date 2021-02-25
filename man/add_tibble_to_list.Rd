@@ -22,7 +22,41 @@ in the global environment if not already present
 The function is an example of \href{http://adv-r.had.co.nz/Environments.html}{assigning a variable to an environment}
 }
 \examples{
-\dontrun{
-add_tibble_to_list(tibble, "tibble_name")
-}
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+    library(dplyr)
+    library(forcats)
+  })
+})
+# select top 3 heaviest penguins for each species
+heaviest_penguins <- penguins \%>\%
+  select(species, body_mass_g) \%>\%
+  group_by(species) \%>\%
+  arrange(desc(body_mass_g)) \%>\%
+  slice_head(n = 3) \%>\%
+  ungroup()
+heaviest_penguins
+
+# prepend heaviest penguin species tibble to list
+heaviest_penguins \%>\%
+  filter(species == "Adelie") \%>\%
+  mutate(species = fct_drop(species)) \%>\%
+  add_tibble_to_list("adelie")
+
+heaviest_penguins \%>\%
+  filter(species == "Chinstrap") \%>\%
+  mutate(species = fct_drop(species)) \%>\%
+  add_tibble_to_list("chinstrap")
+
+heaviest_penguins \%>\%
+  filter(species == "Gentoo") \%>\%
+  mutate(species = fct_drop(species)) \%>\%
+  add_tibble_to_list("gentoo")
+str(tibble_list, max.level = 1, list.len = 3)
+
+# convert list to tibble
+heaviest_penguins <- bind_rows(tibble_list)
+heaviest_penguins
 }

@@ -26,11 +26,13 @@ to extract the comma delimited list
 }
 \examples{
 suppressPackageStartupMessages({
- library(dplyr)
- library(purrr)
- library(palmerpenguins)
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+    library(dplyr)
+    library(purrr)
+  })
 })
-library(store)
 # select top 5 heaviest penguins from each species on each island
 heaviest_penguins <- penguins \%>\%
  select(species, island, body_mass_g) \%>\%
