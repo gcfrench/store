@@ -158,42 +158,58 @@ delete_key <- function(keyring_name, service_name) {
 
 #' get_sqlserver_connection
 #'
-#' This function initiates a SQL Server connection either
-#' using stored database credentials using the keyring package
-#' or else requesting database credentials. The SQKL Server tables
-#' are added to the connection pane
+#' This function initiates a SQL Server connection using windows authentication,
+#' either using stored database credentials through the keyring package or else
+#' requesting database credentials in the console. The SQL Server tables are added
+#' to the connection pane
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, name of service storing credentials
-#' @param keyring logical, use of keyring TRUE (default) or FALSE
+#' @param keyring logical, use of keyring TRUE (default) or request credentials (FALSE)
 #'
 #' @return connection object, SQL Server connection object
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' get_sqlserver_connection("keyring", "database_service_name")
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'    library(DBI)
+#'    library(odbc)
+#'  })
+#' })
+#' # connect to database, using keyring stored credentials
+#' con <- get_sqlserver_connection(keyring_name = "keyring_name",
+#'                                 service_name = "database_name",
+#'                                 keyring = TRUE)
+#' # list tables
+#' dbListTables(con)
+#'
+#' # disconnect from database
+#' dbDisconnect(con)
 #' }
 get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE) {
 
   # get connection string details
   if (!keyring) {
 
-    server = readline("SQL server name: ")
-    database = readline("Database name: ")
+    # get server details
+    server <- readline("SQL server name: ")
+    database <- readline("Database name: ")
 
   } else{
 
+    # get server details
     keyring::keyring_unlock(keyring_name)
-    server = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name, service = service_name))[["server"]]
-    database = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name, service = service_name))[["database"]]
+    server <- jsonlite::fromJSON(keyring::key_get(keyring = keyring_name, service = service_name))[["server"]]
+    database <- jsonlite::fromJSON(keyring::key_get(keyring = keyring_name, service = service_name))[["database"]]
     keyring::keyring_lock(keyring_name)
 
   }
 
+  # get database connection function
   get_connection <- function(connection_function) {
-
-    # get connection
     tryCatch(connection_function(odbc::odbc(),
                                  driver = "SQL Server",
                                  server = server,
@@ -201,10 +217,10 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
              error = function(e) {stop("Connection to SQL SERVER UNSUCCESSFUL", call. = FALSE)})
   }
 
-  # Connect to SQL Server database
+  # connect to SQL Server database
   con <- get_connection(DBI::dbConnect)
 
-  # Add connection to connection pane
+  # add connection to connection pane
   get_connection(connections::connection_open)
 
   return(con)
@@ -213,7 +229,7 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #' get_mysql_connection
 #'
 #' This function initiates a MySQL connection using stored database credentials
-#' using the keyring package. The MySQL tables are added to the connection pane
+#' through the keyring package. The MySQL tables are added to the connection pane
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, name of service storing credentials
@@ -223,15 +239,29 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #'
 #' @examples
 #' \dontrun{
-#' get_mysql_connection("keyring", "database_service_name")
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'    library(DBI)
+#'    library(odbc)
+#'  })
+#' })
+#' # connect to database, using keyring stored credentials
+#' con <- get_mysql_connection(keyring_name = "keyring_name",
+#'                             service_name = "database_name")
+#' # list tables
+#' dbListTables(con)
+#'
+#' # disconnect from database
+#' dbDisconnect(con)
 #' }
 get_mysql_connection <- function(keyring_name, service_name) {
 
+  # unlock keyring
   keyring::keyring_unlock(keyring_name)
 
+  # get database connection function
   get_connection <- function(connection_function) {
-
-    # get connection
     tryCatch(connection_function(RMariaDB::MariaDB(),
                                  host = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name,
                                                                             service = service_name))[["server"]],
@@ -245,12 +275,13 @@ get_mysql_connection <- function(keyring_name, service_name) {
                stop("Connection to MySQL UNSUCCESSFUL", call. = FALSE)})
   }
 
-  # Connect to MySQL database
+  # connect to MySQL database
   con <- get_connection(DBI::dbConnect)
 
-  # Add connection to connection pane
+  # add connection to connection pane
   get_connection(connections::connection_open)
 
+  # lock keyring
   keyring::keyring_lock(keyring_name)
 
   return(con)

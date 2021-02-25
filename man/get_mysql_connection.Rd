@@ -16,10 +16,24 @@ connection object, MySQL connection object
 }
 \description{
 This function initiates a MySQL connection using stored database credentials
-using the keyring package. The MySQL tables are added to the connection pane
+through the keyring package. The MySQL tables are added to the connection pane
 }
 \examples{
 \dontrun{
-get_mysql_connection("keyring", "database_service_name")
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+   library(DBI)
+   library(odbc)
+ })
+})
+# connect to database, using keyring stored credentials
+con <- get_mysql_connection(keyring_name = "keyring_name",
+                            service_name = "database_name")
+# list tables
+dbListTables(con)
+
+# disconnect from database
+dbDisconnect(con)
 }
 }

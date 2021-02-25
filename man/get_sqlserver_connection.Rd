@@ -11,19 +11,34 @@ get_sqlserver_connection(keyring_name, service_name, keyring = TRUE)
 
 \item{service_name}{character, name of service storing credentials}
 
-\item{keyring}{logical, use of keyring TRUE (default) or FALSE}
+\item{keyring}{logical, use of keyring TRUE (default) or request credentials (FALSE)}
 }
 \value{
 connection object, SQL Server connection object
 }
 \description{
-This function initiates a SQL Server connection either
-using stored database credentials using the keyring package
-or else requesting database credentials. The SQKL Server tables
-are added to the connection pane
+This function initiates a SQL Server connection using windows authentication,
+either using stored database credentials through the keyring package or else
+requesting database credentials in the console. The SQL Server tables are added
+to the connection pane
 }
 \examples{
 \dontrun{
-get_sqlserver_connection("keyring", "database_service_name")
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+   library(DBI)
+   library(odbc)
+ })
+})
+# connect to database, using keyring stored credentials
+con <- get_sqlserver_connection(keyring_name = "keyring_name",
+                                service_name = "database_name",
+                                keyring = TRUE)
+# list tables
+dbListTables(con)
+
+# disconnect from database
+dbDisconnect(con)
 }
 }

@@ -19,7 +19,14 @@ RoxygenNote: 7.1.1
 Imports: 
     magrittr,
     dplyr,
-    purrr
+    purrr,
+    keyring,
+    stringr,
+    jsonlite,
+    odbc,
+    DBI,
+    connections,
+    RMariaDB
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
