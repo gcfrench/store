@@ -210,7 +210,6 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
   return(con)
 }
 
-
 #' get_mysql_connection
 #'
 #' This function initiates a MySQL connection using stored database credentials
