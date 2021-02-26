@@ -7,6 +7,10 @@
 #' Remember this password as it will be needed everytime you access
 #' the database connection strings stored in this keyring.
 #'
+#' More information on securing credentials in R can be found in RStudio's
+#' [Securing Credentials](https://db.rstudio.com/best-practices/managing-credentials/)
+#' webpage.
+#'
 #' @param keyring_name
 #'
 #' @return character, keyring name
@@ -161,7 +165,10 @@ delete_key <- function(keyring_name, service_name) {
 #' This function initiates a SQL Server connection using windows authentication,
 #' either using stored database credentials through the keyring package or else
 #' requesting database credentials in the console. The SQL Server tables are added
-#' to the connection pane
+#' to the connection pane.
+#'
+#' More information on connecting to databases using R can be found in RStudios
+#' [Databases using R](https://db.rstudio.com/) webpages.
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, name of service storing credentials
@@ -185,6 +192,9 @@ delete_key <- function(keyring_name, service_name) {
 #'                                 keyring = TRUE)
 #' # list tables
 #' dbListTables(con)
+#'
+#' # get query
+#' database_query <- dbGetQuery(con, "sql_statement")
 #'
 #' # disconnect from database
 #' dbDisconnect(con)
@@ -229,7 +239,10 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #' get_mysql_connection
 #'
 #' This function initiates a MySQL connection using stored database credentials
-#' through the keyring package. The MySQL tables are added to the connection pane
+#' through the keyring package. The MySQL tables are added to the connection pane.
+#'
+#' More information on connecting to databases using R can be found in RStudios
+#' [Databases using R](https://db.rstudio.com/) webpages.
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, name of service storing credentials
@@ -251,6 +264,9 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #'                             service_name = "database_name")
 #' # list tables
 #' dbListTables(con)
+#'
+#' # get query
+#' database_query <- dbGetQuery(con, "sql_statement")
 #'
 #' # disconnect from database
 #' dbDisconnect(con)

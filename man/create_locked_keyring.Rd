@@ -20,6 +20,10 @@ This keyring will be used to store database connection strings.
 On creating the keyring you will be asked for a password.
 Remember this password as it will be needed everytime you access
 the database connection strings stored in this keyring.
+
+More information on securing credentials in R can be found in RStudio's
+\href{https://db.rstudio.com/best-practices/managing-credentials/}{Securing Credentials}
+webpage.
 }
 \examples{
 \dontrun{

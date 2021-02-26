@@ -3,12 +3,6 @@ template:
     bootswatch: flatly
 
 reference:
-- title: "Data manipulation"
-  desc: "Format data"
-- contents:
-  - extract_comma_delimited_list
-  - extract_semicolon_delimited_list
-  - add_tibble_to_list
 - title: "Store credentials"
   desc: "Securely store and retrive database connections using the keyring package"
 - contents:
@@ -24,6 +18,16 @@ reference:
 - contents:
   - get_mysql_connection
   - get_sqlserver_connection
+- title: "Data manipulation"
+  desc: "Format data"
+- contents:
+  - extract_comma_delimited_list
+  - extract_semicolon_delimited_list
+  - add_tibble_to_list
+- title: "Export data and analyses"
+  desc: "Export data to Excel spreadsheets"
+- contents:
+  - add_new_spreadsheet
 
 navbar:
   title: score

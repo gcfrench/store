@@ -20,7 +20,11 @@ connection object, SQL Server connection object
 This function initiates a SQL Server connection using windows authentication,
 either using stored database credentials through the keyring package or else
 requesting database credentials in the console. The SQL Server tables are added
-to the connection pane
+to the connection pane.
+}
+\details{
+More information on connecting to databases using R can be found in RStudios
+\href{https://db.rstudio.com/}{Databases using R} webpages.
 }
 \examples{
 \dontrun{
@@ -37,6 +41,9 @@ con <- get_sqlserver_connection(keyring_name = "keyring_name",
                                 keyring = TRUE)
 # list tables
 dbListTables(con)
+
+# get query
+database_query <- dbGetQuery(con, "sql_statement")
 
 # disconnect from database
 dbDisconnect(con)
