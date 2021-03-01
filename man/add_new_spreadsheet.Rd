@@ -49,6 +49,7 @@ suppressPackageStartupMessages({
     library(dplyr)
     library(stringr)
     library(ggplot2)
+    library(here)
     library(lubridate)
     library(openxlsx)
   })
@@ -106,8 +107,5 @@ add_new_spreadsheet("palmerpenguins", mass_flipper_data,
                     image_width = 6,
                     image_height = 6)
 saveWorkbook(workbook, workbook_path, overwrite = TRUE)
-
-# tidy up
-if (dir_exists("output")) {dir_delete("output")}
 }
 }

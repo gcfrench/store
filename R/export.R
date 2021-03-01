@@ -30,6 +30,7 @@
 #'     library(dplyr)
 #'     library(stringr)
 #'     library(ggplot2)
+#'     library(here)
 #'     library(lubridate)
 #'     library(openxlsx)
 #'   })
@@ -87,9 +88,6 @@
 #'                     image_width = 6,
 #'                     image_height = 6)
 #' saveWorkbook(workbook, workbook_path, overwrite = TRUE)
-#'
-#' # tidy up
-#' if (dir_exists("output")) {dir_delete("output")}
 #' }
 add_new_spreadsheet <- function(spreadsheet_name, data, image_path = NA_character_,
                                 image_width, image_height) {

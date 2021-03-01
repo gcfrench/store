@@ -18,6 +18,10 @@ reference:
 - contents:
   - get_mysql_connection
   - get_sqlserver_connection
+- title: "Lookup tables"
+- desc: "Dataframes containing data table lookups"
+- contents:
+  - country_codes
 - title: "Data manipulation"
   desc: "Format data"
 - contents:

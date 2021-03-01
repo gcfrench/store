@@ -27,7 +27,9 @@ Imports:
     DBI,
     connections,
     RMariaDB,
-    openxlsx
+    openxlsx,
+    ISOcodes,
+    vroom
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
@@ -36,3 +38,5 @@ Config/testthat/edition: 3
 URL: https://github.com/gcfrench/store
 BugReports: https://github.com/gcfrench/store/issues
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

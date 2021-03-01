@@ -1,5 +1,7 @@
 # store 0.2.0
 
+* Added **county_codes** look up table of ISO-3166 three letter country codes and 
+United Nations regions
 * Added **add_new_spreadsheet** to add a tibble and optional image to an Excel spreadsheet
 * Added **add_tibble_to_list** to prepend multiple tibbles into a list which can
 then be converted into a single tibble using dplyr::bind_rows function
