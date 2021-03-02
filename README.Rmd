@@ -32,7 +32,7 @@ personal package. A summary of the use of functions within these packages is pro
 
 ## Installation
 
-The package can be installed from GitHub
+The package can be installed from GitHub, which also hosts the [package site](https://gcfrench.github.io/store)
 
 ```{r, eval = FALSE}
 devtools::install_github("gcfrench/store")
@@ -56,6 +56,10 @@ the documents, lookups and functions added.
 Links to both **my twitter account**, where I retweet or like R related tweets posted by 
 other members of the R community or with a #rstats hashtag and the **package's Github pages** 
 are provided in the top right hand corner.
+
+## Publication
+
+The store package has been published to [GitHub pages](https://gcfrench.github.io/store)
 
 ## Code of Conduct
 

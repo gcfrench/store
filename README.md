@@ -28,7 +28,8 @@ document in the information section.
 
 ## Installation
 
-The package can be installed from GitHub
+The package can be installed from GitHub, which also hosts the [package
+site](https://gcfrench.github.io/store)
 
 ``` r
 devtools::install_github("gcfrench/store")
@@ -54,6 +55,11 @@ Links to both **my twitter account**, where I retweet or like R related
 tweets posted by other members of the R community or with a \#rstats
 hashtag and the **package’s Github pages** are provided in the top right
 hand corner.
+
+## Publication
+
+The store package has been published to [GitHub
+pages](https://gcfrench.github.io/store)
 
 ## Code of Conduct
 

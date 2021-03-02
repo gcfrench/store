@@ -44,7 +44,8 @@ usethis::use_description(fields = list(Title = "Store commonly used functions an
                                        documentation. These can be then used when creating new
                                        packages by copy and pasting the relevant R scripts and
                                        associated test scripts into the new package, as well as
-                                       updating the pkgdown file"))
+                                       updating the pkgdown file",
+                                       URL = "https://gcfrench.github.io/store"))
 ```
 
 **usethis::use_cc0_license** add one of the license options for the package
@@ -304,6 +305,22 @@ usethis::edit_file("README.Rmd")
 **pkgdown::build_home** builds the index.html file in the docs directory
 ```{r}
 pkgdown::build_home()
+```
+
+## Publish on GitHub
+
+**pkgdown::deploy_to_branch** pushes docs folder to GitHub branch gh-pages. 
+
+Need to change repository settings GitHub Pages Source to Branch gh-pages/root. 
+Site published to **https://github_name.github.io/package_name**
+```{r}
+pkgdown::deploy_to_branch()
+```
+
+**usethis::edit_file** Add URL to description and README files
+```{r}
+usethis::edit_file("DESCRIPTION")
+usethis::edit_file("README.Rmd")
 ```
 
 ## Install package
