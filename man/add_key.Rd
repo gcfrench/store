@@ -17,8 +17,7 @@ add_key(keyring_name, service_name)
 \description{
 Add a new key to the keyring to store a new database connection string.
 If the keyring is locked then unlock it first with its password.
-}
-\details{
+
 On creating the key, the name of the key relating to the database is added under the service name
 and the database connections string is added as a json string in the password dialog box.
 

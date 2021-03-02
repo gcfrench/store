@@ -30,7 +30,8 @@ Imports:
     RMariaDB,
     openxlsx,
     ISOcodes,
-    vroom
+    vroom,
+    reactable
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

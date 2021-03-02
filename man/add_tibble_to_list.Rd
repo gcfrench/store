@@ -17,9 +17,8 @@ tibble, original tibble is returned invisibly
 \description{
 This function prepends tibbles to a list, creating the list
 in the global environment if not already present
-}
-\details{
-The function is an example of \href{http://adv-r.had.co.nz/Environments.html}{assigning a variable to an environment}
+
+It is an example of \href{http://adv-r.had.co.nz/Environments.html}{assigning a variable to an environment}
 }
 \examples{
 suppressPackageStartupMessages({

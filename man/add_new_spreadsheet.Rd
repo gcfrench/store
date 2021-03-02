@@ -29,8 +29,7 @@ data_frame, the inputted data frame is returned invisibly
 \description{
 This function adds a data frame and optional image to a new spreadsheet in an
 Excel workbook.
-}
-\details{
+
 The text is left aligned with the first header row made bold. The widths of the
 columns in the spreadsheet are also  automatically adjusted to fit the text and
 the filter functionality is switched on.

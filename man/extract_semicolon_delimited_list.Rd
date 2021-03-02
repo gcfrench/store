@@ -15,14 +15,14 @@ extract_semicolon_delimited_list(.df, column_name)
 character, semi-colon delimited list
 }
 \description{
-This function extracts a semi-colon delimited list from a data frame's column
-}
-\details{
-The function is an example of the use of a \href{https://adv-r.hadley.nz/function-factories.html}{function factory},
+It is an example of the use of a \href{https://adv-r.hadley.nz/function-factories.html}{function factory},
 \href{https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/}{tidy evaluation}
 and purrr's \href{https://purrr.tidyverse.org/reference/map.html}{map function}.
 The function may be called on a \href{https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html}{nested data frame}
 to extract the semi-colon delimited list
+}
+\details{
+This function extracts a semi-colon delimited list from a data frame's column
 }
 \examples{
 suppressPackageStartupMessages({

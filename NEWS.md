@@ -1,5 +1,6 @@
 # store 0.2.0
 
+* Added **display_table** to display data frames in a formatted html table
 * Added **county_codes** look up table of ISO-3166 three letter country codes and 
 United Nations regions
 * Added **add_new_spreadsheet** to add a tibble and optional image to an Excel spreadsheet

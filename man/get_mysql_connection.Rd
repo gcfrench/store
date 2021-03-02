@@ -17,8 +17,7 @@ connection object, MySQL connection object
 \description{
 This function initiates a MySQL connection using stored database credentials
 through the keyring package. The MySQL tables are added to the connection pane.
-}
-\details{
+
 More information on connecting to databases using R can be found in RStudios
 \href{https://db.rstudio.com/}{Databases using R} webpages.
 }

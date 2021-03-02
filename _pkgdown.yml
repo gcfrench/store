@@ -28,6 +28,10 @@ reference:
   - extract_comma_delimited_list
   - extract_semicolon_delimited_list
   - add_tibble_to_list
+- title: "Data visualisation"
+  desc: "Tabular and graphical visualisations"
+  contents:
+  - display_table
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets"
 - contents:

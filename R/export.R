@@ -1,5 +1,6 @@
 #' add_new_spreadsheet
 #'
+#' @description
 #' This function adds a data frame and optional image to a new spreadsheet in an
 #' Excel workbook.
 #'

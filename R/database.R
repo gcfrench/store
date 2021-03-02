@@ -1,5 +1,6 @@
 #' create_locked_keyring
 #'
+#' @description
 #' Add a password protected keyring to the Windows Credential Store.
 #' This keyring will be used to store database connection strings.
 #'
@@ -28,6 +29,7 @@ create_locked_keyring <- function(keyring_name) {
 
 #' get_keyring_status
 #'
+#' @description
 #' Check the current status of the keyring. The default status of the keyring is to be locked,
 #' requiring its password to unlock it, to access the stored database connection strings.
 #'
@@ -50,6 +52,7 @@ get_keyring_status <- function(keyring_name) {
 
 #' unlock_keyring
 #'
+#' @description
 #' Unlock the keyring requiring keyring password
 #'
 #' @param keyring_name character, keyring name
@@ -68,6 +71,7 @@ unlock_keyring <- function(keyring_name) {
 
 #' lock_keyring
 #'
+#' @description
 #' Lock the keyring requiring keyring password
 #'
 #' @param keyring_name character, keyring name
@@ -86,6 +90,7 @@ lock_keyring <- function(keyring_name) {
 
 #' list_keys
 #'
+#' @description
 #' List the current keys stored on the keyring.
 #' Each of these keys store a database connection string.
 #'
@@ -104,6 +109,7 @@ list_keys <- function(keyring_name) {
 
 #' add_key
 #'
+#' @description
 #' Add a new key to the keyring to store a new database connection string.
 #' If the keyring is locked then unlock it first with its password.
 #'
@@ -137,6 +143,7 @@ add_key <- function(keyring_name, service_name){
 
 #' delete_key
 #'
+#' @description
 #' Remove a key from the keyring by supplying both the keyring name
 #' and name of key to remove
 #'
@@ -162,6 +169,7 @@ delete_key <- function(keyring_name, service_name) {
 
 #' get_sqlserver_connection
 #'
+#' @description
 #' This function initiates a SQL Server connection using windows authentication,
 #' either using stored database credentials through the keyring package or else
 #' requesting database credentials in the console. The SQL Server tables are added
@@ -238,6 +246,7 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 
 #' get_mysql_connection
 #'
+#' @description
 #' This function initiates a MySQL connection using stored database credentials
 #' through the keyring package. The MySQL tables are added to the connection pane.
 #'

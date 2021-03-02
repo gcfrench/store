@@ -1,5 +1,6 @@
 #' ISO-3166 three letter country codes with United Nations regions
 #'
+#' @description
 #' International Organisation for Standardisation three letter codes for the
 #' representation of country names taken from the [ISOcodes package](https://cran.r-project.org/web/packages/ISOcodes/index.html)
 #' , associated with UN regions taken from [United Nations website](https://unstats.un.org/unsd/methodology/m49/).

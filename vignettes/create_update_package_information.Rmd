@@ -26,7 +26,7 @@ This documents the functions to run to help create and update a R package. Furth
 * [pkgdown documentation](https://pkgdown.r-lib.org/)
 * [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
 
-## Create the skeleton package --------------------------------------------
+## Create the skeleton package
 
 **usethis::create_package** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
 ```{r}
@@ -139,7 +139,7 @@ usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "supers
 usethis::use_code_of_conduct()
 ```
 
-## Add to github --------------------------------------------
+### Add to github --------------------------------------------
 
 **usethis::use_git** initiates a Git repository, making the initial commits
 ```{r}
@@ -157,7 +157,7 @@ usethis::use_github()
 usethis::use_github_action("pkgdown")
 ```
 
-## Add package versioning --------------------------------------------
+### Add package versioning --------------------------------------------
 
 Navigate to the home project directory first
 

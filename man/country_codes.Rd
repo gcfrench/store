@@ -19,8 +19,7 @@ country_codes
 International Organisation for Standardisation three letter codes for the
 representation of country names taken from the \href{https://cran.r-project.org/web/packages/ISOcodes/index.html}{ISOcodes package}
 , associated with UN regions taken from \href{https://unstats.un.org/unsd/methodology/m49/}{United Nations website}.
-}
-\details{
+
 The missing old European country Yugoslavia was added, along with the UN regions
 for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
 countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.

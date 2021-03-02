@@ -15,8 +15,7 @@ character, keyring name
 \description{
 Add a password protected keyring to the Windows Credential Store.
 This keyring will be used to store database connection strings.
-}
-\details{
+
 On creating the keyring you will be asked for a password.
 Remember this password as it will be needed everytime you access
 the database connection strings stored in this keyring.

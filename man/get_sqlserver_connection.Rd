@@ -21,8 +21,7 @@ This function initiates a SQL Server connection using windows authentication,
 either using stored database credentials through the keyring package or else
 requesting database credentials in the console. The SQL Server tables are added
 to the connection pane.
-}
-\details{
+
 More information on connecting to databases using R can be found in RStudios
 \href{https://db.rstudio.com/}{Databases using R} webpages.
 }

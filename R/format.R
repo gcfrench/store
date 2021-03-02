@@ -1,5 +1,6 @@
 #' extract_delimited_list
 #'
+#' @description
 #' This function returns the parent function of the function factory to extract
 #' a delimited list from a data frame's column
 #'
@@ -22,9 +23,10 @@ extract_delimited_list <- function(delimiter) {
 
 #' extract_comma_delimited_list
 #'
+#' @description
 #' This function extracts a comma delimited list from a data frame's column
 #'
-#' The function is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
+#' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
 #' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
 #' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
 #' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
@@ -66,7 +68,8 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #'
 #' This function extracts a semi-colon delimited list from a data frame's column
 #'
-#' The function is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
+#' @description
+#' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
 #' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
 #' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
 #' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
@@ -106,10 +109,11 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 
 #' add tibble to list
 #'
+#' @description
 #' This function prepends tibbles to a list, creating the list
 #' in the global environment if not already present
 #'
-#' The function is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
+#' It is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
 #'
 #' @param .data tibble, tibble to be added
 #' @param .name character, name of tibble to be added
