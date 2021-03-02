@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title> • store</title>
+<title>Function reference • store</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="" />
+<meta property="og:title" content="Function reference" />
 
 
 
@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -91,9 +91,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/package_setup.html">package setup</a>
+      <a href="../articles/package_setup.html">Create and update a package</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/index.html">lookups and functions</a>
 </li>
 <li>
   <a href="../news/index.html">versions</a>
@@ -107,7 +110,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/gcfrench">
+  <a href="https://github.com/gcfrench/store">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -136,7 +139,156 @@
       <col class="title" />
     </colgroup>
 
-    
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-store-credentials" class="hasAnchor"><a href="#section-store-credentials" class="anchor"></a>Store credentials</h2>
+          <p class="section-desc"><p>Securely store and retrive database connections using the keyring package</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="create_locked_keyring.html">create_locked_keyring()</a></code> </p>
+        </td>
+        <td><p>create_locked_keyring</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_keyring_status.html">get_keyring_status()</a></code> </p>
+        </td>
+        <td><p>get_keyring_status</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_keys.html">list_keys()</a></code> </p>
+        </td>
+        <td><p>list_keys</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="unlock_keyring.html">unlock_keyring()</a></code> </p>
+        </td>
+        <td><p>unlock_keyring</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="add_key.html">add_key()</a></code> </p>
+        </td>
+        <td><p>add_key</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete_key.html">delete_key()</a></code> </p>
+        </td>
+        <td><p>delete_key</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lock_keyring.html">lock_keyring()</a></code> </p>
+        </td>
+        <td><p>lock_keyring</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-database-connections" class="hasAnchor"><a href="#section-database-connections" class="anchor"></a>Database connections</h2>
+          <p class="section-desc"><p>Connect to databases</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="get_mysql_connection.html">get_mysql_connection()</a></code> </p>
+        </td>
+        <td><p>get_mysql_connection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_sqlserver_connection.html">get_sqlserver_connection()</a></code> </p>
+        </td>
+        <td><p>get_sqlserver_connection</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-lookup-tables" class="hasAnchor"><a href="#section-lookup-tables" class="anchor"></a>Lookup tables</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="country_codes.html">country_codes</a></code> </p>
+        </td>
+        <td><p>ISO-3166 three letter country codes with United Nations regions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-manipulation" class="hasAnchor"><a href="#section-data-manipulation" class="anchor"></a>Data manipulation</h2>
+          <p class="section-desc"><p>Format data</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="extract_comma_delimited_list.html">extract_comma_delimited_list()</a></code> </p>
+        </td>
+        <td><p>extract_comma_delimited_list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="extract_semicolon_delimited_list.html">extract_semicolon_delimited_list()</a></code> </p>
+        </td>
+        <td><p>extract_semicolon_delimited_list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="add_tibble_to_list.html">add_tibble_to_list()</a></code> </p>
+        </td>
+        <td><p>add tibble to list</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-export-data-and-analyses" class="hasAnchor"><a href="#section-export-data-and-analyses" class="anchor"></a>Export data and analyses</h2>
+          <p class="section-desc"><p>Export data to Excel spreadsheets</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="add_new_spreadsheet.html">add_new_spreadsheet()</a></code> </p>
+        </td>
+        <td><p>add_new_spreadsheet</p></td>
+      </tr>
+    </tbody>
     </table>
   </div>
 

@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -55,9 +55,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/package_setup.html">package setup</a>
+      <a href="articles/package_setup.html">Create and update a package</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="reference/index.html">lookups and functions</a>
 </li>
 <li>
   <a href="news/index.html">versions</a>
@@ -71,7 +74,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/gcfrench">
+  <a href="https://github.com/gcfrench/store">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,11 +91,35 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-This package stores the commonly used
-    functions and lookups, along with function tests and documentation.
-    These can be then used when creating new packages by copy and pasting
-    the relevant R scripts and associated test scripts into the new
-    package, as well as updating the pkgdown file
+
+
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>This personal package is a place to the store functions and lookups that I have created overtime and may find useful in the future. I started creating it after reading a blog <a href="https://www.jumpingrivers.com/blog/personal-r-package/">Writing a Personal R Package</a> from <a href="https://www.jumpingrivers.com/">Jumping Rivers</a> which encouraged spending time putting your personal library of code in one place within a package.</p>
+<p>Writing packages along with their documentation have become easier with the production of a number of packages from <a href="https://rstudio.com/">RStudio</a>, including <a href="https://devtools.r-lib.org/">devtools</a>, <a href="https://usethis.r-lib.org/">usethis</a> and <a href="https://pkgdown.r-lib.org/">pkgdown</a> and I have used these packages in developing this personal package. A summary of the use of functions within these packages is provided in <strong>Create and update a package</strong> document in the information section.</p>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>The package can be installed from GitHub</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"gcfrench/store"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>The <strong>information section</strong> is the place where my useful documents are stored. These documents provide information and guidance when writing R scripts, for example <strong>creating and updating a R package</strong>.</p>
+<p>The <strong>lookups and functions</strong> section contain my useful functions and lookup tables. These can be used either directly by installing and loading this package or by copying and pasting the R code from the package’s data-raw or R sub-directories, avaiable from the package’s GitHib pages, into your R script. The functions contain examples within their documentation to demonstrate their use.</p>
+<p>The <strong>versions</strong> section lists the version history of this package, along with a summary of the documents, lookups and functions added.</p>
+<p>Links to both <strong>my twitter account</strong>, where I retweet or like R related tweets posted by other members of the R community or with a #rstats hashtag and the <strong>package’s Github pages</strong> are provided in the top right hand corner.</p>
+</div>
+<div id="code-of-conduct" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<p>Please note that the store project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -112,6 +139,12 @@ This package stores the commonly used
 <li><small>CC0</small></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -119,7 +152,13 @@ This package stores the commonly used
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
