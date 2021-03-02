@@ -307,7 +307,23 @@ usethis::edit_file("README.Rmd")
 pkgdown::build_home()
 ```
 
+## Install package
+
+Build documentation and test functions, then run **Install and Restart** to build and install package
+
+```{r}
+devtools::document()
+devtools::test()
+```
+
 ## Publish on GitHub
+
+**pkgdown::build_site** run **pkgdown::clean_site** first to delete files in docs
+sub-directory
+```{r}
+pkgdown::clean_site()
+pkgdown::build_site()
+```
 
 **pkgdown::deploy_to_branch** pushes docs folder to GitHub branch gh-pages. 
 
@@ -322,18 +338,6 @@ pkgdown::deploy_to_branch()
 usethis::edit_file("DESCRIPTION")
 usethis::edit_file("README.Rmd")
 ```
-
-## Install package
-
-Build documentation, test functions and build website, then run **Install and Restart** to build and install package
-
-```{r}
-devtools::document()
-devtools::test()
-pkgdown::build_site()
-```
-
-
 
 
 
