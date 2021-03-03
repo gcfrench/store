@@ -40,7 +40,11 @@
 
 
 <meta property="og:title" content="extract_semicolon_delimited_list — extract_semicolon_delimited_list" />
-<meta property="og:description" content="This function extracts a semi-colon delimited list from a data frame's column" />
+<meta property="og:description" content="It is an example of the use of a function factory,
+tidy evaluation
+and purrr's map function.
+The function may be called on a nested data frame
+to extract the semi-colon delimited list" />
 
 
 
@@ -135,7 +139,11 @@
     </div>
 
     <div class="ref-description">
-    <p>This function extracts a semi-colon delimited list from a data frame's column</p>
+    <p>It is an example of the use of a <a href='https://adv-r.hadley.nz/function-factories.html'>function factory</a>,
+<a href='https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/'>tidy evaluation</a>
+and purrr's <a href='https://purrr.tidyverse.org/reference/map.html'>map function</a>.
+The function may be called on a <a href='https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html'>nested data frame</a>
+to extract the semi-colon delimited list</p>
     </div>
 
     <pre class="usage"><span class='fu'>extract_semicolon_delimited_list</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>column_name</span><span class='op'>)</span></pre>
@@ -158,11 +166,7 @@
     <p>character, semi-colon delimited list</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function is an example of the use of a <a href='https://adv-r.hadley.nz/function-factories.html'>function factory</a>,
-<a href='https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/'>tidy evaluation</a>
-and purrr's <a href='https://purrr.tidyverse.org/reference/map.html'>map function</a>.
-The function may be called on a <a href='https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html'>nested data frame</a>
-to extract the semi-colon delimited list</p>
+    <p>This function extracts a semi-colon delimited list from a data frame's column</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>

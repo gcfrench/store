@@ -107,7 +107,7 @@
 </ul>
 <div id="create-the-skeleton-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#create-the-skeleton-package" class="anchor"></a>Create the skeleton package ——————————————–</h2>
+<a href="#create-the-skeleton-package" class="anchor"></a>Create the skeleton package</h2>
 <p><strong>usethis::create_package</strong> create the skeleton package directory structure, opening the package in a new R Studio session as a new project</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html">create_package</a></span><span class="op">(</span><span class="st">"C:/Files/packages/store"</span><span class="op">)</span></code></pre></div>
@@ -190,10 +190,9 @@ navbar:
 <p><strong>usethis::use_code_of_conduct</strong> add code of conduct markdown, pasting code of conduct section into README file</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html">use_code_of_conduct</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="add-to-github" class="section level2">
-<h2 class="hasAnchor">
-<a href="#add-to-github" class="anchor"></a>Add to github ——————————————–</h2>
+<div id="add-to-github" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-to-github" class="anchor"></a>Add to github ——————————————–</h3>
 <p><strong>usethis::use_git</strong> initiates a Git repository, making the initial commits</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -205,9 +204,9 @@ navbar:
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github_action.html">use_github_action</a></span><span class="op">(</span><span class="st">"pkgdown"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="add-package-versioning" class="section level2">
-<h2 class="hasAnchor">
-<a href="#add-package-versioning" class="anchor"></a>Add package versioning ——————————————–</h2>
+<div id="add-package-versioning" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-package-versioning" class="anchor"></a>Add package versioning ——————————————–</h3>
 <p>Navigate to the home project directory first</p>
 <p><strong>renv::init</strong> initiates the renv environment, creating the renv folder and adding the renv.lock file, linking the relevant packages from the renv cache</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -226,6 +225,7 @@ navbar:
 <p><strong>renv::restore</strong> restore the package versions contained within the renv lock file</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/restore.html">restore</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
 <div id="add-and-edit-script-files" class="section level2">
 <h2 class="hasAnchor">

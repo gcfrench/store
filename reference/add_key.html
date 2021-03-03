@@ -41,7 +41,11 @@
 
 <meta property="og:title" content="add_key — add_key" />
 <meta property="og:description" content="Add a new key to the keyring to store a new database connection string.
-If the keyring is locked then unlock it first with its password." />
+If the keyring is locked then unlock it first with its password.
+On creating the key, the name of the key relating to the database is added under the service name
+and the database connections string is added as a json string in the password dialog box.
+SQL Server windows authentication: &quot;server&quot;:&quot;SERVER_NAME&quot;, &quot;database&quot;:&quot;DATABASE_NAME&quot;
+For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRESS&quot;" />
 
 
 
@@ -138,6 +142,10 @@ If the keyring is locked then unlock it first with its password." />
     <div class="ref-description">
     <p>Add a new key to the keyring to store a new database connection string.
 If the keyring is locked then unlock it first with its password.</p>
+<p>On creating the key, the name of the key relating to the database is added under the service name
+and the database connections string is added as a json string in the password dialog box.</p>
+<p>SQL Server windows authentication: "server":"SERVER_NAME", "database":"DATABASE_NAME"
+For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS"</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_key</span><span class='op'>(</span><span class='va'>keyring_name</span>, <span class='va'>service_name</span><span class='op'>)</span></pre>
@@ -160,12 +168,6 @@ If the keyring is locked then unlock it first with its password.</p>
     
 
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>On creating the key, the name of the key relating to the database is added under the service name
-and the database connections string is added as a json string in the password dialog box.</p>
-<p>SQL Server windows authentication: "server":"SERVER_NAME", "database":"DATABASE_NAME"
-For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS"</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • store</title>
+<title>display_table — display_table • store</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,12 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="display_table — display_table" />
+<meta property="og:description" content="
+This function displays a data frame as a html table using the reactable
+package. The top ten rows in the table are displayed with the options to click
+through or display all the rows. The ability to search for table content and
+sort columns is also available." />
 
 
 
@@ -58,7 +63,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -128,39 +133,61 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/gcfrench/store/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>display_table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/display.R'><code>R/display.R</code></a></small>
+    <div class="hidden name"><code>display_table.Rd</code></div>
     </div>
 
-    <div id="store-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#store-020" class="anchor"></a>store 0.2.0</h1>
-<ul>
-<li>Added <strong>get_postgres_connection</strong> to connect to PostgreSQL database</li>
-<li>Added <strong>display_table</strong> to display data frames in a formatted html table</li>
-<li>Added <strong>county_codes</strong> look up table of ISO-3166 three letter country codes and United Nations regions</li>
-<li>Added <strong>add_new_spreadsheet</strong> to add a tibble and optional image to an Excel spreadsheet</li>
-<li>Added <strong>add_tibble_to_list</strong> to prepend multiple tibbles into a list which can then be converted into a single tibble using dplyr::bind_rows function</li>
-<li>Added <strong>get_mysql_connection</strong> and <strong>get_sqlserver_connection</strong> to connect to these databases</li>
-<li>Added functions to use the <strong>keyring</strong> package to store securely store database credentials</li>
-<li>Added <strong>extract_comma_delimited_list</strong> and <strong>extract_semicolon_delimited_list</strong> functions</li>
-</ul>
-</div>
-    <div id="store-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#store-010" class="anchor"></a>store 0.1.0</h1>
-<ul>
-<li>Added <strong>Create and update a package</strong> document to information</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
+<p>This function displays a data frame as a html table using the <a href='https://glin.github.io/reactable/'>reactable</a>
+package. The top ten rows in the table are displayed with the options to click
+through or display all the rows. The ability to search for table content and
+sort columns is also available.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>display_table</span><span class='op'>(</span><span class='va'>data</span>, rows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>data frame, data to display</p></td>
+    </tr>
+    <tr>
+      <th>rows</th>
+      <td><p>integer, number of rows to display with total rows as default</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>html table to display</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+ <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
+   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+ <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='co'># display top 5 heaviest penguins from each species on each island</span>
+<span class='va'>heaviest_penguins</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span>, <span class='va'>body_mass_g</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>display_table</span><span class='op'>(</span><span class='va'>heaviest_penguins</span><span class='op'>)</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

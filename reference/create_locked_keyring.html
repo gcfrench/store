@@ -41,7 +41,13 @@
 
 <meta property="og:title" content="create_locked_keyring — create_locked_keyring" />
 <meta property="og:description" content="Add a password protected keyring to the Windows Credential Store.
-This keyring will be used to store database connection strings." />
+This keyring will be used to store database connection strings.
+On creating the keyring you will be asked for a password.
+Remember this password as it will be needed everytime you access
+the database connection strings stored in this keyring.
+More information on securing credentials in R can be found in RStudio's
+Securing Credentials
+webpage." />
 
 
 
@@ -138,6 +144,12 @@ This keyring will be used to store database connection strings." />
     <div class="ref-description">
     <p>Add a password protected keyring to the Windows Credential Store.
 This keyring will be used to store database connection strings.</p>
+<p>On creating the keyring you will be asked for a password.
+Remember this password as it will be needed everytime you access
+the database connection strings stored in this keyring.</p>
+<p>More information on securing credentials in R can be found in RStudio's
+<a href='https://db.rstudio.com/best-practices/managing-credentials/'>Securing Credentials</a>
+webpage.</p>
     </div>
 
     <pre class="usage"><span class='fu'>create_locked_keyring</span><span class='op'>(</span><span class='va'>keyring_name</span><span class='op'>)</span></pre>
@@ -154,14 +166,6 @@ This keyring will be used to store database connection strings.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>character, keyring name</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>On creating the keyring you will be asked for a password.
-Remember this password as it will be needed everytime you access
-the database connection strings stored in this keyring.</p>
-<p>More information on securing credentials in R can be found in RStudio's
-<a href='https://db.rstudio.com/best-practices/managing-credentials/'>Securing Credentials</a>
-webpage.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

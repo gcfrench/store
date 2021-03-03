@@ -41,7 +41,13 @@
 
 <meta property="og:title" content="add_new_spreadsheet — add_new_spreadsheet" />
 <meta property="og:description" content="This function adds a data frame and optional image to a new spreadsheet in an
-Excel workbook." />
+Excel workbook.
+The text is left aligned with the first header row made bold. The widths of the
+columns in the spreadsheet are also  automatically adjusted to fit the text and
+the filter functionality is switched on.
+An image may be inserted to the right of the text with both the image's width
+and height sizes adjustable by providing their sizes in inches in the function's
+parameters." />
 
 
 
@@ -138,6 +144,12 @@ Excel workbook." />
     <div class="ref-description">
     <p>This function adds a data frame and optional image to a new spreadsheet in an
 Excel workbook.</p>
+<p>The text is left aligned with the first header row made bold. The widths of the
+columns in the spreadsheet are also  automatically adjusted to fit the text and
+the filter functionality is switched on.</p>
+<p>An image may be inserted to the right of the text with both the image's width
+and height sizes adjustable by providing their sizes in inches in the function's
+parameters.</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_new_spreadsheet</span><span class='op'>(</span>
@@ -176,14 +188,6 @@ Excel workbook.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>data_frame, the inputted data frame is returned invisibly</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The text is left aligned with the first header row made bold. The widths of the
-columns in the spreadsheet are also  automatically adjusted to fit the text and
-the filter functionality is switched on.</p>
-<p>An image may be inserted to the right of the text with both the image's width
-and height sizes adjustable by providing their sizes in inches in the function's
-parameters.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
