@@ -43,3 +43,62 @@ display_table <- function(data, rows = nrow(data)) {
                        class = "table")
 }
 
+#' reduce_image_size
+#'
+#' @description
+#' This function reduces the size of an image, archiving the
+#' original image in a separate archive sub-directory
+#'
+#' The example batch runs the function and is an example of parallelization using
+#' the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/)
+#' packages
+#'
+#' @param path_image character, path name of image
+#' @param image_size percentage size reduction, default = 50%
+#'
+#' @return character, path name of image returned invisibly
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(fs)
+#'     library(here)
+#'     library(future)
+#'     library(furrr)
+#'   })
+#' })
+#'
+#' i_am("display.R")
+#' plan(multiprocess)
+#' here("figures") %>%
+#'   dir_ls(., glob = "*.png") %>%
+#'   future_map(reduce_image_size,
+#'              image_size = "25%",
+#'              .options = furrr_options(seed = TRUE),
+#'              .progress = TRUE)
+#'
+#' }
+reduce_image_size <- function(path_image, image_size = "50%") {
+
+  # create archive directory if does not exist
+  dir_archive <- fs::path(fs::path_dir(path_image), "archive")
+  if(!fs::dir_exists(dir_archive)){
+    fs::dir_create(dir_archive)
+  }
+
+  # move original image to archive directory
+  path_archive <- fs::path(dir_archive, fs::path_file(path_image))
+  fs::file_move(path_image, path_archive)
+
+  # save reduced image in original directory
+  magick::image_read(path_archive) %>%
+    magick::image_scale(image_size) %>%
+    magick::image_write(path_image)
+
+  # return path to reduced image
+  invisible(path_image)
+}
+

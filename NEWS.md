@@ -1,3 +1,8 @@
+# store 0.3.0
+
+* Added **reduce_image_size** to reduce the size of an image, with an example of
+parallelization to batch reduce images size within a directory
+
 # store 0.2.0
 
 * Added **get_postgres_connection** to connect to PostgreSQL database

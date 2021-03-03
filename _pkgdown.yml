@@ -33,6 +33,7 @@ reference:
   desc: "Tabular and graphical visualisations"
   contents:
   - display_table
+  - reduce_image_size
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets"
 - contents:
