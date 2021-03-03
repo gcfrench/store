@@ -312,3 +312,73 @@ get_mysql_connection <- function(keyring_name, service_name) {
   return(con)
 }
 
+#' get_postgres_connection
+#'
+#' @description
+#' This function initiates a PostgreSQL connection using stored database credentials
+#' through the keyring package. The PostgreSQL tables are added to the connection pane.
+#'
+#' @param keyring_name character, keyring name
+#' @param service_name name of service storing credentials
+#'
+#' @return connection object, PostgreSQL connection object
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(DBI)
+#'     library(odbc)
+#'   })
+#' })
+#' # connect to database, using keyring stored credentials
+#' con <- get_postgres_connection(keyring_name = "keyring_name",
+#'                                service_name = "database_name")
+#' # list tables
+#' dbListTables(con)
+#'
+#' # get query
+#' database_query <- dbGetQuery(con, "sql_statement")
+#'
+#' # import table
+#' dbWriteTable(con, Id(schema = "schema_name", table = "table_name"),
+#'              value = data_frame, append = TRUE, row.names = FALSE)
+#'
+#' # disconnect from database
+#' dbDisconnect(con)
+#' }
+get_postgres_connection <- function(keyring_name, service_name) {
+
+  # unlock keyring
+  keyring::keyring_unlock(keyring_name)
+
+  # get database connection function
+  get_connection <- function(connection_function) {
+    postgreSQL <- jsonlite::fromJSON(keyring::key_get(keyring = keyring_name,
+                                                      service = service_name))[["database"]]
+    con <- connection_function(RPostgres::Postgres(),
+                               host = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name,
+                                                                          service = service_name))[["server"]],
+                               dbname = postgreSQL,
+                               user = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name,
+                                                                          service = service_name))[["username"]],
+                               password = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name,
+                                                                              service = service_name))[["password"]],
+                               port = jsonlite::fromJSON(keyring::key_get(keyring = keyring_name,
+                                                                          service = service_name))[["port"]])
+  }
+
+  # Connect to PostGreSQL database
+  con <- get_connection(DBI::dbConnect)
+
+  # Add connection to connection pane
+  get_connection(connections::connection_open)
+
+  # lock keyring
+  keyring::keyring_lock(keyring_name)
+
+  return(con)
+}
+

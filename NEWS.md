@@ -1,5 +1,6 @@
 # store 0.2.0
 
+* Added **get_postgres_connection** to connect to PostgreSQL database
 * Added **display_table** to display data frames in a formatted html table
 * Added **county_codes** look up table of ISO-3166 three letter country codes and 
 United Nations regions

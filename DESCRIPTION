@@ -31,7 +31,8 @@ Imports:
     openxlsx,
     ISOcodes,
     vroom,
-    reactable
+    reactable,
+    RPostgres
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

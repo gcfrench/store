@@ -16,8 +16,9 @@ reference:
 - title: "Database connections"
   desc: "Connect to databases"
 - contents:
-  - get_mysql_connection
   - get_sqlserver_connection
+  - get_postgres_connection
+  - get_mysql_connection
 - title: "Lookup tables"
 - desc: "Dataframes containing data table lookups"
 - contents:
