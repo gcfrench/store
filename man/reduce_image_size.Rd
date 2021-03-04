@@ -30,7 +30,7 @@ suppressPackageStartupMessages({
   })
 })
 
-i_am("example.R")
+i_am("example.Rmd")
 plan(multiprocess)
 here("figures") \%>\%
   dir_ls(., glob = "*.png") \%>\%

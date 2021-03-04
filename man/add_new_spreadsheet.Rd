@@ -54,7 +54,7 @@ suppressPackageStartupMessages({
   })
 })
 # create output directory
-i_am("example.R")
+i_am("example.Rmd")
 if (!dir_exists("output")) {dir.create("output")}
 if (!dir_exists("output/images")) {dir.create("output/images")}
 
