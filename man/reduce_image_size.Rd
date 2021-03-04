@@ -17,10 +17,6 @@ character, path name of image returned invisibly
 \description{
 This function reduces the size of an image, archiving the
 original image in a separate archive sub-directory
-
-The example batch runs the function and is an example of parallelization using
-the \href{https://github.com/HenrikBengtsson/future}{future} and \href{https://davisvaughan.github.io/furrr/}{furrr}
-packages
 }
 \examples{
 \dontrun{
@@ -34,7 +30,7 @@ suppressPackageStartupMessages({
   })
 })
 
-i_am("display.R")
+i_am("example.R")
 plan(multiprocess)
 here("figures") \%>\%
   dir_ls(., glob = "*.png") \%>\%
@@ -44,5 +40,10 @@ here("figures") \%>\%
              .progress = TRUE)
 
 }
+}
+\seealso{
+The example batch runs the function and is an example of parallelization using
+the \href{https://github.com/HenrikBengtsson/future}{future} and \href{https://davisvaughan.github.io/furrr/}{furrr}
+packages
 }
 \concept{image manipulation functions}

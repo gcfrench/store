@@ -51,7 +51,7 @@ display_table <- function(data, rows = nrow(data)) {
 #' This function reduces the size of an image, archiving the
 #' original image in a separate archive sub-directory
 #'
-#' The example batch runs the function and is an example of parallelization using
+#' @seealso The example batch runs the function and is an example of parallelization using
 #' the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/)
 #' packages
 #'
@@ -75,7 +75,7 @@ display_table <- function(data, rows = nrow(data)) {
 #'   })
 #' })
 #'
-#' i_am("display.R")
+#' i_am("example.Rmd")
 #' plan(multiprocess)
 #' here("figures") %>%
 #'   dir_ls(., glob = "*.png") %>%
