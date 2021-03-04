@@ -23,27 +23,105 @@ original image in a separate archive sub-directory
 suppressPackageStartupMessages({
   library(store)
   suppressWarnings({
+    library(palmerpenguins)
     library(fs)
+    library(dplyr)
+    library(ggplot2)
     library(here)
+    library(magick)
+    library(magrittr)
     library(future)
     library(furrr)
   })
 })
-
+# create output directory
 i_am("example.Rmd")
-plan(multiprocess)
-here("figures") \%>\%
+if (!dir_exists("output")) {dir.create("output")}
+if (!dir_exists("output/images")) {dir.create("output/images")}
+
+# example taken from palmerpenguins example analysis of mass vs. flipper length
+# https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+
+# data
+mass_flipper_data <- penguins \%>\%
+  select(species, flipper_length_mm, body_mass_g, )
+mass_flipper_data
+
+# graph
+mass_flipper_graph <- ggplot(data = mass_flipper_data,
+                             aes(x = flipper_length_mm,
+                                 y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species),
+             size = 3,
+             alpha = 0.8) +
+  theme_minimal() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "Penguin size, Palmer Station LTER",
+       subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
+       x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme(legend.position = c(0.2, 0.7),
+        legend.background = element_rect(fill = "white", color = NA),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
+
+# save graph
+ggsave(filename = "output/images/palmerpenguins_graph.png",
+       plot = mass_flipper_graph)
+
+# graph image
+mass_flipper_graph <- image_read(here("output/images/palmerpenguins_graph.png"))
+mass_flipper_graph
+
+# graph information
+image_info(mass_flipper_graph)
+
+# image taken from Allison Horst's Art for teaching with palmerpengiuns
+# Citation: Artwork by @allison_horst
+lter_penguins <- image_read("https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png")
+lter_penguins
+
+# image information
+image_info(lter_penguins)
+
+# save image
+image_write(image = lter_penguins,
+            path = "output/images/palmerpenguins_image.png")
+
+# batch reduce images
+plan(multisession)
+here("output/images") \%>\%
   dir_ls(., glob = "*.png") \%>\%
   future_map(reduce_image_size,
              image_size = "25\%",
              .options = furrr_options(seed = TRUE),
              .progress = TRUE)
 
+# reduced graph
+mass_flipper_graph_reduce <- image_read(here("output/images/palmerpenguins_graph.png"))
+mass_flipper_graph_reduce
+
+# reduced graph information
+image_info(mass_flipper_graph_reduce)
+
+# reduced image
+lter_penguins_reduce <- image_read(here("output/images/palmerpenguins_image.png"))
+lter_penguins_reduce
+
+# reduced image information
+image_info(lter_penguins_reduce)
 }
 }
 \seealso{
-The example batch runs the function and is an example of parallelization using
+The example batch runs the function on a graph from the
+\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
+and \href{https://allisonhorst.github.io/palmerpenguins/articles/art.html}{palmer penguins image}
+from Allison Horst's Art work. Artwork by @allison_horst and is an example of parallelization using
 the \href{https://github.com/HenrikBengtsson/future}{future} and \href{https://davisvaughan.github.io/furrr/}{furrr}
-packages
+packages.
 }
 \concept{image manipulation functions}
