@@ -32,6 +32,8 @@ extract_delimited_list <- function(delimiter) {
 #' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
 #' to extract the comma delimited list
 #'
+#' @family delimited functions
+#'
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #'
@@ -74,6 +76,8 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
 #' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
 #' to extract the semi-colon delimited list
+#'
+#' @family delimited functions
 #'
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list

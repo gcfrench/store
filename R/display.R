@@ -8,6 +8,8 @@
 #' through or display all the rows. The ability to search for table content and
 #' sort columns is also available.
 #'
+#' @family tabular display
+#'
 #' @param data data frame, data to display
 #' @param rows integer, number of rows to display with total rows as default
 #'
@@ -52,6 +54,8 @@ display_table <- function(data, rows = nrow(data)) {
 #' The example batch runs the function and is an example of parallelization using
 #' the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/)
 #' packages
+#'
+#' @family image manipulation functions
 #'
 #' @param path_image character, path name of image
 #' @param image_size percentage size reduction, default = 50%

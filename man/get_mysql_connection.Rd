@@ -17,9 +17,6 @@ connection object, MySQL connection object
 \description{
 This function initiates a MySQL connection using stored database credentials
 through the keyring package. The MySQL tables are added to the connection pane.
-
-More information on connecting to databases using R can be found in RStudios
-\href{https://db.rstudio.com/}{Databases using R} webpages.
 }
 \examples{
 \dontrun{
@@ -43,3 +40,12 @@ database_query <- dbGetQuery(con, "sql_statement")
 dbDisconnect(con)
 }
 }
+\seealso{
+More information on connecting to databases using R can be found in RStudio's
+\href{https://db.rstudio.com/}{Databases using R} webpages.
+
+Other database functions: 
+\code{\link{get_postgres_connection}()},
+\code{\link{get_sqlserver_connection}()}
+}
+\concept{database functions}

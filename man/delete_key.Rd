@@ -23,3 +23,13 @@ and name of key to remove
 delete_key(readline("keyring name: "), readline("service name: "))
 }
 }
+\seealso{
+Other keyring functions: 
+\code{\link{add_key}()},
+\code{\link{create_locked_keyring}()},
+\code{\link{get_keyring_status}()},
+\code{\link{list_keys}()},
+\code{\link{lock_keyring}()},
+\code{\link{unlock_keyring}()}
+}
+\concept{keyring functions}

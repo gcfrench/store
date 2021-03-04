@@ -21,3 +21,13 @@ Each of these keys store a database connection string.
 list_keys(readline("keyring name: "))
 }
 }
+\seealso{
+Other keyring functions: 
+\code{\link{add_key}()},
+\code{\link{create_locked_keyring}()},
+\code{\link{delete_key}()},
+\code{\link{get_keyring_status}()},
+\code{\link{lock_keyring}()},
+\code{\link{unlock_keyring}()}
+}
+\concept{keyring functions}

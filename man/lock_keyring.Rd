@@ -20,3 +20,13 @@ Lock the keyring requiring keyring password
 lock_keyring(readline("keyring name: "))
 }
 }
+\seealso{
+Other keyring functions: 
+\code{\link{add_key}()},
+\code{\link{create_locked_keyring}()},
+\code{\link{delete_key}()},
+\code{\link{get_keyring_status}()},
+\code{\link{list_keys}()},
+\code{\link{unlock_keyring}()}
+}
+\concept{keyring functions}

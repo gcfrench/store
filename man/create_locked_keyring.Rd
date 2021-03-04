@@ -19,13 +19,23 @@ This keyring will be used to store database connection strings.
 On creating the keyring you will be asked for a password.
 Remember this password as it will be needed everytime you access
 the database connection strings stored in this keyring.
-
-More information on securing credentials in R can be found in RStudio's
-\href{https://db.rstudio.com/best-practices/managing-credentials/}{Securing Credentials}
-webpage.
 }
 \examples{
 \dontrun{
 create_locked_keyring(readline("keyring name: "))
 }
 }
+\seealso{
+More information on securing credentials in R can be found in RStudio's
+\href{https://db.rstudio.com/best-practices/managing-credentials/}{Securing Credentials}
+webpage.
+
+Other keyring functions: 
+\code{\link{add_key}()},
+\code{\link{delete_key}()},
+\code{\link{get_keyring_status}()},
+\code{\link{list_keys}()},
+\code{\link{lock_keyring}()},
+\code{\link{unlock_keyring}()}
+}
+\concept{keyring functions}

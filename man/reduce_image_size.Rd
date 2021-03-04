@@ -45,3 +45,4 @@ here("figures") \%>\%
 
 }
 }
+\concept{image manipulation functions}

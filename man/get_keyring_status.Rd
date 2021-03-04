@@ -21,3 +21,13 @@ requiring its password to unlock it, to access the stored database connection st
 get_keyring_status(readline("keyring name: "))
 }
 }
+\seealso{
+Other keyring functions: 
+\code{\link{add_key}()},
+\code{\link{create_locked_keyring}()},
+\code{\link{delete_key}()},
+\code{\link{list_keys}()},
+\code{\link{lock_keyring}()},
+\code{\link{unlock_keyring}()}
+}
+\concept{keyring functions}

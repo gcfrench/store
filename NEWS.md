@@ -1,7 +1,8 @@
 # store 0.3.0
 
-* Added **reduce_image_size** to reduce the size of an image, with an example of
-parallelization to batch reduce images size within a directory
+* Added **reduce_image_size** to reduce the size of an image, with the example of
+parallelization using the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/) packages to batch reduce images size 
+within a directory.
 
 # store 0.2.0
 
@@ -16,11 +17,11 @@ then be converted into a single tibble using dplyr::bind_rows function
 these databases
 * Added functions to use the **keyring** package to store securely store database 
 credentials
-* Added **extract_comma_delimited_list** and **extract_semicolon_delimited_list** functions
+* Added **extract_comma_delimited_list** and **extract_semicolon_delimited_list** functions.
+These are an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
+[tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+and purrr's [map function](https://purrr.tidyverse.org/reference/map.html) with example using a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
 
 # store 0.1.0
 
 * Added **Create and update a package** document to information
-
-
-

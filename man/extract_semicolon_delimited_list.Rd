@@ -49,3 +49,8 @@ heaviest_penguins <- heaviest_penguins \%>\%
  select(-penguins)
 heaviest_penguins
 }
+\seealso{
+Other delimited functions: 
+\code{\link{extract_comma_delimited_list}()}
+}
+\concept{delimited functions}

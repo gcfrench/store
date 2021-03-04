@@ -39,3 +39,4 @@ heaviest_penguins <- penguins \%>\%
   ungroup()
 display_table(heaviest_penguins)
 }
+\concept{tabular display}

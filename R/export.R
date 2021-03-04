@@ -12,6 +12,8 @@
 #' and height sizes adjustable by providing their sizes in inches in the function's
 #' parameters.
 #'
+#' @family excel functions
+#'
 #' @param spreadsheet_name character string, name of spreadsheet to add
 #' @param data data_frame, data to add to spreadsheet
 #' @param image_path character string, path to image file if present, default is NA

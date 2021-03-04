@@ -108,3 +108,4 @@ add_new_spreadsheet("palmerpenguins", mass_flipper_data,
 saveWorkbook(workbook, workbook_path, overwrite = TRUE)
 }
 }
+\concept{excel functions}

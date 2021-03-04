@@ -44,3 +44,12 @@ dbWriteTable(con, Id(schema = "schema_name", table = "table_name"),
 dbDisconnect(con)
 }
 }
+\seealso{
+More information on connecting to databases using R can be found in RStudio's
+\href{https://db.rstudio.com/}{Databases using R} webpages.
+
+Other database functions: 
+\code{\link{get_mysql_connection}()},
+\code{\link{get_sqlserver_connection}()}
+}
+\concept{database functions}

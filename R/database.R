@@ -8,9 +8,11 @@
 #' Remember this password as it will be needed everytime you access
 #' the database connection strings stored in this keyring.
 #'
-#' More information on securing credentials in R can be found in RStudio's
+#' @seealso More information on securing credentials in R can be found in RStudio's
 #' [Securing Credentials](https://db.rstudio.com/best-practices/managing-credentials/)
 #' webpage.
+#'
+#' @family keyring functions
 #'
 #' @param keyring_name
 #'
@@ -35,6 +37,8 @@ create_locked_keyring <- function(keyring_name) {
 #'
 #' @param keyring_name character, keyring name
 #'
+#' @family keyring functions
+#'
 #' @return message, keyring status
 #' @export
 #'
@@ -55,6 +59,8 @@ get_keyring_status <- function(keyring_name) {
 #' @description
 #' Unlock the keyring requiring keyring password
 #'
+#' @family keyring functions
+#'
 #' @param keyring_name character, keyring name
 #'
 #' @return
@@ -73,6 +79,8 @@ unlock_keyring <- function(keyring_name) {
 #'
 #' @description
 #' Lock the keyring requiring keyring password
+#'
+#' @family keyring functions
 #'
 #' @param keyring_name character, keyring name
 #'
@@ -93,6 +101,8 @@ lock_keyring <- function(keyring_name) {
 #' @description
 #' List the current keys stored on the keyring.
 #' Each of these keys store a database connection string.
+#'
+#' @family keyring functions
 #'
 #' @param keyring_name character, keyring name
 #'
@@ -120,6 +130,8 @@ list_keys <- function(keyring_name) {
 #  PostGresSQL database: {"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"}
 #' For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
 #'
+#' @family keyring functions
+#'
 #' @param keyring_name, character keyring name
 #' @param service_name, character key name
 #'
@@ -146,6 +158,8 @@ add_key <- function(keyring_name, service_name){
 #' @description
 #' Remove a key from the keyring by supplying both the keyring name
 #' and name of key to remove
+#'
+#' @family keyring functions
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, key name
@@ -175,8 +189,10 @@ delete_key <- function(keyring_name, service_name) {
 #' requesting database credentials in the console. The SQL Server tables are added
 #' to the connection pane.
 #'
-#' More information on connecting to databases using R can be found in RStudios
+#' @seealso More information on connecting to databases using R can be found in RStudio's
 #' [Databases using R](https://db.rstudio.com/) webpages.
+#'
+#' @family database functions
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, name of service storing credentials
@@ -250,8 +266,10 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #' This function initiates a MySQL connection using stored database credentials
 #' through the keyring package. The MySQL tables are added to the connection pane.
 #'
-#' More information on connecting to databases using R can be found in RStudios
+#' @seealso More information on connecting to databases using R can be found in RStudio's
 #' [Databases using R](https://db.rstudio.com/) webpages.
+#'
+#' @family database functions
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name character, name of service storing credentials
@@ -317,6 +335,11 @@ get_mysql_connection <- function(keyring_name, service_name) {
 #' @description
 #' This function initiates a PostgreSQL connection using stored database credentials
 #' through the keyring package. The PostgreSQL tables are added to the connection pane.
+#'
+#' @seealso More information on connecting to databases using R can be found in RStudio's
+#' [Databases using R](https://db.rstudio.com/) webpages.
+#'
+#' @family database functions
 #'
 #' @param keyring_name character, keyring name
 #' @param service_name name of service storing credentials
