@@ -23,5 +23,16 @@ country_codes <- country_codes %>%
                      country_name = "Yugoslavia",
                      un_region_name = "Europe"))
 
+# add 27 European Union member countries
+# https://europa.eu/european-union/about-eu/countries_en
+
+european_union <- c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
+        "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD",
+        "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE")
+country_codes <- country_codes %>%
+  dplyr::mutate(eu_member = dplyr::case_when(
+                                    alpha_3 %in% european_union ~ TRUE,
+                                    TRUE ~ FALSE))
+
 # save in data directory
 usethis::use_data(country_codes, overwrite = TRUE)

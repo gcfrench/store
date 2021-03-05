@@ -134,11 +134,6 @@ usethis::use_lifecycle()
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
 ```
 
-**usethis::use_code_of_conduct** add code of conduct markdown, pasting code of conduct section into README file
-```{r}
-usethis::use_code_of_conduct()
-```
-
 ### Add to github --------------------------------------------
 
 **usethis::use_git** initiates a Git repository, making the initial commits

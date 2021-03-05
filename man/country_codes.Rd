@@ -3,13 +3,14 @@
 \docType{data}
 \name{country_codes}
 \alias{country_codes}
-\title{ISO-3166 three letter country codes with United Nations regions}
+\title{ISO-3166 three letter country codes with United Nations regions and European Union membership}
 \format{
-A tibble with 250 rows and 3 variables
+A tibble with 250 rows and 4 variables
 \describe{
 \item{alpha_3}{ISO_3166_1 country code}
 \item{country_name}{Name of country}
 \item{un_region_name}{Name of United Nations region}
+\item{eu_member}{Whether the country is a member of the European Union or not}
 }
 }
 \usage{
@@ -18,7 +19,8 @@ country_codes
 \description{
 International Organisation for Standardisation three letter codes for the
 representation of country names taken from the \href{https://cran.r-project.org/web/packages/ISOcodes/index.html}{ISOcodes package}
-, associated with UN regions taken from \href{https://unstats.un.org/unsd/methodology/m49/}{United Nations website}.
+, associated with UN regions taken from \href{https://unstats.un.org/unsd/methodology/m49/}{United Nations website},
+and whether the country is the member of the \href{https://europa.eu/european-union/about-eu/countries_en}{European Union}
 
 The missing old European country Yugoslavia was added, along with the UN regions
 for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
