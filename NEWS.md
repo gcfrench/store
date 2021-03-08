@@ -1,8 +1,11 @@
 # store 0.3.0
 
+* Updated **add_new_spreadsheet** added filter parameter to turn off adding filter
+to spreadsheet capability
+* Updated **country_codes** look up table to include European Union membership
 * Added **reduce_image_size** to reduce the size of an image, with the example of
 parallelization using the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/) packages to batch reduce images size 
-within a directory.
+within a directory
 
 # store 0.2.0
 

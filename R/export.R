@@ -19,6 +19,7 @@
 #' @param image_path character string, path to image file if present, default is NA
 #' @param image_width double, width of image in inches
 #' @param image_height double, height of image in inches
+#' @param filter logical, add filter to spreadsheet (default = TRUE) or not (FALSE)
 #'
 #' @return data_frame, the inputted data frame is returned invisibly
 #' @export
@@ -93,7 +94,7 @@
 #' saveWorkbook(workbook, workbook_path, overwrite = TRUE)
 #' }
 add_new_spreadsheet <- function(spreadsheet_name, data, image_path = NA_character_,
-                                image_width, image_height) {
+                                image_width, image_height, filter = TRUE) {
   # create spreadsheet
   sheet <- openxlsx::addWorksheet(wb = workbook, sheetName = spreadsheet_name)
   column_number <- ncol(data)
@@ -107,7 +108,9 @@ add_new_spreadsheet <- function(spreadsheet_name, data, image_path = NA_characte
   openxlsx::addStyle(workbook, sheet, header_style, rows = 1, cols = 1:column_number)
   openxlsx::addStyle(workbook, sheet, cell_style,
                      gridExpand = TRUE, cols = 1:column_number, rows = 1:row_number + 1)
-  openxlsx::addFilter(workbook, sheet, rows = 1, cols = 1:column_number)
+  if(filter) {
+    openxlsx::addFilter(workbook, sheet, rows = 1, cols = 1:column_number)
+  }
 
   # add image
   if(!is.na(image_path)) {

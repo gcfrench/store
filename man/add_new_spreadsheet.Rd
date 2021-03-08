@@ -9,7 +9,8 @@ add_new_spreadsheet(
   data,
   image_path = NA_character_,
   image_width,
-  image_height
+  image_height,
+  filter = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ add_new_spreadsheet(
 \item{image_width}{double, width of image in inches}
 
 \item{image_height}{double, height of image in inches}
+
+\item{filter}{logical, add filter to spreadsheet (default = TRUE) or not (FALSE)}
 }
 \value{
 data_frame, the inputted data frame is returned invisibly
