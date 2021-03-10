@@ -56,7 +56,10 @@ display_table <- function(data, rows = nrow(data)) {
 #' and [palmer penguins image](https://allisonhorst.github.io/palmerpenguins/articles/art.html)
 #' from Allison Horst's Art work. Artwork by @allison_horst and is an example of parallelization using
 #' the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/)
-#' packages.
+#' packages
+#'
+#' @seealso [Jumping rivers](https://www.jumpingrivers.com/) has written a series of
+#' four blogs for [displaying images on web pages](https://www.jumpingrivers.com/blog/knitr-include-graphics-external/).
 #'
 #' @family image manipulation functions
 #'
@@ -77,7 +80,6 @@ display_table <- function(data, rows = nrow(data)) {
 #'     library(ggplot2)
 #'     library(here)
 #'     library(magick)
-#'     library(magrittr)
 #'     library(future)
 #'     library(furrr)
 #'   })
@@ -119,7 +121,12 @@ display_table <- function(data, rows = nrow(data)) {
 #'
 #' # save graph
 #' ggsave(filename = "output/images/palmerpenguins_graph.png",
-#'        plot = mass_flipper_graph)
+#'        plot = mass_flipper_graph,
+#'        type = "cairo-png",
+#'        width = 8,
+#'        height = 8,
+#'        units = "in",
+#'        dpi = 72)
 #'
 #' # graph image
 #' mass_flipper_graph <- image_read(here("output/images/palmerpenguins_graph.png"))
@@ -145,7 +152,7 @@ display_table <- function(data, rows = nrow(data)) {
 #' here("output/images") %>%
 #'   dir_ls(., glob = "*.png") %>%
 #'   future_map(reduce_image_size,
-#'              image_size = "25%",
+#'              image_size = "50%",
 #'              .options = furrr_options(seed = TRUE),
 #'              .progress = TRUE)
 #'
@@ -182,5 +189,125 @@ display_table <- function(data, rows = nrow(data)) {
 
   # return path to reduced image
   invisible(path_image)
-}
+ }
+
+#' add_image_shadow
+#'
+#' @description
+#' This function adds a border shadow to the image, archiving the
+#' original image in a separate archive sub-directory
+#'
+#' @seealso The example batch runs the function on a graph from the
+#' [palmerpenguins package](https://allisonhorst.github.io/palmerpenguins/articles/examples.html)
+#' and is an example of parallelization using the [future](https://github.com/HenrikBengtsson/future)
+#' and [furrr](https://davisvaughan.github.io/furrr/) packages
+#'
+#' @family image manipulation functions
+#'
+#' @param path_image character, path name of image
+#'
+#' @return character, path name of image returned invisibly
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(fs)
+#'   library(dplyr)
+#'   library(ggplot2)
+#'   library(here)
+#'   library(magick)
+#'   library(future)
+#'  library(furrr)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#' if (!dir_exists("output/images")) {dir.create("output/images")}
+#'
+#' # example taken from palmerpenguins example analysis of mass vs. flipper length
+#' # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+#'
+#' # data
+#' mass_flipper_data <- penguins %>%
+#'   select(species, flipper_length_mm, body_mass_g, )
+#' mass_flipper_data
+#'
+#' # graph
+#' mass_flipper_graph <- ggplot(data = mass_flipper_data,
+#'                              aes(x = flipper_length_mm,
+#'                                  y = body_mass_g)) +
+#'   geom_point(aes(color = species,
+#'                  shape = species),
+#'              size = 3,
+#'              alpha = 0.8) +
+#'   theme_minimal() +
+#'   scale_color_manual(values = c("darkorange","purple","cyan4")) +
+#'   labs(title = "Penguin size, Palmer Station LTER",
+#'        subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
+#'        x = "Flipper length (mm)",
+#'        y = "Body mass (g)",
+#'        color = "Penguin species",
+#'        shape = "Penguin species") +
+#'   theme(legend.position = c(0.2, 0.7),
+#'         legend.background = element_rect(fill = "white", color = NA),
+#'         plot.title.position = "plot",
+#'         plot.caption = element_text(hjust = 0, face= "italic"),
+#'         plot.caption.position = "plot")
+#'
+#' # save graph
+#' ggsave(filename = "output/images/palmerpenguins_graph.png",
+#'        plot = mass_flipper_graph,
+#'        type = "cairo-png",
+#'        width = 6,
+#'        height = 6,
+#'        units = "in",
+#'       dpi = 72)
+#'
+#' # graph image
+#' mass_flipper_graph <- image_read(here("output/images/palmerpenguins_graph.png"))
+#' mass_flipper_graph
+#'
+#' # add shadows to graph image
+#' plan(multisession)
+#' here("output/images") %>%
+#'   dir_ls(., glob = "*.png") %>%
+#'   future_map(add_image_shadow,
+#'              .options = furrr_options(seed = TRUE),
+#'               .progress = TRUE)
+#'
+#' # shadowed graph
+#' mass_flipper_graph_shadow <- image_read(here("output/images/palmerpenguins_graph.png"))
+#' mass_flipper_graph_shadow
+#' }
+
+ add_image_shadow <- function(path_image) {
+
+   # create archive directory if does not exist
+   dir_archive <- fs::path(fs::path_dir(path_image), "archive")
+   if(!fs::dir_exists(dir_archive)){
+     fs::dir_create(dir_archive)
+   }
+
+   # move original image to archive directory
+   path_archive <- fs::path(dir_archive, fs::path_file(path_image))
+   fs::file_move(path_image, path_archive)
+
+   # save image with shadow in original directory
+   magick::image_read(path_archive) %>%
+     magick::image_border(geometry = "2x2") %>%
+     magick::image_shadow() %>%
+     magick::image_write(path_image)
+
+   # return path to reduced image
+   invisible(path_image)
+ }
+
+
+
+
 

@@ -1,5 +1,7 @@
 # store 0.3.0
 
+* Added **add_image_shadow** to add a shadow border to an image, with the example of
+parallelization using the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/) packages to batch add border shadows to images within a directory
 * Updated **add_new_spreadsheet** added filter parameter to turn off adding filter
 to spreadsheet capability
 * Updated **country_codes** look up table to include European Union membership

@@ -34,6 +34,7 @@ reference:
   contents:
   - display_table
   - reduce_image_size
+  - add_image_shadow
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets"
 - contents:
