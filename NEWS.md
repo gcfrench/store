@@ -1,5 +1,13 @@
 # store 0.3.0
 
+* Added **display_variable_correlation** to display a plot of the correlation matrix
+for each variable within a data frame
+* Added **display_variable_outliers** to display the variable outliers within a 
+data frame
+* Added **display_variable_distribution** to display the distribution of numerical
+variables within a data frame
+* Added **display_variable_stats** to display the basic statistics of the variables 
+within a data frame
 * Added **add_image_shadow** to add a shadow border to an image, with the example of
 parallelization using the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/) packages to batch add border shadows to images within a directory
 * Updated **add_new_spreadsheet** added filter parameter to turn off adding filter

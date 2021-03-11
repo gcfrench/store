@@ -5,7 +5,7 @@ template:
 reference:
 - title: "Store credentials"
   desc: "Securely store and retrive database connections using the keyring package"
-- contents:
+  contents:
   - create_locked_keyring
   - get_keyring_status
   - list_keys
@@ -15,17 +15,24 @@ reference:
   - lock_keyring
 - title: "Database connections"
   desc: "Connect to databases"
-- contents:
+  contents:
   - get_sqlserver_connection
   - get_postgres_connection
   - get_mysql_connection
 - title: "Lookup tables"
-- desc: "Dataframes containing data table lookups"
-- contents:
+  desc: "Dataframes containing data table lookups"
+  contents:
   - country_codes
+- title: "Exploratory Data Analysis"
+  desc: "Explore datasets"
+  contents:
+  - display_variable_stats
+  - display_variable_distribution
+  - display_variable_outliers
+  - display_variable_correlation
 - title: "Data manipulation"
   desc: "Format data"
-- contents:
+  contents:
   - extract_comma_delimited_list
   - extract_semicolon_delimited_list
   - add_tibble_to_list
@@ -37,7 +44,7 @@ reference:
   - add_image_shadow
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets"
-- contents:
+  contents:
   - add_new_spreadsheet
 
 navbar:

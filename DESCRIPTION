@@ -34,7 +34,14 @@ Imports:
     reactable,
     RPostgres,
     magick,
-    fs
+    fs,
+    dlookr,
+    gridExtra,
+    inspectdf,
+    patchwork,
+    ggplot2,
+    tidyr,
+    corrplot
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
