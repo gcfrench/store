@@ -22,6 +22,6 @@ correlation values between each variable combination
 Other exploratory data analysis: 
 \code{\link{display_variable_distribution}()},
 \code{\link{display_variable_outliers}()},
-\code{\link{display_variable_stats}()}
+\code{\link{display_variable_summary}()}
 }
 \concept{exploratory data analysis}

@@ -27,6 +27,6 @@ with outliers included and excluded
 Other exploratory data analysis: 
 \code{\link{display_variable_correlation}()},
 \code{\link{display_variable_distribution}()},
-\code{\link{display_variable_stats}()}
+\code{\link{display_variable_summary}()}
 }
 \concept{exploratory data analysis}

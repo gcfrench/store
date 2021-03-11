@@ -28,6 +28,6 @@ the mean, level of skewness, kurtosis and normality
 Other exploratory data analysis: 
 \code{\link{display_variable_correlation}()},
 \code{\link{display_variable_outliers}()},
-\code{\link{display_variable_stats}()}
+\code{\link{display_variable_summary}()}
 }
 \concept{exploratory data analysis}

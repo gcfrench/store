@@ -1,21 +1,33 @@
-#' display_variable_stats
+#' display_variable_summary
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Displays the basic statistics of the variables within a data frame. This includes
-#' a plot of the prevalence of NAs and frequency of category levels, a summary count
-#' of the number of rows, missing values, unique values and zero values for each variable
+#' Exports the basic statistics of the variables within a data frame into an output
+#' directory. This includes a plots of the prevalence of missing values and frequency
+#' of category levels and a table image containing a summary count of the number of rows,
+#' missing values, unique values and zero values for each variable
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, data frame used to display the variable statistics
-#' @param width_1 integer, integer between 0-1, determining width of first column
-#' @param width_2 integer, integer between 0-1, determining width of second column
+#' @param .dataset data frame, data frame to summarise
 #'
-#' @return a patchwork object including two plots and one table
+#' @return returns dataset invisibly
 #' @export
-display_variable_stats <- function(.dataset, width_1 = 0.6, width_2 = 0.4) {
+display_variable_summary <- function(.dataset) {
+
+  # export plot as image
+  export_plot <- function(plot, plot_name,
+                          figure_width = 6, figure_height = 6) {
+    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+                    plot = plot,
+                    type = "cairo-png",
+                    width = figure_width,
+                    height = figure_height,
+                    units = "in",
+                    dpi = 72)
+    invisible(plot)
+  }
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -25,53 +37,54 @@ display_variable_stats <- function(.dataset, width_1 = 0.6, width_2 = 0.4) {
   .dataset <- .dataset %>%
     dplyr::select(sort(names(.)))
 
-  # numeric variable stats table
+  # variable summary table --------------------------------------------------
+
+  ## numeric variable summary table
   if(check_numeric) {
-    t1 <- dlookr::diagnose(.dataset) %>%
+    numeric_table <- dlookr::diagnose(.dataset) %>%
       dplyr::inner_join(dlookr::diagnose_numeric(.dataset)) %>%
       dplyr::inner_join(dlookr::describe(.dataset) %>%
                           dplyr::rename(variables = variable)) %>%
       dplyr::select(variables, types, n, contains("count"), zero)
   }
 
-  # nominal variable stats table
+  ## nominal variable statistics table
   if(check_nominal) {
-    t2 <-dlookr::diagnose(.dataset) %>%
+    nominal_table <-dlookr::diagnose(.dataset) %>%
       dplyr::inner_join(dlookr::diagnose_category(.dataset)) %>%
       dplyr::rename(n = N) %>%
       dplyr::select(variables, types, n, contains("count")) %>%
       dplyr::distinct()
   }
 
-  # combined numeric and nominal tables
+  ## combined numeric and nominal tables
   if(check_numeric & check_nominal) {
-    t <- t1 %>%
-      dplyr::bind_rows(t2)
+    summary_table <- numeric_table %>%
+      dplyr::bind_rows(nominal_table)
   } else if(check_numeric) {
-    t <- t1
+    summary_table <- numeric_table
   } else {
-    t <- t2
+    summary_table<- nominal_table
   }
-  t <- gridExtra::tableGrob(t, rows = NULL, theme = gridExtra::ttheme_minimal())
 
-  # variable stats plot
-  p1 <- inspectdf::inspect_na(.dataset) %>%
-    inspectdf::show_plot()
+  ## export variable statistics table
+  gridExtra::tableGrob(summary_table, rows = NULL,
+                       theme = gridExtra::ttheme_default(base_size = 16)) %>%
+    export_plot("summary_table", figure_width = 10)
+
+  # variable missing data plot
+  inspectdf::inspect_na(.dataset) %>%
+    inspectdf::show_plot() %>%
+    export_plot("missing_data")
 
   # variable category plot
   if(check_nominal) {
-    p2 <- inspectdf::inspect_cat(.dataset) %>%
-      inspectdf::show_plot()
+    inspectdf::inspect_cat(.dataset) %>%
+      inspectdf::show_plot() %>%
+      export_plot("category_data", figure_width = 10)
   }
 
-  # display plots and table
-  if(check_nominal) {
-    patchwork::wrap_plots((p1 / p2), patchwork::wrap_elements(t),
-                          widths = c(width_1, width_2))
-  } else {
-    patchwork::wrap_plots(p1 + patchwork::wrap_elements(t),
-                          widths = c(width_1, width_2))
-  }
+  invisible(.dataset)
 }
 
 #' display_variable_distribution
