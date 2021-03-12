@@ -89,19 +89,109 @@ display_variable_summary <- function(.dataset) {
   ## export variable statistics table
   gridExtra::tableGrob(summary_table, rows = NULL,
                        theme = gridExtra::ttheme_default(base_size = 16)) %>%
-    export_plot("summary_table", figure_width = 10)
+    export_plot("01-summary_table", figure_width = 10)
 
   # variable missing data plot
   inspectdf::inspect_na(.dataset) %>%
     inspectdf::show_plot() %>%
-    export_plot("missing_data")
+    export_plot("02-missing_data")
 
   # variable category plot
   if(check_nominal) {
     inspectdf::inspect_cat(.dataset) %>%
       inspectdf::show_plot() %>%
-      export_plot("category_data", figure_width = 10)
+      export_plot("03-category_data", figure_width = 10)
   }
+
+  invisible(.dataset)
+}
+
+#' display_variable_outliers
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Exports the variable outliers within a data frame with a boxplot, and
+#' summary statistics including count outliers and mean of each variable
+#' with outliers included and excluded
+#'
+#' @family exploratory data analysis
+#'
+#' @param .dataset data frame, data frame used to display the variable statistics
+#'
+#' @return dataset returned invisibly
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(here)
+#'   library(fs)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#'
+#' # example from palmerpenguins
+#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+#' display_variable_outliers(penguins_raw)
+#' }
+display_variable_outliers <- function(.dataset) {
+
+  # export plot as image
+  export_plot <- function(plot, plot_name,
+                          figure_width = 6, figure_height = 6) {
+    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+                    plot = plot,
+                    type = "cairo-png",
+                    width = figure_width,
+                    height = figure_height,
+                    units = "in",
+                    dpi = 72)
+    invisible(plot)
+  }
+
+  # check for types
+  check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
+  check_nominal <- any(c("factor", "character") %in% (dlookr::diagnose(.dataset)$types))
+
+  # exit function if no numeric types
+  if(!check_numeric) {
+    return(NULL)
+  }
+
+  # sort column names
+  .dataset <- .dataset %>%
+    dplyr::select_if(is.numeric) %>%
+    dplyr::select(sort(names(.)))
+
+  # variable outliers table
+  outliers_table <- dlookr::diagnose_outlier(.dataset) %>%
+    dplyr::rename(outliers_count = outliers_cnt,
+                  with_outliers_mean = with_mean,
+                  without_outliers_mean = without_mean) %>%
+    dplyr::select(-outliers_ratio, -outliers_mean)
+
+  # export outliers table
+  gridExtra::tableGrob(outliers_table, rows = NULL, theme = gridExtra::ttheme_default(base_size = 16)) %>%
+    export_plot("04-outliers_table", figure_width = 12)
+
+  # variable outliers plot
+  variable_outliers <- .dataset %>%
+    tidyr::pivot_longer(cols = tidyselect::everything()) %>%
+    ggplot2::ggplot(ggplot2::aes(x = name, y = value, fill = name)) +
+    ggplot2::geom_boxplot() +
+    ggplot2::facet_wrap(ggplot2::vars(name), scale = "free") +
+    ggplot2::guides(fill = FALSE) +
+    ggplot2::theme(axis.title = ggplot2::element_blank())
+
+  # export variable outliers plot
+  variable_outliers %>%
+    export_plot("05-variable_outliers")
 
   invisible(.dataset)
 }
@@ -181,102 +271,12 @@ display_variable_distribution <- function(.dataset) {
   # export variable distribution table
   gridExtra::tableGrob(distribution_table, rows = NULL,
                        theme = gridExtra::ttheme_default(base_size = 14)) %>%
-    export_plot("distribution_table", figure_width = 20, figure_height = 10)
+    export_plot("06-distribution_table", figure_width = 20, figure_height = 10)
 
   # variable distribution plot
   inspectdf::inspect_num(.dataset) %>%
     inspectdf::show_plot() %>%
-    export_plot("distribution_plot")
-
-  invisible(.dataset)
-}
-
-#' display_variable_outliers
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' Exports the variable outliers within a data frame with a boxplot, and
-#' summary statistics including count outliers and mean of each variable
-#' with outliers included and excluded
-#'
-#' @family exploratory data analysis
-#'
-#' @param .dataset data frame, data frame used to display the variable statistics
-#'
-#' @return dataset returned invisibly
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(here)
-#'   library(fs)
-#'  })
-#' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
-#'
-#' # example from palmerpenguins
-#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' display_variable_outliers(penguins_raw)
-#' }
-display_variable_outliers <- function(.dataset) {
-
-  # export plot as image
-  export_plot <- function(plot, plot_name,
-                          figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
-                    plot = plot,
-                    type = "cairo-png",
-                    width = figure_width,
-                    height = figure_height,
-                    units = "in",
-                    dpi = 72)
-    invisible(plot)
-  }
-
-  # check for types
-  check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
-  check_nominal <- any(c("factor", "character") %in% (dlookr::diagnose(.dataset)$types))
-
-  # exit function if no numeric types
-  if(!check_numeric) {
-    return(NULL)
-  }
-
-  # sort column names
-  .dataset <- .dataset %>%
-    dplyr::select_if(is.numeric) %>%
-    dplyr::select(sort(names(.)))
-
-  # variable outliers table
-  outliers_table <- dlookr::diagnose_outlier(.dataset) %>%
-    dplyr::rename(outliers_count = outliers_cnt,
-                  with_outliers_mean = with_mean,
-                  without_outliers_mean = without_mean) %>%
-    dplyr::select(-outliers_ratio, -outliers_mean)
-
-  # export outliers table
-  gridExtra::tableGrob(outliers_table, rows = NULL, theme = gridExtra::ttheme_default(base_size = 16)) %>%
-    export_plot("outliers_table", figure_width = 12)
-
-  # variable outliers plot
-  variable_outliers <- .dataset %>%
-    tidyr::pivot_longer(cols = tidyselect::everything()) %>%
-    ggplot2::ggplot(ggplot2::aes(x = name, y = value, fill = name)) +
-    ggplot2::geom_boxplot() +
-    ggplot2::facet_wrap(ggplot2::vars(name), scale = "free") +
-    ggplot2::guides(fill = FALSE) +
-    ggplot2::theme(axis.title = ggplot2::element_blank())
-
-  # export variable outliers plot
-  variable_outliers %>%
-    export_plot("variable_outliers")
+    export_plot("07-distribution_plot")
 
   invisible(.dataset)
 }
@@ -331,7 +331,7 @@ display_variable_correlation <- function(.dataset) {
     dplyr::select(sort(names(.)))
 
   # variable correlation plot
-  png("output/correlation_plot.png", width = 600, height = 600, type = "cairo-png")
+  png("output/08-correlation_plot.png", width = 600, height = 600, type = "cairo-png")
   .dataset %>%
     cor(use = "complete.obs", method = "pearson") %>%
     corrplot::corrplot(method = "number", number.digits = 3,
