@@ -4,24 +4,39 @@
 \alias{display_variable_outliers}
 \title{display_variable_outliers}
 \usage{
-display_variable_outliers(.dataset, width_1 = 0.6, width_2 = 0.4)
+display_variable_outliers(.dataset)
 }
 \arguments{
 \item{.dataset}{data frame, data frame used to display the variable statistics}
-
-\item{width_1}{integer, integer between 0-1, determining width of first column}
-
-\item{width_2}{integer, integer between 0-1, determining width of second column}
 }
 \value{
-a patchwork object including one plot and one table
+dataset returned invisibly
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Displays the variable outliers within a data frame with a boxplot, and
+Exports the variable outliers within a data frame with a boxplot, and
 summary statistics including count outliers and mean of each variable
 with outliers included and excluded
+}
+\examples{
+\dontrun{
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+  library(palmerpenguins)
+  library(here)
+  library(fs)
+ })
+})
+# create output directory
+i_am("example.Rmd")
+if (!dir_exists("output")) {dir.create("output")}
+
+# example from palmerpenguins
+# https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+display_variable_outliers(penguins_raw)
+}
 }
 \seealso{
 Other exploratory data analysis: 

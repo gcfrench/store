@@ -5,15 +5,34 @@
 #'
 #' Exports the basic statistics of the variables within a data frame into an output
 #' directory. This includes a plots of the prevalence of missing values and frequency
-#' of category levels and a table image containing a summary count of the number of rows,
-#' missing values, unique values and zero values for each variable
+#' of category levels and a table image containing variable's type summary count of
+#' the number of rows, missing values, unique values and zero values for each variable
 #'
 #' @family exploratory data analysis
 #'
 #' @param .dataset data frame, data frame to summarise
 #'
-#' @return returns dataset invisibly
+#' @return dataset returned invisibly
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(here)
+#'   library(fs)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#'
+#' # example from palmerpenguins
+#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+#' display_variable_summary(penguins_raw)
+#' }
 display_variable_summary <- function(.dataset) {
 
   # export plot as image
@@ -92,7 +111,7 @@ display_variable_summary <- function(.dataset) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Displays the distribution of the numeric variables within a data frame, including
+#' Exports the distribution of the numeric variables within a data frame, including
 #' a histogram for each variable and table of summary statistics. These statistics
 #' include the range, quartiles, mean, medium, standard deviation, standard error of
 #' the mean, level of skewness, kurtosis and normality
@@ -100,12 +119,42 @@ display_variable_summary <- function(.dataset) {
 #' @family exploratory data analysis
 #'
 #' @param .dataset data frame, data frame used to display the variable statistics
-#' @param height_1 integer, integer between 0-1, determining height of first column
-#' @param height_2 integer, integer between 0-1, determining height of second column
 #'
-#' @return a patchwork object including one plot and one table
+#' @return dataset returned invisibly
 #' @export
-display_variable_distribution <- function(.dataset, height_1 = 1, height_2 = 0) {
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(here)
+#'   library(fs)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#'
+#' # example from palmerpenguins
+#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+#' display_variable_distribution(penguins_raw)
+#' }
+display_variable_distribution <- function(.dataset) {
+
+  # export plot as image
+  export_plot <- function(plot, plot_name,
+                          figure_width = 6, figure_height = 6) {
+    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+                    plot = plot,
+                    type = "cairo-png",
+                    width = figure_width,
+                    height = figure_height,
+                    units = "in",
+                    dpi = 72)
+    invisible(plot)
+  }
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -122,21 +171,24 @@ display_variable_distribution <- function(.dataset, height_1 = 1, height_2 = 0) 
     dplyr::select(sort(names(.)))
 
   # variable distribution table
-  t1 <- dlookr::diagnose_numeric(.dataset) %>%
+  distribution_table <- dlookr::diagnose_numeric(.dataset) %>%
     dplyr::inner_join(dlookr::describe(.dataset)
                       %>% dplyr::rename(variables = variable)) %>%
     dplyr::inner_join(dlookr::normality(.dataset) %>%
                         dplyr::rename(variables = vars, normality = statistic)) %>%
     dplyr::select(variables:max, sd:kurtosis, normality, p_value)
-  t1 <- gridExtra::tableGrob(t1, rows = NULL, theme = gridExtra::ttheme_minimal())
+
+  # export variable distribution table
+  gridExtra::tableGrob(distribution_table, rows = NULL,
+                       theme = gridExtra::ttheme_default(base_size = 14)) %>%
+    export_plot("distribution_table", figure_width = 20, figure_height = 10)
 
   # variable distribution plot
-  p1 <- inspectdf::inspect_num(.dataset) %>%
-    inspectdf::show_plot()
+  inspectdf::inspect_num(.dataset) %>%
+    inspectdf::show_plot() %>%
+    export_plot("distribution_plot")
 
-  # display plot and table
-  patchwork::wrap_plots(p1 / patchwork::wrap_elements(t1),
-                        heights = c(height_1, height_2))
+  invisible(.dataset)
 }
 
 #' display_variable_outliers
@@ -144,19 +196,49 @@ display_variable_distribution <- function(.dataset, height_1 = 1, height_2 = 0) 
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Displays the variable outliers within a data frame with a boxplot, and
+#' Exports the variable outliers within a data frame with a boxplot, and
 #' summary statistics including count outliers and mean of each variable
 #' with outliers included and excluded
 #'
 #' @family exploratory data analysis
 #'
 #' @param .dataset data frame, data frame used to display the variable statistics
-#' @param width_1 integer, integer between 0-1, determining width of first column
-#' @param width_2 integer, integer between 0-1, determining width of second column
 #'
-#' @return a patchwork object including one plot and one table
+#' @return dataset returned invisibly
 #' @export
-display_variable_outliers <- function(.dataset, width_1 = 0.6, width_2 = 0.4) {
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(here)
+#'   library(fs)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#'
+#' # example from palmerpenguins
+#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+#' display_variable_outliers(penguins_raw)
+#' }
+display_variable_outliers <- function(.dataset) {
+
+  # export plot as image
+  export_plot <- function(plot, plot_name,
+                          figure_width = 6, figure_height = 6) {
+    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+                    plot = plot,
+                    type = "cairo-png",
+                    width = figure_width,
+                    height = figure_height,
+                    units = "in",
+                    dpi = 72)
+    invisible(plot)
+  }
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -173,15 +255,18 @@ display_variable_outliers <- function(.dataset, width_1 = 0.6, width_2 = 0.4) {
     dplyr::select(sort(names(.)))
 
   # variable outliers table
-  t1 <- dlookr::diagnose_outlier(.dataset) %>%
+  outliers_table <- dlookr::diagnose_outlier(.dataset) %>%
     dplyr::rename(outliers_count = outliers_cnt,
                   with_outliers_mean = with_mean,
                   without_outliers_mean = without_mean) %>%
     dplyr::select(-outliers_ratio, -outliers_mean)
-  t1 <- gridExtra::tableGrob(t1, rows = NULL, theme = gridExtra::ttheme_minimal())
+
+  # export outliers table
+  gridExtra::tableGrob(outliers_table, rows = NULL, theme = gridExtra::ttheme_default(base_size = 16)) %>%
+    export_plot("outliers_table", figure_width = 12)
 
   # variable outliers plot
-  p1 <- .dataset %>%
+  variable_outliers <- .dataset %>%
     tidyr::pivot_longer(cols = tidyselect::everything()) %>%
     ggplot2::ggplot(ggplot2::aes(x = name, y = value, fill = name)) +
     ggplot2::geom_boxplot() +
@@ -189,8 +274,11 @@ display_variable_outliers <- function(.dataset, width_1 = 0.6, width_2 = 0.4) {
     ggplot2::guides(fill = FALSE) +
     ggplot2::theme(axis.title = ggplot2::element_blank())
 
-  # display plot and table
-  patchwork::wrap_plots(p1, patchwork::wrap_elements(t1), widths = c(width_1, width_2))
+  # export variable outliers plot
+  variable_outliers %>%
+    export_plot("variable_outliers")
+
+  invisible(.dataset)
 }
 
 #' display_variable_correlation
@@ -198,15 +286,34 @@ display_variable_outliers <- function(.dataset, width_1 = 0.6, width_2 = 0.4) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Displays a plot of the correlation matrix for each variable, showing the
+#' Exports a plot of the correlation matrix for each variable, showing the
 #' correlation values between each variable combination
 #'
 #' @family exploratory data analysis
 #'
 #' @param .dataset data frame, data frame used to display the variable statistics
 #'
-#' @return a corrplot object of the correlation matrix plot
+#' @return dataset returned invisibly
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(here)
+#'   library(fs)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#'
+#' # example from palmerpenguins
+#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+#' display_variable_correlation(penguins_raw)
+#' }
 display_variable_correlation <- function(.dataset) {
 
   # check for types
@@ -224,15 +331,13 @@ display_variable_correlation <- function(.dataset) {
     dplyr::select(sort(names(.)))
 
   # variable correlation plot
-  p1 <- .dataset %>%
+  png("output/correlation_plot.png", width = 600, height = 600, type = "cairo-png")
+  .dataset %>%
     cor(use = "complete.obs", method = "pearson") %>%
     corrplot::corrplot(method = "number", number.digits = 3,
                        type = "upper", mar = c(0, 0, 2, 0),
                        title = "Correlation between numeric variables")
+  dev.off()
 
-  # display plot
-  p1
-
-  # do not return correlation matrix
-  invisible()
+  invisible(.dataset)
 }

@@ -4,25 +4,40 @@
 \alias{display_variable_distribution}
 \title{display_variable_distribution}
 \usage{
-display_variable_distribution(.dataset, height_1 = 1, height_2 = 0)
+display_variable_distribution(.dataset)
 }
 \arguments{
 \item{.dataset}{data frame, data frame used to display the variable statistics}
-
-\item{height_1}{integer, integer between 0-1, determining height of first column}
-
-\item{height_2}{integer, integer between 0-1, determining height of second column}
 }
 \value{
-a patchwork object including one plot and one table
+dataset returned invisibly
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Displays the distribution of the numeric variables within a data frame, including
+Exports the distribution of the numeric variables within a data frame, including
 a histogram for each variable and table of summary statistics. These statistics
 include the range, quartiles, mean, medium, standard deviation, standard error of
 the mean, level of skewness, kurtosis and normality
+}
+\examples{
+\dontrun{
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+  library(palmerpenguins)
+  library(here)
+  library(fs)
+ })
+})
+# create output directory
+i_am("example.Rmd")
+if (!dir_exists("output")) {dir.create("output")}
+
+# example from palmerpenguins
+# https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+display_variable_distribution(penguins_raw)
+}
 }
 \seealso{
 Other exploratory data analysis: 

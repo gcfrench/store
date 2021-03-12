@@ -10,13 +10,32 @@ display_variable_correlation(.dataset)
 \item{.dataset}{data frame, data frame used to display the variable statistics}
 }
 \value{
-a corrplot object of the correlation matrix plot
+dataset returned invisibly
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Displays a plot of the correlation matrix for each variable, showing the
+Exports a plot of the correlation matrix for each variable, showing the
 correlation values between each variable combination
+}
+\examples{
+\dontrun{
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+  library(palmerpenguins)
+  library(here)
+  library(fs)
+ })
+})
+# create output directory
+i_am("example.Rmd")
+if (!dir_exists("output")) {dir.create("output")}
+
+# example from palmerpenguins
+# https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+display_variable_correlation(penguins_raw)
+}
 }
 \seealso{
 Other exploratory data analysis: 
