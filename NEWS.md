@@ -1,14 +1,14 @@
 # store 0.3.0
 
-* Added **display_variable_collection** to run all the exploratory data analyses on
+* Added **eda_variable_collection** to run all the exploratory data analyses on
 a data frame which provide examples of using the [dlookr](https://github.com/choonghyunryu/dlookr) and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
-* Added **display_variable_correlation** to display a plot of the correlation matrix
+* Added **eda_variable_correlation** to display a plot of the correlation matrix
 for each variable within a data frame
-* Added **display_variable_outliers** to display the variable outliers within a 
+* Added **eda_variable_outliers** to display the variable outliers within a 
 data frame
-* Added **display_variable_distribution** to display the distribution of numerical
+* Added **eda_variable_distribution** to display the distribution of numerical
 variables within a data frame
-* Added **display_variable_summary** to export a summary of the variables 
+* Added **eda_variable_summary** to export a summary of the variables 
 within a data frame as plots and a table
 * Added **add_image_shadow** to add a shadow border to an image, with the example of
 parallelization using the [future](https://github.com/HenrikBengtsson/future) and [furrr](https://davisvaughan.github.io/furrr/) packages to batch add border shadows to images within a directory

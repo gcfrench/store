@@ -26,11 +26,11 @@ reference:
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:
-  - display_variable_collection
-  - display_variable_summary
-  - display_variable_distribution
-  - display_variable_outliers
-  - display_variable_correlation
+  - eda
+  - eda_variable_summary
+  - eda_variable_distribution
+  - eda_variable_outliers
+  - eda_variable_correlation
 - title: "Data manipulation"
   desc: "Format data"
   contents:

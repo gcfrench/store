@@ -1,4 +1,4 @@
-#' display_variable_summary
+#' Display variable summary
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -35,9 +35,9 @@
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' display_variable_summary(penguins_raw)
+#' eda_variable_summary(penguins_raw)
 #' }
-display_variable_summary <- function(.dataset) {
+eda_variable_summary <- function(.dataset) {
 
   # export plot as image
   export_plot <- function(plot, plot_name,
@@ -110,7 +110,7 @@ display_variable_summary <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' display_variable_outliers
+#' Display variable oo=utliers
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -146,9 +146,9 @@ display_variable_summary <- function(.dataset) {
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' display_variable_outliers(penguins_raw)
+#' eda_variable_outliers(penguins_raw)
 #' }
-display_variable_outliers <- function(.dataset) {
+eda_variable_outliers <- function(.dataset) {
 
   # export plot as image
   export_plot <- function(plot, plot_name,
@@ -204,7 +204,7 @@ display_variable_outliers <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' display_variable_distribution
+#' Display variable distribution
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -241,9 +241,9 @@ display_variable_outliers <- function(.dataset) {
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' display_variable_distribution(penguins_raw)
+#' eda_variable_distribution(penguins_raw)
 #' }
-display_variable_distribution <- function(.dataset) {
+eda_variable_distribution <- function(.dataset) {
 
   # export plot as image
   export_plot <- function(plot, plot_name,
@@ -293,7 +293,7 @@ display_variable_distribution <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' display_variable_correlation
+#' Display variable correlation
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -328,9 +328,9 @@ display_variable_distribution <- function(.dataset) {
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' display_variable_correlation(penguins_raw)
+#' eda_variable_correlation(penguins_raw)
 #' }
-display_variable_correlation <- function(.dataset) {
+eda_variable_correlation <- function(.dataset) {
 
   # check for types
   check_numeric <- any(c("numeric", "integer") %in% (dlookr::diagnose(.dataset)$types))
@@ -398,32 +398,32 @@ display_variable_correlation <- function(.dataset) {
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' display_variable_collection(penguins_raw)
+#' eda_variable_collection(penguins_raw)
 #' }
-display_variable_collection <- function(.dataset,
-                                        summary = TRUE,
-                                        outliers = TRUE,
-                                        distribution = TRUE,
-                                        correlation = TRUE) {
+eda <- function(.dataset,
+                summary = TRUE,
+                outliers = TRUE,
+                distribution = TRUE,
+                correlation = TRUE) {
 
   # basic statistics of the variables
   if(summary) {
-    display_variable_summary(.dataset)
+    eda_variable_summary(.dataset)
   }
 
   # variable outliers
   if(outliers) {
-    display_variable_outliers(.dataset)
+    eda_variable_outliers(.dataset)
   }
 
   # distribution of the numeric variables
   if(distribution) {
-    display_variable_distribution(.dataset)
+    eda_variable_distribution(.dataset)
   }
 
   # correlation matrix of the variables
   if(correlation) {
-    display_variable_correlation(.dataset)
+    eda_variable_correlation(.dataset)
   }
 
   invisible(.dataset)
