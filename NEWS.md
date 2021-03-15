@@ -1,5 +1,7 @@
 # store 0.3.0
 
+* Added **display_variable_collection** to run all the exploratory data analyses on
+a data frame which provide examples of using the [dlookr](https://github.com/choonghyunryu/dlookr) and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
 * Added **display_variable_correlation** to display a plot of the correlation matrix
 for each variable within a data frame
 * Added **display_variable_outliers** to display the variable outliers within a 

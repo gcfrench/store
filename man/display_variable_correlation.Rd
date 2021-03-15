@@ -7,7 +7,7 @@
 display_variable_correlation(.dataset)
 }
 \arguments{
-\item{.dataset}{data frame, data frame used to display the variable statistics}
+\item{.dataset}{data frame, dataset for exploratory data analysis}
 }
 \value{
 dataset returned invisibly
@@ -38,7 +38,11 @@ display_variable_correlation(penguins_raw)
 }
 }
 \seealso{
+This is an example of exploratory data analsyis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
+and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages
+
 Other exploratory data analysis: 
+\code{\link{display_variable_collection}()},
 \code{\link{display_variable_distribution}()},
 \code{\link{display_variable_outliers}()},
 \code{\link{display_variable_summary}()}

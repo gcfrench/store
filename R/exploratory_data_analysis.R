@@ -8,9 +8,13 @@
 #' of category levels and a table image containing variable's type summary count of
 #' the number of rows, missing values, unique values and zero values for each variable
 #'
+#' @seealso
+#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
+#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, data frame to summarise
+#' @param .dataset data frame, dataset for exploratory data analysis
 #'
 #' @return dataset returned invisibly
 #' @export
@@ -115,9 +119,13 @@ display_variable_summary <- function(.dataset) {
 #' summary statistics including count outliers and mean of each variable
 #' with outliers included and excluded
 #'
+#' @seealso
+#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
+#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, data frame used to display the variable statistics
+#' @param .dataset data frame, dataset for exploratory data analysis
 #'
 #' @return dataset returned invisibly
 #' @export
@@ -206,9 +214,13 @@ display_variable_outliers <- function(.dataset) {
 #' include the range, quartiles, mean, medium, standard deviation, standard error of
 #' the mean, level of skewness, kurtosis and normality
 #'
+#' @seealso
+#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
+#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, data frame used to display the variable statistics
+#' @param .dataset data frame, dataset for exploratory data analysis
 #'
 #' @return dataset returned invisibly
 #' @export
@@ -289,9 +301,13 @@ display_variable_distribution <- function(.dataset) {
 #' Exports a plot of the correlation matrix for each variable, showing the
 #' correlation values between each variable combination
 #'
+#' @seealso
+#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
+#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, data frame used to display the variable statistics
+#' @param .dataset data frame, dataset for exploratory data analysis
 #'
 #' @return dataset returned invisibly
 #' @export
@@ -338,6 +354,77 @@ display_variable_correlation <- function(.dataset) {
                        type = "upper", mar = c(0, 0, 2, 0),
                        title = "Correlation between numeric variables")
   dev.off()
+
+  invisible(.dataset)
+}
+
+#' Run exploratory data analyses
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Export the collection of exploratory data analyses plots and tables. This includes
+#' the summary, distribution and correlation of variables and presence of outliers
+#' exported by default, any of which may be excluded in the export
+#'
+#' @seealso
+#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
+#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#'
+#' @family exploratory data analysis
+#'
+#' @param .dataset data frame, dataset for exploratory data analysis
+#' @param summary boolean, display variable summary (FALSE to turn off)
+#' @param outliers boolean, display outliers (FALSE to turn off)
+#' @param distribution boolean, display variable distribution (FALSE to turn off)
+#' @param correlation boolean, display variable correlation (FALSE to turn off)
+#'
+#' @return dataset returned invisibly
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(palmerpenguins)
+#'   library(here)
+#'   library(fs)
+#'  })
+#' })
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir.create("output")}
+#'
+#' # example from palmerpenguins
+#' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
+#' display_variable_collection(penguins_raw)
+#' }
+display_variable_collection <- function(.dataset,
+                                        summary = TRUE,
+                                        outliers = TRUE,
+                                        distribution = TRUE,
+                                        correlation = TRUE) {
+
+  # basic statistics of the variables
+  if(summary) {
+    display_variable_summary(.dataset)
+  }
+
+  # variable outliers
+  if(outliers) {
+    display_variable_outliers(.dataset)
+  }
+
+  # distribution of the numeric variables
+  if(distribution) {
+    display_variable_distribution(.dataset)
+  }
+
+  # correlation matrix of the variables
+  if(correlation) {
+    display_variable_correlation(.dataset)
+  }
 
   invisible(.dataset)
 }
