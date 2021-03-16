@@ -19,6 +19,9 @@ Exports the basic statistics of the variables within a data frame into an output
 directory. This includes a plots of the prevalence of missing values and frequency
 of category levels and a table image containing variable's type summary count of
 the number of rows, missing values, unique values and zero values for each variable
+
+The output directory is created in the project root directory which may be changed
+using here::i_am function
 }
 \examples{
 \dontrun{
@@ -32,7 +35,7 @@ suppressPackageStartupMessages({
 })
 # create output directory
 i_am("example.Rmd")
-if (!dir_exists("output")) {dir.create("output")}
+if (!dir_exists("output")) {dir_create("output")}
 
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html

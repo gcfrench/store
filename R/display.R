@@ -86,8 +86,8 @@ display_table <- function(data, rows = nrow(data)) {
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
-#' if (!dir_exists("output/images")) {dir.create("output/images")}
+#' if (!dir_exists("output")) {dir_create("output")}
+#' if (!dir_exists("output/images")) {dir_create("output/images")}
 #'
 #' # example taken from palmerpenguins example analysis of mass vs. flipper length
 #' # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
@@ -120,7 +120,7 @@ display_table <- function(data, rows = nrow(data)) {
 #'         plot.caption.position = "plot")
 #'
 #' # save graph
-#' ggsave(filename = "output/images/palmerpenguins_graph.png",
+#' ggsave(filename = here("output", "images", "palmerpenguins_graph.png"),
 #'        plot = mass_flipper_graph,
 #'        type = "cairo-png",
 #'        width = 8,
@@ -129,7 +129,7 @@ display_table <- function(data, rows = nrow(data)) {
 #'        dpi = 72)
 #'
 #' # graph image
-#' mass_flipper_graph <- image_read(here("output/images/palmerpenguins_graph.png"))
+#' mass_flipper_graph <- image_read(here("output", "images", "palmerpenguins_graph.png"))
 #' mass_flipper_graph
 #'
 #' # graph information
@@ -145,7 +145,7 @@ display_table <- function(data, rows = nrow(data)) {
 #'
 #' # save image
 #' image_write(image = lter_penguins,
-#'             path = "output/images/palmerpenguins_image.png")
+#'             path = here("output", "images", "palmerpenguins_image.png"))
 #'
 #' # batch reduce images
 #' plan(multisession)
@@ -157,14 +157,14 @@ display_table <- function(data, rows = nrow(data)) {
 #'              .progress = TRUE)
 #'
 #' # reduced graph
-#' mass_flipper_graph_reduce <- image_read(here("output/images/palmerpenguins_graph.png"))
+#' mass_flipper_graph_reduce <- image_read(here("output", "images", "palmerpenguins_graph.png"))
 #' mass_flipper_graph_reduce
 #'
 #' # reduced graph information
 #' image_info(mass_flipper_graph_reduce)
 #'
 #' # reduced image
-#' lter_penguins_reduce <- image_read(here("output/images/palmerpenguins_image.png"))
+#' lter_penguins_reduce <- image_read(here("output", "images", "palmerpenguins_image.png"))
 #' lter_penguins_reduce
 #'
 #' # reduced image information
@@ -226,8 +226,8 @@ display_table <- function(data, rows = nrow(data)) {
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
-#' if (!dir_exists("output/images")) {dir.create("output/images")}
+#' if (!dir_exists("output")) {dir_create("output")}
+#' if (!dir_exists("output/images")) {dir_create("output/images")}
 #'
 #' # example taken from palmerpenguins example analysis of mass vs. flipper length
 #' # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
@@ -260,7 +260,7 @@ display_table <- function(data, rows = nrow(data)) {
 #'         plot.caption.position = "plot")
 #'
 #' # save graph
-#' ggsave(filename = "output/images/palmerpenguins_graph.png",
+#' ggsave(filename = here("output", "images", "palmerpenguins_graph.png"),
 #'        plot = mass_flipper_graph,
 #'        type = "cairo-png",
 #'        width = 6,
@@ -269,19 +269,19 @@ display_table <- function(data, rows = nrow(data)) {
 #'       dpi = 72)
 #'
 #' # graph image
-#' mass_flipper_graph <- image_read(here("output/images/palmerpenguins_graph.png"))
+#' mass_flipper_graph <- image_read(here("output", "images", "palmerpenguins_graph.png"))
 #' mass_flipper_graph
 #'
 #' # add shadows to graph image
 #' plan(multisession)
-#' here("output/images") %>%
+#' here("output", "images") %>%
 #'   dir_ls(., glob = "*.png") %>%
 #'   future_map(add_image_shadow,
 #'              .options = furrr_options(seed = TRUE),
 #'               .progress = TRUE)
 #'
 #' # shadowed graph
-#' mass_flipper_graph_shadow <- image_read(here("output/images/palmerpenguins_graph.png"))
+#' mass_flipper_graph_shadow <- image_read(here("output", "images", "palmerpenguins_graph.png"))
 #' mass_flipper_graph_shadow
 #' }
 

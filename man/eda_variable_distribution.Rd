@@ -19,6 +19,9 @@ Exports the distribution of the numeric variables within a data frame, including
 a histogram for each variable and table of summary statistics. These statistics
 include the range, quartiles, mean, medium, standard deviation, standard error of
 the mean, level of skewness, kurtosis and normality
+
+The output directory is created in the project root directory which may be changed
+using here::i_am function
 }
 \examples{
 \dontrun{
@@ -32,7 +35,7 @@ suppressPackageStartupMessages({
 })
 # create output directory
 i_am("example.Rmd")
-if (!dir_exists("output")) {dir.create("output")}
+if (!dir_exists("output")) {dir_create("output")}
 
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html

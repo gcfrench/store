@@ -35,8 +35,8 @@ suppressPackageStartupMessages({
 })
 # create output directory
 i_am("example.Rmd")
-if (!dir_exists("output")) {dir.create("output")}
-if (!dir_exists("output/images")) {dir.create("output/images")}
+if (!dir_exists("output")) {dir_create("output")}
+if (!dir_exists("output/images")) {dir_create("output/images")}
 
 # example taken from palmerpenguins example analysis of mass vs. flipper length
 # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
@@ -69,7 +69,7 @@ mass_flipper_graph <- ggplot(data = mass_flipper_data,
         plot.caption.position = "plot")
 
 # save graph
-ggsave(filename = "output/images/palmerpenguins_graph.png",
+ggsave(filename = here("output", "images", "palmerpenguins_graph.png"),
        plot = mass_flipper_graph,
        type = "cairo-png",
        width = 8,
@@ -78,7 +78,7 @@ ggsave(filename = "output/images/palmerpenguins_graph.png",
        dpi = 72)
 
 # graph image
-mass_flipper_graph <- image_read(here("output/images/palmerpenguins_graph.png"))
+mass_flipper_graph <- image_read(here("output", "images", "palmerpenguins_graph.png"))
 mass_flipper_graph
 
 # graph information
@@ -94,7 +94,7 @@ image_info(lter_penguins)
 
 # save image
 image_write(image = lter_penguins,
-            path = "output/images/palmerpenguins_image.png")
+            path = here("output", "images", "palmerpenguins_image.png"))
 
 # batch reduce images
 plan(multisession)
@@ -106,14 +106,14 @@ here("output/images") \%>\%
              .progress = TRUE)
 
 # reduced graph
-mass_flipper_graph_reduce <- image_read(here("output/images/palmerpenguins_graph.png"))
+mass_flipper_graph_reduce <- image_read(here("output", "images", "palmerpenguins_graph.png"))
 mass_flipper_graph_reduce
 
 # reduced graph information
 image_info(mass_flipper_graph_reduce)
 
 # reduced image
-lter_penguins_reduce <- image_read(here("output/images/palmerpenguins_image.png"))
+lter_penguins_reduce <- image_read(here("output", "images", "palmerpenguins_image.png"))
 lter_penguins_reduce
 
 # reduced image information

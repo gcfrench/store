@@ -8,6 +8,9 @@
 #' of category levels and a table image containing variable's type summary count of
 #' the number of rows, missing values, unique values and zero values for each variable
 #'
+#' The output directory is created in the project root directory which may be changed
+#' using here::i_am function
+#'
 #' @seealso
 #' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
 #' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
@@ -31,7 +34,7 @@
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
+#' if (!dir_exists("output")) {dir_create("output")}
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
@@ -42,7 +45,7 @@ eda_variable_summary <- function(.dataset) {
   # export plot as image
   export_plot <- function(plot, plot_name,
                           figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+    ggplot2::ggsave(filename = here::here("output", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
                     type = "cairo-png",
                     width = figure_width,
@@ -51,6 +54,9 @@ eda_variable_summary <- function(.dataset) {
                     dpi = 72)
     invisible(plot)
   }
+
+  # create output directory in project root
+  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -110,7 +116,7 @@ eda_variable_summary <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' Display variable oo=utliers
+#' Display variable outliers
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -118,6 +124,9 @@ eda_variable_summary <- function(.dataset) {
 #' Exports the variable outliers within a data frame with a boxplot, and
 #' summary statistics including count outliers and mean of each variable
 #' with outliers included and excluded
+#'
+#' The output directory is created in the project root directory which may be changed
+#' using here::i_am function
 #'
 #' @seealso
 #' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
@@ -142,7 +151,7 @@ eda_variable_summary <- function(.dataset) {
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
+#' if (!dir_exists("output")) {dir_create("output")}
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
@@ -153,7 +162,7 @@ eda_variable_outliers <- function(.dataset) {
   # export plot as image
   export_plot <- function(plot, plot_name,
                           figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+    ggplot2::ggsave(filename = here::here("output", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
                     type = "cairo-png",
                     width = figure_width,
@@ -162,6 +171,9 @@ eda_variable_outliers <- function(.dataset) {
                     dpi = 72)
     invisible(plot)
   }
+
+  # create output directory in project root
+  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -214,6 +226,9 @@ eda_variable_outliers <- function(.dataset) {
 #' include the range, quartiles, mean, medium, standard deviation, standard error of
 #' the mean, level of skewness, kurtosis and normality
 #'
+#' The output directory is created in the project root directory which may be changed
+#' using here::i_am function
+#'
 #' @seealso
 #' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
 #' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
@@ -237,7 +252,7 @@ eda_variable_outliers <- function(.dataset) {
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
+#' if (!dir_exists("output")) {dir_create("output")}
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
@@ -248,7 +263,7 @@ eda_variable_distribution <- function(.dataset) {
   # export plot as image
   export_plot <- function(plot, plot_name,
                           figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = stringr::str_glue("output/{plot_name}.png"),
+    ggplot2::ggsave(filename = here::here("output", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
                     type = "cairo-png",
                     width = figure_width,
@@ -257,6 +272,9 @@ eda_variable_distribution <- function(.dataset) {
                     dpi = 72)
     invisible(plot)
   }
+
+  # create output directory in project root
+  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -301,6 +319,9 @@ eda_variable_distribution <- function(.dataset) {
 #' Exports a plot of the correlation matrix for each variable, showing the
 #' correlation values between each variable combination
 #'
+#' The output directory is created in the project root directory which may be changed
+#' using here::i_am function
+#'
 #' @seealso
 #' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
 #' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
@@ -324,13 +345,16 @@ eda_variable_distribution <- function(.dataset) {
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
+#' if (!dir_exists("output")) {dir_create("output")}
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 #' eda_variable_correlation(penguins_raw)
 #' }
 eda_variable_correlation <- function(.dataset) {
+
+  # create output directory in project root
+  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
 
   # check for types
   check_numeric <- any(c("numeric", "integer") %in% (dlookr::diagnose(.dataset)$types))
@@ -347,7 +371,7 @@ eda_variable_correlation <- function(.dataset) {
     dplyr::select(sort(names(.)))
 
   # variable correlation plot
-  png("output/08-correlation_plot.png", width = 600, height = 600, type = "cairo-png")
+  png(here::here("output", "08-correlation_plot.png"), width = 600, height = 600, type = "cairo-png")
   .dataset %>%
     cor(use = "complete.obs", method = "pearson") %>%
     corrplot::corrplot(method = "number", number.digits = 3,
@@ -366,6 +390,9 @@ eda_variable_correlation <- function(.dataset) {
 #' Export the collection of exploratory data analyses plots and tables. This includes
 #' the summary, distribution and correlation of variables and presence of outliers
 #' exported by default, any of which may be excluded in the export
+#'
+#' The output directory is created in the project root directory which may be changed
+#' using here::i_am function
 #'
 #' @seealso
 #' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
@@ -394,7 +421,7 @@ eda_variable_correlation <- function(.dataset) {
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
+#' if (!dir_exists("output")) {dir_create("output")}
 #'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
@@ -405,6 +432,9 @@ eda <- function(.dataset,
                 outliers = TRUE,
                 distribution = TRUE,
                 correlation = TRUE) {
+
+  # create output directory in project root
+  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
 
   # basic statistics of the variables
   if(summary) {

@@ -17,6 +17,9 @@ dataset returned invisibly
 
 Exports a plot of the correlation matrix for each variable, showing the
 correlation values between each variable combination
+
+The output directory is created in the project root directory which may be changed
+using here::i_am function
 }
 \examples{
 \dontrun{
@@ -30,7 +33,7 @@ suppressPackageStartupMessages({
 })
 # create output directory
 i_am("example.Rmd")
-if (!dir_exists("output")) {dir.create("output")}
+if (!dir_exists("output")) {dir_create("output")}
 
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html

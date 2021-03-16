@@ -32,6 +32,9 @@ dataset returned invisibly
 Export the collection of exploratory data analyses plots and tables. This includes
 the summary, distribution and correlation of variables and presence of outliers
 exported by default, any of which may be excluded in the export
+
+The output directory is created in the project root directory which may be changed
+using here::i_am function
 }
 \examples{
 \dontrun{
@@ -45,7 +48,7 @@ suppressPackageStartupMessages({
 })
 # create output directory
 i_am("example.Rmd")
-if (!dir_exists("output")) {dir.create("output")}
+if (!dir_exists("output")) {dir_create("output")}
 
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html

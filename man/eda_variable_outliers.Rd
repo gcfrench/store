@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_data_analysis.R
 \name{eda_variable_outliers}
 \alias{eda_variable_outliers}
-\title{Display variable oo=utliers}
+\title{Display variable outliers}
 \usage{
 eda_variable_outliers(.dataset)
 }
@@ -18,6 +18,9 @@ dataset returned invisibly
 Exports the variable outliers within a data frame with a boxplot, and
 summary statistics including count outliers and mean of each variable
 with outliers included and excluded
+
+The output directory is created in the project root directory which may be changed
+using here::i_am function
 }
 \examples{
 \dontrun{
@@ -31,7 +34,7 @@ suppressPackageStartupMessages({
 })
 # create output directory
 i_am("example.Rmd")
-if (!dir_exists("output")) {dir.create("output")}
+if (!dir_exists("output")) {dir_create("output")}
 
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html

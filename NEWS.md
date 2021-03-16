@@ -1,7 +1,8 @@
 # store 0.3.0
 
 * Added **eda_variable_collection** to run all the exploratory data analyses on
-a data frame which provide examples of using the [dlookr](https://github.com/choonghyunryu/dlookr) and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+a data frame which provide examples of using the [dlookr](https://github.com/choonghyunryu/dlookr) and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages and setting 
+the project root directory using [here](https://github.com/r-lib/here) package
 * Added **eda_variable_correlation** to display a plot of the correlation matrix
 for each variable within a data frame
 * Added **eda_variable_outliers** to display the variable outliers within a 

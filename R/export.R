@@ -41,8 +41,8 @@
 #' })
 #' # create output directory
 #' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir.create("output")}
-#' if (!dir_exists("output/images")) {dir.create("output/images")}
+#' if (!dir_exists("output")) {dir_create("output")}
+#' if (!dir_exists("output/images")) {dir_create("output/images")}
 #'
 #' # example taken from palmerpenguins example analysis of mass vs. flipper length
 #' # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
