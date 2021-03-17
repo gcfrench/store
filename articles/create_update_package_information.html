@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -187,21 +187,18 @@ navbar:
 <p><strong>usethis::use_lifecycle_badge</strong> add lifecycle badge to home page</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/badges.html">use_lifecycle_badge</a></span><span class="op">(</span><span class="st">"experimental"</span><span class="op">)</span> <span class="co"># "experimental", "stable". "superseded", "deprecated"</span></code></pre></div>
-<p><strong>usethis::use_code_of_conduct</strong> add code of conduct markdown, pasting code of conduct section into README file</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html">use_code_of_conduct</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div id="add-to-github" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-to-github" class="anchor"></a>Add to github ——————————————–</h3>
 <p><strong>usethis::use_git</strong> initiates a Git repository, making the initial commits</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>usethis::use_github</strong> creates the repository on Github and pushes the initial commits. This needs a Github Personal Access Token (PAT) which can be created using <strong>usethis::create_github_token</strong>. Information on how to do this can be found in <a href="https://happygitwithr.com/credential-caching.html">Happy Git and Github for the useR</a></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html">use_github</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># usethis::create_github_token()</span></code></pre></div>
 <p><strong>usethis::use_github_action</strong> configures files to use github to host package website</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github_action.html">use_github_action</a></span><span class="op">(</span><span class="st">"pkgdown"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="add-package-versioning" class="section level3">
@@ -209,21 +206,21 @@ navbar:
 <a href="#add-package-versioning" class="anchor"></a>Add package versioning ——————————————–</h3>
 <p>Navigate to the home project directory first</p>
 <p><strong>renv::init</strong> initiates the renv environment, creating the renv folder and adding the renv.lock file, linking the relevant packages from the renv cache</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/init.html">init</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>renv::status</strong> check the renv lock file is up-to-date, run <strong>renv::snapshot</strong> to update the renv lock file if not</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/status.html">status</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/snapshot.html">snapshot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>renv::deactivate</strong> turn off the renv environment, then manually delete the renv folder and .Rprofile file</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/deactivate.html">deactivate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Navigate to the home project directory first</p>
 <p><strong>renv::activate</strong> turn on the renv environment</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/activate.html">activate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>renv::restore</strong> restore the package versions contained within the renv lock file</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/restore.html">restore</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -234,10 +231,10 @@ navbar:
 <h3 class="hasAnchor">
 <a href="#add-new-script" class="anchor"></a>Add new script ——————————————–</h3>
 <p><strong>usethis::use_vignette</strong>(“vignette_name”): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_vignette.html">use_vignette</a></span><span class="op">(</span><span class="st">"script_name"</span><span class="op">)</span></code></pre></div>
 <p><strong>pkgdown::build_articles</strong> builds the html files in the articles sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_articles.html">build_article</a></span><span class="op">(</span><span class="st">"script_name"</span><span class="op">)</span>
 <span class="co"># pkgdown::build_articles()</span>
 <span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_articles.html">build_articles_index</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -246,16 +243,16 @@ navbar:
 <h3 class="hasAnchor">
 <a href="#add-new-function" class="anchor"></a>Add new function ——————————————–</h3>
 <p><strong>usethis::use_r</strong> add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing <strong>devtools::document</strong>, Ctlr-shift-D or through the Build:Document menu</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_r</a></span><span class="op">(</span><span class="st">"function_script_name"</span><span class="op">)</span></code></pre></div>
 <p><strong>usethis::use_package</strong> add packages to the imports section of the description file</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span><span class="op">(</span><span class="st">"package_name"</span><span class="op">)</span></code></pre></div>
 <p><strong>devtools::document</strong> update documentation, can also use Ctlr-shift-D or through the Build:Document menu</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/document.html">document</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>pkgdown::build_reference</strong> builds the html files in the reference sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="va"><a href="https://pkgdown.r-lib.org/reference/build_reference.html">build_reference</a></span>
 <span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_reference.html">build_reference_index</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
@@ -263,23 +260,23 @@ navbar:
 <h3 class="hasAnchor">
 <a href="#add-new-test-script" class="anchor"></a>Add new test script ——————————————–</h3>
 <p><strong>usethis::use_test</strong> add unit tests for function</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_test</a></span><span class="op">(</span><span class="st">"test_script_name"</span><span class="op">)</span></code></pre></div>
 <p><strong>devtools::test</strong> run all tests, can also use Ctrl-Shift_T or Build-Test Package</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/test.html">test</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="add-new-data-script" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-new-data-script" class="anchor"></a>Add new data script ——————————————–</h3>
 <p><strong>usethis::use_data_raw</strong> add a new data_raw script</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span><span class="op">(</span><span class="st">"data_raw_script_name"</span><span class="op">)</span></code></pre></div>
 <p><strong>usethis::use_data</strong> add the .rda data file in the data directory, after running the data raw script so that the data frame is stored in the global environment</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data</a></span><span class="op">(</span><span class="va">data_frame_name</span><span class="op">)</span></code></pre></div>
 <p><strong>usethis::use_r</strong> document the data frame in a R script. Running <strong>devtools::document</strong> afterwards</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_r</a></span><span class="op">(</span><span class="st">"lookup"</span><span class="op">)</span></code></pre></div>
 <p>Data frame documentation template</p>
 <pre><code>#' Data frame name
@@ -293,7 +290,7 @@ navbar:
 #' }
 "data_frame_name"</code></pre>
 <p><strong>pkgdown::build_reference</strong> builds the html files in the reference sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="va"><a href="https://pkgdown.r-lib.org/reference/build_reference.html">build_reference</a></span>
 <span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_reference.html">build_reference_index</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
@@ -301,23 +298,23 @@ navbar:
 <h3 class="hasAnchor">
 <a href="#edit-news-file" class="anchor"></a>Edit news file ——————————————–</h3>
 <p><strong>usethis::use_version</strong> update the package version</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_version.html">use_version</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>usethis::edit_file</strong> edit the news file with the new package version</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span><span class="op">(</span><span class="st">"News.md"</span><span class="op">)</span></code></pre></div>
 <p><strong>pkgdown::build_news</strong> builds the index.html file in the news sub-directory of the docs directory</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_news.html">build_news</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="edit-the-readme-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#edit-the-readme-file" class="anchor"></a>Edit the README file ——————————————–</h3>
 <p><strong>usethis::edit_file</strong> edit the README.Rmd file</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></code></pre></div>
 <p><strong>pkgdown::build_home</strong> builds the index.html file in the docs directory</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_home.html">build_home</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -325,7 +322,7 @@ navbar:
 <h2 class="hasAnchor">
 <a href="#install-package" class="anchor"></a>Install package</h2>
 <p>Build documentation and test functions, then run <strong>Install and Restart</strong> to build and install package</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/document.html">document</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/test.html">test</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
@@ -333,15 +330,15 @@ navbar:
 <h2 class="hasAnchor">
 <a href="#publish-on-github" class="anchor"></a>Publish on GitHub</h2>
 <p><strong>pkgdown::build_site</strong> run <strong>pkgdown::clean_site</strong> first to delete files in docs sub-directory</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/clean_site.html">clean_site</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>pkgdown::deploy_to_branch</strong> pushes docs folder to GitHub branch gh-pages.</p>
 <p>Need to change repository settings GitHub Pages Source to Branch gh-pages/root. Site published to <strong><a href="https://github_name.github.io/package_name" class="uri">https://github_name.github.io/package_name</a></strong></p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/deploy_to_branch.html">deploy_to_branch</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>usethis::edit_file</strong> Add URL to description and README files</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span>
 <span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></code></pre></div>
 </div>

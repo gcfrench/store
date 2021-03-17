@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -132,6 +132,21 @@
       <small>Source: <a href='https://github.com/gcfrench/store/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="store-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#store-030" class="anchor"></a>store 0.3.0</h1>
+<ul>
+<li>Added <strong>eda_variable_collection</strong> to run all the exploratory data analyses on a data frame which provide examples of using the <a href="https://github.com/choonghyunryu/dlookr">dlookr</a> and <a href="https://alastairrushworth.github.io/inspectdf/">inspectdf</a> packages and setting the project root directory using <a href="https://github.com/r-lib/here">here</a> package</li>
+<li>Added <strong>eda_variable_correlation</strong> to display a plot of the correlation matrix for each variable within a data frame</li>
+<li>Added <strong>eda_variable_outliers</strong> to display the variable outliers within a data frame</li>
+<li>Added <strong>eda_variable_distribution</strong> to display the distribution of numerical variables within a data frame</li>
+<li>Added <strong>eda_variable_summary</strong> to export a summary of the variables within a data frame as plots and a table</li>
+<li>Added <strong>add_image_shadow</strong> to add a shadow border to an image, with the example of parallelization using the <a href="https://github.com/HenrikBengtsson/future">future</a> and <a href="https://davisvaughan.github.io/furrr/">furrr</a> packages to batch add border shadows to images within a directory</li>
+<li>Updated <strong>add_new_spreadsheet</strong> added filter parameter to turn off adding filter to spreadsheet capability</li>
+<li>Updated <strong>country_codes</strong> look up table to include European Union membership</li>
+<li>Added <strong>reduce_image_size</strong> to reduce the size of an image, with the example of parallelization using the <a href="https://github.com/HenrikBengtsson/future">future</a> and <a href="https://davisvaughan.github.io/furrr/">furrr</a> packages to batch reduce images size within a directory</li>
+</ul>
+</div>
     <div id="store-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
 <a href="#store-020" class="anchor"></a>store 0.2.0</h1>
@@ -143,7 +158,8 @@
 <li>Added <strong>add_tibble_to_list</strong> to prepend multiple tibbles into a list which can then be converted into a single tibble using dplyr::bind_rows function</li>
 <li>Added <strong>get_mysql_connection</strong> and <strong>get_sqlserver_connection</strong> to connect to these databases</li>
 <li>Added functions to use the <strong>keyring</strong> package to store securely store database credentials</li>
-<li>Added <strong>extract_comma_delimited_list</strong> and <strong>extract_semicolon_delimited_list</strong> functions</li>
+<li>Added <strong>extract_comma_delimited_list</strong> and <strong>extract_semicolon_delimited_list</strong> functions. These are an example of the use of a <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a>, <a href="https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/">tidy evaluation</a> and purrr’s <a href="https://purrr.tidyverse.org/reference/map.html">map function</a> with example using a <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html">nested data frame</a>
+</li>
 </ul>
 </div>
     <div id="store-010" class="section level1">

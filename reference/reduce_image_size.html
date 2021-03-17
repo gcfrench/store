@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>add_new_spreadsheet — add_new_spreadsheet • store</title>
+<title>reduce_image_size — reduce_image_size • store</title>
 
 
 <!-- jquery -->
@@ -39,15 +39,9 @@
 
 
 
-<meta property="og:title" content="add_new_spreadsheet — add_new_spreadsheet" />
-<meta property="og:description" content="This function adds a data frame and optional image to a new spreadsheet in an
-Excel workbook.
-The text is left aligned with the first header row made bold. The widths of the
-columns in the spreadsheet are also  automatically adjusted to fit the text and
-the filter functionality is switched on.
-An image may be inserted to the right of the text with both the image's width
-and height sizes adjustable by providing their sizes in inches in the function's
-parameters." />
+<meta property="og:title" content="reduce_image_size — reduce_image_size" />
+<meta property="og:description" content="This function reduces the size of an image, archiving the
+original image in a separate archive sub-directory" />
 
 
 
@@ -136,63 +130,46 @@ parameters." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>add_new_spreadsheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/export.R'><code>R/export.R</code></a></small>
-    <div class="hidden name"><code>add_new_spreadsheet.Rd</code></div>
+    <h1>reduce_image_size</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/display.R'><code>R/display.R</code></a></small>
+    <div class="hidden name"><code>reduce_image_size.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function adds a data frame and optional image to a new spreadsheet in an
-Excel workbook.</p>
-<p>The text is left aligned with the first header row made bold. The widths of the
-columns in the spreadsheet are also  automatically adjusted to fit the text and
-the filter functionality is switched on.</p>
-<p>An image may be inserted to the right of the text with both the image's width
-and height sizes adjustable by providing their sizes in inches in the function's
-parameters.</p>
+    <p>This function reduces the size of an image, archiving the
+original image in a separate archive sub-directory</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_new_spreadsheet</span><span class='op'>(</span>
-  <span class='va'>spreadsheet_name</span>,
-  <span class='va'>data</span>,
-  image_path <span class='op'>=</span> <span class='cn'>NA_character_</span>,
-  <span class='va'>image_width</span>,
-  <span class='va'>image_height</span>,
-  filter <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>reduce_image_size</span><span class='op'>(</span><span class='va'>path_image</span>, image_size <span class='op'>=</span> <span class='st'>"50%"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>spreadsheet_name</th>
-      <td><p>character string, name of spreadsheet to add</p></td>
+      <th>path_image</th>
+      <td><p>character, path name of image</p></td>
     </tr>
     <tr>
-      <th>data</th>
-      <td><p>data_frame, data to add to spreadsheet</p></td>
-    </tr>
-    <tr>
-      <th>image_path</th>
-      <td><p>character string, path to image file if present, default is NA</p></td>
-    </tr>
-    <tr>
-      <th>image_width</th>
-      <td><p>double, width of image in inches</p></td>
-    </tr>
-    <tr>
-      <th>image_height</th>
-      <td><p>double, height of image in inches</p></td>
-    </tr>
-    <tr>
-      <th>filter</th>
-      <td><p>logical, add filter to spreadsheet (default = TRUE) or not (FALSE)</p></td>
+      <th>image_size</th>
+      <td><p>percentage size reduction, default = 50%</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data_frame, the inputted data frame is returned invisibly</p>
+    <p>character, path name of image returned invisibly</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>The example batch runs the function on a graph from the
+<a href='https://allisonhorst.github.io/palmerpenguins/articles/examples.html'>palmerpenguins package</a>
+and <a href='https://allisonhorst.github.io/palmerpenguins/articles/art.html'>palmer penguins image</a>
+from Allison Horst's Art work. Artwork by @allison_horst and is an example of parallelization using
+the <a href='https://github.com/HenrikBengtsson/future'>future</a> and <a href='https://davisvaughan.github.io/furrr/'>furrr</a>
+packages</p>
+<p><a href='https://www.jumpingrivers.com/'>Jumping rivers</a> has written a series of
+four blogs for <a href='https://www.jumpingrivers.com/blog/knitr-include-graphics-external/'>displaying images on web pages</a>.</p>
+<p>Other image manipulation functions: 
+<code><a href='add_image_shadow.html'>add_image_shadow</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
@@ -202,11 +179,11 @@ parameters.</p>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
-    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
-    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ycphs.github.io/openxlsx/index.html'>openxlsx</a></span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/magick/'>magick</a></span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/HenrikBengtsson/future'>future</a></span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/DavisVaughan/furrr'>furrr</a></span><span class='op'>)</span>
   <span class='op'>}</span><span class='op'>)</span>
 <span class='op'>}</span><span class='op'>)</span>
 <span class='co'># create output directory</span>
@@ -217,12 +194,12 @@ parameters.</p>
 <span class='co'># example taken from palmerpenguins example analysis of mass vs. flipper length</span>
 <span class='co'># https://allisonhorst.github.io/palmerpenguins/articles/examples.html</span>
 
-<span class='co'>## data</span>
+<span class='co'># data</span>
 <span class='va'>mass_flipper_data</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>flipper_length_mm</span>, <span class='va'>body_mass_g</span>, <span class='op'>)</span>
 <span class='va'>mass_flipper_data</span>
 
-<span class='co'>## graph</span>
+<span class='co'># graph</span>
 <span class='va'>mass_flipper_graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>mass_flipper_data</span>,
                              <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>flipper_length_mm</span>,
                                  y <span class='op'>=</span> <span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -236,7 +213,7 @@ parameters.</p>
        subtitle <span class='op'>=</span> <span class='st'>"Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins"</span>,
        x <span class='op'>=</span> <span class='st'>"Flipper length (mm)"</span>,
        y <span class='op'>=</span> <span class='st'>"Body mass (g)"</span>,
-      color <span class='op'>=</span> <span class='st'>"Penguin species"</span>,
+       color <span class='op'>=</span> <span class='st'>"Penguin species"</span>,
        shape <span class='op'>=</span> <span class='st'>"Penguin species"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.2</span>, <span class='fl'>0.7</span><span class='op'>)</span>,
         legend.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"white"</span>, color <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>,
@@ -244,24 +221,56 @@ parameters.</p>
         plot.caption <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust <span class='op'>=</span> <span class='fl'>0</span>, face<span class='op'>=</span> <span class='st'>"italic"</span><span class='op'>)</span>,
         plot.caption.position <span class='op'>=</span> <span class='st'>"plot"</span><span class='op'>)</span>
 
+<span class='co'># save graph</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span>filename <span class='op'>=</span> <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"output"</span>, <span class='st'>"images"</span>, <span class='st'>"palmerpenguins_graph.png"</span><span class='op'>)</span>,
+       plot <span class='op'>=</span> <span class='va'>mass_flipper_graph</span>,
+       type <span class='op'>=</span> <span class='st'>"cairo-png"</span>,
+       width <span class='op'>=</span> <span class='fl'>8</span>,
+       height <span class='op'>=</span> <span class='fl'>8</span>,
+       units <span class='op'>=</span> <span class='st'>"in"</span>,
+       dpi <span class='op'>=</span> <span class='fl'>72</span><span class='op'>)</span>
+
+<span class='co'># graph image</span>
+<span class='va'>mass_flipper_graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/magick/reference/editing.html'>image_read</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"output"</span>, <span class='st'>"images"</span>, <span class='st'>"palmerpenguins_graph.png"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>mass_flipper_graph</span>
 
-<span class='co'>## save image</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span>filename <span class='op'>=</span> <span class='st'>"output/images/palmerpenguin_graph.png"</span>,
-       plot <span class='op'>=</span> <span class='va'>mass_flipper_graph</span><span class='op'>)</span>
+<span class='co'># graph information</span>
+<span class='fu'><a href='https://docs.ropensci.org/magick/reference/attributes.html'>image_info</a></span><span class='op'>(</span><span class='va'>mass_flipper_graph</span><span class='op'>)</span>
 
-<span class='co'>## export data and graph into spreadsheet</span>
-<span class='va'>workbook_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_glue.html'>str_glue</a></span><span class='op'>(</span><span class='st'>"output/example_{today()}.xlsx"</span><span class='op'>)</span>
-<span class='kw'>if</span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='http://fs.r-lib.org/reference/file_access.html'>file_exists</a></span><span class='op'>(</span><span class='va'>workbook_path</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>workbook</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/openxlsx/man/createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span> <span class='kw'>else</span> <span class='op'>{</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/openxlsx/man/loadWorkbook.html'>loadWorkbook</a></span><span class='op'>(</span><span class='va'>workbook_path</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='fu'>add_new_spreadsheet</span><span class='op'>(</span><span class='st'>"palmerpenguins"</span>, <span class='va'>mass_flipper_data</span>,
-                    image_path <span class='op'>=</span> <span class='st'>"output/images/palmerpenguin_graph.png"</span>,
-                    image_width <span class='op'>=</span> <span class='fl'>6</span>,
-                    image_height <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>workbook</span>, <span class='va'>workbook_path</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='co'># image taken from Allison Horst's Art for teaching with palmerpengiuns</span>
+<span class='co'># Citation: Artwork by @allison_horst</span>
+<span class='va'>lter_penguins</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/magick/reference/editing.html'>image_read</a></span><span class='op'>(</span><span class='st'>"https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png"</span><span class='op'>)</span>
+<span class='va'>lter_penguins</span>
+
+<span class='co'># image information</span>
+<span class='fu'><a href='https://docs.ropensci.org/magick/reference/attributes.html'>image_info</a></span><span class='op'>(</span><span class='va'>lter_penguins</span><span class='op'>)</span>
+
+<span class='co'># save image</span>
+<span class='fu'><a href='https://docs.ropensci.org/magick/reference/editing.html'>image_write</a></span><span class='op'>(</span>image <span class='op'>=</span> <span class='va'>lter_penguins</span>,
+            path <span class='op'>=</span> <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"output"</span>, <span class='st'>"images"</span>, <span class='st'>"palmerpenguins_image.png"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># batch reduce images</span>
+<span class='fu'><a href='https://rdrr.io/pkg/future/man/plan.html'>plan</a></span><span class='op'>(</span><span class='va'>multisession</span><span class='op'>)</span>
+<span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"output/images"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>.</span>, glob <span class='op'>=</span> <span class='st'>"*.png"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_map.html'>future_map</a></span><span class='op'>(</span><span class='va'>reduce_image_size</span>,
+             image_size <span class='op'>=</span> <span class='st'>"50%"</span>,
+             .options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/furrr/man/furrr_options.html'>furrr_options</a></span><span class='op'>(</span>seed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+             .progress <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='co'># reduced graph</span>
+<span class='va'>mass_flipper_graph_reduce</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/magick/reference/editing.html'>image_read</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"output"</span>, <span class='st'>"images"</span>, <span class='st'>"palmerpenguins_graph.png"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>mass_flipper_graph_reduce</span>
+
+<span class='co'># reduced graph information</span>
+<span class='fu'><a href='https://docs.ropensci.org/magick/reference/attributes.html'>image_info</a></span><span class='op'>(</span><span class='va'>mass_flipper_graph_reduce</span><span class='op'>)</span>
+
+<span class='co'># reduced image</span>
+<span class='va'>lter_penguins_reduce</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/magick/reference/editing.html'>image_read</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"output"</span>, <span class='st'>"images"</span>, <span class='st'>"palmerpenguins_image.png"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>lter_penguins_reduce</span>
+
+<span class='co'># reduced image information</span>
+<span class='fu'><a href='https://docs.ropensci.org/magick/reference/attributes.html'>image_info</a></span><span class='op'>(</span><span class='va'>lter_penguins_reduce</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

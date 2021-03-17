@@ -43,9 +43,7 @@
 <meta property="og:description" content="This function initiates a SQL Server connection using windows authentication,
 either using stored database credentials through the keyring package or else
 requesting database credentials in the console. The SQL Server tables are added
-to the connection pane.
-More information on connecting to databases using R can be found in RStudios
-Databases using R webpages." />
+to the connection pane." />
 
 
 
@@ -77,7 +75,7 @@ Databases using R webpages." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -144,8 +142,6 @@ Databases using R webpages." />
 either using stored database credentials through the keyring package or else
 requesting database credentials in the console. The SQL Server tables are added
 to the connection pane.</p>
-<p>More information on connecting to databases using R can be found in RStudios
-<a href='https://db.rstudio.com/'>Databases using R</a> webpages.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_sqlserver_connection</span><span class='op'>(</span><span class='va'>keyring_name</span>, <span class='va'>service_name</span>, keyring <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
@@ -170,6 +166,13 @@ to the connection pane.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>connection object, SQL Server connection object</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>More information on connecting to databases using R can be found in RStudio's
+<a href='https://db.rstudio.com/'>Databases using R</a> webpages.</p>
+<p>Other database functions: 
+<code><a href='get_mysql_connection.html'>get_mysql_connection</a>()</code>,
+<code><a href='get_postgres_connection.html'>get_postgres_connection</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

@@ -3,5 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   create_update_package_information: create_update_package_information.html
-last_built: 2021-03-03T09:32Z
+  example: example.html
+last_built: 2021-03-17T08:59Z
 

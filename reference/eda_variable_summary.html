@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>add_key — add_key • store</title>
+<title>Display variable summary — eda_variable_summary • store</title>
 
 
 <!-- jquery -->
@@ -39,13 +39,14 @@
 
 
 
-<meta property="og:title" content="add_key — add_key" />
-<meta property="og:description" content="Add a new key to the keyring to store a new database connection string.
-If the keyring is locked then unlock it first with its password.
-On creating the key, the name of the key relating to the database is added under the service name
-and the database connections string is added as a json string in the password dialog box.
-SQL Server windows authentication: &quot;server&quot;:&quot;SERVER_NAME&quot;, &quot;database&quot;:&quot;DATABASE_NAME&quot;
-For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRESS&quot;" />
+<meta property="og:title" content="Display variable summary — eda_variable_summary" />
+<meta property="og:description" content="
+Exports the basic statistics of the variables within a data frame into an output
+directory. This includes a plots of the prevalence of missing values and frequency
+of category levels and a table image containing variable's type summary count of
+the number of rows, missing values, unique values and zero values for each variable
+The output directory is created in the project root directory which may be changed
+using here::i_am function" />
 
 
 
@@ -134,53 +135,62 @@ For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRES
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>add_key</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/database.R'><code>R/database.R</code></a></small>
-    <div class="hidden name"><code>add_key.Rd</code></div>
+    <h1>Display variable summary</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/exploratory_data_analysis.R'><code>R/exploratory_data_analysis.R</code></a></small>
+    <div class="hidden name"><code>eda_variable_summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Add a new key to the keyring to store a new database connection string.
-If the keyring is locked then unlock it first with its password.</p>
-<p>On creating the key, the name of the key relating to the database is added under the service name
-and the database connections string is added as a json string in the password dialog box.</p>
-<p>SQL Server windows authentication: "server":"SERVER_NAME", "database":"DATABASE_NAME"
-For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS"</p>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
+<p>Exports the basic statistics of the variables within a data frame into an output
+directory. This includes a plots of the prevalence of missing values and frequency
+of category levels and a table image containing variable's type summary count of
+the number of rows, missing values, unique values and zero values for each variable</p>
+<p>The output directory is created in the project root directory which may be changed
+using here::i_am function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_key</span><span class='op'>(</span><span class='va'>keyring_name</span>, <span class='va'>service_name</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>eda_variable_summary</span><span class='op'>(</span><span class='va'>.dataset</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>keyring_name, </th>
-      <td><p>character keyring name</p></td>
-    </tr>
-    <tr>
-      <th>service_name, </th>
-      <td><p>character key name</p></td>
+      <th>.dataset</th>
+      <td><p>data frame, dataset for exploratory data analysis</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>dataset returned invisibly</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other keyring functions: 
-<code><a href='create_locked_keyring.html'>create_locked_keyring</a>()</code>,
-<code><a href='delete_key.html'>delete_key</a>()</code>,
-<code><a href='get_keyring_status.html'>get_keyring_status</a>()</code>,
-<code><a href='list_keys.html'>list_keys</a>()</code>,
-<code><a href='lock_keyring.html'>lock_keyring</a>()</code>,
-<code><a href='unlock_keyring.html'>unlock_keyring</a>()</code></p></div>
+    <div class='dont-index'><p>This is an example of exploratory data analsyis using the <a href='https://github.com/choonghyunryu/dlookr'>dlookr</a>
+and <a href='https://alastairrushworth.github.io/inspectdf/'>inspectdf</a> packages</p>
+<p>Other exploratory data analysis: 
+<code><a href='eda_variable_correlation.html'>eda_variable_correlation</a>()</code>,
+<code><a href='eda_variable_distribution.html'>eda_variable_distribution</a>()</code>,
+<code><a href='eda_variable_outliers.html'>eda_variable_outliers</a>()</code>,
+<code><a href='eda.html'>eda</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>add_key</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readline.html'>readline</a></span><span class='op'>(</span><span class='st'>"keyring name: "</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/readline.html'>readline</a></span><span class='op'>(</span><span class='st'>"service name: "</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+ <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
+ <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='co'># create output directory</span>
+<span class='fu'><a href='https://here.r-lib.org//reference/i_am.html'>i_am</a></span><span class='op'>(</span><span class='st'>"example.Rmd"</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='http://fs.r-lib.org/reference/file_access.html'>dir_exists</a></span><span class='op'>(</span><span class='st'>"output"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='st'>"output"</span><span class='op'>)</span><span class='op'>}</span>
+
+<span class='co'># example from palmerpenguins</span>
+<span class='co'># https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html</span>
+<span class='fu'>eda_variable_summary</span><span class='op'>(</span><span class='va'>penguins_raw</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
