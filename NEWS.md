@@ -1,3 +1,5 @@
+# store 0.4.0
+
 # store 0.3.0
 
 * Added **eda_variable_collection** to run all the exploratory data analyses on
