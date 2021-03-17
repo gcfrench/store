@@ -23,6 +23,7 @@ reference:
   desc: "Dataframes containing data table lookups"
   contents:
   - country_codes
+  - uk_ireland_base_map
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

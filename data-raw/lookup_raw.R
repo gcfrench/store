@@ -1,4 +1,4 @@
-# country_codes
+# country_codes ----------------------------------------------------------------
 country_codes <- ISOcodes::ISO_3166_1 %>%
   janitor::clean_names() %>%
   dplyr::rename(country_name = name) %>%
@@ -36,3 +36,14 @@ country_codes <- country_codes %>%
 
 # save in data directory
 usethis::use_data(country_codes, overwrite = TRUE)
+
+# UK Ireland base map ----------------------------------------------------------
+# taken from https://www.datadaptive.com/?pg=14
+base_map_path <- choose.files(default = "", caption = "Select base map shape file")
+uk_ireland_base_map <- sf::st_read(base_map_path) %>%
+  janitor::clean_names() %>%
+  dplyr::mutate(uk = as.logical(uk))
+
+# save in data directory
+usethis::use_data(uk_ireland_base_map, overwrite = TRUE)
+

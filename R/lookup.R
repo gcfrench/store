@@ -18,3 +18,42 @@
 #'   \item{eu_member}{Whether the country is a member of the European Union or not}
 #' }
 "country_codes"
+
+#' UK Ireland Base Map derived from the Oil and Gas Authority's OGA and Lloyd's Register
+#' SNS Regional Geological Maps (Open Source) layer
+#'
+#' @description
+#' A simple features data frame of the British and Irish coastline
+#' derived from the Oil and Gas Authority's OGA and Lloyd's Register
+#' SNS Regional Geological Maps (Open Source) layer.
+#'
+#' UKIrelandIoM_DECC_OSGB36 This dataset contains generalised boundaries for the
+#' four countries of the UK, the Isle of Man, and Ireland. The dataset is suitable
+#' as a reference for simple background mapping, and is re-usable under the Open
+#' Government Licence v3.
+#'
+#' This boundary dataset was created from a subset of the DECC_OFF_Coastline_ED50
+#' layer published by the Oil & Gas Authority in the following data package:
+#'
+#' OGA and Lloyd's Register SNS Regional Geological Maps (Open Source)
+#' http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyd%27s+Register+SNS+Regional+Geological+Maps&sort_by=relevanc
+#'
+#' The data has been converted from ED50 to OSGB36 and numerous individual polygons
+#' have been merged to create a set of polygons for each of Scotland, England, Wales,
+#' Northern Ireland, the Isle of Man, and Ireland.
+#'
+#' Licence: Open Government Licence v3 (OGL)
+#' http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+#' Attribution: Contains data © 2017 Oil & Gas Authority
+#'
+#' Created by Owen Boswarva, 2018-07-04
+#' Downloadable from [DataAdaptive](https://www.datadaptive.com/?pg=14)
+#'
+#' @format A simple feature data frame with 6 rows and 3 variables
+#' \describe{
+#'   \item{country}{country name}
+#'   \item{uk}{whether country is in UK or not}
+#'   \item{geometry}{polygon genometry}
+#' }
+"uk_ireland_base_map"
+
