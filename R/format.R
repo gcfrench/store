@@ -2,7 +2,8 @@
 #'
 #' @description
 #' This function returns the parent function of the function factory to extract
-#' a delimited list from a data frame's column
+#' a delimited list from a data frame's column. It excludes NAs but does not sort
+#' the character string
 #'
 #' @param delimiter character, delimiter
 #'
@@ -13,7 +14,7 @@ extract_delimited_list <- function(delimiter) {
 
     df_column <- .df %>%
       dplyr::select({{column_name}}) %>%
-      dplyr::arrange({{column_name}}) %>%
+      tidyr::drop_na() %>%
       dplyr::nest_by() %>%
       dplyr::mutate(dplyr::across(data, function(x) {purrr::map_chr(x, paste0, collapse = delimiter)})) %>%
       dplyr::pull() %>%
@@ -24,7 +25,8 @@ extract_delimited_list <- function(delimiter) {
 #' extract_comma_delimited_list
 #'
 #' @description
-#' This function extracts a comma delimited list from a data frame's column
+#' This function extracts a comma delimited list from a data frame's column. It
+#' excludes NAs but does not sort the character string
 #'
 #' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
 #' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
@@ -68,7 +70,8 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 
 #' extract_semicolon_delimited_list
 #'
-#' This function extracts a semi-colon delimited list from a data frame's column
+#' This function extracts a semi-colon delimited list from a data frame's column. It
+#' excludes NAs but does not sort the character string
 #'
 #' @description
 #' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),

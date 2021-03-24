@@ -22,7 +22,8 @@ The function may be called on a \href{https://cran.r-project.org/web/packages/ti
 to extract the semi-colon delimited list
 }
 \details{
-This function extracts a semi-colon delimited list from a data frame's column
+This function extracts a semi-colon delimited list from a data frame's column. It
+excludes NAs but does not sort the character string
 }
 \examples{
 suppressPackageStartupMessages({

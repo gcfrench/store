@@ -41,7 +41,8 @@ Imports:
     patchwork,
     ggplot2,
     tidyr,
-    corrplot
+    corrplot,
+    sf
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

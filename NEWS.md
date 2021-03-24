@@ -1,5 +1,6 @@
 # store 0.4.0
 
+* Updated **extract_delimited_list** parent function to exclude NAs
 * Added **uk_ireland_base_map** A simple features data frame of the British and 
 Irish coastline derived from the Oil and Gas Authority's OGA and Lloyd's Register 
 SNS Regional Geological Maps (Open Source) layer.

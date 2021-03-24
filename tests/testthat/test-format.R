@@ -5,11 +5,23 @@ test_that("comma delimited list extracted", {
                "x, y, z")
 })
 
+test_that("comma delimited list excludes NA", {
+  expect_equal(extract_comma_delimited_list(tibble::tibble(last_three_letters = c("x", NA_character_)),
+                                            column_name = "last_three_letters"),
+               "x")
+})
+
 # extract_semicolon_delimited_list
 test_that("semi-colon delimited list extracted", {
   expect_equal(extract_semicolon_delimited_list(tibble::tibble(last_three_letters = c("x", "y", "z")),
                                             column_name = "last_three_letters"),
                "x; y; z")
+})
+
+test_that("semi-colon delimited list excludes NA", {
+  expect_equal(extract_semicolon_delimited_list(tibble::tibble(last_three_letters = c("x", NA_character_, "y")),
+                                            column_name = "last_three_letters"),
+               "x; y")
 })
 
 # add_tibble_to_list

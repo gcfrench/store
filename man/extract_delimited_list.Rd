@@ -14,5 +14,6 @@ function, extracts the column as a delimited list
 }
 \description{
 This function returns the parent function of the function factory to extract
-a delimited list from a data frame's column
+a delimited list from a data frame's column. It excludes NAs but does not sort
+the character string
 }

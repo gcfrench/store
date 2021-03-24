@@ -15,7 +15,8 @@ extract_comma_delimited_list(.df, column_name)
 character, comma delimited list
 }
 \description{
-This function extracts a comma delimited list from a data frame's column
+This function extracts a comma delimited list from a data frame's column. It
+excludes NAs but does not sort the character string
 
 It is an example of the use of a \href{https://adv-r.hadley.nz/function-factories.html}{function factory},
 \href{https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/}{tidy evaluation}
