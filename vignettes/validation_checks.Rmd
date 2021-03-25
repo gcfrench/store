@@ -1,0 +1,111 @@
+---
+title: "validation_checks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{validation_checks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(store)
+library(assertr)
+library(palmerpenguins)
+library(janitor)
+```
+
+Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
+package, with extra checks provided by the [assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html)
+package. All examples perform checks on the [palmerpenguins dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) and return 
+TRUE if validation check passes and stops with an error if the validation check fails
+
+## Validation checks
+
+The penguins dataset contains eight named columns
+```{r}
+penguins %>% 
+  chain_start %>%
+    verify(has_all_names("species")) %>%
+    verify(has_all_names("island")) %>%
+    verify(has_all_names("bill_length_mm")) %>%
+    verify(has_all_names("bill_depth_mm")) %>%
+    verify(has_all_names("flipper_length_mm")) %>%
+    verify(has_all_names("body_mass_g")) %>%
+    verify(has_all_names("sex")) %>%
+    verify(has_all_names("year")) %>%
+    verify(ncol(.) == 8) %>%
+  chain_end
+```
+
+The penguins dataset contains 344 rows
+```{r}
+penguins %>% 
+  verify(nrow(.) == 344,
+         success_fun = success_logical, error_fun = error_stop)
+```
+
+Penguins raw dataset date_egg column is a date type
+```{r}
+penguins_raw %>% 
+  clean_names() %>% 
+  assert(assertive::is_date, date_egg,
+         success_fun = success_logical, error_fun = error_stop)
+```
+
+Combination of sample number and species name in penguins raw dataset should be
+unique
+```{r}
+penguins_raw %>% 
+  clean_names() %>%  
+  assert_rows(col_concat, is_uniq, sample_number, species,
+              success_fun = success_logical, error_fun = error_stop)
+```
+
+All penguins are assigned to a species and an island (they is no missing data in 
+the species or island columns)
+```{r}
+penguins %>% 
+  assert(not_na, species, island,  
+         success_fun = success_logical, error_fun = error_stop)
+```
+
+All penguins are either male or female
+```{r}
+penguins %>% 
+  assert(in_set("male", "female"), sex,
+         success_fun = success_logical, error_fun = error_stop)
+```
+
+All penguins should weigh between 2700 and 6300 grams, inclusively
+```{r}
+penguins %>% 
+  assert(within_bounds(2700, 6300), body_mass_g,
+         success_fun = success_logical, error_fun = error_stop)
+```
+
+
+```{r check_join_bug, eval=FALSE}
+check_join <- function(.data, left_column, right_column) {
+  .data %>% 
+    select({{left_column}}, {{right_column}}) %>% 
+    distinct %>% 
+    assert_rows(num_row_NAs, function(.x) {.x != 1}, {{left_column}}, {{right_column}}, 
+                                   success_fun = success_logical, error_fun = error_stop)
+}
+```
+
+```{r}
+# Check licenced from date before licenced until
+assert_that(all(derogationsData$licenseValidForm <= derogationsData$licenseValidUntil))
+```
+
+
+
