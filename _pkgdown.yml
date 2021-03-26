@@ -58,6 +58,8 @@ navbar:
       menu:
       - text: "Create and update a package"
         href: articles/create_update_package_information.html
+      - text: "Run validation checks"
+        href: articles/validation_checks.html
     - text: "lookups and functions"
       href: reference/index.html
     - text: "versions"

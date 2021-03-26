@@ -1,33 +1,37 @@
 ---
-title: "validation_checks"
+title: "Validation checks"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{validation_checks}
+  %\VignetteIndexEntry{Validation checks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  eval = FALSE,
+  eval = TRUE,
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
 ```{r setup}
-library(store)
-library(assertr)
-library(palmerpenguins)
-library(janitor)
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(assertr)
+    library(assertive)
+    library(palmerpenguins)
+    library(janitor)
+  })
+})
 ```
+
+## Validation checks
 
 Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
 package, with extra checks provided by the [assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html)
 package. All examples perform checks on the [palmerpenguins dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) and return 
 TRUE if validation check passes and stops with an error if the validation check fails
-
-## Validation checks
 
 The penguins dataset contains eight named columns
 ```{r}
@@ -60,8 +64,7 @@ penguins_raw %>%
          success_fun = success_logical, error_fun = error_stop)
 ```
 
-Combination of sample number and species name in penguins raw dataset should be
-unique
+Combination of sample number and species name in penguins raw dataset are unique
 ```{r}
 penguins_raw %>% 
   clean_names() %>%  
@@ -84,28 +87,24 @@ penguins %>%
          success_fun = success_logical, error_fun = error_stop)
 ```
 
-All penguins should weigh between 2700 and 6300 grams, inclusively
+All penguins weigh between 2700 and 6300 grams, inclusively
 ```{r}
 penguins %>% 
   assert(within_bounds(2700, 6300), body_mass_g,
          success_fun = success_logical, error_fun = error_stop)
 ```
 
+## Data exploration
 
-```{r check_join_bug, eval=FALSE}
-check_join <- function(.data, left_column, right_column) {
-  .data %>% 
-    select({{left_column}}, {{right_column}}) %>% 
-    distinct %>% 
-    assert_rows(num_row_NAs, function(.x) {.x != 1}, {{left_column}}, {{right_column}}, 
-                                   success_fun = success_logical, error_fun = error_stop)
-}
-```
-
+Find the rows in the penguins dataset that are missing all the four bill, flipper
+and body mass measurements. Row numbers are displayed in the index column
 ```{r}
-# Check licenced from date before licenced until
-assert_that(all(derogationsData$licenseValidForm <= derogationsData$licenseValidUntil))
+penguins %>% 
+  assert_rows(num_row_NAs, function(.x){.x != 4}, bill_length_mm:body_mass_g,
+               success_fun = success_continue, error_fun = just_warn)
+
 ```
+
 
 
 
