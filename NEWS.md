@@ -1,5 +1,7 @@
 # store 0.4.0
 
+* Added **tidy_spatial_data** to help in cleaning spatial data frames using the 
+[sf](https://r-spatial.github.io/sf/) package
 * Added **Run validation checks** document to information, providing examples of 
 the use of the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
 package for validation

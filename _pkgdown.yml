@@ -24,6 +24,10 @@ reference:
   contents:
   - country_codes
   - uk_ireland_base_map
+- title: "Spatial data"
+  desc: "Explore spatial datasets"
+  contents:
+  - tidy_spatial_data
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

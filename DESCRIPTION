@@ -42,7 +42,8 @@ Imports:
     ggplot2,
     tidyr,
     corrplot,
-    sf
+    sf,
+    assertthat
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
