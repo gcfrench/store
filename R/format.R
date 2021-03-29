@@ -10,16 +10,25 @@
 #' @return function, extracts the column as a delimited list
 extract_delimited_list <- function(delimiter) {
 
-  function(.df, column_name, ...) {
+    function(.df, column_name, sort = FALSE, ...) {
 
-    .df %>%
-      dplyr::select({{column_name}}) %>%
-      tidyr::drop_na() %>%
-      dplyr::pull() %>%
-      stringr::str_sort() %>%
-      glue::glue_collapse({{column_name}}, sep = delimiter, ...) %>%
-      vctrs::vec_cast(character())
-  }
+      # extract required vector
+      .vec <- .df %>%
+        dplyr::select({{column_name}}) %>%
+        tidyr::drop_na() %>%
+        dplyr::pull()
+
+      # optionally sort vector
+      if(sort) {
+        .vec <- .vec %>%
+          stringr::str_sort()
+      }
+
+      # create delimited character string
+      .vec %>%
+        glue::glue_collapse({{column_name}}, sep = delimiter, ...) %>%
+        vctrs::vec_cast(character())
+    }
 }
 
 #' extract_comma_delimited_list
@@ -38,6 +47,7 @@ extract_delimited_list <- function(delimiter) {
 #'
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
+#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
 #' @param last, character, optional string used to separate the last two items
 #'
 #' @return character, comma delimited list
@@ -85,6 +95,7 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #'
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
+#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
 #' @param last, character, optional string used to separate the last two items
 #'
 #' @return character, semi-colon delimited list

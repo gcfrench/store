@@ -13,8 +13,14 @@ test_that("comma delimited list excludes NA", {
 
 test_that("comma delimited list sorts string", {
   expect_equal(extract_comma_delimited_list(tibble::tibble(last_three_letters = c("y", "x")),
-                                            column_name = "last_three_letters"),
+                                            column_name = "last_three_letters", sort = TRUE),
                "x, y")
+})
+
+test_that("delimiter text added to the last two items", {
+  expect_equal(extract_comma_delimited_list(tibble::tibble(last_three_letters = c("x", "y", "z")),
+                                            column_name = "last_three_letters", last = " and "),
+               "x, y and z")
 })
 
 # extract_semicolon_delimited_list
@@ -32,7 +38,7 @@ test_that("semi-colon delimited list excludes NA", {
 
 test_that("semi-colon delimited list sorts string", {
   expect_equal(extract_semicolon_delimited_list(tibble::tibble(last_three_letters = c("y", "x")),
-                                            column_name = "last_three_letters"),
+                                            column_name = "last_three_letters", sort = TRUE),
                "x; y")
 })
 

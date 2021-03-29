@@ -4,12 +4,14 @@
 \alias{extract_comma_delimited_list}
 \title{extract_comma_delimited_list}
 \usage{
-extract_comma_delimited_list(.df, column_name, ...)
+extract_comma_delimited_list(.df, column_name, sort = FALSE, ...)
 }
 \arguments{
 \item{.df}{data frame, data frame containing the column to extract the delimited list}
 
 \item{column_name}{character, name of column to extract the delimited list}
+
+\item{sort}{logical, whether the list is sorted (TRUE) or not (default FALSE)}
 
 \item{last, }{character, optional string used to separate the last two items}
 }
