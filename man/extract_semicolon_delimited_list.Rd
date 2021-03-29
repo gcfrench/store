@@ -4,12 +4,14 @@
 \alias{extract_semicolon_delimited_list}
 \title{extract_semicolon_delimited_list}
 \usage{
-extract_semicolon_delimited_list(.df, column_name)
+extract_semicolon_delimited_list(.df, column_name, ...)
 }
 \arguments{
 \item{.df}{data frame, data frame containing the column to extract the delimited list}
 
 \item{column_name}{character, name of column to extract the delimited list}
+
+\item{last, }{character, optional string used to separate the last two items}
 }
 \value{
 character, semi-colon delimited list

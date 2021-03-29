@@ -43,7 +43,9 @@ Imports:
     tidyr,
     corrplot,
     sf,
-    assertthat
+    assertthat,
+    glue,
+    vctrs
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

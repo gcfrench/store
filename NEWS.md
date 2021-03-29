@@ -5,7 +5,8 @@
 * Added **Run validation checks** document to information, providing examples of 
 the use of the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
 package for validation
-* Updated **extract_delimited_list** parent function to exclude NAs
+* Updated **extract_delimited_list** parent function to apply sort, exclude NAs 
+and optionally add additional text to separate last two items
 * Added **uk_ireland_base_map** A simple features data frame of the British and 
 Irish coastline derived from the Oil and Gas Authority's OGA and Lloyd's Register 
 SNS Regional Geological Maps (Open Source) layer
