@@ -16,7 +16,7 @@ tibble, original tibble is returned invisibly
 }
 \description{
 This function prepends tibbles to a list, creating the list
-in the global environment if not already present
+in the environment calling this function if not already present
 
 It is an example of \href{http://adv-r.had.co.nz/Environments.html}{assigning a variable to an environment}
 }

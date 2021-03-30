@@ -1,5 +1,7 @@
 # store 0.4.0
 
+* Updated **add_tibble_to_list** to add list to the parent environment calling the
+function rather than the global environment, as described in the [rlang](https://rlang.r-lib.org/index.html) package
 * Added **tidy_spatial_data** to help in cleaning spatial data frames using the 
 [sf](https://r-spatial.github.io/sf/) package
 * Added **Run validation checks** document to information, providing examples of 

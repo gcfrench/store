@@ -131,7 +131,7 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #'
 #' @description
 #' This function prepends tibbles to a list, creating the list
-#' in the global environment if not already present
+#' in the environment calling this function if not already present
 #'
 #' It is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
 #'
@@ -180,15 +180,19 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #' heaviest_penguins <- bind_rows(tibble_list)
 #' heaviest_penguins
 add_tibble_to_list <- function(.data, .name) {
-  if(!exists("tibble_list", envir = globalenv())) {
-    assign("tibble_list", list(), envir = globalenv())
+
+  # environment calling this function
+  parent_environment <- rlang::env_parent(env = rlang::caller_env(), n = 1)
+
+  if(!exists("tibble_list", envir = parent_environment)) {
+    assign("tibble_list", list(), envir = parent_environment)
   }
-  tibble_list <- get("tibble_list", envir = globalenv())
+  tibble_list <- get("tibble_list", envir = parent_environment)
   .data <- .data %>%
     list() %>%
     purrr::set_names(.name) %>%
     purrr::prepend(tibble_list)
-  assign("tibble_list", .data, envir = globalenv())
+  assign("tibble_list", .data, envir = parent_environment)
   invisible(.data)
 }
 
