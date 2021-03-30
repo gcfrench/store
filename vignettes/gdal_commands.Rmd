@@ -1,0 +1,166 @@
+---
+title: "gdal_commands"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gdal_commands}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+> GDAL commands for importing and exporting spatial layers into SQL Server, PostGres and Spatialite
+
+```{r markdown, eval = TRUE, echo = FALSE, purl = FALSE, warning = FALSE}
+library(knitr)
+eval = FALSE
+opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE, error = FALSE, comment = NA)
+```
+
+# PostGRES
+
+## Import shapefile
+Batch import shape files by supplying folder path containing shape files rather than individual shape file path
+```
+ogr2ogr -progress -lco geometry_name=geom -lco schema=public -f "PostgreSQL" 
+PG:"host=IPADDRESS dbname=DATABASENAME user=USERNAME password=PASSWORD" SHAPEFILEPATH.shp 
+-nln TABLENAME --config PG_USE_COPY YES
+```
+
+## Import File GeoDatabase
+There are two drivers using in File GeoDatabases
+
+1. OpenFileGDB driver- GDAL driver installed by default allowing read only access to Geodatabases created in ArcGIS v9 and above
+1. fileGDB driver - ESRI driver that is not installed by default allowing read and write access to Geodatabases created in ArcGIS v10 and above
+
+Issue with importing some polygons files producing errors - Error occurred in filegdbtable.cpp at line 2375, ERROR 1: Error occurred in filegdbtable.cpp at line 2703. This appears to result from GDAL not supporting M routing values. Either
+
+* Disable these values [removing M values in ArcGIS](http://support.esri.com/technical-article/000010389)
+* [Install gdal-filegdb driver](http://gis.stackexchange.com/questions/26285/file-geodatabase-gdb-support-in-qgis) using advanced installation in OSGeo4W setup program (Undo skip in gdal-filegdb in libs). FileGDB driver is used when both drivers are installed. Unsure if this results in issues with then using OpenFileGDB driver?
+* Possibly [convert polygons M to polygon](http://gis.stackexchange.com/questions/109626/qgis-convert-polygon-m-to-polygon) 
+
+```
+ogr2ogr -progress -lco geometry_name=geom -lco schema=public -f "PostgreSQL" 
+PG:"host=IPADDRESS dbname=DATABASENAME user=USERNAME password=PASSWORD" 
+GEODATABASEFILEPATH.gdb "TABLENAME"
+```
+
+## Import Spatialite database
+Unable to rename multiple tables using -nln
+```
+ogr2ogr -progress -lco geometry_name=geom -lco schema=public -f "PostgreSQL" 
+PG:"host=IPADDRESS dbname=DATABASENAME user=USERNAME password=PASSWORD" 
+SPATIALITEFILEPATH.sqlite "TABLENAME1" "TABLENAME2" 
+```
+
+## Export to shapefile
+```
+ogr2ogr -progress -f "ESRI Shapefile" OUTPUTFOLDERNAME PG:"host=HOSTNAME 
+dbname=DATABASENAME user=USERNAME password=PASSWORD" TABLENAME
+```
+
+## Export to Spatialite database
+```
+ogr2ogr -progress -f SQLite -dsco SPATIALITE=yes SPATIALITEPATH  
+PG:"host=HOSTNAME dbname=DATABASENAME user=USERNAME password=PASSWORD" 
+TABLENAME1 TABLENAME2
+```
+*** 
+
+# Spatialite
+
+## Import shapefile
+```
+ogr2ogr -progress -f SQLite -dsco SPATIALITE=NO SPATIALITEFILEPATH.sqlite 
+SHAPEFILEPATH.shp
+```
+
+## Import File GeoDatabase
+```
+ogr2ogr -progress -f SQLite -dsco SPATIALITE=NO SPATIALITEFILEPATH.sqlite
+GEODATABASEFILEPATH.gdb "TABLENAME"
+```
+
+## Export to shapefile
+```
+ogr2ogr -progress -f "ESRI Shapefile" SHAPEFILEPATH.shp SPATIALITEPATH.sqlite 
+-dsco SPATIALITE=yes
+```
+*** 
+
+# File GeoDatabase
+
+## Export to shapefile
+```
+ogr2ogr -progress -f "ESRI Shapefile" OUTPUTFOLDERNAME GEODATABASEFILEPATH.gdb
+"TABLENAME"
+```
+***
+
+# Reprojection
+
+```
+ogr2ogr -f "ESRI Shapefile" ORIGINAL.shp REPROJECTED.shp -s_srs EPSG:27700 
+-t_srs EPSG:4326
+```
+*** 
+
+# SQL Server
+
+## Import shapefile
+```
+ogr2ogr -progress -f "MSSQLSpatial" "MSSQL:Server=INSTANCENAME;Database=DATABASENAME;
+uid=USERNAME;pwd=PASSWORD;Integrated Security=True;GeometryFormat=native;Launder=YES;
+precision=NO;geom_type=Geometry" SHAPEFILEPATH.shp
+```
+
+## Export to shapefile
+```
+ogr2ogr -progress -f "ESRI Shapefile" SHAPEFILEPATH.shp "MSSQL:Server=INSTANCENAME;
+Database=DATABASENAME;uid=USERNAME;pwd=PASSWORD;Integrated Security=True;
+GeometryFormat=native"  -sql "SELECT QUERY" -lco "SHPT=POLYGON" -a_srs "EPSG:27700"
+```
+*** 
+
+# Additional commands
+
+* -lco = Layer Creation Options
+* -dsco = Data Source Creation Options
+
+| command | Description |
+|:-------------------|:------------------------------------------------|
+| -nln TABLENAME | Name table on import |
+| -overwrite | Overwrite existing table |
+| -append | Append to existing table |
+| -nlt MULTIPOLYGON | Define polygon type if not Polygon |
+| -lco precision=NO | Turn off guessing at precision for column data types as GDAL 
+can incorrectly guess precision for columns leading to obscure errors |
+| -lco geometry_name=NAME | Name given to the geometry field |
+| -lco schemna=NAME | define schema to use |
+| -s_srs ESPG:xxxx | override the source spatial reference system |
+| -t_srs EPSG:xxxx | Reproject / transform to spatial reference system |
+| -a_srs ESPG:xxxx | Assign spatial reference system on output |
+| -sql SQLQUERY | sql statement to execute |
+| --config PG_USE_COPY YES | Improve speed importing into PostGres |
+
+# OGRInfo
+
+| command | Description |
+|:-------------------|:------------------------------------------------|
+| ogrinfo FILEPATH TABLENAME -so | Summary of layer |
+| ogrinfo --formats | lists drivers installed |
+
+# Resources
+
+* [GDAL main page](http://www.gdal.org/)
+* [GDAL code](https://fossies.org/dox/gdal-2.1.2/index.html)
+* [GDAL ogr2ogr](http://www.gdal.org/ogr2ogr.html)
+* [GDAL ogrInfo](http://www.gdal.org/ogrinfo.html)
+* [OGR Vector Formats](http://www.gdal.org/ogr_formats.html)
+* [OGR2OGR Cheatsheet](http://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet)
+* [SpatiaLite](http://trac.osgeo.org/postgis/wiki/SpatiaLite)

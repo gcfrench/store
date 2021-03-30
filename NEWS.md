@@ -1,12 +1,14 @@
 # store 0.4.0
 
+* Added **GDAL commands** document for importing and exporting spatial layers into 
+SQL Server, PostGres and Spatialite
 * Updated **add_tibble_to_list** to add list to the parent environment calling the
 function rather than the global environment, as described in the [rlang](https://rlang.r-lib.org/index.html) package
 * Added **tidy_spatial_data** to help in cleaning spatial data frames using the 
 [sf](https://r-spatial.github.io/sf/) package
 * Added **Run validation checks** document to information, providing examples of 
 the use of the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
-package for validation
+and [assertthat](https://github.com/hadley/assertthat) packages for validation
 * Updated **extract_delimited_list** parent function to apply sort, exclude NAs 
 and optionally add additional text to separate last two items
 * Added **uk_ireland_base_map** A simple features data frame of the British and 

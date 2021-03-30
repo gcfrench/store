@@ -20,6 +20,7 @@ suppressPackageStartupMessages({
   suppressWarnings({
     library(assertr)
     library(assertive)
+    library(assertthat)
     library(palmerpenguins)
     library(janitor)
   })
@@ -30,8 +31,28 @@ suppressPackageStartupMessages({
 
 Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
 package, with extra checks provided by the [assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html)
-package. All examples perform checks on the [palmerpenguins dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) and return 
+package. The [assertthat](https://github.com/hadley/assertthat) package can also be used 
+as an alternative to stopifnot(). All examples perform checks on the [palmerpenguins dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) and return 
 TRUE if validation check passes and stops with an error if the validation check fails
+
+The file path to the palmerpenguins image exists
+```{r}
+assert_that(file.exists("palmerpenguins_image.png"), 
+            msg = "Path palmerpenguins image is UNSUCCESSFUL")
+```
+
+The penguin dataset is not empty
+```{r}
+see_if(not_empty(penguins), 
+       msg = "Penguins dataset is EMPTY")
+```
+
+The penguins dataset contains 344 rows
+```{r}
+penguins %>% 
+  verify(nrow(.) == 344,
+         success_fun = success_logical, error_fun = error_stop)
+```
 
 The penguins dataset contains eight named columns
 ```{r}
@@ -47,13 +68,6 @@ penguins %>%
     verify(has_all_names("year")) %>%
     verify(ncol(.) == 8) %>%
   chain_end
-```
-
-The penguins dataset contains 344 rows
-```{r}
-penguins %>% 
-  verify(nrow(.) == 344,
-         success_fun = success_logical, error_fun = error_stop)
 ```
 
 Penguins raw dataset date_egg column is a date type
