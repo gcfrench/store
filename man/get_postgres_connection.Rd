@@ -23,6 +23,7 @@ through the keyring package. The PostgreSQL tables are added to the connection p
 suppressPackageStartupMessages({
   library(store)
   suppressWarnings({
+    library(dplyr)
     library(DBI)
     library(odbc)
   })
@@ -33,8 +34,12 @@ con <- get_postgres_connection(keyring_name = "keyring_name",
 # list tables
 dbListTables(con)
 
+# get table
+database_table <- tbl(con, "table_name") \%>\% collect()
+
 # get query
 database_query <- dbGetQuery(con, "sql_statement")
+database_query <- tbl(con, sql("sql_statement")) \%>\% collect()
 
 # import table
 dbWriteTable(con, Id(schema = "schema_name", table = "table_name"),

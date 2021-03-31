@@ -23,6 +23,7 @@ through the keyring package. The MySQL tables are added to the connection pane.
 suppressPackageStartupMessages({
  library(store)
  suppressWarnings({
+   library(dplyr)
    library(DBI)
    library(odbc)
  })
@@ -33,8 +34,12 @@ con <- get_mysql_connection(keyring_name = "keyring_name",
 # list tables
 dbListTables(con)
 
+# get table
+database_table <- tbl(con, "table_name") \%>\% collect()
+
 # get query
 database_query <- dbGetQuery(con, "sql_statement")
+database_query <- tbl(con, sql("sql_statement")) \%>\% collect()
 
 # disconnect from database
 dbDisconnect(con)

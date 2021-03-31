@@ -1,5 +1,7 @@
 # store 0.4.0
 
+
+* Updated **get_database_connections** examples to include using [dplyr with databases](https://db.rstudio.com/dplyr/)
 * Added **GDAL commands** document for importing and exporting spatial layers into 
 SQL Server, PostGres and Spatialite
 * Updated **add_tibble_to_list** to add list to the parent environment calling the

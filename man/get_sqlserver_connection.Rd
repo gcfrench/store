@@ -34,12 +34,17 @@ suppressPackageStartupMessages({
 # connect to database, using keyring stored credentials
 con <- get_sqlserver_connection(keyring_name = "keyring_name",
                                 service_name = "database_name",
-                                keyring = TRUE)
+                              keyring = TRUE)
+
 # list tables
 dbListTables(con)
 
+# get table
+database_table <- tbl(con, "table_name") \%>\% collect()
+
 # get query
 database_query <- dbGetQuery(con, "sql_statement")
+database_query <- tbl(con, sql("sql_statement")) \%>\% collect()
 
 # disconnect from database
 dbDisconnect(con)
