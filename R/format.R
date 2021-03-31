@@ -18,6 +18,11 @@ extract_delimited_list <- function(delimiter) {
         tidyr::drop_na() %>%
         dplyr::pull()
 
+      # check for empty vector
+      if(rlang::is_empty(.vec)) {
+        return(NA_character_)
+      }
+
       # optionally sort vector
       if(sort) {
         .vec <- .vec %>%
