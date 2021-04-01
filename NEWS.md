@@ -11,8 +11,9 @@ function rather than the global environment, as described in the [rlang](https:/
 * Added **Run validation checks** document to information, providing examples of 
 the use of the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
 and [assertthat](https://github.com/hadley/assertthat) packages for validation
-* Updated **extract_delimited_list** parent function to apply sort, exclude NAs 
-and optionally add additional text to separate last two items
+* Updated **extract_delimited_list** parent function to apply sort, handle NAs 
+and optionally add additional text to separate last two items. Additional
+**extract_space_delimited_list** function added
 * Added **uk_ireland_base_map** A simple features data frame of the British and 
 Irish coastline derived from the Oil and Gas Authority's OGA and Lloyd's Register 
 SNS Regional Geological Maps (Open Source) layer

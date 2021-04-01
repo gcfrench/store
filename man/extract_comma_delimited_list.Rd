@@ -20,7 +20,8 @@ character, comma delimited list
 }
 \description{
 This function extracts a comma delimited list from a data frame's column. It
-excludes NAs but does not sort the character string
+excludes NAs, optionally sorts the character string and adds text as a delimiter
+to the last two items
 
 It is an example of the use of a \href{https://adv-r.hadley.nz/function-factories.html}{function factory},
 \href{https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/}{tidy evaluation}
@@ -55,6 +56,7 @@ heaviest_penguins
 }
 \seealso{
 Other delimited functions: 
-\code{\link{extract_semicolon_delimited_list}()}
+\code{\link{extract_semicolon_delimited_list}()},
+\code{\link{extract_space_delimited_list}()}
 }
 \concept{delimited functions}
