@@ -35,6 +35,13 @@ test_that("semi-colon delimited list extracted", {
                "x; y; z")
 })
 
+# extract_space_delimited_list
+test_that("space delimited list extracted", {
+  expect_equal(extract_space_delimited_list(tibble::tibble(last_three_letters = c("x", "y", "z")),
+                                                column_name = "last_three_letters"),
+               "x y z")
+})
+
 # add_tibble_to_list
 test_that("tibble added to list", {
   expect_equal(add_tibble_to_list(tibble::tibble(last_three_letters = c("x", "y", "z")),

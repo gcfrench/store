@@ -27,6 +27,7 @@ reference:
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
+  - gridreference_to_wkt
   - tidy_spatial_data
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"

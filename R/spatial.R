@@ -59,3 +59,116 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
 
   return(sf_data)
 }
+
+#' Convert OSGB Gridreference to well-known text
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function converts a grid refence to well-known text, using the
+#' gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37)
+#' package.
+#'
+#' It can convert either British or Irish gridreferences up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @param grid_reference character, gridreference in OSGB ()
+#'
+#' @return character, polygon WKT
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' gridreference_to_wkt("SP123456")
+#' }
+gridreference_to_wkt <- function(grid_reference) {
+
+  # https://github.com/ropensci-archive/rnbn/issues/37
+  gridCoords <- function (grid = NULL, units = c("km", "m"))
+  {
+    decodeTetrad <- function(letter) {
+      l = as.integer(charToRaw(letter)) - 65
+      if (l > 13)
+        l <- l - 1
+      coord <- list()
+      coord$x <- (l%/%5) * 2000
+      coord$y <- (l%%5) * 2000
+      return(coord)
+    }
+    units <- match.arg(units)
+    gr <- toupper(gsub(" ", "", grid))
+    v <- regexec("^([H,N,O,S,T][A-H,J-Z]|[B-D,F-J,L-O,Q-T,V-X])([0-9]{2,10})([A-N,P-Z]{0,1})$",
+                 gr)
+    if (v[[1]][[1]] > 0) {
+      letters <- unlist(regmatches(gr, v))[2]
+      nums <- unlist(regmatches(gr, v))[3]
+      tetrad <- unlist(regmatches(gr, v))[4]
+      n <- nchar(nums)
+      if ((n%%2) == 0) {
+        n <- n%/%2
+        precision <- 10^(5 - n)
+        gridref <- list()
+        class(gridref) <- "gridref"
+        gridref$grid <- grid
+        if (nchar(letters) == 2) {
+          gridref$system <- "OSGB"
+        }
+        else {
+          gridref$system <- "OSNI"
+        }
+        x <- 0
+        y <- 0
+        l <- 1
+        if (gridref$system == "OSGB") {
+          l = as.integer(charToRaw(substr(letters, l, l))) -
+            65
+          if (l > 7)
+            l <- l - 1
+          x <- ((l%%5) - 2) * 5e+05
+          y <- (3 - (l%/%5)) * 5e+05
+          l <- 2
+        }
+        l = as.integer(charToRaw(substr(letters, l, l))) -
+          65
+        if (l > 7)
+          l <- l - 1
+        x <- x + (l%%5) * 1e+05
+        y <- y + (4 - (l%/%5)) * 1e+05
+        x <- x + as.integer(substr(nums, 1, n)) * precision
+        y <- y + as.integer(substr(nums, n + 1, n + 1 + n)) *
+          precision
+        if (nchar(tetrad) == 1) {
+          c <- decodeTetrad(tetrad)
+          x <- x + c$x
+          y <- y + c$y
+          precision <- 2000
+        }
+        if (units == "km") {
+          x <- x/1000
+          y <- y/1000
+        }
+        gridref$x <- x
+        gridref$y <- y
+        gridref$precision <- precision
+        gridref$units <- units
+        return(gridref)
+      }
+      else {
+        stop("must be an even number of digits")
+      }
+    }
+    else {
+      stop("not a valid grid reference string")
+    }
+  }
+
+  # Get easting and northing coordinates using rNBN
+  coords <- gridCoords(grid = grid_reference, unit = "m")
+  easting <- as.numeric(coords[3])
+  northing <- as.numeric(coords[4])
+  precision <- as.numeric(coords[5])
+  projection <- as.character(coords[2])
+
+  # convert coordinates to WKT
+  stringr::str_glue("POLYGON({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing})")
+}
