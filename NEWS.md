@@ -1,7 +1,7 @@
 # store 0.4.0
 
-* Added **gridreference_to_wkt** to convert British and Irish grid references to
-well-known text
+* Added **grid_reference_to_geometry** to convert British and Irish grid reference 
+to its square polygon geometry feature
 * Updated **get_database_connections** examples to include using [dplyr with databases](https://db.rstudio.com/dplyr/)
 * Added **GDAL commands** document for importing and exporting spatial layers into 
 SQL Server, PostGres and Spatialite

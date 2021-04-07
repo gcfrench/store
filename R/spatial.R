@@ -60,28 +60,28 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
   return(sf_data)
 }
 
-#' Convert OSGB Gridreference to well-known text
+#' Convert OSGB Grid reference to polygon geometry feature
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' This function converts a grid refence to well-known text, using the
-#' gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37)
-#' package.
+#' This function converts a grid reference to its square polygon geometry feature
+#' through conversion to well-known text. It uses the gridCoords function in the
+#' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can convert either British or Irish gridreferences up to 10 figure (1m precision),
+#' It can convert either British or Irish grid references up to 10 figure (1m precision),
 #' including tetrads (2000m precision)
 #'
-#' @param grid_reference character, gridreference in OSGB ()
+#' @param grid_reference character, British or Irish grid reference
 #'
-#' @return character, polygon WKT
+#' @return geometry, square polygon feature
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' gridreference_to_wkt("SP123456")
+#' grid_reference_to_geometry("SP123456")
 #' }
-gridreference_to_wkt <- function(grid_reference) {
+grid_reference_to_geometry <- function(grid_reference) {
 
   # https://github.com/ropensci-archive/rnbn/issues/37
   gridCoords <- function (grid = NULL, units = c("km", "m"))
@@ -169,6 +169,19 @@ gridreference_to_wkt <- function(grid_reference) {
   precision <- as.numeric(coords[5])
   projection <- as.character(coords[2])
 
+  # Get EPSG code
+  if(projection == "OSGB") {
+    epsg = 27700
+  } else if (projection == "OSNI") {
+    epsg = 29902
+  } else {
+    epsg = NA_integer_
+  }
+
   # convert coordinates to WKT
-  stringr::str_glue("POLYGON({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing})")
+  wkt <- stringr::str_glue("POLYGON (({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing}))") %>%
+    vctrs::vec_cast(character())
+
+  # convert to geometry feature
+  sf::st_as_sfc(wkt, crs = epsg)
 }

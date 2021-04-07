@@ -23,12 +23,12 @@ reference:
   desc: "Dataframes containing data table lookups"
   contents:
   - country_codes
-  - uk_ireland_base_map
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
-  - gridreference_to_wkt
+  - grid_reference_to_geometry
   - tidy_spatial_data
+  - uk_ireland_base_map
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

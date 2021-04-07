@@ -299,7 +299,7 @@ display_table <- function(data, rows = nrow(data)) {
 
    # save image with shadow in original directory
    magick::image_read(path_archive) %>%
-     magick::image_border(geometry = "2x2") %>%
+     magick::image_border(geometry = "1x1") %>%
      magick::image_shadow() %>%
      magick::image_write(path_image)
 
