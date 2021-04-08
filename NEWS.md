@@ -1,5 +1,7 @@
 # store 0.4.0
 
+* Added **vc_grid_square_intersects** A data frame listing the vice counties intersects
+with 10km, 2km and 1km grid squares
 * Added **uk_ireland_tenkm_grid_squares** A data frame listing UK and Ireland 
 10km grid squares along with their country and whether in the UK, on land or sea
 * Added **nbn_demonstration_dataset** An example data frame containing bird example 

@@ -23,6 +23,8 @@ reference:
   desc: "Dataframes containing data table lookups"
   contents:
   - country_codes
+  - uk_ireland_tenkm_grid_squares
+  - vc_grid_square_intersects
 - title: "Example tables"
   desc: "Dataframes containing example data"
   contents:
@@ -33,7 +35,6 @@ reference:
   - grid_reference_to_geometry
   - tidy_spatial_data
   - uk_ireland_base_map
-  - uk_ireland_tenkm_grid_squares
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

@@ -75,3 +75,25 @@
 #'   \item{geographical}{whether the 10km grid square is on land or in the sea}
 #' }
 "uk_ireland_tenkm_grid_squares"
+
+#' Vice counties grid square intersects
+#'
+#' @description
+#' A list of OSGB 10km, 2km and 1km grid squares with the dominant vice county that
+#' overlaps the grid square and list of all vice counties overlapping the grid square
+#' at the vice county borders.
+#'
+#' The list of British vice-counties can be downloaded from the [Biological Records Centre](https://www.brc.ac.uk/article/british-vice-counties)
+#' website
+#'
+#' @format A tibble with 363518 rows and 5 variables
+#' \describe{
+#'   \item{grid_square}{OSGB 10km, 2km or 1km grid square}
+#'   \item{precsion}{precision of grid square in metres}
+#'   \item{vc_dominant}{dominant vice county number occupying the largest grid square area}
+#'   \item{vc_count}{number of vice counties overlapping the grid square}
+#'   \item{vc_list}{hash separated list of vice counties numbers overlapping the grid square}
+#' }
+"vc_grid_square_intersects"
+
+

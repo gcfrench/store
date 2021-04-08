@@ -55,3 +55,39 @@ uk_ireland_tenkm_grid_squares <- readr::read_delim(file_path, delim = "\t")
 
 # save in data directory
 usethis::use_data(uk_ireland_tenkm_grid_squares, overwrite = TRUE)
+
+# Vice-county grid square intersections ----------------------------------------
+folder_path <- choose.dir(default = "", caption = "Select folder")
+
+# 10km grid squares
+readr::read_csv(fs::path(folder_path, "VC10kmIntersects.txt")) %>%
+  janitor::clean_names() %>%
+  dplyr::rename(grid_square = grid_ref,
+                vc_dominant = dominant_vc) %>%
+  dplyr::mutate(precision = "10000") %>%
+  dplyr::relocate(precision, .after = grid_square) %>%
+  store::add_tibble_to_list("tenkm")
+
+# tetrads
+readr::read_csv(fs::path(folder_path, "VC2kmIntersects.txt")) %>%
+  janitor::clean_names() %>%
+  dplyr::rename(grid_square = grid_ref,
+                vc_dominant = dominant_vc) %>%
+  dplyr::mutate(precision = "2000") %>%
+  dplyr::relocate(precision, .after = grid_square) %>%
+  store::add_tibble_to_list("twokm")
+
+# 1km grid squares
+readr::read_csv(fs::path(folder_path, "VC1kmIntersects.txt")) %>%
+  janitor::clean_names() %>%
+  dplyr::rename(grid_square = grid_ref,
+                vc_dominant = dominant_vc) %>%
+  dplyr::mutate(precision = "1000") %>%
+  dplyr::relocate(precision, .after = grid_square) %>%
+  store::add_tibble_to_list("onekm")
+
+# collate grid sqaures
+vc_grid_square_intersects <- dplyr::bind_rows(tibble_list)
+
+# save in data directory
+usethis::use_data(vc_grid_square_intersects, overwrite = TRUE)
