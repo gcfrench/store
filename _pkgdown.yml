@@ -23,6 +23,10 @@ reference:
   desc: "Dataframes containing data table lookups"
   contents:
   - country_codes
+- title: "Example tables"
+  desc: "Dataframes containing example data"
+  contents:
+  - nbn_demonstration_dataset
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
