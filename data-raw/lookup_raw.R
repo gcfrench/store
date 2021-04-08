@@ -47,3 +47,11 @@ uk_ireland_base_map <- sf::st_read(base_map_path) %>%
 # save in data directory
 usethis::use_data(uk_ireland_base_map, overwrite = TRUE)
 
+# UK and Ireland 10km grid squares ---------------------------------------------
+
+## Import records
+file_path <- choose.files(default = "", caption = "Select dataset")
+uk_ireland_tenkm_grid_squares <- readr::read_delim(file_path, delim = "\t")
+
+# save in data directory
+usethis::use_data(uk_ireland_tenkm_grid_squares, overwrite = TRUE)

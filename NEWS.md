@@ -1,6 +1,8 @@
 # store 0.4.0
 
-* Added **nbn_demonstration_dataset** example data frame containing bird example 
+* Added **uk_ireland_tenkm_grid_squares** A data frame listing UK and Ireland 
+10km grid squares along with their country and whether in the UK, on land or sea
+* Added **nbn_demonstration_dataset** An example data frame containing bird example 
 records used to demonstrate the NBN Gateway
 * Added **grid_reference_to_geometry** to convert British and Irish grid reference 
 to its square polygon geometry feature
