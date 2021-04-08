@@ -24,6 +24,22 @@ including tetrads (2000m precision)
 }
 \examples{
 \dontrun{
-grid_reference_to_geometry("SP123456")
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+   library(here)
+   library(fs)
+  })
+})
+# create output directory
+i_am("example.Rmd")
+if (!dir_exists("output")) {dir_create("output")}
+
+# create sf data frame and export as shape file
+nbn_demonstration_dataset \%>\%
+  janitor::clean_names() \%>\%
+  dplyr::rowwise() \%>\%
+  dplyr::mutate(geometry = grid_reference_to_geometry(grid_reference)) \%>\%
+  sf::st_write("output/nbn_demonstration_dataset.shp")
 }
 }

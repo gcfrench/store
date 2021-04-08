@@ -79,8 +79,24 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#' grid_reference_to_geometry("SP123456")
-#' }
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'    library(here)
+#'    library(fs)
+#'   })
+#'})
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir_create("output")}
+#'
+#' # create sf data frame and export as shape file
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(geometry = grid_reference_to_geometry(grid_reference)) %>%
+#'   sf::st_write("output/nbn_demonstration_dataset.shp")
+#'}
 grid_reference_to_geometry <- function(grid_reference) {
 
   # https://github.com/ropensci-archive/rnbn/issues/37
@@ -154,11 +170,11 @@ grid_reference_to_geometry <- function(grid_reference) {
         return(gridref)
       }
       else {
-        stop("must be an even number of digits")
+         stop("must be an even number of digits")
       }
     }
     else {
-      stop("not a valid grid reference string")
+       stop("not a valid grid reference string")
     }
   }
 
@@ -169,19 +185,23 @@ grid_reference_to_geometry <- function(grid_reference) {
   precision <- as.numeric(coords[5])
   projection <- as.character(coords[2])
 
-  # Get EPSG code
-  if(projection == "OSGB") {
-    epsg = 27700
-  } else if (projection == "OSNI") {
-    epsg = 29902
-  } else {
-    epsg = NA_integer_
-  }
+    # Get EPSG code
+    if(projection == "OSGB") {
+      epsg = 27700
+    } else if (projection == "OSNI") {
+      epsg = 29902
+    } else {
+      epsg = NA_integer_
+    }
 
-  # convert coordinates to WKT
-  wkt <- stringr::str_glue("POLYGON (({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing}))") %>%
-    vctrs::vec_cast(character())
+    # convert coordinates to WKT
+    wkt <- stringr::str_glue("POLYGON (({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing}))") %>%
+      vctrs::vec_cast(character())
 
-  # convert to geometry feature
-  sf::st_as_sfc(wkt, crs = epsg)
+    # convert to geometry feature
+    sf::st_as_sfc(wkt, crs = epsg)
 }
+
+
+
+

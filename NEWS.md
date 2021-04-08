@@ -7,7 +7,8 @@ with 10km, 2km and 1km grid squares
 * Added **nbn_demonstration_dataset** An example data frame containing bird example 
 records used to demonstrate the NBN Gateway
 * Added **grid_reference_to_geometry** to convert British and Irish grid reference 
-to its square polygon geometry feature
+to its square polygon geometry feature. Example uses [dplyr::rowwise](https://dplyr.tidyverse.org/reference/rowwise.html) function to 
+apply function to each grid reference in the dataset
 * Updated **get_database_connections** examples to include using [dplyr with databases](https://db.rstudio.com/dplyr/)
 * Added **GDAL commands** document for importing and exporting spatial layers into 
 SQL Server, PostGres and Spatialite

@@ -23,6 +23,6 @@ overlaps the grid square and list of all vice counties overlapping the grid squa
 at the vice county borders.
 
 The list of British vice-counties can be downloaded from the \href{https://www.brc.ac.uk/article/british-vice-counties}{Biological Records Centre}
-website
+website, with the vice-county boundaries downloaded from \href{https://github.com/BiologicalRecordsCentre/vice-counties}{Biological Records Centre's github page}
 }
 \keyword{datasets}

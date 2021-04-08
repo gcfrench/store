@@ -84,7 +84,7 @@
 #' at the vice county borders.
 #'
 #' The list of British vice-counties can be downloaded from the [Biological Records Centre](https://www.brc.ac.uk/article/british-vice-counties)
-#' website
+#' website, with the vice-county boundaries downloaded from [Biological Records Centre's github page](https://github.com/BiologicalRecordsCentre/vice-counties)
 #'
 #' @format A tibble with 363518 rows and 5 variables
 #' \describe{
