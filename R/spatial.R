@@ -70,7 +70,8 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
 #' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
 #' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' including tetrads (2000m precision) and returns an empty polygon feature for
+#' an invalid grid reference
 #'
 #' @param grid_reference character, British or Irish grid reference
 #'
@@ -167,15 +168,27 @@ grid_reference_to_geometry <- function(grid_reference) {
         gridref$y <- y
         gridref$precision <- precision
         gridref$units <- units
-        return(gridref)
       }
       else {
-         stop("must be an even number of digits")
+        message("must be an even number of digits")
+        gridref <- list(grid = NA_character_,
+                        system = NA_character_,
+                        x = NA_integer_,
+                        y = NA_integer_,
+                        precision = NA_integer_,
+                        units = NA_integer_)
       }
     }
     else {
-       stop("not a valid grid reference string")
+      message("not a valid grid reference string")
+      gridref <- list(grid = NA_character_,
+                      system = NA_character_,
+                      x = NA_integer_,
+                      y = NA_integer_,
+                      precision = NA_integer_,
+                      units = NA_integer_)
     }
+    return(gridref)
   }
 
   # Get easting and northing coordinates using rNBN
@@ -185,21 +198,26 @@ grid_reference_to_geometry <- function(grid_reference) {
   precision <- as.numeric(coords[5])
   projection <- as.character(coords[2])
 
-    # Get EPSG code
-    if(projection == "OSGB") {
-      epsg = 27700
-    } else if (projection == "OSNI") {
-      epsg = 29902
-    } else {
-      epsg = NA_integer_
-    }
+  # return empty polygon geometry if invalid grid reference
+  if(is.na(projection)) {
+    return(sf::st_sfc(sf::st_polygon()))
+  }
 
-    # convert coordinates to WKT
-    wkt <- stringr::str_glue("POLYGON (({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing}))") %>%
-      vctrs::vec_cast(character())
+  # Get EPSG code
+  if(projection == "OSGB") {
+    epsg = 27700
+  } else if (projection == "OSNI") {
+    epsg = 29902
+  } else {
+    epsg = NA_integer_
+  }
 
-    # convert to geometry feature
-    sf::st_as_sfc(wkt, crs = epsg)
+  # convert coordinates to WKT
+  wkt <- stringr::str_glue("POLYGON (({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing}))") %>%
+    vctrs::vec_cast(character())
+
+  # convert to geometry feature
+  sf::st_as_sfc(wkt, crs = epsg)
 }
 
 
