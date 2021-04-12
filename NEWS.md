@@ -1,5 +1,7 @@
 # store 0.4.0
 
+* Added **grid_reference_valid**, **grid_reference_projection**, **grid_reference_precision**
+suits of grid reference functions using parent **gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 * Added **vc_grid_square_intersects** A data frame listing the vice counties intersects
 with 10km, 2km and 1km grid squares
 * Added **uk_ireland_tenkm_grid_squares** A data frame listing UK and Ireland 

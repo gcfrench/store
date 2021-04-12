@@ -44,4 +44,10 @@ nbn_demonstration_dataset \%>\%
   sf::st_write("output/nbn_demonstration_dataset.shp")
 }
 }
+\seealso{
+Other grid reference functions: 
+\code{\link{grid_reference_precision}()},
+\code{\link{grid_reference_projection}()},
+\code{\link{grid_reference_valid}()}
+}
 \concept{grid reference functions}

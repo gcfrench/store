@@ -171,6 +171,127 @@ gridCoords <-  function (grid = NULL, units = c("km", "m")) {
     return(gridref)
 }
 
+#' Check if grid reference is a valid OSGB or OSNI Grid reference
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function checks if the grid reference is a valid OSGB or OSNI grid reference.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can check either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#'
+#' @return logical, grid reference valid (TRUE) or invalid (FALSE)
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'})
+#'
+#' # add valid column
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::select(grid_reference) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(valid = grid_reference_valid(grid_reference))
+#'}
+grid_reference_valid <- function(grid_reference) {
+
+  # Get projection using rNBN
+  projection <- gridCoords(grid = grid_reference) %>%
+    purrr::pluck("system")
+
+  # return valid grid reference if projection returned
+  if(!is.na(projection)) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+#' Get projection for grid reference
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function returns the grid reference's projection, either as OSGB or OSNI.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can check either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#'
+#' @return character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'})
+#'
+#' # add projection column
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::select(grid_reference) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(projection = grid_reference_projection(grid_reference))
+#'}
+grid_reference_projection <- function(grid_reference) {
+
+  # Get projection using rNBN
+  gridCoords(grid = grid_reference) %>%
+    purrr::pluck("system")
+}
+
+#' Get precison for grid reference
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function returns the grid reference's precsion in metres.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can check either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#'
+#' @return integer, precision of grid reference in metres.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'})
+#'
+#' # add precision column
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::select(grid_reference) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(precision = grid_reference_precision(grid_reference))
+#'}
+grid_reference_precision <- function(grid_reference) {
+
+  # Get precision using rNBN
+  gridCoords(grid = grid_reference, units = "m") %>%
+    purrr::pluck("precision")
+}
+
 #' Convert OSGB Grid reference to polygon geometry feature
 #'
 #' @description
@@ -215,10 +336,10 @@ grid_reference_geometry <- function(grid_reference) {
 
   # Get easting and northing coordinates using rNBN
   coords <- gridCoords(grid = grid_reference, unit = "m")
-  easting <- as.numeric(coords[3])
-  northing <- as.numeric(coords[4])
-  precision <- as.numeric(coords[5])
-  projection <- as.character(coords[2])
+  easting <- coords %>% purrr::pluck("x")
+  northing <- coords %>% purrr::pluck("y")
+  precision <- coords %>% purrr::pluck("precision")
+  projection <- coords %>% purrr::pluck("system")
 
   # return empty polygon geometry if invalid grid reference
   if(is.na(projection)) {
@@ -241,10 +362,4 @@ grid_reference_geometry <- function(grid_reference) {
   # convert to geometry feature
   sf::st_as_sfc(wkt, crs = epsg)
 }
-
-
-
-
-
-
 
