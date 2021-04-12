@@ -32,7 +32,7 @@ reference:
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
-  - grid_reference_to_geometry
+  - grid_reference_geometry
   - tidy_spatial_data
   - uk_ireland_base_map
 - title: "Exploratory Data Analysis"

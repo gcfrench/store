@@ -60,49 +60,29 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
   return(sf_data)
 }
 
-#' Convert OSGB Grid reference to polygon geometry feature
+#' Get x,y coordinates from a grid reference
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' Given an OSGB or OSNI grid reference string, get the x,y coordinates of the OSGB
+#' or OSNI grid for the bottom, left-hand corner of the grid square. The units
+#' parameter controls the units (metres m or kilometres km) in which the coordinates
+#' should be returned
 #'
-#' This function converts a grid reference to its square polygon geometry feature
-#' through conversion to well-known text. It uses the gridCoords function in the
-#' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#' function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision) and returns an empty polygon feature for
-#' an invalid grid reference
+#' @author Stuart Ball
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid character, an OSGB or OSNI grid reference string
+#' @param units character, metres or kilometres (default)
 #'
-#' @return geometry, square polygon feature
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
-#'    library(here)
-#'    library(fs)
-#'   })
-#'})
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#'
-#' # create sf data frame and export as shape file
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(geometry = grid_reference_to_geometry(grid_reference)) %>%
-#'   sf::st_write("output/nbn_demonstration_dataset.shp")
-#'}
-grid_reference_to_geometry <- function(grid_reference) {
-
-  # https://github.com/ropensci-archive/rnbn/issues/37
-  gridCoords <- function (grid = NULL, units = c("km", "m"))
-  {
+#' @return a list of class "gridref" with the following contents:
+#' * grid	the original grid reference
+#' * system	the grid reference system, either "OSGB" or "OSNI"
+#' * x the x coordinate (easting) in requested units
+#' * y the y coordinate (northing)in requested units
+#' * units "m" or "km"
+#' * precision the precision of the original grid reference in metres
+gridCoords <-  function (grid = NULL, units = c("km", "m")) {
     decodeTetrad <- function(letter) {
       l = as.integer(charToRaw(letter)) - 65
       if (l > 13)
@@ -189,7 +169,49 @@ grid_reference_to_geometry <- function(grid_reference) {
                       units = NA_integer_)
     }
     return(gridref)
-  }
+}
+
+#' Convert OSGB Grid reference to polygon geometry feature
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function converts a grid reference to its square polygon geometry feature
+#' through conversion to well-known text. It uses the gridCoords function in the
+#' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can convert either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision) and returns an empty polygon feature for
+#' an invalid grid reference
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#'
+#' @return geometry, square polygon feature
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'    library(here)
+#'    library(fs)
+#'   })
+#'})
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir_create("output")}
+#'
+#' # create sf data frame and export as shape file
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(geometry = grid_reference_geometry(grid_reference)) %>%
+#'   sf::st_write("output/nbn_demonstration_dataset.shp")
+#'}
+grid_reference_geometry <- function(grid_reference) {
 
   # Get easting and northing coordinates using rNBN
   coords <- gridCoords(grid = grid_reference, unit = "m")
@@ -219,6 +241,9 @@ grid_reference_to_geometry <- function(grid_reference) {
   # convert to geometry feature
   sf::st_as_sfc(wkt, crs = epsg)
 }
+
+
+
 
 
 
