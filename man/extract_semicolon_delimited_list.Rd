@@ -58,6 +58,7 @@ heaviest_penguins
 \seealso{
 Other delimited functions: 
 \code{\link{extract_comma_delimited_list}()},
+\code{\link{extract_paragraph_delimited_list}()},
 \code{\link{extract_space_delimited_list}()}
 }
 \concept{delimited functions}

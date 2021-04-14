@@ -52,6 +52,7 @@ reference:
   - extract_comma_delimited_list
   - extract_semicolon_delimited_list
   - extract_space_delimited_list
+  - extract_paragraph_delimited_list
   - add_tibble_to_list
 - title: "Data visualisation"
   desc: "Tabular and graphical visualisations"

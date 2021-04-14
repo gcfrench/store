@@ -30,10 +30,17 @@ extract_delimited_list <- function(delimiter) {
       }
 
       # create delimited character string
-      .vec %>%
+      .vec <- .vec %>%
         glue::glue_collapse({{column_name}}, sep = delimiter, ...) %>%
         vctrs::vec_cast(character())
-    }
+
+      # add double quotes to ends of character string for paragraph delimiter
+      if(stringr::str_detect(delimiter, "\r\n")) {
+        .vec <- stringr::str_glue('"{.vec}"')
+      }
+
+      return(.vec)
+  }
 }
 
 #' extract_comma_delimited_list
@@ -182,6 +189,57 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #'  select(-penguins)
 #' heaviest_penguins
 extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
+
+
+
+#' extract_paragraph_delimited_list
+#'
+#' This function extracts a paragraph delimited list from a data frame's column,
+#' inserting two new lines and carriage returns. It excludes NAs, optionally sorts
+#' the character string and adds text as a delimiter to the last two items
+#'
+#' @description
+#' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
+#' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+#' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
+#' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
+#' to extract the paragraph delimited list
+#'
+#' @family delimited functions
+#'
+#' @param .df data frame, data frame containing the column to extract the delimited list
+#' @param column_name character, name of column to extract the delimited list
+#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
+#' @param last, character, optional string used to separate the last two items
+#'
+#' @return character, paragraph delimited list
+#' @export
+#'
+#' @examples
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(palmerpenguins)
+#'     library(dplyr)
+#'     library(purrr)
+#'   })
+#' })
+#' # select top 5 heaviest penguins from each species on each island
+#' heaviest_penguins <- penguins %>%
+#'  select(species, island, body_mass_g) %>%
+#'  group_by(species, island) %>%
+#'  arrange(desc(body_mass_g)) %>%
+#'  slice_head(n = 5) %>%
+#'  ungroup()
+#' heaviest_penguins
+#'
+#' # extract paragraph separated list of penguin weights for each species on each island
+#' heaviest_penguins <- heaviest_penguins %>%
+#'  group_nest(across(c(species:island)), .key = "penguins") %>%
+#'  mutate(weight = map_chr(penguins, extract_paragraph_delimited_list, column_name = "body_mass_g")) %>%
+#'  select(-penguins)
+#' heaviest_penguins
+extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n")
 
 #' add tibble to list
 #'
