@@ -38,6 +38,11 @@ reference:
   - grid_reference_easting
   - grid_reference_northing
   - grid_reference_geometry
+  - grid_reference_hectad
+  - grid_reference_pentad
+  - grid_reference_tetrad
+  - grid_reference_monad
+  - grid_reference_hectare
   - tidy_spatial_data
   - uk_ireland_base_map
 - title: "Exploratory Data Analysis"

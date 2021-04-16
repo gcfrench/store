@@ -1,5 +1,8 @@
 # store 0.4.0
 
+* Added **grid_reference_hectad**, **grid_reference_pentad**, **grid_reference_tetrad**,
+**grid_reference_monad** and **grid_reference_hectare** family of grid reference functions
+to convert higher resolution grid references using parent **gridRef** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 * Added **extract_paragraph_delimited_list** to family of extract_delimited_list
 functions. This function adds two carriage returns and new lines as a delimiter
 * Added **grid_reference_valid**, **grid_reference_projection**, **grid_reference_precision**,

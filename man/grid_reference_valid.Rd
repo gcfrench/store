@@ -39,8 +39,13 @@ nbn_demonstration_dataset \%>\%
 Other grid reference functions: 
 \code{\link{grid_reference_easting}()},
 \code{\link{grid_reference_geometry}()},
+\code{\link{grid_reference_hectad}()},
+\code{\link{grid_reference_hectare}()},
+\code{\link{grid_reference_monad}()},
 \code{\link{grid_reference_northing}()},
+\code{\link{grid_reference_pentad}()},
 \code{\link{grid_reference_precision}()},
-\code{\link{grid_reference_projection}()}
+\code{\link{grid_reference_projection}()},
+\code{\link{grid_reference_tetrad}()}
 }
 \concept{grid reference functions}
