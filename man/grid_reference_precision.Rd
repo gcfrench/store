@@ -37,7 +37,9 @@ nbn_demonstration_dataset \%>\%
 }
 \seealso{
 Other grid reference functions: 
+\code{\link{grid_reference_easting}()},
 \code{\link{grid_reference_geometry}()},
+\code{\link{grid_reference_northing}()},
 \code{\link{grid_reference_projection}()},
 \code{\link{grid_reference_valid}()}
 }

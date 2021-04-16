@@ -35,6 +35,8 @@ reference:
   - grid_reference_valid
   - grid_reference_projection
   - grid_reference_precision
+  - grid_reference_easting
+  - grid_reference_northing
   - grid_reference_geometry
   - tidy_spatial_data
   - uk_ireland_base_map

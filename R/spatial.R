@@ -292,6 +292,108 @@ grid_reference_precision <- function(grid_reference) {
     purrr::pluck("precision")
 }
 
+#' Get easting for grid reference
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function returns the grid reference's easting in metres.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can check either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#' @param centre logical, easting for either lower left hand corner (default) or centre point (TRUE)
+#'
+#' @return integer, easting of grid reference in metres.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'})
+#'
+#' # add easting column
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::select(grid_reference) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(easting = grid_reference_easting(grid_reference, centre = FALSE))
+#'}
+grid_reference_easting <- function(grid_reference, centre = FALSE) {
+
+  # Get easting for lower left hand corner using rNBN
+  easting <- gridCoords(grid = grid_reference, units = "m") %>%
+    purrr::pluck("x")
+
+  # get easting for centre point
+  if(centre) {
+
+    # Get precision using rNBN
+    precision <- gridCoords(grid = grid_reference, units = "m") %>%
+      purrr::pluck("precision")
+
+    easting <- easting + (precision / 2L)
+  }
+
+  return(easting)
+}
+
+#' Get northing for grid reference
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function returns the grid reference's northing in metres.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can check either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#' @param centre logical, northing for either lower left hand corner (default) or centre point (TRUE)
+#'
+#' @return integer, northing of grid reference in metres.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'})
+#'
+#' # add northing column
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::select(grid_reference) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(northing = grid_reference_northing(grid_reference, centre = FALSE))
+#'}
+grid_reference_northing <- function(grid_reference, centre = FALSE) {
+
+  # Get northing for lower left hand corner using rNBN
+  northing <- gridCoords(grid = grid_reference, units = "m") %>%
+    purrr::pluck("y")
+
+  # get northing for centre point
+  if(centre) {
+
+    # Get precision using rNBN
+    precision <- gridCoords(grid = grid_reference, units = "m") %>%
+      purrr::pluck("precision")
+
+    northing <- northing + (precision / 2L)
+  }
+
+  return(northing)
+}
+
 #' Convert OSGB Grid reference to polygon geometry feature
 #'
 #' @description
