@@ -34,7 +34,6 @@ reference:
   contents:
   - grid_reference_valid
   - grid_reference_projection
-  - grid_reference_precision
   - grid_reference_easting
   - grid_reference_northing
   - grid_reference_geometry
@@ -45,6 +44,11 @@ reference:
   - grid_reference_hectare
   - tidy_spatial_data
   - uk_ireland_base_map
+- title: "Grid Reference"
+  desc: "Extract and format grid reference information"
+- contents:
+  - as_gridref
+  - precision.gridref
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

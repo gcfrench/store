@@ -256,44 +256,6 @@ grid_reference_projection <- function(grid_reference) {
     purrr::pluck("system")
 }
 
-#' Get precison for grid reference
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function returns the grid reference's precsion in metres.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
-#'
-#' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
-#'
-#' @family grid reference functions
-#'
-#' @param grid_reference character, British or Irish grid reference
-#'
-#' @return integer, precision of grid reference in metres.
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
-#'
-#' # add precision column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(precision = grid_reference_precision(grid_reference))
-#'}
-grid_reference_precision <- function(grid_reference) {
-
-  # Get precision using rNBN
-  gridCoords(grid = grid_reference, units = "m") %>%
-    purrr::pluck("precision")
-}
-
 #' Get easting for grid reference
 #'
 #' @description

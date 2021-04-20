@@ -43,9 +43,9 @@ Other grid reference functions:
 \code{\link{grid_reference_hectare}()},
 \code{\link{grid_reference_monad}()},
 \code{\link{grid_reference_northing}()},
-\code{\link{grid_reference_precision}()},
 \code{\link{grid_reference_projection}()},
 \code{\link{grid_reference_tetrad}()},
-\code{\link{grid_reference_valid}()}
+\code{\link{grid_reference_valid}()},
+\code{\link{precision.gridref}()}
 }
 \concept{grid reference functions}
