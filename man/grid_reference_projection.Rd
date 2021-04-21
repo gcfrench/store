@@ -45,7 +45,6 @@ Other grid reference functions:
 \code{\link{grid_reference_northing}()},
 \code{\link{grid_reference_pentad}()},
 \code{\link{grid_reference_tetrad}()},
-\code{\link{grid_reference_valid}()},
 \code{\link{precision.gridref}()}
 }
 \concept{grid reference functions}

@@ -1,13 +1,16 @@
 # store 0.4.0
 
+
+* Added **as_gridref**, **precision** S3 class of grid reference functions using parent 
+**gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
+S3 classes described in [S3](https://adv-r.hadley.nz/s3.html) chapter of Advanced R
 * Added **grid_reference_hectad**, **grid_reference_pentad**, **grid_reference_tetrad**,
 **grid_reference_monad** and **grid_reference_hectare** family of grid reference functions
 to convert higher resolution grid references using parent **gridRef** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 * Added **extract_paragraph_delimited_list** to family of extract_delimited_list
 functions. This function adds two carriage returns and new lines as a delimiter
-* Added **grid_reference_valid**, **grid_reference_projection**, **grid_reference_precision**,
-**grid_reference_easting**, **grid_reference_northing** family of grid reference functions 
-using parent **gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
+* Added **grid_reference_projection**, **grid_reference_easting**, **grid_reference_northing** 
+family of grid reference functions using parent **gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 * Added **vc_grid_square_intersects** A data frame listing the vice counties intersects
 with 10km, 2km and 1km grid squares
 * Added **uk_ireland_tenkm_grid_squares** A data frame listing UK and Ireland 

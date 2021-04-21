@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{precision.gridref}
 \alias{precision.gridref}
-\title{Get precison for grid reference}
+\title{Get precision for grid reference}
 \usage{
 \method{precision}{gridref}(grid_reference)
 }
@@ -13,9 +13,7 @@
 integer, precision of grid reference in metres.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-This function returns the grid reference's precsion in metres.
+This function returns the grid reference's precision in metres.
 It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
 
 It can check either British or Irish grid references up to 10 figure (1m precision),
@@ -45,7 +43,6 @@ Other grid reference functions:
 \code{\link{grid_reference_northing}()},
 \code{\link{grid_reference_pentad}()},
 \code{\link{grid_reference_projection}()},
-\code{\link{grid_reference_tetrad}()},
-\code{\link{grid_reference_valid}()}
+\code{\link{grid_reference_tetrad}()}
 }
 \concept{grid reference functions}

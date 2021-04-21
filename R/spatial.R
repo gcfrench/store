@@ -173,51 +173,6 @@ gridCoords <-  function (grid = NULL, units = c("km", "m")) {
     return(gridref)
 }
 
-#' Check if grid reference is a valid OSGB or OSNI Grid reference
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function checks if the grid reference is a valid OSGB or OSNI grid reference.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
-#'
-#' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
-#'
-#' @family grid reference functions
-#'
-#' @param grid_reference character, British or Irish grid reference
-#'
-#' @return logical, grid reference valid (TRUE) or invalid (FALSE)
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
-#'
-#' # add valid column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(valid = grid_reference_valid(grid_reference))
-#'}
-grid_reference_valid <- function(grid_reference) {
-
-  # Get projection using rNBN
-  projection <- gridCoords(grid = grid_reference) %>%
-    purrr::pluck("system")
-
-  # return valid grid reference if projection returned
-  if(!is.na(projection)) {
-    TRUE
-  } else {
-    FALSE
-  }
-}
-
 #' Get projection for grid reference
 #'
 #' @description

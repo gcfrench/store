@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{as_gridref}
 \alias{as_gridref}
-\title{as_gridref}
+\title{Convert to gridref object}
 \usage{
 as_gridref(x = character())
 }

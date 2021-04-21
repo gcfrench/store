@@ -1,4 +1,4 @@
-#' as_gridref
+#' Convert to gridref object
 #'
 #' @description
 #' Convert character string to gridref object
@@ -86,6 +86,7 @@ gridCoords <- function(x, ...) {
 #' @param x object, uses methods from generic function precision
 #'
 #' @return
+#' @export
 precision <- function(x, ...) {
   UseMethod("precision", x)
 }
@@ -133,7 +134,6 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
   n <- n%/%2
   precision <- 10^(5 - n)
   gridref <- list()
-  class(gridref) <- "gridref"
   gridref$grid <- grid
   if (nchar(letters) == 2) {
     gridref$system <- "OSGB"
@@ -180,12 +180,10 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
   return(gridref)
 }
 
-#' Get precison for grid reference
+#' Get precision for grid reference
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function returns the grid reference's precsion in metres.
+#' This function returns the grid reference's precision in metres.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
 #' It can check either British or Irish grid references up to 10 figure (1m precision),
