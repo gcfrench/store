@@ -29,6 +29,7 @@ suppressPackageStartupMessages({
 nbn_demonstration_dataset \%>\%
   janitor::clean_names() \%>\%
   dplyr::select(grid_reference) \%>\%
+  dplyr::mutate(grid_reference = as_gridref(grid_reference)) \%>\%
   dplyr::rowwise() \%>\%
   dplyr::mutate(precision = precision(grid_reference))
 }
@@ -42,7 +43,7 @@ Other grid reference functions:
 \code{\link{grid_reference_monad}()},
 \code{\link{grid_reference_northing}()},
 \code{\link{grid_reference_pentad}()},
-\code{\link{grid_reference_projection}()},
-\code{\link{grid_reference_tetrad}()}
+\code{\link{grid_reference_tetrad}()},
+\code{\link{projection.gridref}()}
 }
 \concept{grid reference functions}

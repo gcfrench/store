@@ -32,7 +32,6 @@ reference:
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
-  - grid_reference_projection
   - grid_reference_easting
   - grid_reference_northing
   - grid_reference_geometry
@@ -48,6 +47,7 @@ reference:
 - contents:
   - as_gridref
   - precision.gridref
+  - projection.gridref
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

@@ -13,7 +13,7 @@ gridCoords(grid = NULL, units = c("km", "m"))
 
 \item{units}{character, metres or kilometres (default)}
 
-\item{x}{object, uses methods from generic function gridCoords}
+\item{x}{object, contains class for method dispatch by function gridCoords}
 }
 \value{
 

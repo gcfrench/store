@@ -43,8 +43,8 @@ Other grid reference functions:
 \code{\link{grid_reference_hectare}()},
 \code{\link{grid_reference_monad}()},
 \code{\link{grid_reference_northing}()},
-\code{\link{grid_reference_projection}()},
 \code{\link{grid_reference_tetrad}()},
-\code{\link{precision.gridref}()}
+\code{\link{precision.gridref}()},
+\code{\link{projection.gridref}()}
 }
 \concept{grid reference functions}

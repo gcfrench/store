@@ -69,9 +69,9 @@ validate_gridref <- function(grid) {
 #' Generic function for gridCoords
 #'
 #' Generic function for gridCoords as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#'  chapter of Advanced R by Hadley Wickham
+#' chapter of Advanced R by Hadley Wickham
 #'
-#' @param x object, uses methods from generic function gridCoords
+#' @param x object, contains class for method dispatch by function gridCoords
 #'
 #' @return
 gridCoords <- function(x, ...) {
@@ -81,14 +81,27 @@ gridCoords <- function(x, ...) {
 #' Generic function for precision
 #'
 #' Generic function for precision as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#'  chapter of Advanced R by Hadley Wickham
+#' chapter of Advanced R by Hadley Wickham
 #'
-#' @param x object, uses methods from generic function precision
+#' @param x object, contains class for method dispatch by generic function precision
 #'
 #' @return
 #' @export
 precision <- function(x, ...) {
   UseMethod("precision", x)
+}
+
+#' Generic function for projection
+#'
+#' Generic function for projection as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
+#' chapter of Advanced R by Hadley Wickham
+#'
+#' @param x object, contains class for method dispatch by generic function projection
+#'
+#' @return
+#' @export
+projection <- function(x, ...) {
+  UseMethod("projection", x)
 }
 
 #' Get x,y coordinates from a grid reference
@@ -206,6 +219,7 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
 #' nbn_demonstration_dataset %>%
 #'   janitor::clean_names() %>%
 #'   dplyr::select(grid_reference) %>%
+#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
 #'   dplyr::rowwise() %>%
 #'   dplyr::mutate(precision = precision(grid_reference))
 #'}
@@ -213,4 +227,43 @@ precision.gridref <- function(grid_reference) {
 
   gridCoords(grid_reference, units = "m") %>%
     purrr::pluck("precision")
+}
+
+
+#' Get projection for grid reference
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function returns the grid reference's projection, either as OSGB or OSNI.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can check either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision)
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#'
+#' @return character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'})
+#'
+#' # add projection column
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::select(grid_reference) %>%
+#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(projection = projection(grid_reference))
+#'}
+projection.gridref <- function(grid_reference) {
+
+  gridCoords(grid_reference) %>%
+    purrr::pluck("system")
 }

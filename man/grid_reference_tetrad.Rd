@@ -44,7 +44,7 @@ Other grid reference functions:
 \code{\link{grid_reference_monad}()},
 \code{\link{grid_reference_northing}()},
 \code{\link{grid_reference_pentad}()},
-\code{\link{grid_reference_projection}()},
-\code{\link{precision.gridref}()}
+\code{\link{precision.gridref}()},
+\code{\link{projection.gridref}()}
 }
 \concept{grid reference functions}

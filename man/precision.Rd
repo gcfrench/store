@@ -7,7 +7,7 @@
 precision(x, ...)
 }
 \arguments{
-\item{x}{object, uses methods from generic function precision}
+\item{x}{object, contains class for method dispatch by generic function precision}
 }
 \value{
 

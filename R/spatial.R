@@ -173,44 +173,6 @@ gridCoords <-  function (grid = NULL, units = c("km", "m")) {
     return(gridref)
 }
 
-#' Get projection for grid reference
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function returns the grid reference's projection, either as OSGB or OSNI.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
-#'
-#' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
-#'
-#' @family grid reference functions
-#'
-#' @param grid_reference character, British or Irish grid reference
-#'
-#' @return character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
-#'
-#' # add projection column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(projection = grid_reference_projection(grid_reference))
-#'}
-grid_reference_projection <- function(grid_reference) {
-
-  # Get projection using rNBN
-  gridCoords(grid = grid_reference) %>%
-    purrr::pluck("system")
-}
-
 #' Get easting for grid reference
 #'
 #' @description
