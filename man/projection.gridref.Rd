@@ -13,11 +13,10 @@
 character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
 This function returns the grid reference's projection, either as OSGB or OSNI.
 It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-
+}
+\details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }
@@ -38,14 +37,14 @@ nbn_demonstration_dataset \%>\%
 }
 \seealso{
 Other grid reference functions: 
-\code{\link{grid_reference_easting}()},
+\code{\link{easting.gridref}()},
 \code{\link{grid_reference_geometry}()},
-\code{\link{grid_reference_hectad}()},
-\code{\link{grid_reference_hectare}()},
-\code{\link{grid_reference_monad}()},
-\code{\link{grid_reference_northing}()},
-\code{\link{grid_reference_pentad}()},
-\code{\link{grid_reference_tetrad}()},
-\code{\link{precision.gridref}()}
+\code{\link{hectad.gridref}()},
+\code{\link{hectare.gridref}()},
+\code{\link{monad.gridref}()},
+\code{\link{northing.gridref}()},
+\code{\link{pentad.gridref}()},
+\code{\link{precision.gridref}()},
+\code{\link{tetrad.gridref}()}
 }
 \concept{grid reference functions}
