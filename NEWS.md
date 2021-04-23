@@ -1,3 +1,5 @@
+# store 0.5.0
+
 # store 0.4.0
 
 * Added **gridsquare_geometry** S3 class of grid reference functions using parent 
