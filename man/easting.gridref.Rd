@@ -39,7 +39,7 @@ nbn_demonstration_dataset \%>\%
 }
 \seealso{
 Other grid reference functions: 
-\code{\link{grid_reference_geometry}()},
+\code{\link{gridsquare_geometry.gridref}()},
 \code{\link{hectad.gridref}()},
 \code{\link{hectare.gridref}()},
 \code{\link{monad.gridref}()},

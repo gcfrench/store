@@ -4,7 +4,7 @@
 \alias{gridCoords.gridref}
 \title{Get x,y coordinates from a grid reference}
 \usage{
-gridCoords.gridref(grid, units = c("km", "m"))
+\method{gridCoords}{gridref}(grid, units = c("km", "m"))
 }
 \arguments{
 \item{grid}{character, an OSGB or OSNI grid reference string}

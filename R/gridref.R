@@ -207,6 +207,19 @@ hectare <- function(x, ...) {
   UseMethod("hectare", x)
 }
 
+#' Generic function for gridsquare_geometry
+#'
+#' Generic function for gridsquare_geometry as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
+#' chapter of Advanced R by Hadley Wickham
+#'
+#' @param x object, contains class for method dispatch by generic function gridsquare_geometry
+#'
+#' @return
+#' @export
+gridsquare_geometry <- function(x, ...) {
+  UseMethod("gridsquare_geometry", x)
+}
+
 #' Get x,y coordinates from a grid reference
 #'
 #' @description
@@ -742,6 +755,66 @@ monad.gridref <- gridRef.gridref(format = "sq1km")
 #'}
 hectare.gridref <- gridRef.gridref(format = "sq100m")
 
+#' Convert OSGB or OSNI Grid reference to polygon geometry feature
+#'
+#' This function converts a grid reference to its square polygon geometry feature
+#' through conversion to well-known text. It uses the gridCoords function in the
+#' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
+#' It can convert either British or Irish grid references up to 10 figure (1m precision),
+#' including tetrads (2000m precision) and returns an empty polygon feature for
+#' an invalid grid reference
+#'
+#' @family grid reference functions
+#'
+#' @param grid_reference character, British or Irish grid reference
+#'
+#' @return geometry, square polygon feature
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'    library(here)
+#'    library(fs)
+#'   })
+#'})
+#' # create output directory
+#' i_am("example.Rmd")
+#' if (!dir_exists("output")) {dir_create("output")}
+#'
+#' # create sf data frame and export as shape file
+#' nbn_demonstration_dataset %>%
+#'   janitor::clean_names() %>%
+#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
+#'   dplyr::rowwise() %>%
+#'   dplyr::mutate(geometry = gridsquare_geometry(grid_reference)) %>%
+#'   sf::st_as_sf() %>%
+#'   sf::st_write("output/nbn_demonstration_dataset.shp")
+#'}
+gridsquare_geometry.gridref <- function(grid_reference) {
 
+  coords <- gridCoords(grid = grid_reference, unit = "m")
+  easting <- coords %>% purrr::pluck("x")
+  northing <- coords %>% purrr::pluck("y")
+  precision <- coords %>% purrr::pluck("precision")
+  projection <- coords %>% purrr::pluck("system")
+
+  # Get EPSG code
+  if(projection == "OSGB") {
+    epsg = 27700
+  } else if (projection == "OSNI") {
+    epsg = 29902
+  }
+
+  # convert coordinates to WKT
+  wkt <- stringr::str_glue("POLYGON (({easting} {northing}, {easting + precision} {northing}, {easting + precision} {northing + precision}, {easting} {northing + precision}, {easting} {northing}))") %>%
+    vctrs::vec_cast(character())
+
+  # convert to geometry feature
+  sf::st_as_sfc(wkt, crs = epsg)
+}
 
 

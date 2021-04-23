@@ -32,7 +32,6 @@ reference:
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
-  - grid_reference_geometry
   - tidy_spatial_data
   - uk_ireland_base_map
 - title: "Grid Reference"
@@ -48,6 +47,7 @@ reference:
   - tetrad.gridref
   - monad.gridref
   - hectare.gridref
+  - gridsquare_geometry.gridref
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:

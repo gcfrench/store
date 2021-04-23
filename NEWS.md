@@ -1,14 +1,16 @@
 # store 0.4.0
 
+* Added **gridsquare_geometry** S3 class of grid reference functions using parent 
+**gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
+to convert British and Irish grid reference to its square polygon geometry feature. 
+Example uses [dplyr::rowwise](https://dplyr.tidyverse.org/reference/rowwise.html) 
+function to apply function to each grid reference in the dataset
 * Added **hectad**, **pentad**, **tetrad**, **monad** and **hectare** S3 class of 
 grid reference functions to convert higher resolution grid references using parent 
 **gridRef** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 * Added **as_gridref**, **precision**, **projection**, **easting** and **northing** 
 S3 class of grid reference functions using parent **gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
 S3 classes described in [S3](https://adv-r.hadley.nz/s3.html) chapter of Advanced R
-* Added  **grid_reference_pentad**, **grid_reference_tetrad**,
-**grid_reference_monad** and **grid_reference_hectare** family of grid reference functions
-to convert higher resolution grid references using parent **gridRef** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 * Added **extract_paragraph_delimited_list** to family of extract_delimited_list
 functions. This function adds two carriage returns and new lines as a delimiter
 * Added **vc_grid_square_intersects** A data frame listing the vice counties intersects
@@ -17,8 +19,6 @@ with 10km, 2km and 1km grid squares
 10km grid squares along with their country and whether in the UK, on land or sea
 * Added **nbn_demonstration_dataset** An example data frame containing bird example 
 records used to demonstrate the NBN Gateway
-* Added **grid_reference_geometry** to convert British and Irish grid reference 
-to its square polygon geometry feature. Example uses [dplyr::rowwise](https://dplyr.tidyverse.org/reference/rowwise.html) function to apply function to each grid reference in the dataset
 * Updated **get_database_connections** examples to include using [dplyr with databases](https://db.rstudio.com/dplyr/)
 * Added **GDAL commands** document for importing and exporting spatial layers into 
 SQL Server, PostGres and Spatialite
