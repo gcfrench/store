@@ -6,4 +6,5 @@ docs
 .httr-oauth
 .DS_Store#
 vignettes/output
+vignettes/example.Rmd
 .DS_Store
