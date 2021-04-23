@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="extract_comma_delimited_list — extract_comma_delimited_list" />
-<meta property="og:description" content="This function extracts a comma delimited list from a data frame's column
+<meta property="og:description" content="This function extracts a comma delimited list from a data frame's column. It
+excludes NAs, optionally sorts the character string and adds text as a delimiter
+to the last two items
 It is an example of the use of a function factory,
 tidy evaluation
 and purrr's map function.
@@ -77,7 +79,7 @@ to extract the comma delimited list" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -98,6 +100,12 @@ to extract the comma delimited list" />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
+    </li>
+    <li>
+      <a href="../articles/validation_checks.html">Run validation checks</a>
+    </li>
+    <li>
+      <a href="../articles/gdal_commands.html">GDAL commands</a>
     </li>
   </ul>
 </li>
@@ -140,7 +148,9 @@ to extract the comma delimited list" />
     </div>
 
     <div class="ref-description">
-    <p>This function extracts a comma delimited list from a data frame's column</p>
+    <p>This function extracts a comma delimited list from a data frame's column. It
+excludes NAs, optionally sorts the character string and adds text as a delimiter
+to the last two items</p>
 <p>It is an example of the use of a <a href='https://adv-r.hadley.nz/function-factories.html'>function factory</a>,
 <a href='https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/'>tidy evaluation</a>
 and purrr's <a href='https://purrr.tidyverse.org/reference/map.html'>map function</a>.
@@ -148,7 +158,7 @@ The function may be called on a <a href='https://cran.r-project.org/web/packages
 to extract the comma delimited list</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_comma_delimited_list</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>column_name</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>extract_comma_delimited_list</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>column_name</span>, sort <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,6 +171,14 @@ to extract the comma delimited list</p>
       <th>column_name</th>
       <td><p>character, name of column to extract the delimited list</p></td>
     </tr>
+    <tr>
+      <th>sort</th>
+      <td><p>logical, whether the list is sorted (TRUE) or not (default FALSE)</p></td>
+    </tr>
+    <tr>
+      <th>last, </th>
+      <td><p>character, optional string used to separate the last two items</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -169,7 +187,9 @@ to extract the comma delimited list</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other delimited functions: 
-<code><a href='extract_semicolon_delimited_list.html'>extract_semicolon_delimited_list</a>()</code></p></div>
+<code><a href='extract_paragraph_delimited_list.html'>extract_paragraph_delimited_list</a>()</code>,
+<code><a href='extract_semicolon_delimited_list.html'>extract_semicolon_delimited_list</a>()</code>,
+<code><a href='extract_space_delimited_list.html'>extract_space_delimited_list</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>

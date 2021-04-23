@@ -3,6 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   create_update_package_information: create_update_package_information.html
-  example: example.html
-last_built: 2021-03-17T08:59Z
+  gdal_commands: gdal_commands.html
+  validation_checks: validation_checks.html
+last_built: 2021-04-23T15:08Z
 

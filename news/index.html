@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -92,6 +92,12 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
+    </li>
+    <li>
+      <a href="../articles/validation_checks.html">Run validation checks</a>
+    </li>
+    <li>
+      <a href="../articles/gdal_commands.html">GDAL commands</a>
     </li>
   </ul>
 </li>
@@ -132,11 +138,33 @@
       <small>Source: <a href='https://github.com/gcfrench/store/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="store-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#store-040" class="anchor"></a>store 0.4.0</h1>
+<ul>
+<li>Added <strong>gridsquare_geometry</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a> to convert British and Irish grid reference to its square polygon geometry feature. Example uses <a href="https://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a> function to apply function to each grid reference in the dataset</li>
+<li>Added <strong>hectad</strong>, <strong>pentad</strong>, <strong>tetrad</strong>, <strong>monad</strong> and <strong>hectare</strong> S3 class of grid reference functions to convert higher resolution grid references using parent <strong>gridRef</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>
+</li>
+<li>Added <strong>as_gridref</strong>, <strong>precision</strong>, <strong>projection</strong>, <strong>easting</strong> and <strong>northing</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>. S3 classes described in <a href="https://adv-r.hadley.nz/s3.html">S3</a> chapter of Advanced R</li>
+<li>Added <strong>extract_paragraph_delimited_list</strong> to family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter</li>
+<li>Added <strong>vc_grid_square_intersects</strong> A data frame listing the vice counties intersects with 10km, 2km and 1km grid squares</li>
+<li>Added <strong>uk_ireland_tenkm_grid_squares</strong> A data frame listing UK and Ireland 10km grid squares along with their country and whether in the UK, on land or sea</li>
+<li>Added <strong>nbn_demonstration_dataset</strong> An example data frame containing bird example records used to demonstrate the NBN Gateway</li>
+<li>Updated <strong>get_database_connections</strong> examples to include using <a href="https://db.rstudio.com/dplyr/">dplyr with databases</a>
+</li>
+<li>Added <strong>GDAL commands</strong> document for importing and exporting spatial layers into SQL Server, PostGres and Spatialite</li>
+<li>Updated <strong>add_tibble_to_list</strong> to add list to the parent environment calling the function rather than the global environment, as described in the <a href="https://rlang.r-lib.org/index.html">rlang</a> package</li>
+<li>Added <strong>tidy_spatial_data</strong> to help in cleaning spatial data frames using the <a href="https://r-spatial.github.io/sf/">sf</a> package</li>
+<li>Added <strong>Run validation checks</strong> document to information, providing examples of the use of the <a href="https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html">assertr</a> and <a href="https://github.com/hadley/assertthat">assertthat</a> packages for validation</li>
+<li>Updated <strong>extract_delimited_list</strong> parent function to apply sort, handle NAs and optionally add additional text to separate last two items. Additional <strong>extract_space_delimited_list</strong> function added</li>
+<li>Added <strong>uk_ireland_base_map</strong> A simple features data frame of the British and Irish coastline derived from the Oil and Gas Authority’s OGA and Lloyd’s Register SNS Regional Geological Maps (Open Source) layer</li>
+</ul>
+</div>
     <div id="store-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
 <a href="#store-030" class="anchor"></a>store 0.3.0</h1>
 <ul>
-<li>Added <strong>eda_variable_collection</strong> to run all the exploratory data analyses on a data frame which provide examples of using the <a href="https://github.com/choonghyunryu/dlookr">dlookr</a> and <a href="https://alastairrushworth.github.io/inspectdf/">inspectdf</a> packages and setting the project root directory using <a href="https://github.com/r-lib/here">here</a> package</li>
+<li>Added <strong>eda_variable_collection</strong> to run all the exploratory data analyses on a data frame, provides examples of using the <a href="https://github.com/choonghyunryu/dlookr">dlookr</a> and <a href="https://alastairrushworth.github.io/inspectdf/">inspectdf</a> packages and setting the project root directory using <a href="https://github.com/r-lib/here">here</a> package</li>
 <li>Added <strong>eda_variable_correlation</strong> to display a plot of the correlation matrix for each variable within a data frame</li>
 <li>Added <strong>eda_variable_outliers</strong> to display the variable outliers within a data frame</li>
 <li>Added <strong>eda_variable_distribution</strong> to display the distribution of numerical variables within a data frame</li>
@@ -166,7 +194,7 @@
 <h1 class="page-header" data-toc-text="0.1.0">
 <a href="#store-010" class="anchor"></a>store 0.1.0</h1>
 <ul>
-<li>Added <strong>Create and update a package</strong> document to information</li>
+<li>Added <strong>Create and update a package</strong> document to information, providing steps for the creation and documentation of a package using the <a href="https://usethis.r-lib.org/">usethis</a> and <a href="https://pkgdown.r-lib.org/">pkgdown</a> packages</li>
 </ul>
 </div>
   </div>

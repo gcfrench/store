@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -52,6 +52,12 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
+    </li>
+    <li>
+      <a href="../articles/validation_checks.html">Run validation checks</a>
+    </li>
+    <li>
+      <a href="../articles/gdal_commands.html">GDAL commands</a>
     </li>
   </ul>
 </li>
@@ -207,21 +213,21 @@ navbar:
 <p>Navigate to the home project directory first</p>
 <p><strong>renv::init</strong> initiates the renv environment, creating the renv folder and adding the renv.lock file, linking the relevant packages from the renv cache</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/init.html">init</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv//reference/init.html">init</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>renv::status</strong> check the renv lock file is up-to-date, run <strong>renv::snapshot</strong> to update the renv lock file if not</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/status.html">status</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/snapshot.html">snapshot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv//reference/status.html">status</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv//reference/snapshot.html">snapshot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>renv::deactivate</strong> turn off the renv environment, then manually delete the renv folder and .Rprofile file</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/deactivate.html">deactivate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv//reference/deactivate.html">deactivate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Navigate to the home project directory first</p>
 <p><strong>renv::activate</strong> turn on the renv environment</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/activate.html">activate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv//reference/activate.html">activate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>renv::restore</strong> restore the package versions contained within the renv lock file</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/restore.html">restore</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv//reference/restore.html">restore</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="add-and-edit-script-files" class="section level2">
