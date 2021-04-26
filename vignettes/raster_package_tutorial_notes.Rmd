@@ -1,0 +1,554 @@
+---
+title: "Raster package tutorial notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Raster package tutorial notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**Tutorials taken from [The Raster package by Robert J. Hijmans](https://rspatial.org/raster/pkg/index.html)**
+
+```{r setup, warning=FALSE}
+suppressPackageStartupMessages({
+# represent large satellite image collections as regular raster data cubes with 
+# dimensions bands, time, y and x
+library(gdalcubes)
+# reading, manipulating, plotting and writing spatiotemporal data array cubes
+library(stars)
+# reading, writing, manipulating, analyzing and modeling of gridded spatial data
+library(raster)
+# simple features spatial vector data
+library(sf)
+# creating graphics based on Grammar of Graphics
+library(ggplot2)
+})
+```
+
+```{r display_table, echo=FALSE}
+library(reactable)
+display_table <- function(data, rows = 5) {
+  reactable(data[1:rows, ], fullWidth = FALSE, searchable = TRUE, 
+            compact = TRUE, wrap = FALSE, resizable = TRUE,
+            defaultColDef = colDef(align = "left"),
+            showPageSizeOptions = TRUE, pageSizeOptions = c(10, nrow(data)),
+            class = "table")
+}
+```
+
+```{r}
+rasterOptions()
+```
+
+-   default options can be changed using raster::rasterOptions
+
+-   raster files can also be imported using the raster::raster function
+
+-   the values associated with the RasterLayer are lost if you change the number of rows or columns or cell resolution, but not if the extent is changed as this does not change the number of cells, only the cell resolution
+
+-   cells numbered by row from upper left to bottom right of the raster
+
+# Raster layer
+
+## create raster
+
+```{r}
+r1 <- raster(ncol = 10, nrow = 10, xmn = 0, xmx = 1000, ymn = 0, ymx = 1000)
+r1
+
+#change resolution
+res(r1) <- 200
+r1
+
+# change number of rows and columns
+ncol(r1) <- 10
+nrow(r1) <- 10
+r1
+
+# set coordinate reference system
+projection(r1) <- "+proj=utm +zone=48 +datum=WGS84"
+r1
+
+# add cell values
+values(r1) <- 1:ncell(r1)
+as.matrix(r1)
+r1
+```
+
+```{r}
+plot(r1, main = 'Raster with 100 cells')
+```
+
+## freq
+
+-   get the counts of each cell value
+
+```{r}
+freq(r1)[1:5, ]
+```
+
+## projectExtent
+
+-   Create an empty raster copy with no values
+
+```{r}
+r <- projectExtent(r1, crs = crs(r1))
+r
+```
+
+## Explore raster cells
+
+```{r}
+as.matrix(r1)
+
+# check if raster has values
+hasValues(r1)
+
+# check if raster values stored in memory
+inMemory(r1)
+
+# dimensions
+dim(r1)
+
+# number of columns
+ncol(r1)
+
+# number of rows
+nrow(r1)
+
+# which row contains the cell number
+rowFromCell(r1, 45)
+
+# which column contains the cell number
+colFromCell(r1, 45)
+
+# what are the x and y coordinates for cell number
+xyFromCell(r1, 45)
+
+# what cell number is at coordinates x and y
+cellFromXY(r1, c(450, 550))
+
+# what column number is at coordinate x
+colFromX(r1, 450)
+
+# what row number is at coordinate y
+rowFromY(r1, 550)
+```
+
+# Raster stack
+
+-   A raster stack can be formed from multiple files or a few bands from a single file
+
+```{r}
+r2 <- r3 <- r1
+values(r2) <- 101:200
+as.matrix(r2)
+values(r3) <- 201:300
+as.matrix(r3)
+
+s <- stack(r1, r2, r3)
+nlayers(s)
+s
+plot(s)
+```
+
+## subset
+
+-   extracts a raster layer from a raster stack
+
+```{r}
+r <- subset(s, 1)
+as.matrix(r)
+```
+
+# Raster brick
+
+-   A raster brick can only be linked to a single multi-layer file
+
+-   Can read a raster brick from file using raster::brick function
+
+```{r}
+b <- brick(r1, r2, r3)
+# b <- brick(s)
+nlayers(b)
+b
+plot(b)
+```
+
+-   Can import a single raster layer directly from a multibanded raster, eg band 2 using raster::raster(filename, band = 2)
+
+```{r}
+# Extract a raster layer from a raster brick
+r2 <- raster(b, layer = 2)
+r2
+plot(r2)
+```
+
+# Vector to Raster layer
+
+## rasterize
+
+-   converts points, lines or polygons attribute values to raster cells. For polygons values transferred if polygon covers centre of raster cell, for line to all raster cells touched by line and for points within a raster cell. Select values to transfer to defined raster object. Resulting multiple raster values are summarised by applied function, eg min
+
+-   fasterize package can be used as a quicker method to rasterize polygons provided as sf objects
+
+## Extract cell values
+
+-   extracts subset of raster using matrix indexing and drop = FALSE. Less efficient than accessing values by raster::getValues function
+
+```{r}
+r <- r1[1:3, 1:3, drop = FALSE] # row number, column number
+r
+as.matrix(r)
+```
+
+## extract
+
+-   extract cell values using polygons or lines where polygon covers centre of cell or line crosses cell. If use weights = TRUE then also outputs percentage of each cell covered by polygon and can apply summary function
+
+```{r}
+extract(r1, y = 12) # what cell value occurs at cell number(s)
+# extract(r1, y = sf object, weights = TRUE) # polygon or line vector
+```
+
+## getValues
+
+-   get all values for a single row
+
+```{r}
+# get cell values from row number
+getValues(r1, 5)
+```
+
+## getValuesBlock
+
+-   get all values for a block of cells
+
+```{r}
+as.matrix(r1)
+getValuesBlock(r1, row = 4, nrows = 3, col = 4, ncols = 3)
+```
+
+# Summarise cell values
+
+## cellStats
+
+-   summary statistic of cell values
+
+```{r}
+# apply summary function within each raster layer in a raster stack
+cellStats(r1, sum)
+```
+
+## frequency
+
+-   frequency table of cell values
+
+```{r}
+r <- raster(ncols = 10, nrows = 10, vals = round(runif(100, 0, 1)))
+freq(r)
+```
+
+## zonal
+
+-   calculate zonal statistics summarising cell values for each zone defined by a raster layer
+
+```{r}
+r <- projectExtent(r1, crs = crs(r1))
+values(r) <- rep(1:10, 10)
+as.matrix(r)
+rz <- zonal(r1, r, fun = 'max')
+rz
+```
+
+## crosstab
+
+-   cross-tabulate 2 raster layers or multiple layers in a raster stack or brick to create a contingency table
+
+# Modify raster values
+
+## calc
+
+-   calculate values from a raster layer
+
+```{r}
+r <- r1 * 2
+r <- calc(r1, fun = function(x){x * 2})
+as.matrix(r)
+```
+
+```{r}
+r <- r1
+f <- function(x) {
+  x[x == 5] <- NA
+  return(x)
+}
+r <- calc(r, f)
+as.matrix(r)
+```
+
+## reclassify
+
+-   replace ranges of values with single values
+
+```{r}
+r <- reclassify(r1, c(1, 10, 1, 10, 20, 2, 20, 30, 3))
+as.matrix(r)
+```
+
+## subs
+
+-   replace single value with another value. subsWithNA = FALSE does not appear to work so that values that are not replaced are replaced with NA
+
+```{r}
+r <- subs(r1, data.frame(from = c(10, 20), to = c(1, 2),
+                         by = 'from',
+                         which = 'to',
+                         subsWithNA = FALSE))
+as.matrix(r)
+```
+
+## focal
+
+-   uses values in a neighborhood of cells around a focal cell and computes a value that is stored in the focal cell, for example compute values for NA
+
+```{r}
+r <- raster(ncols = 20, nrows = 20, vals = round(runif(400, 0, 1) * 0.7))
+as.matrix(r)
+rc <- clump(r)
+as.matrix(rc)
+plot(rc)
+```
+
+## update
+
+-   can update values in an existing raster file using raster::update
+
+# Modify raster extent
+
+## crop
+
+-   Take a geographic subset of a larger raster object, providing the extent directly, extracted from a spatial object or dynamically for raster plot using raster::drawExtent.
+
+```{r}
+r <- crop(r1, extent(300, 700, 300, 700))
+as.matrix(r)
+r
+plot(r1, legend = FALSE)
+plot(r, add = TRUE)
+```
+
+## extend
+
+-   Extends a raster layer by adding outer rows and columns containing NA values
+
+```{r}
+r <- extend(r, extent(0, 1000, 0, 1000))
+as.matrix(r)
+r
+```
+
+## trim
+
+-   Crops a raster layer by removing outer rows and columns containing NA values
+
+```{r}
+r <- trim(r)
+as.matrix(r)
+r
+```
+
+## shift
+
+-   shifts the location of a raster layer either in the x or y direction
+
+```{r}
+r <- shift(r, dx = 200, dy = 200)
+r
+plot(r1, legend = FALSE)
+plot(r, add = TRUE)
+```
+
+# Modify raster resolution
+
+## aggregate
+
+-   Changes the cell resolution of a raster layer. Provide a function determining what to do with the grouped cell values (eg mean) when aggregating
+
+```{r}
+r <- aggregate(r1, fact = 2, fun = sum)
+as.matrix(r)
+r
+plot(r)
+```
+
+## disaggregate
+
+```{r}
+r <- disaggregate(r, fact = 2)
+as.matrix(r)
+r
+plot(r)
+```
+
+# Modify raster projection
+
+## projectRaster
+
+-   transform values in a raster layer to a new raster layer with a different coordindate reference system
+
+# Modify between raster layers
+
+## mask
+
+-   removes all values from one layer that are NA in another layer
+
+```{r}
+# remove numbers divisible by 10
+## create masking raster with TRUE / FALSE values
+masking_raster <- r1 %% 10
+masking_raster <- masking_raster == 0
+as.matrix(masking_raster)
+
+## use masking raster to remove numbers divisible by 10
+r <- r1
+r[masking_raster] <- NA
+as.matrix(r)
+
+# mask removes all values in r2 that are NA in r
+rm <- mask(r2, r)
+as.matrix(rm)
+```
+
+## cover
+
+-   replaces NA values in first layer with values from the second layer
+
+```{r}
+as.matrix(rm)
+rm <- cover(rm, r1)
+as.matrix(rm)
+```
+
+## overlay
+
+-   combines multiple raster layers
+
+```{r}
+st <- overlay(r1, r2, r3, fun = mean)
+
+# can also use summary functions directly
+st <- mean(r1, r2, r3) # across raster layers
+st <- mean(s) # layers within raster stack
+as.matrix(st)
+```
+
+## merge
+
+-   Merges 2 or more raster layers, with the same resolution and origin into a single raster layer. Overlapping values are taken from the first layer
+
+```{r}
+rl <- crop(r1, extent(0, 600, 0, 1000))
+rr <- crop(r2, extent(400, 1000, 0, 1000))
+r <- merge(rl, rr)
+as.matrix(r)
+r
+plot(r)
+```
+
+## resample
+
+-   transfers values between cells within non-matching raster layers, using nearest heighbour for categorical data and bilinear interpolation for numerical data
+
+```{r}
+r <- projectExtent(r1, crs = crs(r1))
+r <- resample(r1, r, method = 'bilinear')
+as.matrix(r)
+r
+plot(r)
+```
+
+# Identify value patterns
+
+## clump
+
+-   identifies groups of cells that are connected with the same values
+
+```{r}
+r <- raster(ncols = 12, nrows = 12, vals = round(runif(144, 0, 1) * 0.7))
+as.matrix(r)
+rc <- clump(r)
+as.matrix(rc)
+plot(rc)
+```
+
+## boundaries
+
+-   identifies transitions between cell values as edges
+
+## Identify value distances
+
+-   More advanced distance calculations are found in gdistance package
+
+## distance
+
+-   computes the shortest distance to cells that are not NA
+
+## pointDistance
+
+-   computes the shortest distance to any point in a set of points
+
+## gridDistance
+
+-   computes distance when following grid cells that can be traversed (e.g. excluding water bodies)
+
+## adjacent
+
+-   identifies which cells are adjacent to other cells
+
+## direction
+
+-   computes the direction towards (or from) the nearest cell that is not NA
+
+# Raster to Vector layer
+
+## rasterToPoints
+
+-   convert raster cell values to centre of cell points
+
+```{r}
+pt <- rasterToPoints(r1, spatial = TRUE)
+pt <- st_as_sf(pt)
+ggplot(pt, aes(color = layer)) +
+  geom_sf() +
+  scale_color_viridis_c()
+```
+
+## rasterToPolygons
+
+-   converts raster cell values to polygons with option of dissolving polygons with same cell values
+
+```{r}
+py <- rasterToPolygons(r1)
+py <- st_as_sf(py)
+ggplot(py, aes(fill = layer)) +
+  geom_sf() +
+  scale_fill_viridis_c()
+```
+
+# Large raster files
+
+## Processing data in chunks
+
+-   The Raster package by Robert J. Hijmans Chapter 10 section 10.4 - 10.6
+
+## Multi-core functions
+
+-   The Raster package by Robert J. Hijmans Chapter 10 section 10.9

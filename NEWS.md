@@ -1,5 +1,7 @@
 # store 0.5.0
 
+* Added **Raster package tutorial notes** made whilst reading [The Raster package by Robert J. Hijmans](https://rspatial.org/raster/pkg/index.html)
+
 # store 0.4.0
 
 * Added **gridsquare_geometry** S3 class of grid reference functions using parent 
