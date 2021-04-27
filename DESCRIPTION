@@ -46,7 +46,8 @@ Imports:
     assertthat,
     glue,
     vctrs,
-    rlang
+    rlang,
+    raster
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

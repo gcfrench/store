@@ -18,29 +18,18 @@ knitr::opts_chunk$set(
 
 ```{r setup, warning=FALSE}
 suppressPackageStartupMessages({
+  # reading, writing, manipulating, analyzing and modeling of gridded spatial data
+  library(raster)
+  # simple features spatial vector data
+  library(sf)
+  # creating graphics based on Grammar of Graphics
+  library(ggplot2)
+})
 # represent large satellite image collections as regular raster data cubes with 
 # dimensions bands, time, y and x
-library(gdalcubes)
+# library(gdalcubes)
 # reading, manipulating, plotting and writing spatiotemporal data array cubes
-library(stars)
-# reading, writing, manipulating, analyzing and modeling of gridded spatial data
-library(raster)
-# simple features spatial vector data
-library(sf)
-# creating graphics based on Grammar of Graphics
-library(ggplot2)
-})
-```
-
-```{r display_table, echo=FALSE}
-library(reactable)
-display_table <- function(data, rows = 5) {
-  reactable(data[1:rows, ], fullWidth = FALSE, searchable = TRUE, 
-            compact = TRUE, wrap = FALSE, resizable = TRUE,
-            defaultColDef = colDef(align = "left"),
-            showPageSizeOptions = TRUE, pageSizeOptions = c(10, nrow(data)),
-            class = "table")
-}
+# library(stars)
 ```
 
 ```{r}
