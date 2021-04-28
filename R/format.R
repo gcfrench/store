@@ -10,7 +10,7 @@
 #' @return function, extracts the column as a delimited list
 extract_delimited_list <- function(delimiter) {
 
-    function(.df, column_name, sort = FALSE, ...) {
+    function(.df, column_name, sort = FALSE, unique_list = FALSE, ...) {
 
       # extract required vector
       .vec <- .df %>%
@@ -21,6 +21,11 @@ extract_delimited_list <- function(delimiter) {
       # check for empty vector
       if(rlang::is_empty(.vec)) {
         return(NA_character_)
+      }
+
+      # optionally remove duplicated elements
+      if(unique_list) {
+        .vec <- unique(.vec)
       }
 
       # optionally sort vector
@@ -61,6 +66,7 @@ extract_delimited_list <- function(delimiter) {
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
+#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
 #' @param last, character, optional string used to separate the last two items
 #'
 #' @return character, comma delimited list
@@ -110,6 +116,7 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
+#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
 #' @param last, character, optional string used to separate the last two items
 #'
 #' @return character, semi-colon delimited list
@@ -159,6 +166,7 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
+#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
 #' @param last, character, optional string used to separate the last two items
 #'
 #' @return character, space delimited list
@@ -210,6 +218,7 @@ extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 #' @param .df data frame, data frame containing the column to extract the delimited list
 #' @param column_name character, name of column to extract the delimited list
 #' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
+#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
 #' @param last, character, optional string used to separate the last two items
 #'
 #' @return character, paragraph delimited list
