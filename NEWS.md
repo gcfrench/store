@@ -6,13 +6,15 @@ editor_options:
 
 ## store 0.5.0
 
+-   Added **PostgreSQL database notes** containing useful SQL, database
+    management and link to Microsoft Access guidance
 -   Updated **extract_delimited_list** parent function to optionally
     remove duplicated elements in a list
 -   Added **Raster package tutorial notes** made whilst reading [The
     Raster package by Robert J.
     Hijmans](https://rspatial.org/raster/pkg/index.html)
 
-## store 0.4.0 <font size="4">[2021-04-23]{style="color: grey;"}</font>
+## store 0.4.0 <font size="4">2021-04-23</font>
 
 -   Added **gridsquare_geometry** S3 class of grid reference functions
     using parent **gridCoords** function from [archived rnbn
@@ -63,7 +65,7 @@ editor_options:
     OGA and Lloyd's Register SNS Regional Geological Maps (Open Source)
     layer
 
-## store 0.3.0 <font size="4">[2021-03-17]{style="color: grey;"}</font>
+## store 0.3.0 <font size="4">2021-03-17</font>
 
 -   Added **eda_variable_collection** to run all the exploratory data
     analyses on a data frame, provides examples of using the
@@ -94,7 +96,7 @@ editor_options:
     [furrr](https://davisvaughan.github.io/furrr/) packages to batch
     reduce images size within a directory
 
-## store 0.2.0 <font size="4">[2021-03-02]{style="color: grey;"}</font>
+## store 0.2.0 <font size="4">2021-03-02</font>
 
 -   Added **get_postgres_connection** to connect to PostgreSQL database
 -   Added **display_table** to display data frames in a formatted html
@@ -120,7 +122,7 @@ editor_options:
     example using a [nested data
     frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
 
-## store 0.1.0 <font size="4">[2021-02-20]{style="color: grey;"}</font>
+## store 0.1.0 <font size="4">2021-02-20</font>
 
 -   Added **Create and update a package** document to information,
     providing steps for the creation and documentation of a package

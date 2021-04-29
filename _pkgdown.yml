@@ -86,6 +86,8 @@ navbar:
         href: articles/create_update_package_information.html
       - text: "Raster package tutorial notes"
         href: articles/raster_package_tutorial_notes.html
+      - text: "PostgreSQL database notes"
+        href: articles/postgres_database_notes.html
       - text: "Run validation checks"
         href: articles/validation_checks.html
       - text: "GDAL commands"

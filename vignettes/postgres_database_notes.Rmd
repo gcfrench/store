@@ -1,0 +1,44 @@
+---
+title: "PostgreSQL Database notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PostgreSQL Database notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r eval=TRUE, echo=FALSE}
+# This is included to allow the markdown document to knit when eval = FALSE
+con <- NULL
+```
+
+# SQL
+
+## Truncate all tables within a schema
+
+This SQL truncates all the tables in a schema following instructions in 
+stack overflow [Truncating all tables in a Postgres database](https://stackoverflow.com/questions/2829158/truncating-all-tables-in-a-postgres-database)
+
+```{sql connection=con}
+DO $$ DECLARE
+    r RECORD;
+BEGIN
+    FOR r IN (SELECT schemaname, tablename FROM pg_tables WHERE schemaname = 'SCHEMA_NAME') 
+	LOOP
+	    EXECUTE 'TRUNCATE TABLE ' 
+		|| quote_ident(r.schemaname) 
+		|| '.'  
+		|| quote_ident(r.tablename) 
+		|| ' RESTART IDENTITY CASCADE';
+    END LOOP;
+END $$;
+```
+
