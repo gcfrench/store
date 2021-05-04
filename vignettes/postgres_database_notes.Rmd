@@ -20,12 +20,144 @@ knitr::opts_chunk$set(
 con <- NULL
 ```
 
+These notes were made whilst creating a postgreSQL database and importing records
+using an R script. They include setting up administration and read access roles, transferring
+database to a different server, linking the postgreSQL database to a Microsoft Access
+database and useful SQL.
+
+# Database administration
+
+-   Login to server as superuser creating database admin user and creating new server 
+connection for database admin user in pgadmin4
+
+``` {.sql}
+CREATE ROLE DATABASE_NAME_admin LOGIN CREATEDB CREATEROLE PASSWORD 'string';
+SELECT * FROM pg_roles;
+
+-- Create - SERVER
+-- General - Name = DATABASE_NAME
+-- Connection - HOST NAME (eg. localhost)
+-- Connection - Username = DATABASE_NAME_admin
+-- Connection - Password = 'string'
+```
+
+-   Login to server as database admin user and create database
+
+``` {.sql}
+CREATE DATABASE DATABASE_NAME OWNER DATABASE_NAME_admin;
+```
+
+-   Create read only access role and access user role on database
+
+``` {.sql}
+-- Create user group role
+CREATE ROLE DATABASE_NAME_read_access;
+
+-- Allow connection to database
+GRANT CONNECT ON DATABASE DATABASE_NAME TO DATABASE_NAME_read_access;
+
+-- Create user which inherits read access user group role
+CREATE ROLE DATABASE_NAME_read_user LOGIN PASSWORD 'string';
+GRANT DATABASE_NAME_read_access TO DATABASE_NAME_read_user;
+```
+
+-   Import and run **create_DATABASE_NAME_schema.sql** to create schema and read 
+access in public schema
+
+``` {.sql}
+-- Included in procedure is setting read access to schema database
+-- Allow access to schema
+GRANT USAGE ON SCHEMA SCHEMA_NAME TO DATABASE_NAME_read_access;
+
+-- Allow select access to all tables
+GRANT SELECT ON ALL TABLES IN SCHEMA SCHEMA_NAME TO DATABASE_NAME_read_access;
+
+-- Allow select access to all future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA SCHEMA_NAME
+GRANT SELECT ON TABLES TO DATABASE_NAME_read_access;
+```
+
+-   Create key on database keyring for database admin user on local machine
+
+-   Run DATABASE_NAME**.Rmd** script to populate database
+
+-   Run VACUUM maintenance
+
+``` {.sql}
+VACUUM;
+```
+
+-   Backup SCHEMA_NAME schema **SCHEMA_NAME_schema_backup_YYYYMMDD.sql** by 
+Right click schema - Backup
+
+-   Create new server connection for read access user in pgadmin4
+
+    ```{sql connection=con}
+    -- Create - SERVER
+    -- General - Name = DATABASE_NAME
+    -- Connection - HOST NAME (eg. localhost)
+    -- Connection - Username = DATABASE_NAME_read_access
+    -- Connection - Password = 'string'
+    ```
+
+-   Create key on database keyring for read access user on local machine
+
+-   Login as superuser and back up DATABASE_NAME roles as sql by Right click 
+server name - Backup Globals **DATABASE_NAME_database_roles_YYYYMMDD.sqL,** selecting 
+SQL from this file
+
+# Transfer database to another server
+
+-   Login as superuser and transfer roles by running **DATABASE_NAME_database_roles_YYYYMMDD.sql**
+
+``` {.sql}
+CREATE ROLE DATABASE_NAME_admin;
+ALTER ROLE DATABASE_NAME_admin WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5_string';
+
+CREATE ROLE DATABASE_NAME_read_access;
+ALTER ROLE DATABASE_NAME_read_access WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+
+CREATE ROLE DATABASE_NAME_read_user;
+ALTER ROLE DATABASE_NAME_read_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5_string';
+```
+
+-   Create DATABASE_NAME database under DATABASE_NAME_admin ownership
+
+``` {.sql}
+CREATE DATABASE DATABASE_NAME OWNER DATABASE_NAME_admin;
+```
+
+-   Create SCHEMA_NAME schema under DATABASE_NAME_admin ownership
+
+``` {.sql}
+CREATE SCHEMA SCHEMA_NAME;
+```
+
+-   Restore schema by right click schema - Restore
+
+-   Grant access to user roles
+
+``` {.sql}
+-- Allow connection to database
+GRANT CONNECT ON DATABASE DATABASE_NAME TO DATABASE_NAME_read_access;
+
+-- Allow access to schema
+GRANT USAGE ON SCHEMA SCHEMA_NAME TO DATABASE_NAME_read_access;
+
+-- Allow select access to all tables
+GRANT SELECT ON ALL TABLES IN SCHEMA SCHEMA_NAME TO DATABASE_NAME_read_access;
+
+-- Allow select access to all future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA SCHEMA_NAME
+GRANT SELECT ON TABLES TO DATABASE_NAME_read_access;
+```
+
 # SQL
 
 ## Truncate all tables within a schema
 
-This SQL truncates all the tables in a schema following instructions in 
-stack overflow [Truncating all tables in a Postgres database](https://stackoverflow.com/questions/2829158/truncating-all-tables-in-a-postgres-database)
+This SQL truncates all the tables in a schema following instructions in stack 
+overflow [Truncating all tables in a Postgres database](https://stackoverflow.com/questions/2829158/truncating-all-tables-in-a-postgres-database)
 
 ```{sql connection=con}
 DO $$ DECLARE
@@ -42,3 +174,17 @@ BEGIN
 END $$;
 ```
 
+# Link Microsoft Access database
+
+-   Install PostgreSQL 32 bit ODBC driver on machine using Postgres's Application 
+Stack Builder or via [website](https://www.postgresql.org/ftp/odbc/versions/msi/). 
+Need corresponding version ie for PostgReSQL 11 need psqlodbs_11_01_0000.zip
+
+-   [Create File Datasource](https://www.postgresonline.com/journal/archives/24-Using-MS-Access-with-PostgreSQL.html) 
+using PostgreSQL Unicode driver and file DNS
+
+-   Link PostgreSQl tables into Microsoft Access
+
+-   Create pass-through queries storing connection string in properties
+
+-   If have odbc error when opening table then try refreshing link in Linked Table Manager
