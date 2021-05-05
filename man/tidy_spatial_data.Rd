@@ -25,6 +25,6 @@ geometry collection and optionally checking for invalid geometry
 }
 \examples{
 \dontrun{
-tidy_spatial_data(sf_data = "uk_ireland_base_map", epsg = 27700, check_valid = TRUE)
+tidy_spatial_data(sf_data = uk_ireland_base_map, epsg = 27700, check_valid = TRUE)
 }
 }

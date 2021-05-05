@@ -94,7 +94,8 @@ penguins %>%
          success_fun = success_logical, error_fun = error_stop)
 ```
 
-All penguins are either male or female
+All penguins are either male or female (set parameters allow.na = TRUE to exclude 
+NAs and inverse = TRUE to check if all penguins do not contain either male or female)
 ```{r}
 penguins %>% 
   assert(in_set("male", "female"), sex,

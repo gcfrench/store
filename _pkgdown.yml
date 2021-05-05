@@ -33,6 +33,7 @@ reference:
   desc: "Explore spatial datasets"
   contents:
   - tidy_spatial_data
+  - extract_polygons
   - uk_ireland_base_map
 - title: "Grid Reference"
   desc: "Extract and format grid reference information"

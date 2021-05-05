@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' tidy_spatial_data(sf_data = "uk_ireland_base_map", epsg = 27700, check_valid = TRUE)
+#' tidy_spatial_data(sf_data = uk_ireland_base_map, epsg = 27700, check_valid = TRUE)
 #' }
 tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
 
@@ -60,5 +60,46 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
   return(sf_data)
 }
 
+#' Extract and dissolve polygons from geometry collection
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function extracts polygons from a geometry collection, dissolving them into
+#' multipolygons
+#'
+#' @param sf_data sf object, spatial data frame containing geometry collections
+#'
+#' @return sf object, spatial data frame containing extracted multipolygons
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' extract_polygons(uk_ireland_base_map)
+#' }
+extract_polygons <- function(sf_data) {
 
+  # Extract polygons and then dissolve by feature_code into multipolygons
+  # For explanation of dissolving by attribute see https:/github.com/r-spatial/sf/issues/290
+  if (any(sf::st_geometry_type(sf_data) == "GEOMETRYCOLLECTION" )) {
 
+    # Add running integer
+    sf_data <- sf_data %>%
+     dplyr::mutate(feature_id = row_number()) %>%
+     dplyr::relocate(feature_id, .before = dplyr::everything())
+
+    # Extract polygons
+    feature_gc <- sf_data %>%
+      dplyr::filter(sf::st_geometry_type(.) == "GEOMETRYCOLLECTION") %>%
+      sf::st_collection_extract("POLYGON") %>%
+      dplyr::group_by(feature_id) %>%
+      dplyr::summarize()
+
+    # Re-append feature_codes with multi-polygons
+    sf_data <- sf_data %>%
+      dplyr::filter(sf::st_geometry_type(.) != "GEOMETRYCOLLECTION") %>%
+      dplyr::bind_rows(feature_gc)
+  }
+
+  return(sf_data)
+}

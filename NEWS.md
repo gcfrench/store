@@ -6,6 +6,9 @@ editor_options:
 
 ## store 0.5.0
 
+-   Added **extract_polygons** function to extract and dissolve polygons
+    from geometry collections using the
+    [sf](https://r-spatial.github.io/sf/) package
 -   Added **PostgreSQL database notes** containing useful SQL, database
     management and link to Microsoft Access guidance
 -   Updated **extract_delimited_list** parent function to optionally
@@ -128,3 +131,4 @@ editor_options:
     providing steps for the creation and documentation of a package
     using the [usethis](https://usethis.r-lib.org/) and
     [pkgdown](https://pkgdown.r-lib.org/) packages
+
