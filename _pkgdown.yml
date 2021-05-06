@@ -71,6 +71,10 @@ reference:
   - display_table
   - reduce_image_size
   - add_image_shadow
+- title: "Quality assurance"
+  desc: "Functions and tables used in quality assurance"
+- contents:
+  - compare_datasets
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets"
   contents:

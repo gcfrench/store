@@ -6,6 +6,9 @@ editor_options:
 
 ## store 0.5.0
 
+-   Added **compare_datasets** function to identify changes between
+    older and newer versions of a dataset, using the
+    [daff](<https://github.com/edwindj/daff>) package
 -   Added **extract_polygons** function to extract and dissolve polygons
     from geometry collections using the
     [sf](https://r-spatial.github.io/sf/) package
@@ -131,4 +134,3 @@ editor_options:
     providing steps for the creation and documentation of a package
     using the [usethis](https://usethis.r-lib.org/) and
     [pkgdown](https://pkgdown.r-lib.org/) packages
-
