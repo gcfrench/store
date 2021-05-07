@@ -74,7 +74,7 @@ reference:
 - title: "Quality assurance"
   desc: "Functions and tables used in quality assurance"
 - contents:
-  - compare_datasets
+  - compare_dataset_versions
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets"
   contents:

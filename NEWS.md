@@ -8,7 +8,7 @@ editor_options:
 
 -   Added **compare_datasets** function to identify changes between
     older and newer versions of a dataset, using the
-    [daff](<https://github.com/edwindj/daff>) package
+    [daff](https://github.com/edwindj/daff) package
 -   Added **extract_polygons** function to extract and dissolve polygons
     from geometry collections using the
     [sf](https://r-spatial.github.io/sf/) package
