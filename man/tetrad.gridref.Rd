@@ -7,7 +7,7 @@
 \method{tetrad}{gridref}(grid)
 }
 \arguments{
-\item{grid_reference}{character, British or Irish grid reference}
+\item{grid_reference}{character gridref class, British or Irish grid reference}
 }
 \value{
 character, 2km grid reference

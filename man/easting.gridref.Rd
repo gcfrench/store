@@ -7,7 +7,7 @@
 \method{easting}{gridref}(grid_reference, centre = FALSE)
 }
 \arguments{
-\item{grid_reference}{character, British or Irish grid reference}
+\item{grid_reference}{character gridref class, British or Irish grid reference}
 
 \item{centre}{logical, easting for either lower left hand corner (default) or centre point (TRUE)}
 }

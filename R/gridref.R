@@ -441,7 +441,7 @@ gridRef.gridref <- function(format){
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return integer, precision of grid reference in metres.
 #' @export
@@ -477,7 +477,7 @@ precision.gridref <- function(grid_reference) {
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
 #' @export
@@ -512,7 +512,7 @@ projection.gridref <- function(grid_reference) {
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #' @param centre logical, easting for either lower left hand corner (default) or centre point (TRUE)
 #'
 #' @return integer, easting of grid reference in metres.
@@ -535,7 +535,7 @@ projection.gridref <- function(grid_reference) {
 easting.gridref <- function(grid_reference, centre = FALSE) {
 
   # Get easting for lower left hand corner using rNBN
-  easting <- gridCoords(grid = grid_reference, units = "m") %>%
+  easting <- gridCoords(grid_reference, units = "m") %>%
     purrr::pluck("x")
 
   # get easting for centre point
@@ -561,7 +561,7 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #' @param centre logical, northing for either lower left hand corner (default) or centre point (TRUE)
 #'
 #' @return integer, northing of grid reference in metres.
@@ -584,7 +584,7 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
 northing.gridref <- function(grid_reference, centre = FALSE) {
 
   # Get northing for lower left hand corner using rNBN
-  northing <- gridCoords(grid = grid_reference, units = "m") %>%
+  northing <- gridCoords(grid_reference, units = "m") %>%
     purrr::pluck("y")
 
   # get northing for centre point
@@ -641,7 +641,7 @@ hectad.gridref <- gridRef.gridref(format = "sq10km")
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return character, 5km grid reference
 #' @export
@@ -672,7 +672,7 @@ pentad.gridref <- gridRef.gridref(format = "sq5km")
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return character, 2km grid reference
 #' @export
@@ -703,7 +703,7 @@ tetrad.gridref <- gridRef.gridref(format = "tetrad")
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return character, 1km grid reference
 #' @export
@@ -734,7 +734,7 @@ monad.gridref <- gridRef.gridref(format = "sq1km")
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return character, 100m grid reference
 #' @export
@@ -767,7 +767,7 @@ hectare.gridref <- gridRef.gridref(format = "sq100m")
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @param grid_reference character gridref class, British or Irish grid reference
 #'
 #' @return geometry, square polygon feature
 #' @export
@@ -796,7 +796,7 @@ hectare.gridref <- gridRef.gridref(format = "sq100m")
 #'}
 gridsquare_geometry.gridref <- function(grid_reference) {
 
-  coords <- gridCoords(grid = grid_reference, unit = "m")
+  coords <- gridCoords(grid_reference, unit = "m")
   easting <- coords %>% purrr::pluck("x")
   northing <- coords %>% purrr::pluck("y")
   precision <- coords %>% purrr::pluck("precision")

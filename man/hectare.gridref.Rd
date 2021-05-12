@@ -7,7 +7,7 @@
 \method{hectare}{gridref}(grid)
 }
 \arguments{
-\item{grid_reference}{character, British or Irish grid reference}
+\item{grid_reference}{character gridref class, British or Irish grid reference}
 }
 \value{
 character, 100m grid reference

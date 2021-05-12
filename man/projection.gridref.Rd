@@ -7,7 +7,7 @@
 \method{projection}{gridref}(grid_reference)
 }
 \arguments{
-\item{grid_reference}{character, British or Irish grid reference}
+\item{grid_reference}{character gridref class, British or Irish grid reference}
 }
 \value{
 character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
