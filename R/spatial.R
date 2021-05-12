@@ -122,8 +122,24 @@ extract_polygons <- function(sf_data) {
 #' @export
 #'
 #' @examples
-#' #' \dontrun{
-#' create_polygons()
+#' \dontrun{
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'    library(here)
+#'    library(fs)
+#'   })
+#'})
+#'# create output directory
+#'i_am("example.Rmd")
+#'if (!dir_exists("output")) {dir_create("output")}
+#'
+#'create_bounding_box(xmin = -10.81,
+#'                    ymin = 49.85,
+#'                    xmax = 2.07,
+#'                    ymax = 60.96,
+#'                    epsg = 4326) %>%
+#' sf::st_write("output/uk_ireland_bounding_box.shp")
 #' }
 create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 
@@ -133,26 +149,19 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
   upper_right_corner <- sf::st_point(c(xmax, ymax))
   lower_right_corner <- sf::st_point(c(xmax, ymin))
 
-  # create square polygon from points
-  bounding_box <- sf::st_polygon(matrix(c(lower_left_corner,
-                                          upper_left_corner,
-                                          upper_right_corner,
-                                          lower_right_corner)))
+  # create multipoint geometry from points
+  corner_points <- sf::st_multipoint(rbind(lower_left_corner,
+                                           upper_left_corner,
+                                           upper_right_corner,
+                                           lower_right_corner,
+                                           lower_left_corner))
+
+  # create square polygon from multipoint geometry
+  square_polygon <- sf::st_polygon(list(corner_points))
 
   # create sf object
-  sf::st_sf(geom = sf::st_sfc(bounding_box), crs = epsg_number)
+  sf::st_sf(id = 1L, geom = sf::st_sfc(square_polygon), crs = epsg_number)
 
-  # coordinates <- matrix(c(xmin, ymax,
-  #                         xmax, ymax,
-  #                         xmax, ymin,
-  #                         xmin, ymin,
-  #                         xmin, ymax),
-  #                       ncol = 2, byrow = TRUE
-  # )
-  # bounding_box <- sf::st_polygon(list(coordinates))
-  # sf::st_crs(bounding_box, epsg)
-
-  #return(bounding_box)
 }
 
 #' UK Ireland Base Map derived from the Oil and Gas Authority's OGA and Lloyd's Register

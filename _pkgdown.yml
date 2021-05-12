@@ -34,6 +34,7 @@ reference:
   contents:
   - tidy_spatial_data
   - extract_polygons
+  - create_bounding_box
   - uk_ireland_base_map
 - title: "Grid Reference"
   desc: "Extract and format grid reference information"

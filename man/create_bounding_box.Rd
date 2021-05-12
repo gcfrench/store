@@ -4,7 +4,7 @@
 \alias{create_bounding_box}
 \title{Create bounding box polygon}
 \usage{
-create_bounding_box(xmin, ymin, xmax, ymax, epsg)
+create_bounding_box(xmin, ymin, xmax, ymax, epsg_number)
 }
 \arguments{
 \item{xmin}{integer, left corner coordinate}
@@ -23,8 +23,24 @@ This function creates a bounding box polygon from it's corner coordinates,
 setting the coordinate reference system from the supplied \href{https://epsg.org/home.html}{EPSG value}
 }
 \examples{
-#' \dontrun{
-create_polygons()
+\dontrun{
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+   library(here)
+   library(fs)
+  })
+})
+# create output directory
+i_am("example.Rmd")
+if (!dir_exists("output")) {dir_create("output")}
+
+create_bounding_box(xmin = -10.81,
+                   ymin = 49.85,
+                   xmax = 2.07,
+                   ymax = 60.96,
+                   epsg = 4326) \%>\%
+sf::st_write("output/uk_ireland_bounding_box.shp")
 }
 }
 \seealso{
