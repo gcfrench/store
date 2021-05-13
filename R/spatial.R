@@ -196,12 +196,13 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #'
 #' @examples
 #' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
+#'suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
 #'    library(here)
 #'    library(fs)
-#'   })
+#'    library(tmap)
+#'  })
 #'})
 #'# create output directory
 #'i_am("example.Rmd")
@@ -209,7 +210,28 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #'
 #'# save UK Ireland base map as shape file
 #'uk_ireland_base_map %>% sf::st_write("output/uk_ireland_base_map.shp")
-#'}
+#'
+#'# create UK Ireland base map image
+#'uk_ireland <- tm_shape(uk_ireland_base_map) +
+#'  tm_fill(col = "uk", style = "cat", palette = c("lightgreen", "darkgreen")) +
+#'  tm_borders(col = "black") +
+#'  tm_compass(type = "8star", size = 4,
+#'             position = c(0.8, 0.85)) +
+#'  tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.8,
+#'               position = c(0.68, 0.02)) +
+#'  tm_layout(bg.color = "lightblue",
+#'            frame.double.line = TRUE,
+#'            inner.margin = 0.05,
+#'            outer.margin = 0.05,
+#'            legend.show = FALSE,
+#'           title = "UK and Ireland base map",
+#'            title.size = 1.5,
+#'            title.fontface = "bold")
+#'
+#'# save UK Ireland base map image
+#'uk_ireland %>%  tmap_save("output/uk_ireland_base_map.png", type = "cairo-png",
+#'                         width = 8, height = 8, units = "in", dpi = 72)
+#' }
 #' @format A simple feature data frame with 6 rows and 3 variables
 #' \describe{
 #'   \item{country}{country name}

@@ -6,9 +6,14 @@ editor_options:
 
 ## store 0.5.0
 
+-   Updated **uk_ireland_base_map** example to include map image using
+    [tmap](https://github.com/mtennekes/tmap) package, following
+    instructions in [Geocomputation with R Chapter 8 Making maps with
+    R](https://geocompr.robinlovelace.net/adv-map.html) by Robin
+    Lovelace, Jakub Nowosad and Jannes Muenchow.
 -   Added **create_bounding_box** function to create a bounding box from
-    corner coordinates using the [sf](https://r-spatial.github.io/sf/reference/st.html) 
-    package
+    corner coordinates using the
+    [sf](https://r-spatial.github.io/sf/reference/st.html) package
 -   Added **compare_datasets** function to identify changes between
     older and newer versions of a dataset, using the
     [daff](https://github.com/edwindj/daff) package
@@ -20,8 +25,8 @@ editor_options:
 -   Updated **extract_delimited_list** parent function to optionally
     remove duplicated elements in a list
 -   Added **Raster package tutorial notes** made whilst reading [The
-    Raster package by Robert J.
-    Hijmans](https://rspatial.org/raster/pkg/index.html)
+    Raster package](https://rspatial.org/raster/pkg/index.html) by
+    Robert J. Hijmans
 
 ## store 0.4.0 <font size="4">2021-04-23</font>
 
