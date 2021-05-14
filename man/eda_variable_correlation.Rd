@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_data_analysis.R
 \name{eda_variable_correlation}
 \alias{eda_variable_correlation}
-\title{Display variable correlation}
+\title{Display the correlation between the variables}
 \usage{
 eda_variable_correlation(.dataset)
 }

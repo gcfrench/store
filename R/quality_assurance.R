@@ -1,7 +1,6 @@
-#' Compare dataset versions
+#' Compare two versions of a dataset
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
 #'
 #' This function compares two versions of a dataset returning the dataset with the added, removed
 #' or changed rows identified, using the [daff package](https://github.com/edwindj/daff).

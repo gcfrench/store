@@ -2,7 +2,7 @@
 % Please edit documentation in R/format.R
 \name{extract_paragraph_delimited_list}
 \alias{extract_paragraph_delimited_list}
-\title{extract_paragraph_delimited_list}
+\title{Extract a paragraph delimited list of items}
 \usage{
 extract_paragraph_delimited_list(
   .df,

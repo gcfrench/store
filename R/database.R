@@ -1,4 +1,4 @@
-#' create_locked_keyring
+#' Create a new keyring
 #'
 #' @description
 #' Add a password protected keyring to the Windows Credential Store.
@@ -29,7 +29,7 @@ create_locked_keyring <- function(keyring_name) {
   keyring::keyring_is_locked(keyring_name)
 }
 
-#' get_keyring_status
+#' Get the status of a keyring
 #'
 #' @description
 #' Check the current status of the keyring. The default status of the keyring is to be locked,
@@ -54,7 +54,7 @@ get_keyring_status <- function(keyring_name) {
   }
 }
 
-#' unlock_keyring
+#' Unlock a keyring
 #'
 #' @description
 #' Unlock the keyring requiring keyring password
@@ -75,7 +75,7 @@ unlock_keyring <- function(keyring_name) {
   stringr::str_glue("The keyring {keyring_name} is currently unlocked")
 }
 
-#' lock_keyring
+#' Lock a keyring
 #'
 #' @description
 #' Lock the keyring requiring keyring password
@@ -96,7 +96,7 @@ lock_keyring <- function(keyring_name) {
   stringr::str_glue("The keyring {keyring_name} is currently locked")
 }
 
-#' list_keys
+#' List the keys within a keyring
 #'
 #' @description
 #' List the current keys stored on the keyring.
@@ -117,7 +117,7 @@ list_keys <- function(keyring_name) {
   keyring::key_list(keyring = keyring_name)
 }
 
-#' add_key
+#' Add a key to a keyring
 #'
 #' @description
 #' Add a new key to the keyring to store a new database connection string.
@@ -153,7 +153,7 @@ add_key <- function(keyring_name, service_name){
   message(stringr::str_glue("The key {service_name} has been added to the keyring {keyring_name}"))
 }
 
-#' delete_key
+#' Delete a key from a keyring
 #'
 #' @description
 #' Remove a key from the keyring by supplying both the keyring name
@@ -181,7 +181,7 @@ delete_key <- function(keyring_name, service_name) {
   keyring::keyring_lock(keyring_name)
 }
 
-#' get_sqlserver_connection
+#' Connect to a SQL Server database
 #'
 #' @description
 #' This function initiates a SQL Server connection using windows authentication,
@@ -265,7 +265,7 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
   return(con)
 }
 
-#' get_mysql_connection
+#' Connect to a MySQL database
 #'
 #' @description
 #' This function initiates a MySQL connection using stored database credentials
@@ -340,7 +340,7 @@ get_mysql_connection <- function(keyring_name, service_name) {
   return(con)
 }
 
-#' get_postgres_connection
+#' Connect to a PostgreSQL database
 #'
 #' @description
 #' This function initiates a PostgreSQL connection using stored database credentials

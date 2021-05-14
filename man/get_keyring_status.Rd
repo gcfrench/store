@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{get_keyring_status}
 \alias{get_keyring_status}
-\title{get_keyring_status}
+\title{Get the status of a keyring}
 \usage{
 get_keyring_status(keyring_name)
 }

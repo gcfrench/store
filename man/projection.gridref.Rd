@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{projection.gridref}
 \alias{projection.gridref}
-\title{Get projection for grid reference}
+\title{Get the projection of a grid reference}
 \usage{
 \method{projection}{gridref}(grid_reference)
 }

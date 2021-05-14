@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{get_sqlserver_connection}
 \alias{get_sqlserver_connection}
-\title{get_sqlserver_connection}
+\title{Connect to a SQL Server database}
 \usage{
 get_sqlserver_connection(keyring_name, service_name, keyring = TRUE)
 }

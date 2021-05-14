@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_data_analysis.R
 \name{eda_variable_outliers}
 \alias{eda_variable_outliers}
-\title{Display variable outliers}
+\title{Display the variable outliers}
 \usage{
 eda_variable_outliers(.dataset)
 }

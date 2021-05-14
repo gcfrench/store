@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_data_analysis.R
 \name{eda_variable_distribution}
 \alias{eda_variable_distribution}
-\title{Display variable distribution}
+\title{Display the distribution of the variables}
 \usage{
 eda_variable_distribution(.dataset)
 }

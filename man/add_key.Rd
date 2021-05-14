@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{add_key}
 \alias{add_key}
-\title{add_key}
+\title{Add a key to a keyring}
 \usage{
 add_key(keyring_name, service_name)
 }

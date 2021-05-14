@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{tetrad.gridref}
 \alias{tetrad.gridref}
-\title{Get 2km grid reference}
+\title{Get the 2km grid reference}
 \usage{
 \method{tetrad}{gridref}(grid)
 }

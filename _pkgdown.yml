@@ -66,6 +66,11 @@ reference:
   - extract_space_delimited_list
   - extract_paragraph_delimited_list
   - add_tibble_to_list
+- title: "Iteration"
+  desc: "Functions used to help with iterating through a dataset"
+  contents:
+  - tally_counter
+  - click
 - title: "Data visualisation"
   desc: "Tabular and graphical visualisations"
   contents:

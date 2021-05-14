@@ -1,4 +1,4 @@
-#' Display variable summary
+#' Display a summary of the variables
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -116,7 +116,7 @@ eda_variable_summary <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' Display variable outliers
+#' Display the variable outliers
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -216,7 +216,7 @@ eda_variable_outliers <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' Display variable distribution
+#' Display the distribution of the variables
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -311,7 +311,7 @@ eda_variable_distribution <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' Display variable correlation
+#' Display the correlation between the variables
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -382,7 +382,7 @@ eda_variable_correlation <- function(.dataset) {
   invisible(.dataset)
 }
 
-#' Run exploratory data analyses
+#' Run the exploratory data analyses
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`

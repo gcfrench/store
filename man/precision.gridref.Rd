@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{precision.gridref}
 \alias{precision.gridref}
-\title{Get precision for grid reference}
+\title{Get the precision of a grid reference}
 \usage{
 \method{precision}{gridref}(grid_reference)
 }

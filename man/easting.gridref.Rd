@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{easting.gridref}
 \alias{easting.gridref}
-\title{Get easting for grid reference}
+\title{Get the easting of a grid reference}
 \usage{
 \method{easting}{gridref}(grid_reference, centre = FALSE)
 }

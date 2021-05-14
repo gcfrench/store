@@ -2,7 +2,7 @@
 % Please edit documentation in R/export.R
 \name{add_new_spreadsheet}
 \alias{add_new_spreadsheet}
-\title{add_new_spreadsheet}
+\title{Add a new spreadsheet containing data and an image to an Excel workbook}
 \usage{
 add_new_spreadsheet(
   spreadsheet_name,

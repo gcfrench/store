@@ -1,4 +1,4 @@
-#' display_table
+#' Display a dataset as a table
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -45,7 +45,7 @@ display_table <- function(data, rows = nrow(data)) {
                        class = "table")
 }
 
-#' reduce_image_size
+#' Reduce the size of an image
 #'
 #' @description
 #' This function reduces the size of an image, archiving the
@@ -191,7 +191,7 @@ display_table <- function(data, rows = nrow(data)) {
   invisible(path_image)
  }
 
-#' add_image_shadow
+#' Add a shadow to an image
 #'
 #' @description
 #' This function adds a border shadow to the image, archiving the

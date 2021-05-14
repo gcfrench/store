@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{create_locked_keyring}
 \alias{create_locked_keyring}
-\title{create_locked_keyring}
+\title{Create a new keyring}
 \usage{
 create_locked_keyring(keyring_name)
 }

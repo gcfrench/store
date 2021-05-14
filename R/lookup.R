@@ -38,7 +38,7 @@
 #' }
 "uk_ireland_tenkm_grid_squares"
 
-#' Vice counties grid square intersects
+#' Vice counties grid square intersections
 #'
 #' @description
 #' A list of OSGB 10km, 2km and 1km grid squares with the dominant vice county that

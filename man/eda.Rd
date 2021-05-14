@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_data_analysis.R
 \name{eda}
 \alias{eda}
-\title{Run exploratory data analyses}
+\title{Run the exploratory data analyses}
 \usage{
 eda(
   .dataset,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/display.R
 \name{add_image_shadow}
 \alias{add_image_shadow}
-\title{add_image_shadow}
+\title{Add a shadow to an image}
 \usage{
 add_image_shadow(path_image)
 }

@@ -1,4 +1,4 @@
-#' add_new_spreadsheet
+#' Add a new spreadsheet containing data and an image to an Excel workbook
 #'
 #' @description
 #' This function adds a data frame and optional image to a new spreadsheet in an

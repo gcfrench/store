@@ -1,4 +1,4 @@
-#' Convert to gridref object
+#' Convert a string to a gridref object
 #'
 #' @description
 #' Convert character string to gridref object
@@ -430,7 +430,7 @@ gridRef.gridref <- function(format){
   }
 }
 
-#' Get precision for grid reference
+#' Get the precision of a grid reference
 #'
 #' @description
 #' This function returns the grid reference's precision in metres.
@@ -467,7 +467,7 @@ precision.gridref <- function(grid_reference) {
 }
 
 
-#' Get projection for grid reference
+#' Get the projection of a grid reference
 #'
 #' This function returns the grid reference's projection, either as OSGB or OSNI.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -502,7 +502,7 @@ projection.gridref <- function(grid_reference) {
     purrr::pluck("system")
 }
 
-#' Get easting for grid reference
+#' Get the easting of a grid reference
 #'
 #' This function returns the grid reference's easting in metres.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -551,7 +551,7 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
   return(easting)
 }
 
-#' Get northing for grid reference
+#' Get the northing of a grid reference
 #'
 #' This function returns the grid reference's northing in metres.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -600,7 +600,7 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
   return(northing)
 }
 
-#' Get 10km grid reference
+#' Get the 10km grid reference
 #'
 #' This function returns the 10km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -631,7 +631,7 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
 #'}
 hectad.gridref <- gridRef.gridref(format = "sq10km")
 
-#' Get 5km grid reference
+#' Get the 5km grid reference
 #'
 #' This function returns the 5km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -662,7 +662,7 @@ hectad.gridref <- gridRef.gridref(format = "sq10km")
 #'}
 pentad.gridref <- gridRef.gridref(format = "sq5km")
 
-#' Get 2km grid reference
+#' Get the 2km grid reference
 #'
 #' This function returns the 2km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -693,7 +693,7 @@ pentad.gridref <- gridRef.gridref(format = "sq5km")
 #'}
 tetrad.gridref <- gridRef.gridref(format = "tetrad")
 
-#' Get 1km grid reference
+#' Get the 1km grid reference
 #'
 #' This function returns the 1km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -724,7 +724,7 @@ tetrad.gridref <- gridRef.gridref(format = "tetrad")
 #'}
 monad.gridref <- gridRef.gridref(format = "sq1km")
 
-#' Get 100m grid reference
+#' Get the 100m grid reference
 #'
 #' This function returns the 100m grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
@@ -755,7 +755,7 @@ monad.gridref <- gridRef.gridref(format = "sq1km")
 #'}
 hectare.gridref <- gridRef.gridref(format = "sq100m")
 
-#' Convert OSGB or OSNI Grid reference to polygon geometry feature
+#' Convert a OSGB or OSNI grid reference to a polygon geometry feature
 #'
 #' This function converts a grid reference to its square polygon geometry feature
 #' through conversion to well-known text. It uses the gridCoords function in the

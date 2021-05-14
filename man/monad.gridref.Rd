@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{monad.gridref}
 \alias{monad.gridref}
-\title{Get 1km grid reference}
+\title{Get the 1km grid reference}
 \usage{
 \method{monad}{gridref}(grid)
 }

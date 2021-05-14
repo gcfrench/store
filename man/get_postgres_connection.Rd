@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{get_postgres_connection}
 \alias{get_postgres_connection}
-\title{get_postgres_connection}
+\title{Connect to a PostgreSQL database}
 \usage{
 get_postgres_connection(keyring_name, service_name)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{gridsquare_geometry.gridref}
 \alias{gridsquare_geometry.gridref}
-\title{Convert OSGB or OSNI Grid reference to polygon geometry feature}
+\title{Convert a OSGB or OSNI grid reference to a polygon geometry feature}
 \usage{
 \method{gridsquare_geometry}{gridref}(grid_reference)
 }

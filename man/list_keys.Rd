@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{list_keys}
 \alias{list_keys}
-\title{list_keys}
+\title{List the keys within a keyring}
 \usage{
 list_keys(keyring_name)
 }

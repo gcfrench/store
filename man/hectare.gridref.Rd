@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{hectare.gridref}
 \alias{hectare.gridref}
-\title{Get 100m grid reference}
+\title{Get the 100m grid reference}
 \usage{
 \method{hectare}{gridref}(grid)
 }

@@ -6,6 +6,11 @@ editor_options:
 
 ## store 0.5.0
 
+-   Added **tally_counter** and **click** R6 functions to provide a
+    quick and easy way to monitor progress whilst iterating through a
+    data frame, applying a function to each row at a time. These
+    functions are written using [R6 object-orientated
+    programming](https://r6.r-lib.org/).
 -   Updated **uk_ireland_base_map** example to include map image using
     [tmap](https://github.com/mtennekes/tmap) package, following
     instructions in [Geocomputation with R Chapter 8 Making maps with

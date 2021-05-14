@@ -3,7 +3,7 @@
 \docType{data}
 \name{vc_grid_square_intersects}
 \alias{vc_grid_square_intersects}
-\title{Vice counties grid square intersects}
+\title{Vice counties grid square intersections}
 \format{
 A tibble with 363518 rows and 5 variables
 \describe{

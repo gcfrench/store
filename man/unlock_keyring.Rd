@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{unlock_keyring}
 \alias{unlock_keyring}
-\title{unlock_keyring}
+\title{Unlock a keyring}
 \usage{
 unlock_keyring(keyring_name)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/display.R
 \name{display_table}
 \alias{display_table}
-\title{display_table}
+\title{Display a dataset as a table}
 \usage{
 display_table(data, rows = nrow(data))
 }

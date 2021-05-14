@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{delete_key}
 \alias{delete_key}
-\title{delete_key}
+\title{Delete a key from a keyring}
 \usage{
 delete_key(keyring_name, service_name)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/format.R
 \name{extract_semicolon_delimited_list}
 \alias{extract_semicolon_delimited_list}
-\title{extract_semicolon_delimited_list}
+\title{Extract a semi-colon delimited list of items}
 \usage{
 extract_semicolon_delimited_list(
   .df,

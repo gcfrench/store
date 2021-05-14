@@ -48,7 +48,7 @@ extract_delimited_list <- function(delimiter) {
   }
 }
 
-#' extract_comma_delimited_list
+#' Extract a comma delimited list of items
 #'
 #' @description
 #' This function extracts a comma delimited list from a data frame's column. It
@@ -98,7 +98,7 @@ extract_delimited_list <- function(delimiter) {
 #' heaviest_penguins
 extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 
-#' extract_semicolon_delimited_list
+#' Extract a semi-colon delimited list of items
 #'
 #' This function extracts a semi-colon list from a data frame's column. It
 #' excludes NAs, optionally sorts the character string and adds text as a delimiter
@@ -148,7 +148,7 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #' heaviest_penguins
 extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 
-#' extract_space_delimited_list
+#' Extract a space delimited list of items
 #'
 #' This function extracts a space delimited list from a data frame's column. It
 #' excludes NAs, optionally sorts the character string and adds text as a delimiter
@@ -200,7 +200,7 @@ extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 
 
 
-#' extract_paragraph_delimited_list
+#' Extract a paragraph delimited list of items
 #'
 #' This function extracts a paragraph delimited list from a data frame's column,
 #' inserting two new lines and carriage returns. It excludes NAs, optionally sorts
@@ -250,7 +250,7 @@ extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 #' heaviest_penguins
 extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n")
 
-#' add tibble to list
+#' Add a tibble to a list
 #'
 #' @description
 #' This function prepends tibbles to a list, creating the list

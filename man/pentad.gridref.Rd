@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{pentad.gridref}
 \alias{pentad.gridref}
-\title{Get 5km grid reference}
+\title{Get the 5km grid reference}
 \usage{
 \method{pentad}{gridref}(grid)
 }

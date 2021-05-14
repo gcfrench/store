@@ -2,7 +2,7 @@
 % Please edit documentation in R/format.R
 \name{add_tibble_to_list}
 \alias{add_tibble_to_list}
-\title{add tibble to list}
+\title{Add a tibble to a list}
 \usage{
 add_tibble_to_list(.data, .name)
 }

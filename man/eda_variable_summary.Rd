@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_data_analysis.R
 \name{eda_variable_summary}
 \alias{eda_variable_summary}
-\title{Display variable summary}
+\title{Display a summary of the variables}
 \usage{
 eda_variable_summary(.dataset)
 }

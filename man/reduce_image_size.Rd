@@ -2,7 +2,7 @@
 % Please edit documentation in R/display.R
 \name{reduce_image_size}
 \alias{reduce_image_size}
-\title{reduce_image_size}
+\title{Reduce the size of an image}
 \usage{
 reduce_image_size(path_image, image_size = "50\%")
 }

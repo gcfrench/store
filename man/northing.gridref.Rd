@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{northing.gridref}
 \alias{northing.gridref}
-\title{Get northing for grid reference}
+\title{Get the northing of a grid reference}
 \usage{
 \method{northing}{gridref}(grid_reference, centre = FALSE)
 }

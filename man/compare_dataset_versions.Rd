@@ -2,7 +2,7 @@
 % Please edit documentation in R/quality_assurance.R
 \name{compare_dataset_versions}
 \alias{compare_dataset_versions}
-\title{Compare dataset versions}
+\title{Compare two versions of a dataset}
 \usage{
 compare_dataset_versions(old_dataset, new_dataset, skip_rows = 0)
 }
@@ -18,8 +18,6 @@ difference dataset (default = 0)}
 data frame, compared dataset with new, removed or updated rows highlighted with #
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
 This function compares two versions of a dataset returning the dataset with the added, removed
 or changed rows identified, using the \href{https://github.com/edwindj/daff}{daff package}.
 The compared dataset can then be exported into an Excel spreadsheet to quickly

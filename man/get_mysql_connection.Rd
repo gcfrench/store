@@ -2,7 +2,7 @@
 % Please edit documentation in R/database.R
 \name{get_mysql_connection}
 \alias{get_mysql_connection}
-\title{get_mysql_connection}
+\title{Connect to a MySQL database}
 \usage{
 get_mysql_connection(keyring_name, service_name)
 }
