@@ -63,6 +63,10 @@ usethis::use_readme_rmd()
 usethis::use_news_md()
 ```
 
+```{}
+## package_name 0.0.0.9000 <font size="4">yyyy-mm-dd</font>
+```
+
 **usethis::use_pipe** add the %>% pipe operator with the addition of the utils-pipe.R file and magrittr package to the imports field in the description file
 ```{r}
 usethis::use_pipe()
@@ -90,38 +94,47 @@ usethis::use_pkgdown()
 
 pkgdown.yml template
 ```{}
+title: ""
 template:
   params:
     bootswatch: flatly
-    
 reference:
 - title: ""
   desc: ""
-- contents:
-  - function_name
-  
+#- contents:
+#  - function_name
+ 
 navbar:
-  title: package_name
   left:
     - icon: fa-home fa-lg
       href: index.html
     - text: "information"
       menu:
-      - text: ""
-        href: articles/script_name.html
+#      - text: ""
+#        href: articles/script_name.html
     - text: "lookups and functions"
-      href: reference/script_name.html
-    - text: "analyses"
+      href: reference/index.html
+#    - text: "analyses"
+#      menu:
+#      - text: ""
+#        href: articles/script_name.html
+#    - text: "submissions"
+#      menu:
+#      - text: ""
+#        href: articles/script_name.html
+    - text: "archive"
       menu:
-      - text: ""
-        href: articles/script_name.html
+#      - text: ""
+#        href: articles/script_name.html
+    - text: "tasks"
+      href: articles/tasks.html
     - text: "versions"
       href: news/index.html
    right:
-    - icon: "fab fa-twitter fa-lg"
-      href: https://twitter.com/gcfrench
-    - icon: "fab fa-github fa-lg"
-      href: https://github.com/gcfrench/store
+#    - icon: "fab fa-twitter fa-lg"
+#      href: https://twitter.com/gcfrench
+#    - icon: "fab fa-github fa-lg"
+#      href: https://github.com/gcfrench/store
 ```
 
 **usethis::use_lifecycle** add the lifecycle badges in the man directory
@@ -132,6 +145,30 @@ usethis::use_lifecycle()
 **usethis::use_lifecycle_badge** add lifecycle badge to home page
 ```{r}
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
+```
+
+**usethis::use_vignette** add tasks vignette
+```{r}
+usethis::use_vignette("tasks")
+```
+
+```{}
+This **tasks** section contains a list of tasks and questions, with
+their current status
+
+-   ✔️ completed
+-   ❗ awaiting completion
+-   ✖️no longer needed
+-   ❓question to be answered
+
+## Tasks and questions
+
+### YYYY-MM-DD
+```
+
+**pkgdown::build_site** build documentation
+```{r}
+pkgdown::build_site()
 ```
 
 ### Add to github --------------------------------------------

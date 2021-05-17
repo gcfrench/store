@@ -6,6 +6,7 @@ editor_options:
 
 ## store 0.5.0
 
+-   Updated **Create and update a package** document
 -   Added **tally_counter** and **click** R6 functions to provide a
     quick and easy way to monitor progress whilst iterating through a
     data frame. These functions are written using [R6 object-orientated
