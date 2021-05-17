@@ -12,15 +12,3 @@ type used, defined within the tally_counter function. It returns the number padd
 to a minimum of four characters. Once counter has finished the environment and counter
 object are removed.
 }
-\examples{
-# Use default decreasing count setting
-iris_three <- iris[1:5, ]
-tally_counter(iris_three)
-sepal_length <- function(x) {
-  message(paste0(click(), ": The sepal length is ", as.numeric(x[, "Sepal.Length"])), " cm")
-  Sys.sleep(0.25)
-}
-sepal_length(iris_three[1, ])
-sepal_length(iris_three[2, ])
-sepal_length(iris_three[3, ])
-}

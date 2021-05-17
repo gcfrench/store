@@ -9,8 +9,8 @@ tally_counter(data, ...)
 \arguments{
 \item{data}{a data frame to be used in the iteration}
 
-\item{...}{character string argument named type indicating type of counter to use,
-either adding or subtracting counts}
+\item{type}{character string indicating type of counter to use, either adding (add)
+or subtracting (default = subtract) counts}
 }
 \value{
 the data frame is returned so that the function is pipe friendly
@@ -42,13 +42,39 @@ the number of digits increases to five, above 99,999 iterations six digits will 
 displayed and so on.
 }
 \examples{
+\dontrun{
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+    library(dplyr)
+    library(stringr)
+    library(purrr)
+  })
+})
 
-# Use default decreasing count setting
-iris_three<- iris[1:3, ]
-tally_counter(iris_three)
+penguin_stats <- function(...) {
 
-# Set increasing count setting
-iris_three <- iris[1:3, ]
-tally_counter(iris_three, type = "add")
+  # get row
+  data <- list(...)
 
+  # get penguins stats
+  species <- purrr::pluck(data, "species")
+  island <- purrr::pluck(data, "island")
+  body_mass_g <- purrr::pluck(data, "body_mass_g")
+  sex <- purrr::pluck(data, "sex")
+  year <- purrr::pluck(data, "year")
+
+  # print penguin stats
+  message(stringr::str_glue("{click()} : The body mass for the {sex} {species} penguin recorded in {year} on {island} island is {body_mass_g} grams"))
+
+}
+penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.25))
+
+penguins \%>\%
+  slice_sample(n = 25) \%>\%
+  arrange(desc(body_mass_g)) \%>\%
+  tally_counter(type = "add") \%>\%
+  pwalk(penguin_stats_slow)
+}
 }
