@@ -1,3 +1,4 @@
+#' @title
 #' Compare two versions of a dataset
 #'
 #' @description

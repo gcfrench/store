@@ -1,3 +1,4 @@
+#' @title
 #' Convert a string to a gridref object
 #'
 #' @description
@@ -37,7 +38,8 @@ as_gridref <- function(x = character()) {
 }
 
 # validator function
-#' Title
+#' @title
+#' Validate grid reference
 #'
 #' @description
 #' Validator function to check that grid reference is valid. Taken from
@@ -66,8 +68,10 @@ validate_gridref <- function(grid) {
   return(grid)
 }
 
+#' @title
 #' Generic function for gridCoords
 #'
+#' @description
 #' Generic function for gridCoords as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -78,8 +82,10 @@ gridCoords <- function(x, ...) {
   UseMethod("gridCoords", x)
 }
 
+#' @title
 #' Generic function for precision
 #'
+#' @description
 #' Generic function for precision as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -91,8 +97,10 @@ precision <- function(x, ...) {
   UseMethod("precision", x)
 }
 
+#' @title
 #' Generic function for projection
 #'
+#' @description
 #' Generic function for projection as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -104,8 +112,10 @@ projection <- function(x, ...) {
   UseMethod("projection", x)
 }
 
+#' @title
 #' Generic function for easting
 #'
+#' @description
 #' Generic function for easting as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -117,8 +127,10 @@ easting <- function(x, ...) {
   UseMethod("easting", x)
 }
 
+#' @title
 #' Generic function for northing
 #'
+#' @description
 #' Generic function for northing as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -130,8 +142,10 @@ northing <- function(x, ...) {
   UseMethod("northing", x)
 }
 
+#' @title
 #' Generic function for gridRef
 #'
+#' @description
 #' Generic function for gridRef as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -142,8 +156,10 @@ gridRef <- function(x, ...) {
   UseMethod("gridRef", x)
 }
 
+#' @title
 #' Generic function for hectad
 #'
+#' @description
 #' Generic function for hectad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -155,8 +171,10 @@ hectad <- function(x, ...) {
   UseMethod("hectad", x)
 }
 
+#' @title
 #' Generic function for pentad
 #'
+#' @description
 #' Generic function for hectad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -168,8 +186,10 @@ pentad <- function(x, ...) {
   UseMethod("pentad", x)
 }
 
+#' @title
 #' Generic function for tetrad
 #'
+#' @description
 #' Generic function for hectad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -181,8 +201,10 @@ tetrad <- function(x, ...) {
   UseMethod("tetrad", x)
 }
 
+#' @title
 #' Generic function for monad
 #'
+#' @description
 #' Generic function for monad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -194,8 +216,10 @@ monad <- function(x, ...) {
   UseMethod("monad", x)
 }
 
+#' @title
 #' Generic function for hectare
 #'
+#' @description
 #' Generic function for hectare as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -207,8 +231,10 @@ hectare <- function(x, ...) {
   UseMethod("hectare", x)
 }
 
+#' @title
 #' Generic function for gridsquare_geometry
 #'
+#' @description
 #' Generic function for gridsquare_geometry as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
 #' chapter of Advanced R by Hadley Wickham
 #'
@@ -220,6 +246,7 @@ gridsquare_geometry <- function(x, ...) {
   UseMethod("gridsquare_geometry", x)
 }
 
+#' @title
 #' Get x,y coordinates from a grid reference
 #'
 #' @description
@@ -309,6 +336,7 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
   return(gridref)
 }
 
+#' @title
 #' Manipulate OSGB or OSNI grid reference string
 #'
 #' @description
@@ -430,6 +458,7 @@ gridRef.gridref <- function(format){
   }
 }
 
+#' @title
 #' Get the precision of a grid reference
 #'
 #' @description
@@ -467,8 +496,10 @@ precision.gridref <- function(grid_reference) {
 }
 
 
+#' @title
 #' Get the projection of a grid reference
 #'
+#' @description
 #' This function returns the grid reference's projection, either as OSGB or OSNI.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -502,8 +533,10 @@ projection.gridref <- function(grid_reference) {
     purrr::pluck("system")
 }
 
+#' @title
 #' Get the easting of a grid reference
 #'
+#' @description
 #' This function returns the grid reference's easting in metres.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -551,8 +584,10 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
   return(easting)
 }
 
+#' @title
 #' Get the northing of a grid reference
 #'
+#' @description
 #' This function returns the grid reference's northing in metres.
 #' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -600,8 +635,10 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
   return(northing)
 }
 
+#' @title
 #' Get the 10km grid reference
 #'
+#' @description
 #' This function returns the 10km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -631,8 +668,10 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
 #'}
 hectad.gridref <- gridRef.gridref(format = "sq10km")
 
+#' @title
 #' Get the 5km grid reference
 #'
+#' @description
 #' This function returns the 5km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -662,8 +701,10 @@ hectad.gridref <- gridRef.gridref(format = "sq10km")
 #'}
 pentad.gridref <- gridRef.gridref(format = "sq5km")
 
+#' @title
 #' Get the 2km grid reference
 #'
+#' @description
 #' This function returns the 2km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -693,8 +734,10 @@ pentad.gridref <- gridRef.gridref(format = "sq5km")
 #'}
 tetrad.gridref <- gridRef.gridref(format = "tetrad")
 
+#' @title
 #' Get the 1km grid reference
 #'
+#' @description
 #' This function returns the 1km grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -724,8 +767,10 @@ tetrad.gridref <- gridRef.gridref(format = "tetrad")
 #'}
 monad.gridref <- gridRef.gridref(format = "sq1km")
 
+#' @title
 #' Get the 100m grid reference
 #'
+#' @description
 #' This function returns the 100m grid reference for a higher precision grid reference.
 #' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -755,8 +800,10 @@ monad.gridref <- gridRef.gridref(format = "sq1km")
 #'}
 hectare.gridref <- gridRef.gridref(format = "sq100m")
 
+#' @title
 #' Convert a OSGB or OSNI grid reference to a polygon geometry feature
 #'
+#' @description
 #' This function converts a grid reference to its square polygon geometry feature
 #' through conversion to well-known text. It uses the gridCoords function in the
 #' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.

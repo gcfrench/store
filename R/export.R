@@ -1,3 +1,4 @@
+#' @title
 #' Add a new spreadsheet containing data and an image to an Excel workbook
 #'
 #' @description

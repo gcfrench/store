@@ -70,6 +70,7 @@ counter_subtract <- R6::R6Class("counter_add",
     )
 )
 
+#' @title
 #' Count the number of remaining interations
 #'
 #' @description
@@ -167,8 +168,10 @@ tally_counter <- function(data, ...) {
   invisible(data)
 }
 
+#' @title
 #' Increment the tally counter
 #'
+#' @description
 #' This function adds or subtracts one from the counter depending on the tally counter
 #' type used, defined within the tally_counter function. It returns the number padded
 #' to a minimum of four characters. Once counter has finished the environment and counter

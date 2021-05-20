@@ -2,7 +2,11 @@
 % Please edit documentation in R/format.R
 \name{extract_paragraph_delimited_list}
 \alias{extract_paragraph_delimited_list}
-\title{Extract a paragraph delimited list of items}
+\title{Extract a paragraph delimited list of items
+
+This function extracts a paragraph delimited list from a data frame's column,
+inserting two new lines and carriage returns. It excludes NAs, optionally sorts
+the character string and adds text as a delimiter to the last two items}
 \usage{
 extract_paragraph_delimited_list(
   .df,
@@ -32,11 +36,6 @@ It is an example of the use of a \href{https://adv-r.hadley.nz/function-factorie
 and purrr's \href{https://purrr.tidyverse.org/reference/map.html}{map function}.
 The function may be called on a \href{https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html}{nested data frame}
 to extract the paragraph delimited list
-}
-\details{
-This function extracts a paragraph delimited list from a data frame's column,
-inserting two new lines and carriage returns. It excludes NAs, optionally sorts
-the character string and adds text as a delimiter to the last two items
 }
 \examples{
 suppressPackageStartupMessages({

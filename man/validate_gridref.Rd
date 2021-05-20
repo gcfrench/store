@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref.R
 \name{validate_gridref}
 \alias{validate_gridref}
-\title{Title}
+\title{Validate grid reference}
 \usage{
 validate_gridref(grid)
 }

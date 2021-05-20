@@ -15,8 +15,7 @@ character, grid reference projection in British National Grid (OSGB) or Irish Na
 \description{
 This function returns the grid reference's projection, either as OSGB or OSNI.
 It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-}
-\details{
+
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }

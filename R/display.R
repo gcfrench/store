@@ -1,3 +1,4 @@
+#' @title
 #' Display a dataset as a table
 #'
 #' @description
@@ -45,6 +46,7 @@ display_table <- function(data, rows = nrow(data)) {
                        class = "table")
 }
 
+#' @title
 #' Reduce the size of an image
 #'
 #' @description
@@ -191,6 +193,7 @@ display_table <- function(data, rows = nrow(data)) {
   invisible(path_image)
  }
 
+#' @title
 #' Add a shadow to an image
 #'
 #' @description

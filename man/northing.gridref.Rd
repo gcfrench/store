@@ -17,8 +17,7 @@ integer, northing of grid reference in metres.
 \description{
 This function returns the grid reference's northing in metres.
 It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-}
-\details{
+
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }

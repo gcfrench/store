@@ -16,8 +16,7 @@ geometry, square polygon feature
 This function converts a grid reference to its square polygon geometry feature
 through conversion to well-known text. It uses the gridCoords function in the
 archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-}
-\details{
+
 It can convert either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision) and returns an empty polygon feature for
 an invalid grid reference

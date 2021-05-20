@@ -1,3 +1,4 @@
+#' @title
 #' Display a summary of the variables
 #'
 #' @description
@@ -116,6 +117,7 @@ eda_variable_summary <- function(.dataset) {
   invisible(.dataset)
 }
 
+#' @title
 #' Display the variable outliers
 #'
 #' @description
@@ -216,6 +218,7 @@ eda_variable_outliers <- function(.dataset) {
   invisible(.dataset)
 }
 
+#' @title
 #' Display the distribution of the variables
 #'
 #' @description
@@ -311,6 +314,7 @@ eda_variable_distribution <- function(.dataset) {
   invisible(.dataset)
 }
 
+#' @title
 #' Display the correlation between the variables
 #'
 #' @description
@@ -382,6 +386,7 @@ eda_variable_correlation <- function(.dataset) {
   invisible(.dataset)
 }
 
+#' @title
 #' Run the exploratory data analyses
 #'
 #' @description

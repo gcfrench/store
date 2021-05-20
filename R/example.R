@@ -1,3 +1,4 @@
+#' @title
 #' NBN demonstration dataset
 #'
 #' @description
@@ -8,7 +9,7 @@
 #' biological species records across the UK. It was superseded in March 2017 by
 #' the [NBN Atlas](https://nbnatlas.org/)
 #'
-#' @format A tibble with 100 rows and 17 variables
+#' @format A tibble with `r nrow(nbn_demonstration_dataset)` rows and `r ncol(nbn_demonstration_dataset)` variables
 #' \describe{
 #'   \item{RecordKey}{primary key associated with the occurrence record}
 #'   \item{SurveyKey}{identifier key for the survey}

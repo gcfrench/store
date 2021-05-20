@@ -15,8 +15,7 @@ character, 5km grid reference
 \description{
 This function returns the 5km grid reference for a higher precision grid reference.
 It uses the gridRef function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-}
-\details{
+
 It can convert either British or Irish grid references up to 10 figure (1m precision),
 but does not convert tetrads (2000m precision)
 }

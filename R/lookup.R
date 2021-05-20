@@ -1,3 +1,4 @@
+#' @title
 #' ISO-3166 three letter country codes with United Nations regions and European Union membership
 #'
 #' @description
@@ -10,7 +11,7 @@
 #' for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
 #' countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.
 #'
-#' @format A tibble with 250 rows and 4 variables
+#' @format A tibble with `r nrow(country_codes)` rows and `r ncol(country_codes)` variables
 #' \describe{
 #'   \item{alpha_3}{ISO_3166_1 country code}
 #'   \item{country_name}{Name of country}
@@ -19,6 +20,7 @@
 #' }
 "country_codes"
 
+#' @title
 #' UK and Ireland 10km grid squares
 #'
 #' @description
@@ -27,7 +29,7 @@
 #' country(s) it occurs in, whether it is in the UK and is on land or in sea is
 #' given, as well as the latitude and longitude for the mid centroid point
 
-#' @format A tibble with 250 rows and 4 variables
+#' @format A tibble with `r nrow(uk_ireland_tenkm_grid_squares)` rows and `r ncol(uk_ireland_tenkm_grid_squares)` variables
 #' \describe{
 #'   \item{ten_km}{ten km grid square}
 #'   \item{country}{list of countries containing the 10km grid square}
@@ -38,6 +40,7 @@
 #' }
 "uk_ireland_tenkm_grid_squares"
 
+#' @title
 #' Vice counties grid square intersections
 #'
 #' @description
@@ -48,7 +51,7 @@
 #' The list of British vice-counties can be downloaded from the [Biological Records Centre](https://www.brc.ac.uk/article/british-vice-counties)
 #' website, with the vice-county boundaries downloaded from [Biological Records Centre's github page](https://github.com/BiologicalRecordsCentre/vice-counties)
 #'
-#' @format A tibble with 363518 rows and 5 variables
+#' @format A tibble with `r nrow(vc_grid_square_intersects)` rows and `r ncol(vc_grid_square_intersects)` variables
 #' \describe{
 #'   \item{grid_square}{OSGB 10km, 2km or 1km grid square}
 #'   \item{precsion}{precision of grid square in metres}

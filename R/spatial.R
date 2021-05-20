@@ -1,3 +1,4 @@
+#' @title
 #' Tidy spatial data
 #'
 #' @description
@@ -60,6 +61,7 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
   return(sf_data)
 }
 
+#' @title
 #' Extract and dissolve polygons from geometry collection
 #'
 #' @description
@@ -104,6 +106,7 @@ extract_polygons <- function(sf_data) {
   return(sf_data)
 }
 
+#' @title
 #' Create bounding box polygon
 #'
 #' @description
@@ -164,6 +167,7 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 
 }
 
+#' @title
 #' UK Ireland Base Map derived from the Oil and Gas Authority's OGA and Lloyd's Register
 #' SNS Regional Geological Maps (Open Source) layer
 #'

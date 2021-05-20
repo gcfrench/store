@@ -1,3 +1,4 @@
+#' @title
 #' Create a new keyring
 #'
 #' @description
@@ -29,6 +30,7 @@ create_locked_keyring <- function(keyring_name) {
   keyring::keyring_is_locked(keyring_name)
 }
 
+#' @title
 #' Get the status of a keyring
 #'
 #' @description
@@ -54,6 +56,7 @@ get_keyring_status <- function(keyring_name) {
   }
 }
 
+#' @title
 #' Unlock a keyring
 #'
 #' @description
@@ -75,6 +78,7 @@ unlock_keyring <- function(keyring_name) {
   stringr::str_glue("The keyring {keyring_name} is currently unlocked")
 }
 
+#' @title
 #' Lock a keyring
 #'
 #' @description
@@ -96,6 +100,7 @@ lock_keyring <- function(keyring_name) {
   stringr::str_glue("The keyring {keyring_name} is currently locked")
 }
 
+#' @title
 #' List the keys within a keyring
 #'
 #' @description
@@ -117,6 +122,7 @@ list_keys <- function(keyring_name) {
   keyring::key_list(keyring = keyring_name)
 }
 
+#' @title
 #' Add a key to a keyring
 #'
 #' @description
@@ -153,6 +159,7 @@ add_key <- function(keyring_name, service_name){
   message(stringr::str_glue("The key {service_name} has been added to the keyring {keyring_name}"))
 }
 
+#' @title
 #' Delete a key from a keyring
 #'
 #' @description
@@ -181,6 +188,7 @@ delete_key <- function(keyring_name, service_name) {
   keyring::keyring_lock(keyring_name)
 }
 
+#' @title
 #' Connect to a SQL Server database
 #'
 #' @description
@@ -265,6 +273,7 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
   return(con)
 }
 
+#' @title
 #' Connect to a MySQL database
 #'
 #' @description
@@ -340,6 +349,7 @@ get_mysql_connection <- function(keyring_name, service_name) {
   return(con)
 }
 
+#' @title
 #' Connect to a PostgreSQL database
 #'
 #' @description
