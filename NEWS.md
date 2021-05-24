@@ -6,13 +6,16 @@ editor_options:
 
 ## store 0.5.0
 
+-   Updated **country_codes** look up table to link to the table view in
+    documentation. The table view was created using the
+    [gt](https://gt.rstudio.com/) package
 -   Updated **Create and update a package** document
 -   Added **tally_counter** and **click** R6 functions to provide a
     quick and easy way to monitor progress whilst iterating through a
     data frame. These functions are written using [R6 object-orientated
     programming](https://r6.r-lib.org/) with an example of using purrr's
     [pwalk function](https://purrr.tidyverse.org/reference/map2.html)
-    and ... to pass one row of a data frame at a time into a function.
+    and ... to pass one row of a data frame at a time into a function
 -   Updated **uk_ireland_base_map** example to include map image using
     [tmap](https://github.com/mtennekes/tmap) package, following
     instructions in [Geocomputation with R Chapter 8 Making maps with

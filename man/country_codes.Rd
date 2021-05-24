@@ -3,7 +3,7 @@
 \docType{data}
 \name{country_codes}
 \alias{country_codes}
-\title{ISO-3166 three letter country codes with United Nations regions and European Union membership}
+\title{\href{output/country_codes_table.html}{ISO-3166 three letter country codes with United Nations regions and European Union membership}}
 \format{
 A tibble with 250 rows and 4 variables
 \describe{
@@ -27,10 +27,9 @@ for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
 countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.
 }
 \examples{
-\dontrun{
 suppressPackageStartupMessages({
-library(store)
-suppressWarnings({
+ library(store)
+ suppressWarnings({
   library(gt)
   library(here)
   library(fs)
@@ -38,35 +37,34 @@ suppressWarnings({
 })
 
 # create output directory
-i_am("example.Rmd")
+i_am("docs/reference/country_codes.html")
 if (!dir_exists("output")) {dir_create("output")}
 
 # create html table
 country_codes \%>\%
-gt::gt(groupname_col = "un_region_name") \%>\%
-  gt::tab_header(title = gt::md("**ISO-3166 three letter country codes**"),
-                 subtitle = gt::md("*Includes United Nations regions and European
+gt(groupname_col = "un_region_name") \%>\%
+  tab_header(title = md("**ISO-3166 three letter country codes**"),
+                 subtitle = md("*Includes United Nations regions and European
                                Union membership*")) \%>\%
-  gt::cols_label(
+  cols_label(
     alpha_3 = "",
     country_name = "",
     eu_member = "EU member"
   ) \%>\%
-  gt::tab_style(
+  tab_style(
     style = list(
-      gt::cell_fill(color = "#000099"), # Pantone Reflex Blue
-      gt::cell_text(color = "#FFCC00")), # Pantone Yellow
-    locations = gt::cells_body(rows = eu_member == TRUE)
+      cell_fill(color = "#000099"), # Pantone Reflex Blue
+      cell_text(color = "#FFCC00")), # Pantone Yellow
+    locations = cells_body(rows = eu_member == TRUE)
   ) \%>\%
-  gt::tab_options(
+  tab_options(
     heading.background.color = "black",
     heading.border.bottom.color = "black",
     column_labels.background.color = "black",
     row_group.font.weight = "bold",
     row_group.background.color = "lightgrey",
-    data_row.padding = gt::px(2)
+    data_row.padding = px(2)
   ) \%>\%
-gt::gtsave("output/country_codes_table.html")
-}
+gtsave("output/country_codes_table.html")
 }
 \keyword{datasets}
