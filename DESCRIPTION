@@ -49,7 +49,8 @@ Imports:
     rlang,
     raster,
     daff,
-    R6
+    R6,
+    gt
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

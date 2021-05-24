@@ -5,7 +5,7 @@
 \alias{uk_ireland_tenkm_grid_squares}
 \title{UK and Ireland 10km grid squares}
 \format{
-A tibble with 11219rows and 6 variables
+A tibble with 11219 rows and 6 variables
 \describe{
 \item{ten_km}{ten km grid square}
 \item{country}{list of countries containing the 10km grid square}

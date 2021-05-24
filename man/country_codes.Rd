@@ -26,4 +26,47 @@ The missing old European country Yugoslavia was added, along with the UN regions
 for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
 countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.
 }
+\examples{
+\dontrun{
+suppressPackageStartupMessages({
+library(store)
+suppressWarnings({
+  library(gt)
+  library(here)
+  library(fs)
+ })
+})
+
+# create output directory
+i_am("example.Rmd")
+if (!dir_exists("output")) {dir_create("output")}
+
+# create html table
+country_codes \%>\%
+gt::gt(groupname_col = "un_region_name") \%>\%
+  gt::tab_header(title = gt::md("**ISO-3166 three letter country codes**"),
+                 subtitle = gt::md("*Includes United Nations regions and European
+                               Union membership*")) \%>\%
+  gt::cols_label(
+    alpha_3 = "",
+    country_name = "",
+    eu_member = "EU member"
+  ) \%>\%
+  gt::tab_style(
+    style = list(
+      gt::cell_fill(color = "#000099"), # Pantone Reflex Blue
+      gt::cell_text(color = "#FFCC00")), # Pantone Yellow
+    locations = gt::cells_body(rows = eu_member == TRUE)
+  ) \%>\%
+  gt::tab_options(
+    heading.background.color = "black",
+    heading.border.bottom.color = "black",
+    column_labels.background.color = "black",
+    row_group.font.weight = "bold",
+    row_group.background.color = "lightgrey",
+    data_row.padding = gt::px(2)
+  ) \%>\%
+gt::gtsave("output/country_codes_table.html")
+}
+}
 \keyword{datasets}
