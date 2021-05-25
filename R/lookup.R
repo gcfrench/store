@@ -1,5 +1,5 @@
 #' @title
-#' [ISO-3166 three letter country codes with United Nations regions and European Union membership](output/country_codes_table.html)
+#' [ISO-3166 three letter country codes with United Nations regions and European Union membership](tables/country_codes_table.html)
 #'
 #' @description
 #' International Organisation for Standardisation three letter codes for the
@@ -31,34 +31,33 @@
 #'
 #' # create output directory
 #' i_am("docs/reference/country_codes.html")
-#' if (!dir_exists("output")) {dir_create("output")}
+#' if (!dir_exists("tables")) {dir_create("tables")}
 #'
 #' # create html table
 #' country_codes %>%
-#' gt(groupname_col = "un_region_name") %>%
+#'   gt(groupname_col = "un_region_name") %>%
 #'   tab_header(title = md("**ISO-3166 three letter country codes**"),
-#'                  subtitle = md("*Includes United Nations regions and European
-#'                                Union membership*")) %>%
-#'   cols_label(
-#'     alpha_3 = "",
-#'     country_name = "",
-#'     eu_member = "EU member"
-#'   ) %>%
+#'              subtitle = md("*Includes United Nations regions and European
+#'                                 Union membership*")) %>%
+#'   cols_hide(eu_member) %>%
 #'   tab_style(
 #'     style = list(
 #'       cell_fill(color = "#000099"), # Pantone Reflex Blue
 #'       cell_text(color = "#FFCC00")), # Pantone Yellow
 #'     locations = cells_body(rows = eu_member == TRUE)
 #'   ) %>%
-#'   tab_options(
-#'     heading.background.color = "black",
-#'     heading.border.bottom.color = "black",
-#'     column_labels.background.color = "black",
+#'  tab_options(
+#'     heading.align = "left",
+#'     heading.background.color = "#2C3E50",
+#'     column_labels.hidden = TRUE,
 #'     row_group.font.weight = "bold",
-#'     row_group.background.color = "lightgrey",
-#'     data_row.padding = px(2)
+#'     row_group.background.color = "#2C3E50",
+#'     table.width = pct(50),
+#'     table.font.size = "smaller",
+#'     data_row.padding = px(0)
 #'   ) %>%
-#' gtsave("output/country_codes_table.html")
+#'   opt_table_lines("none") %>%
+#'   gtsave("tables/country_codes_table.html")
 "country_codes"
 
 #' @title
