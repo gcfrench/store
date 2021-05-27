@@ -5,19 +5,20 @@
 #' Add a password protected keyring to the Windows Credential Store.
 #' This keyring will be used to store database connection strings.
 #'
+#' @details
 #' On creating the keyring you will be asked for a password.
 #' Remember this password as it will be needed everytime you access
 #' the database connection strings stored in this keyring.
 #'
-#' @seealso More information on securing credentials in R can be found in RStudio's
+#' @seealso
+#' More information on securing credentials in R can be found in RStudio's
 #' [Securing Credentials](https://db.rstudio.com/best-practices/managing-credentials/)
 #' webpage.
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name
+#' @param keyring_name A character string providing the name of the keyring
 #'
-#' @return character, keyring name
 #' @export
 #'
 #' @examples
@@ -37,11 +38,12 @@ create_locked_keyring <- function(keyring_name) {
 #' Check the current status of the keyring. The default status of the keyring is to be locked,
 #' requiring its password to unlock it, to access the stored database connection strings.
 #'
-#' @param keyring_name character, keyring name
+#' @inheritParams create_locked_keyring
 #'
 #' @family keyring functions
 #'
-#' @return message, keyring status
+#' @return A message giving the locked status of the keyring
+#'
 #' @export
 #'
 #' @examples
@@ -64,9 +66,8 @@ get_keyring_status <- function(keyring_name) {
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name character, keyring name
+#' @inheritParams create_locked_keyring
 #'
-#' @return
 #' @export
 #'
 #' @examples
@@ -86,9 +87,8 @@ unlock_keyring <- function(keyring_name) {
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name character, keyring name
+#' @inheritParams create_locked_keyring
 #'
-#' @return
 #' @export
 #'
 #' @examples
@@ -109,9 +109,10 @@ lock_keyring <- function(keyring_name) {
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name character, keyring name
+#' @inheritParams create_locked_keyring
 #'
-#' @return
+#' @return A data frame listing the keys in the keyring
+#'
 #' @export
 #'
 #' @examples
@@ -129,19 +130,19 @@ list_keys <- function(keyring_name) {
 #' Add a new key to the keyring to store a new database connection string.
 #' If the keyring is locked then unlock it first with its password.
 #'
+#' @details
 #' On creating the key, the name of the key relating to the database is added under the service name
 #' and the database connections string is added as a json string in the password dialog box.
 #'
-#' SQL Server windows authentication: {"server":"SERVER_NAME", "database":"DATABASE_NAME"}
-#  PostGresSQL database: {"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"}
-#' For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
+#' * SQL Server windows authentication: \{"server":"SERVER_NAME", "database":"DATABASE_NAME"\}
+#' * PostGresSQL database: \{"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"\}
+#' * For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name, character keyring name
-#' @param service_name, character key name
+#' @inheritParams create_locked_keyring
+#' @param service_name A character string providing the name of the key
 #'
-#' @return
 #' @export
 #'
 #' @examples
@@ -168,10 +169,8 @@ add_key <- function(keyring_name, service_name){
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name character, keyring name
-#' @param service_name character, key name
+#' @inheritParams add_key
 #'
-#' @return
 #' @export
 #'
 #' @examples
@@ -197,16 +196,16 @@ delete_key <- function(keyring_name, service_name) {
 #' requesting database credentials in the console. The SQL Server tables are added
 #' to the connection pane.
 #'
-#' @seealso More information on connecting to databases using R can be found in RStudio's
+#' @seealso
+#' More information on connecting to databases using R can be found in RStudio's
 #' [Databases using R](https://db.rstudio.com/) webpages.
 #'
 #' @family database functions
 #'
-#' @param keyring_name character, keyring name
-#' @param service_name character, name of service storing credentials
-#' @param keyring logical, use of keyring TRUE (default) or request credentials (FALSE)
+#' @inheritParams add_key
+#' @param keyring default TRUE uses the keyring, FALSE requests credentials
 #'
-#' @return connection object, SQL Server connection object
+#' @return A SQL Server connection object
 #' @export
 #'
 #' @examples
@@ -280,7 +279,8 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #' This function initiates a MySQL connection using stored database credentials
 #' through the keyring package. The MySQL tables are added to the connection pane.
 #'
-#' @seealso More information on connecting to databases using R can be found in RStudio's
+#' @seealso
+#' More information on connecting to databases using R can be found in RStudio's
 #' [Databases using R](https://db.rstudio.com/) webpages.
 #'
 #' @family database functions
@@ -356,7 +356,8 @@ get_mysql_connection <- function(keyring_name, service_name) {
 #' This function initiates a PostgreSQL connection using stored database credentials
 #' through the keyring package. The PostgreSQL tables are added to the connection pane.
 #'
-#' @seealso More information on connecting to databases using R can be found in RStudio's
+#' @seealso
+#' More information on connecting to databases using R can be found in RStudio's
 #' [Databases using R](https://db.rstudio.com/) webpages.
 #'
 #' @family database functions

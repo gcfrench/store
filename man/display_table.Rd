@@ -23,6 +23,7 @@ through or display all the rows. The ability to search for table content and
 sort columns is also available.
 }
 \examples{
+\dontrun{
 suppressPackageStartupMessages({
  library(store)
  suppressWarnings({
@@ -38,5 +39,6 @@ heaviest_penguins <- penguins \%>\%
   slice_head(n = 5) \%>\%
   ungroup()
 display_table(heaviest_penguins)
+}
 }
 \concept{tabular display}

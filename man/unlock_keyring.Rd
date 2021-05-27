@@ -7,10 +7,7 @@
 unlock_keyring(keyring_name)
 }
 \arguments{
-\item{keyring_name}{character, keyring name}
-}
-\value{
-
+\item{keyring_name}{A character string providing the name of the keyring}
 }
 \description{
 Unlock the keyring requiring keyring password

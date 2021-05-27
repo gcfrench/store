@@ -18,6 +18,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #'suppressPackageStartupMessages({
 #'  library(store)
 #'  suppressWarnings({
@@ -33,6 +34,7 @@
 #'   slice_head(n = 5) %>%
 #'   ungroup()
 #' display_table(heaviest_penguins)
+#' }
 display_table <- function(data, rows = nrow(data)) {
   reactable::reactable(data[1:rows, ],
                        fullWidth = FALSE,
@@ -53,7 +55,8 @@ display_table <- function(data, rows = nrow(data)) {
 #' This function reduces the size of an image, archiving the
 #' original image in a separate archive sub-directory
 #'
-#' @seealso The example batch runs the function on a graph from the
+#' @seealso
+#' The example batch runs the function on a graph from the
 #' [palmerpenguins package](https://allisonhorst.github.io/palmerpenguins/articles/examples.html)
 #' and [palmer penguins image](https://allisonhorst.github.io/palmerpenguins/articles/art.html)
 #' from Allison Horst's Art work. Artwork by @allison_horst and is an example of parallelization using
@@ -200,7 +203,8 @@ display_table <- function(data, rows = nrow(data)) {
 #' This function adds a border shadow to the image, archiving the
 #' original image in a separate archive sub-directory
 #'
-#' @seealso The example batch runs the function on a graph from the
+#' @seealso
+#' The example batch runs the function on a graph from the
 #' [palmerpenguins package](https://allisonhorst.github.io/palmerpenguins/articles/examples.html)
 #' and is an example of parallelization using the [future](https://github.com/HenrikBengtsson/future)
 #' and [furrr](https://davisvaughan.github.io/furrr/) packages

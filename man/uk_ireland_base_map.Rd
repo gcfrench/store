@@ -13,6 +13,9 @@ A simple feature data frame with 6 rows and 3 variables
 \item{geometry}{polygon genometry}
 }
 }
+\source{
+Created by Owen Boswarva, 2018-07-04. Downloadable from \href{https://www.datadaptive.com/?pg=14}{DataAdaptive}
+}
 \usage{
 uk_ireland_base_map
 }
@@ -39,9 +42,6 @@ Northern Ireland, the Isle of Man, and Ireland.
 Licence: Open Government Licence v3 (OGL)
 http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 Attribution: Contains data © 2017 Oil & Gas Authority
-
-Created by Owen Boswarva, 2018-07-04
-Downloadable from \href{https://www.datadaptive.com/?pg=14}{DataAdaptive}
 }
 \examples{
 \dontrun{

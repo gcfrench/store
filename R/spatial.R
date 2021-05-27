@@ -195,9 +195,6 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #' http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 #' Attribution: Contains data © 2017 Oil & Gas Authority
 #'
-#' Created by Owen Boswarva, 2018-07-04
-#' Downloadable from [DataAdaptive](https://www.datadaptive.com/?pg=14)
-#'
 #' @examples
 #' \dontrun{
 #'suppressPackageStartupMessages({
@@ -242,5 +239,7 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #'   \item{uk}{whether country is in UK or not}
 #'   \item{geometry}{polygon genometry}
 #' }
+#' @source
+#' Created by Owen Boswarva, 2018-07-04. Downloadable from [DataAdaptive](https://www.datadaptive.com/?pg=14)
 "uk_ireland_base_map"
 

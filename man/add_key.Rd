@@ -7,22 +7,22 @@
 add_key(keyring_name, service_name)
 }
 \arguments{
-\item{keyring_name, }{character keyring name}
+\item{keyring_name}{A character string providing the name of the keyring}
 
-\item{service_name, }{character key name}
-}
-\value{
-
+\item{service_name}{A character string providing the name of the key}
 }
 \description{
 Add a new key to the keyring to store a new database connection string.
 If the keyring is locked then unlock it first with its password.
-
+}
+\details{
 On creating the key, the name of the key relating to the database is added under the service name
 and the database connections string is added as a json string in the password dialog box.
-
-SQL Server windows authentication: {"server":"SERVER_NAME", "database":"DATABASE_NAME"}
-For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
+\itemize{
+\item SQL Server windows authentication: \{"server":"SERVER_NAME", "database":"DATABASE_NAME"\}
+\item PostGresSQL database: \{"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"\}
+\item For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
+}
 }
 \examples{
 \dontrun{
