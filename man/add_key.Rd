@@ -24,11 +24,6 @@ and the database connections string is added as a json string in the password di
 \item For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
 }
 }
-\examples{
-\dontrun{
-add_key(readline("keyring name: "), readline("service name: "))
-}
-}
 \seealso{
 Other keyring functions: 
 \code{\link{create_locked_keyring}()},

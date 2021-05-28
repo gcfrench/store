@@ -15,11 +15,6 @@ delete_key(keyring_name, service_name)
 Remove a key from the keyring by supplying both the keyring name
 and name of key to remove
 }
-\examples{
-\dontrun{
-delete_key(readline("keyring name: "), readline("service name: "))
-}
-}
 \seealso{
 Other keyring functions: 
 \code{\link{add_key}()},

@@ -12,11 +12,6 @@ lock_keyring(keyring_name)
 \description{
 Lock the keyring requiring keyring password
 }
-\examples{
-\dontrun{
-lock_keyring(readline("keyring name: "))
-}
-}
 \seealso{
 Other keyring functions: 
 \code{\link{add_key}()},

@@ -16,11 +16,6 @@ A data frame listing the keys in the keyring
 List the current keys stored on the keyring.
 Each of these keys store a database connection string.
 }
-\examples{
-\dontrun{
-list_keys(readline("keyring name: "))
-}
-}
 \seealso{
 Other keyring functions: 
 \code{\link{add_key}()},

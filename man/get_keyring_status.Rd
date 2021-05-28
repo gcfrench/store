@@ -16,11 +16,6 @@ A message giving the locked status of the keyring
 Check the current status of the keyring. The default status of the keyring is to be locked,
 requiring its password to unlock it, to access the stored database connection strings.
 }
-\examples{
-\dontrun{
-get_keyring_status(readline("keyring name: "))
-}
-}
 \seealso{
 Other keyring functions: 
 \code{\link{add_key}()},

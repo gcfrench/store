@@ -12,11 +12,6 @@ unlock_keyring(keyring_name)
 \description{
 Unlock the keyring requiring keyring password
 }
-\examples{
-\dontrun{
-unlock_keyring(readline("keyring name: "))
-}
-}
 \seealso{
 Other keyring functions: 
 \code{\link{add_key}()},

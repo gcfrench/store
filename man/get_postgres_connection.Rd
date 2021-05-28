@@ -7,31 +7,32 @@
 get_postgres_connection(keyring_name, service_name)
 }
 \arguments{
-\item{keyring_name}{character, keyring name}
+\item{keyring_name}{A character string providing the name of the keyring}
 
-\item{service_name}{name of service storing credentials}
+\item{service_name}{A character string providing the name of the key}
 }
 \value{
-connection object, PostgreSQL connection object
+A PostgreSQL database connection object
 }
 \description{
 This function initiates a PostgreSQL connection using stored database credentials
 through the keyring package. The PostgreSQL tables are added to the connection pane.
 }
-\examples{
-\dontrun{
-suppressPackageStartupMessages({
-  library(store)
-  suppressWarnings({
-    library(dplyr)
-    library(DBI)
-    library(odbc)
-  })
-})
+\section{Connect}{
+\preformatted{library(store)
+library(DBI)
+library(odbc)
+
 # connect to database, using keyring stored credentials
 con <- get_postgres_connection(keyring_name = "keyring_name",
                                service_name = "database_name")
-# list tables
+}
+}
+
+\section{Query}{
+
+More information on working with databases using R can be found in RStudio's
+\href{https://db.rstudio.com/}{Databases using R} webpages.\preformatted{# list tables
 dbListTables(con)
 
 # get table
@@ -40,19 +41,15 @@ database_table <- tbl(con, "table_name") \%>\% collect()
 # get query
 database_query <- dbGetQuery(con, "sql_statement")
 database_query <- tbl(con, sql("sql_statement")) \%>\% collect()
-
-# import table
-dbWriteTable(con, Id(schema = "schema_name", table = "table_name"),
-             value = data_frame, append = TRUE, row.names = FALSE)
-
-# disconnect from database
-dbDisconnect(con)
 }
 }
+
+\section{Disconnect}{
+\preformatted{dbDisconnect(con)
+}
+}
+
 \seealso{
-More information on connecting to databases using R can be found in RStudio's
-\href{https://db.rstudio.com/}{Databases using R} webpages.
-
 Other database functions: 
 \code{\link{get_mysql_connection}()},
 \code{\link{get_sqlserver_connection}()}

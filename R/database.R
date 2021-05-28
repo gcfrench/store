@@ -20,11 +20,6 @@
 #' @param keyring_name A character string providing the name of the keyring
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' create_locked_keyring(readline("keyring name: "))
-#' }
 create_locked_keyring <- function(keyring_name) {
   keyring::keyring_create(keyring_name)
   keyring::keyring_lock(keyring_name)
@@ -45,11 +40,6 @@ create_locked_keyring <- function(keyring_name) {
 #' @return A message giving the locked status of the keyring
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' get_keyring_status(readline("keyring name: "))
-#' }
 get_keyring_status <- function(keyring_name) {
   if (keyring::keyring_is_locked(keyring_name)) {
     stringr::str_glue("The keyring {keyring_name} is currently locked")
@@ -69,11 +59,6 @@ get_keyring_status <- function(keyring_name) {
 #' @inheritParams create_locked_keyring
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' unlock_keyring(readline("keyring name: "))
-#' }
 unlock_keyring <- function(keyring_name) {
   keyring::keyring_unlock(keyring_name)
   stringr::str_glue("The keyring {keyring_name} is currently unlocked")
@@ -90,11 +75,6 @@ unlock_keyring <- function(keyring_name) {
 #' @inheritParams create_locked_keyring
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' lock_keyring(readline("keyring name: "))
-#' }
 lock_keyring <- function(keyring_name) {
   keyring::keyring_lock(keyring_name)
   stringr::str_glue("The keyring {keyring_name} is currently locked")
@@ -114,11 +94,6 @@ lock_keyring <- function(keyring_name) {
 #' @return A data frame listing the keys in the keyring
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' list_keys(readline("keyring name: "))
-#' }
 list_keys <- function(keyring_name) {
   keyring::key_list(keyring = keyring_name)
 }
@@ -144,11 +119,6 @@ list_keys <- function(keyring_name) {
 #' @param service_name A character string providing the name of the key
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' add_key(readline("keyring name: "), readline("service name: "))
-#' }
 add_key <- function(keyring_name, service_name){
   if (keyring::keyring_is_locked(keyring_name)) {
     message(stringr::str_glue("The keyring {keyring_name} is currently locked, please unlock with password first"))
@@ -172,11 +142,6 @@ add_key <- function(keyring_name, service_name){
 #' @inheritParams add_key
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' delete_key(readline("keyring name: "), readline("service name: "))
-#' }
 delete_key <- function(keyring_name, service_name) {
   if (keyring::keyring_is_locked(keyring_name)) {
     message(stringr::str_glue("The keyring {keyring_name} is currently locked, please unlock with password first"))
@@ -196,32 +161,22 @@ delete_key <- function(keyring_name, service_name) {
 #' requesting database credentials in the console. The SQL Server tables are added
 #' to the connection pane.
 #'
-#' @seealso
-#' More information on connecting to databases using R can be found in RStudio's
-#' [Databases using R](https://db.rstudio.com/) webpages.
+#' @section Connect:
+#' ```
+#' library(store)
+#' library(DBI)
+#' library(odbc)
 #'
-#' @family database functions
-#'
-#' @inheritParams add_key
-#' @param keyring default TRUE uses the keyring, FALSE requests credentials
-#'
-#' @return A SQL Server connection object
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'    library(DBI)
-#'    library(odbc)
-#'  })
-#' })
 #' # connect to database, using keyring stored credentials
 #' con <- get_sqlserver_connection(keyring_name = "keyring_name",
 #'                                 service_name = "database_name",
-#'                               keyring = TRUE)
+#'                                 keyring = TRUE)
+#' ```
 #'
+#' @section Query:
+#' More information on working with databases using R can be found in RStudio's
+#' [Databases using R](https://db.rstudio.com/) webpages.
+#' ```
 #' # list tables
 #' dbListTables(con)
 #'
@@ -231,10 +186,19 @@ delete_key <- function(keyring_name, service_name) {
 #' # get query
 #' database_query <- dbGetQuery(con, "sql_statement")
 #' database_query <- tbl(con, sql("sql_statement")) %>% collect()
+#' ```
 #'
-#' # disconnect from database
+#' @section Disconnect:
+#' ```
 #' dbDisconnect(con)
-#' }
+#' ```
+#' @family database functions
+#'
+#' @inheritParams add_key
+#' @param keyring default TRUE uses the keyring, FALSE requests credentials
+#'
+#' @return A SQL Server database connection object
+#' @export
 get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE) {
 
   # get connection string details
@@ -279,44 +243,27 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #' This function initiates a MySQL connection using stored database credentials
 #' through the keyring package. The MySQL tables are added to the connection pane.
 #'
-#' @seealso
-#' More information on connecting to databases using R can be found in RStudio's
-#' [Databases using R](https://db.rstudio.com/) webpages.
+#' @section Connect:
+#' ```
+#' library(store)
+#' library(DBI)
+#' library(odbc)
 #'
-#' @family database functions
-#'
-#' @param keyring_name character, keyring name
-#' @param service_name character, name of service storing credentials
-#'
-#' @return connection object, MySQL connection object
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'    library(dplyr)
-#'    library(DBI)
-#'    library(odbc)
-#'  })
-#' })
 #' # connect to database, using keyring stored credentials
 #' con <- get_mysql_connection(keyring_name = "keyring_name",
 #'                             service_name = "database_name")
-#' # list tables
-#' dbListTables(con)
+#' ```
 #'
-#' # get table
-#' database_table <- tbl(con, "table_name") %>% collect()
+#' @inheritSection get_sqlserver_connection Query
 #'
-#' # get query
-#' database_query <- dbGetQuery(con, "sql_statement")
-#' database_query <- tbl(con, sql("sql_statement")) %>% collect()
+#' @inheritSection get_sqlserver_connection Disconnect
 #'
-#' # disconnect from database
-#' dbDisconnect(con)
-#' }
+#' @family database functions
+#'
+#' @inheritParams add_key
+#'
+#' @return A MySQL database connection object
+#' @export
 get_mysql_connection <- function(keyring_name, service_name) {
 
   # unlock keyring
@@ -356,48 +303,27 @@ get_mysql_connection <- function(keyring_name, service_name) {
 #' This function initiates a PostgreSQL connection using stored database credentials
 #' through the keyring package. The PostgreSQL tables are added to the connection pane.
 #'
-#' @seealso
-#' More information on connecting to databases using R can be found in RStudio's
-#' [Databases using R](https://db.rstudio.com/) webpages.
+#' @section Connect:
+#' ```
+#' library(store)
+#' library(DBI)
+#' library(odbc)
 #'
-#' @family database functions
-#'
-#' @param keyring_name character, keyring name
-#' @param service_name name of service storing credentials
-#'
-#' @return connection object, PostgreSQL connection object
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
-#'     library(dplyr)
-#'     library(DBI)
-#'     library(odbc)
-#'   })
-#' })
 #' # connect to database, using keyring stored credentials
 #' con <- get_postgres_connection(keyring_name = "keyring_name",
 #'                                service_name = "database_name")
-#' # list tables
-#' dbListTables(con)
+#' ```
 #'
-#' # get table
-#' database_table <- tbl(con, "table_name") %>% collect()
+#' @inheritSection get_sqlserver_connection Query
 #'
-#' # get query
-#' database_query <- dbGetQuery(con, "sql_statement")
-#' database_query <- tbl(con, sql("sql_statement")) %>% collect()
+#' @inheritSection get_sqlserver_connection Disconnect
 #'
-#' # import table
-#' dbWriteTable(con, Id(schema = "schema_name", table = "table_name"),
-#'              value = data_frame, append = TRUE, row.names = FALSE)
+#' @family database functions
 #'
-#' # disconnect from database
-#' dbDisconnect(con)
-#' }
+#' @inheritParams add_key
+#'
+#' @return A PostgreSQL database connection object
+#' @export
 get_postgres_connection <- function(keyring_name, service_name) {
 
   # unlock keyring
@@ -430,4 +356,3 @@ get_postgres_connection <- function(keyring_name, service_name) {
 
   return(con)
 }
-
