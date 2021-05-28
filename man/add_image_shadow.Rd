@@ -7,14 +7,15 @@
 add_image_shadow(path_image)
 }
 \arguments{
-\item{path_image}{character, path name of image}
+\item{path_image}{The character string of the image path name}
 }
 \value{
-character, path name of image returned invisibly
+The path name of image returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
-This function adds a border shadow to the image, archiving the
-original image in a separate archive sub-directory
+This function adds a border shadow to the image, archiving the original image
+in a separate archive sub-directory
 }
 \examples{
 \dontrun{

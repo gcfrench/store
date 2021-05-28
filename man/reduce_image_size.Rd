@@ -7,12 +7,13 @@
 reduce_image_size(path_image, image_size = "50\%")
 }
 \arguments{
-\item{path_image}{character, path name of image}
+\item{path_image}{The character string of the image path name}
 
-\item{image_size}{percentage size reduction, default = 50\%}
+\item{image_size}{Percentage size reduction with 50\% as the default}
 }
 \value{
-character, path name of image returned invisibly
+The path name of image returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
 This function reduces the size of an image, archiving the
