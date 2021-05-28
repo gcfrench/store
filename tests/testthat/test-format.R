@@ -30,7 +30,7 @@ test_that("comma delimited list returns unique string", {
 
 test_that("delimiter text added to the last two items", {
   expect_equal(extract_comma_delimited_list(tibble::tibble(last_three_letters = c("x", "y", "z")),
-                                            column_name = "last_three_letters", last = " and "),
+                                            column_name = "last_three_letters", last_delimiter = " and "),
                "x, y and z")
 })
 

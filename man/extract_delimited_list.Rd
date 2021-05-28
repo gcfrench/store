@@ -7,13 +7,12 @@
 extract_delimited_list(delimiter)
 }
 \arguments{
-\item{delimiter}{character, delimiter}
+\item{delimiter}{A character string delimiter}
 }
 \value{
-function, extracts the column as a delimited list
+The parent function for extracting the column as a delimited list
 }
 \description{
 This function returns the parent function of the function factory to extract
-a delimited list from a data frame's column. It excludes NAs but does not sort
-the character string
+a delimited list from a data frame's column.
 }

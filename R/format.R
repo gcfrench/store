@@ -3,15 +3,14 @@
 #'
 #' @description
 #' This function returns the parent function of the function factory to extract
-#' a delimited list from a data frame's column. It excludes NAs but does not sort
-#' the character string
+#' a delimited list from a data frame's column.
 #'
-#' @param delimiter character, delimiter
+#' @param delimiter A character string delimiter
 #'
-#' @return function, extracts the column as a delimited list
+#' @return The parent function for extracting the column as a delimited list
 extract_delimited_list <- function(delimiter) {
 
-    function(.df, column_name, sort = FALSE, unique_list = FALSE, ...) {
+    function(.df, column_name, sort = FALSE, unique_list = FALSE, last_delimiter = "", ...) {
 
       # extract required vector
       .vec <- .df %>%
@@ -37,7 +36,7 @@ extract_delimited_list <- function(delimiter) {
 
       # create delimited character string
       .vec <- .vec %>%
-        glue::glue_collapse({{column_name}}, sep = delimiter, ...) %>%
+        glue::glue_collapse({{column_name}}, sep = delimiter, last = last_delimiter, ...) %>%
         vctrs::vec_cast(character())
 
       # add double quotes to ends of character string for paragraph delimiter
@@ -54,24 +53,25 @@ extract_delimited_list <- function(delimiter) {
 #'
 #' @description
 #' This function extracts a comma delimited list from a data frame's column. It
-#' excludes NAs, optionally sorts the character string and adds text as a delimiter
-#' to the last two items
+#' excludes NAs, optionally removes duplicate elements, sorts the character string
+#' and adds text as a delimiter to the last two items.
 #'
+#' @details
 #' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
 #' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
 #' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
 #' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
-#' to extract the comma delimited list
+#' to extract the delimited list.
 #'
 #' @family delimited functions
 #'
-#' @param .df data frame, data frame containing the column to extract the delimited list
-#' @param column_name character, name of column to extract the delimited list
-#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
-#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
-#' @param last, character, optional string used to separate the last two items
+#' @param .df A data frame containing the column with the delimited list to extract
+#' @param column_name The name of the column containing the delimited list to extract
+#' @param sort Should the delimited list be sorted (TRUE) or not (default FALSE)
+#' @param unique_list Should the delimited list contain duplicated elements (default FALSE) or not (TRUE)
+#' @param last_delimiter An optional character string used to separate the last two items in the delimited list
 #'
-#' @return character, comma delimited list
+#' @return The comma separated delimited list as a character string
 #' @export
 #'
 #' @examples
@@ -103,26 +103,18 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #' @title
 #' Extract a semi-colon delimited list of items
 #'
-#' This function extracts a semi-colon list from a data frame's column. It
-#' excludes NAs, optionally sorts the character string and adds text as a delimiter
-#' to the last two items
-#'
 #' @description
-#' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
-#' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
-#' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
-#' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
-#' to extract the semi-colon delimited list
+#' This function extracts a semi-colon delimited list from a data frame's column. It
+#' excludes NAs, optionally removes duplicate elements, sorts the character string
+#' and adds text as a delimiter to the last two items.
+#'
+#' @inherit extract_comma_delimited_list return details
 #'
 #' @family delimited functions
 #'
-#' @param .df data frame, data frame containing the column to extract the delimited list
-#' @param column_name character, name of column to extract the delimited list
-#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
-#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
-#' @param last, character, optional string used to separate the last two items
+#' @inheritParams extract_comma_delimited_list
 #'
-#' @return character, semi-colon delimited list
+#' @return The semi-colon separated delimited list as a character string
 #' @export
 #'
 #' @examples
@@ -154,26 +146,18 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #' @title
 #' Extract a space delimited list of items
 #'
-#' This function extracts a space delimited list from a data frame's column. It
-#' excludes NAs, optionally sorts the character string and adds text as a delimiter
-#' to the last two items
-#'
 #' @description
-#' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
-#' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
-#' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
-#' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
-#' to extract the semi-colon delimited list
+#' This function extracts a space delimited list from a data frame's column. It
+#' excludes NAs, optionally removes duplicate elements, sorts the character string
+#' and adds text as a delimiter to the last two items.
+#'
+#' @inherit extract_comma_delimited_list return details
 #'
 #' @family delimited functions
 #'
-#' @param .df data frame, data frame containing the column to extract the delimited list
-#' @param column_name character, name of column to extract the delimited list
-#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
-#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
-#' @param last, character, optional string used to separate the last two items
+#' @inheritParams extract_comma_delimited_list
 #'
-#' @return character, space delimited list
+#' @return The space separated delimited list as a character string
 #' @export
 #'
 #' @examples
@@ -202,31 +186,21 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #' heaviest_penguins
 extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 
-
-
 #' @title
 #' Extract a paragraph delimited list of items
 #'
-#' This function extracts a paragraph delimited list from a data frame's column,
-#' inserting two new lines and carriage returns. It excludes NAs, optionally sorts
-#' the character string and adds text as a delimiter to the last two items
-#'
 #' @description
-#' It is an example of the use of a [function factory](https://adv-r.hadley.nz/function-factories.html),
-#' [tidy evaluation](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
-#' and purrr's [map function](https://purrr.tidyverse.org/reference/map.html).
-#' The function may be called on a [nested data frame](https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html)
-#' to extract the paragraph delimited list
+#' This function extracts a paragraph delimited list from a data frame's column. It
+#' excludes NAs, optionally removes duplicate elements, sorts the character string
+#' and adds text as a delimiter to the last two items.
+#'
+#' @inherit extract_comma_delimited_list return details
 #'
 #' @family delimited functions
 #'
-#' @param .df data frame, data frame containing the column to extract the delimited list
-#' @param column_name character, name of column to extract the delimited list
-#' @param sort logical, whether the list is sorted (TRUE) or not (default FALSE)
-#' @param unique_list logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)
-#' @param last, character, optional string used to separate the last two items
+#' @inheritParams extract_comma_delimited_list
 #'
-#' @return character, paragraph delimited list
+#' @return The paragraph separated delimited list as a character string
 #' @export
 #'
 #' @examples
@@ -259,15 +233,17 @@ extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n
 #' Add a tibble to a list
 #'
 #' @description
-#' This function prepends tibbles to a list, creating the list
-#' in the environment calling this function if not already present
+#' This function prepends tibbles to a list, creating the list in the environment
+#' calling this function if not already present
 #'
-#' It is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
+#' @details
+#' Adding a tibble to a list is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
 #'
-#' @param .data tibble, tibble to be added
-#' @param .name character, name of tibble to be added
+#' @param .data The tibble to be added to the beginning of the list
+#' @param .name The name of the tibble to be added to the beginning of the list
 #'
-#' @return tibble, original tibble is returned invisibly
+#' @return The tibble is returned invisibly so that the function may be used within
+#' a pipe workflow
 #' @export
 #'
 #' @examples

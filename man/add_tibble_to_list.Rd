@@ -7,18 +7,20 @@
 add_tibble_to_list(.data, .name)
 }
 \arguments{
-\item{.data}{tibble, tibble to be added}
+\item{.data}{The tibble to be added to the beginning of the list}
 
-\item{.name}{character, name of tibble to be added}
+\item{.name}{The name of the tibble to be added to the beginning of the list}
 }
 \value{
-tibble, original tibble is returned invisibly
+The tibble is returned invisibly so that the function may be used within
+a pipe workflow
 }
 \description{
-This function prepends tibbles to a list, creating the list
-in the environment calling this function if not already present
-
-It is an example of \href{http://adv-r.had.co.nz/Environments.html}{assigning a variable to an environment}
+This function prepends tibbles to a list, creating the list in the environment
+calling this function if not already present
+}
+\details{
+Adding a tibble to a list is an example of \href{http://adv-r.had.co.nz/Environments.html}{assigning a variable to an environment}
 }
 \examples{
 suppressPackageStartupMessages({

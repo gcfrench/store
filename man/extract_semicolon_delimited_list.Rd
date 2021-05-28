@@ -2,40 +2,42 @@
 % Please edit documentation in R/format.R
 \name{extract_semicolon_delimited_list}
 \alias{extract_semicolon_delimited_list}
-\title{Extract a semi-colon delimited list of items
-
-This function extracts a semi-colon list from a data frame's column. It
-excludes NAs, optionally sorts the character string and adds text as a delimiter
-to the last two items}
+\title{Extract a semi-colon delimited list of items}
 \usage{
 extract_semicolon_delimited_list(
   .df,
   column_name,
   sort = FALSE,
   unique_list = FALSE,
+  last_delimiter = "",
   ...
 )
 }
 \arguments{
-\item{.df}{data frame, data frame containing the column to extract the delimited list}
+\item{.df}{A data frame containing the column with the delimited list to extract}
 
-\item{column_name}{character, name of column to extract the delimited list}
+\item{column_name}{The name of the column containing the delimited list to extract}
 
-\item{sort}{logical, whether the list is sorted (TRUE) or not (default FALSE)}
+\item{sort}{Should the delimited list be sorted (TRUE) or not (default FALSE)}
 
-\item{unique_list}{logical, whether to remove the duplicated elements (TRUE) or not (default FALSE)}
+\item{unique_list}{Should the delimited list contain duplicated elements (default FALSE) or not (TRUE)}
 
-\item{last, }{character, optional string used to separate the last two items}
+\item{last_delimiter}{An optional character string used to separate the last two items in the delimited list}
 }
 \value{
-character, semi-colon delimited list
+The semi-colon separated delimited list as a character string
 }
 \description{
+This function extracts a semi-colon delimited list from a data frame's column. It
+excludes NAs, optionally removes duplicate elements, sorts the character string
+and adds text as a delimiter to the last two items.
+}
+\details{
 It is an example of the use of a \href{https://adv-r.hadley.nz/function-factories.html}{function factory},
 \href{https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/}{tidy evaluation}
 and purrr's \href{https://purrr.tidyverse.org/reference/map.html}{map function}.
 The function may be called on a \href{https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html}{nested data frame}
-to extract the semi-colon delimited list
+to extract the delimited list.
 }
 \examples{
 suppressPackageStartupMessages({
