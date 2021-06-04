@@ -224,6 +224,13 @@ renv::restore()
 
 ## Add and edit script files
 
+### Add documentation folders --------------------------------------------
+```{r}
+fs::dir_create("man/figures")
+fs::dir_create("man/tables")
+fs::dir_create("man/examples")
+```
+
 ### Add new script --------------------------------------------
 
 **usethis::use_vignette**("vignette_name"): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.

@@ -28,19 +28,23 @@ suppressPackageStartupMessages({
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)
-    library(forcats)
   })
 })
-# select top 3 heaviest penguins for each species
+# select top 5 heaviest penguins from each species on each island
 heaviest_penguins <- penguins \%>\%
-  select(species, body_mass_g) \%>\%
-  group_by(species) \%>\%
+  select(species, island, body_mass_g) \%>\%
+  group_by(species, island) \%>\%
   arrange(desc(body_mass_g)) \%>\%
-  slice_head(n = 3) \%>\%
+  slice_head(n = 5) \%>\%
   ungroup()
 heaviest_penguins
 
 # prepend heaviest penguin species tibble to list
+suppressPackageStartupMessages({
+  suppressWarnings({
+   library(forcats)
+  })
+})
 heaviest_penguins \%>\%
   filter(species == "Adelie") \%>\%
   mutate(species = fct_drop(species)) \%>\%
@@ -58,6 +62,5 @@ heaviest_penguins \%>\%
 str(tibble_list, max.level = 1, list.len = 3)
 
 # convert list to tibble
-heaviest_penguins <- bind_rows(tibble_list)
-heaviest_penguins
+bind_rows(tibble_list)
 }

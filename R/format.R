@@ -1,13 +1,4 @@
-#' @title
-#' extract_delimited_list
-#'
-#' @description
-#' This function returns the parent function of the function factory to extract
-#' a delimited list from a data frame's column.
-#'
-#' @param delimiter A character string delimiter
-#'
-#' @return The parent function for extracting the column as a delimited list
+#' @noRd
 extract_delimited_list <- function(delimiter) {
 
     function(.df, column_name, sort = FALSE, unique_list = FALSE, last_delimiter = "", ...) {
@@ -74,30 +65,19 @@ extract_delimited_list <- function(delimiter) {
 #' @return The comma separated delimited list as a character string
 #' @export
 #'
+#' @example man/examples/heaviest_penguins.R
+#'
 #' @examples
+#' # extract comma separated list of penguin weights for each species on each island
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(purrr)
+#'    library(purrr)
 #'   })
 #' })
-#' # select top 5 heaviest penguins from each species on each island
-#' heaviest_penguins <- penguins %>%
-#'  select(species, island, body_mass_g) %>%
-#'  group_by(species, island) %>%
-#'  arrange(desc(body_mass_g)) %>%
-#'  slice_head(n = 5) %>%
-#'  ungroup()
-#' heaviest_penguins
-#'
-#' # extract comma separated list of penguin weights for each species on each island
-#' heaviest_penguins <- heaviest_penguins %>%
+#' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_comma_delimited_list, column_name = "body_mass_g")) %>%
 #'  select(-penguins)
-#' heaviest_penguins
 extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 
 #' @title
@@ -117,30 +97,19 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #' @return The semi-colon separated delimited list as a character string
 #' @export
 #'
+#' @example man/examples/heaviest_penguins.R
+#'
 #' @examples
+#' # extract comma separated list of penguin weights for each species on each island
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(purrr)
+#'    library(purrr)
 #'   })
 #' })
-#' # select top 5 heaviest penguins from each species on each island
-#' heaviest_penguins <- penguins %>%
-#'  select(species, island, body_mass_g) %>%
-#'  group_by(species, island) %>%
-#'  arrange(desc(body_mass_g)) %>%
-#'  slice_head(n = 5) %>%
-#'  ungroup()
-#' heaviest_penguins
-#'
-#' # extract comma separated list of penguin weights for each species on each island
-#' heaviest_penguins <- heaviest_penguins %>%
+#' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_semicolon_delimited_list, column_name = "body_mass_g")) %>%
 #'  select(-penguins)
-#' heaviest_penguins
 extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 
 #' @title
@@ -160,30 +129,15 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #' @return The space separated delimited list as a character string
 #' @export
 #'
-#' @examples
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(purrr)
-#'   })
-#' })
-#' # select top 5 heaviest penguins from each species on each island
-#' heaviest_penguins <- penguins %>%
-#'  select(species, island, body_mass_g) %>%
-#'  group_by(species, island) %>%
-#'  arrange(desc(body_mass_g)) %>%
-#'  slice_head(n = 5) %>%
-#'  ungroup()
-#' heaviest_penguins
+#' @example man/examples/heaviest_penguins.R
 #'
+#' @examples
 #' # extract comma separated list of penguin weights for each species on each island
-#' heaviest_penguins <- heaviest_penguins %>%
+#' library(purrr)
+#' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_space_delimited_list, column_name = "body_mass_g")) %>%
 #'  select(-penguins)
-#' heaviest_penguins
 extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 
 #' @title
@@ -203,30 +157,19 @@ extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 #' @return The paragraph separated delimited list as a character string
 #' @export
 #'
+#' @example man/examples/heaviest_penguins.R
+#'
 #' @examples
+#' # extract paragraph separated list of penguin weights for each species on each island
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(purrr)
+#'    library(purrr)
 #'   })
 #' })
-#' # select top 5 heaviest penguins from each species on each island
-#' heaviest_penguins <- penguins %>%
-#'  select(species, island, body_mass_g) %>%
-#'  group_by(species, island) %>%
-#'  arrange(desc(body_mass_g)) %>%
-#'  slice_head(n = 5) %>%
-#'  ungroup()
-#' heaviest_penguins
-#'
-#' # extract paragraph separated list of penguin weights for each species on each island
-#' heaviest_penguins <- heaviest_penguins %>%
+#' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_paragraph_delimited_list, column_name = "body_mass_g")) %>%
 #'  select(-penguins)
-#' heaviest_penguins
 extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n")
 
 #' @title
@@ -246,25 +189,15 @@ extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n
 #' a pipe workflow
 #' @export
 #'
+#' @example man/examples/heaviest_penguins.R
+#'
 #' @examples
+#' # prepend heaviest penguin species tibble to list
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(forcats)
+#'    library(forcats)
 #'   })
 #' })
-#' # select top 3 heaviest penguins for each species
-#' heaviest_penguins <- penguins %>%
-#'   select(species, body_mass_g) %>%
-#'   group_by(species) %>%
-#'   arrange(desc(body_mass_g)) %>%
-#'   slice_head(n = 3) %>%
-#'   ungroup()
-#' heaviest_penguins
-#'
-#' # prepend heaviest penguin species tibble to list
 #' heaviest_penguins %>%
 #'   filter(species == "Adelie") %>%
 #'   mutate(species = fct_drop(species)) %>%
@@ -282,8 +215,7 @@ extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n
 #' str(tibble_list, max.level = 1, list.len = 3)
 #'
 #' # convert list to tibble
-#' heaviest_penguins <- bind_rows(tibble_list)
-#' heaviest_penguins
+#' bind_rows(tibble_list)
 add_tibble_to_list <- function(.data, .name) {
 
   # environment calling this function

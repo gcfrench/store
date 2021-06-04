@@ -45,24 +45,27 @@ suppressPackageStartupMessages({
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)
-    library(purrr)
   })
 })
 # select top 5 heaviest penguins from each species on each island
 heaviest_penguins <- penguins \%>\%
- select(species, island, body_mass_g) \%>\%
- group_by(species, island) \%>\%
- arrange(desc(body_mass_g)) \%>\%
- slice_head(n = 5) \%>\%
- ungroup()
+  select(species, island, body_mass_g) \%>\%
+  group_by(species, island) \%>\%
+  arrange(desc(body_mass_g)) \%>\%
+  slice_head(n = 5) \%>\%
+  ungroup()
 heaviest_penguins
 
 # extract comma separated list of penguin weights for each species on each island
-heaviest_penguins <- heaviest_penguins \%>\%
+suppressPackageStartupMessages({
+  suppressWarnings({
+   library(purrr)
+  })
+})
+heaviest_penguins \%>\%
  group_nest(across(c(species:island)), .key = "penguins") \%>\%
  mutate(weight = map_chr(penguins, extract_semicolon_delimited_list, column_name = "body_mass_g")) \%>\%
  select(-penguins)
-heaviest_penguins
 }
 \seealso{
 Other delimited functions: 
