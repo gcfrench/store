@@ -24,21 +24,24 @@ through or display all the rows. The ability to search for table content and
 sort columns is also available.
 }
 \examples{
-\dontrun{
 suppressPackageStartupMessages({
- library(store)
- suppressWarnings({
-   library(palmerpenguins)
-   library(dplyr)
- })
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+    library(dplyr)
+  })
 })
-# display top 5 heaviest penguins from each species on each island
+# select top 5 heaviest penguins from each species on each island
 heaviest_penguins <- penguins \%>\%
   select(species, island, body_mass_g) \%>\%
   group_by(species, island) \%>\%
   arrange(desc(body_mass_g)) \%>\%
   slice_head(n = 5) \%>\%
   ungroup()
+heaviest_penguins
+
+\dontrun{
+# display table of penguin weights for each species on each island
 display_table(heaviest_penguins)
 }
 }

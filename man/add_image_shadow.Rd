@@ -17,38 +17,36 @@ used in a piped workflow
 This function adds a border shadow to the image, archiving the original image
 in a separate archive sub-directory
 }
-\examples{
-\dontrun{
-suppressPackageStartupMessages({
- library(store)
- suppressWarnings({
-  library(palmerpenguins)
-  library(fs)
-  library(dplyr)
-  library(ggplot2)
-  library(here)
-  library(magick)
-  library(future)
- library(furrr)
- })
-})
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
-if (!dir_exists("output/images")) {dir_create("output/images")}
+\section{Figures}{
 
+\if{html}{\figure{penguins_mass_flipper_plot.png}{options: width=100\%}}
+}
+
+\examples{
 # example taken from palmerpenguins example analysis of mass vs. flipper length
 # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
 
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+    library(fs)
+    library(dplyr)
+    library(ggplot2)
+  })
+})
+
+# create temp directory
+dir_create(path(tempdir(), "figures"))
+
 # data
-mass_flipper_data <- penguins \%>\%
-  select(species, flipper_length_mm, body_mass_g, )
-mass_flipper_data
+penguins_mass_flipper <- penguins \%>\%
+  select(species, flipper_length_mm, body_mass_g)
 
 # graph
-mass_flipper_graph <- ggplot(data = mass_flipper_data,
-                             aes(x = flipper_length_mm,
-                                 y = body_mass_g)) +
+penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
+                                     aes(x = flipper_length_mm,
+                                         y = body_mass_g)) +
   geom_point(aes(color = species,
                  shape = species),
              size = 3,
@@ -68,30 +66,38 @@ mass_flipper_graph <- ggplot(data = mass_flipper_data,
         plot.caption.position = "plot")
 
 # save graph
-ggsave(filename = here("output", "images", "palmerpenguins_graph.png"),
-       plot = mass_flipper_graph,
+suppressWarnings({
+  ggsave(filename = path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+       plot = penguins_mass_flipper_plot,
        type = "cairo-png",
        width = 6,
        height = 6,
        units = "in",
-      dpi = 72)
+       dpi = 72)
+})
 
-# graph image
-mass_flipper_graph <- image_read(here("output", "images", "palmerpenguins_graph.png"))
-mass_flipper_graph
+suppressPackageStartupMessages({
+   suppressWarnings({
+      library(fs)
+      library(here)
+      library(future)
+      library(furrr)
+   })
+})
 
 # add shadows to graph image
 plan(multisession)
-here("output", "images") \%>\%
-  dir_ls(., glob = "*.png") \%>\%
-  future_map(add_image_shadow,
-             .options = furrr_options(seed = TRUE),
+path(tempdir(), "figures") \%>\%
+   dir_ls(., glob = "*.png") \%>\%
+   future_map(add_image_shadow,
+              .options = furrr_options(seed = TRUE),
               .progress = TRUE)
 
-# shadowed graph
-mass_flipper_graph_shadow <- image_read(here("output", "images", "palmerpenguins_graph.png"))
-mass_flipper_graph_shadow
-}
+# copy shadow graph to man directory
+file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+          here("man", "figures", "penguins_mass_flipper_plot.png"),
+          overwrite = TRUE)
+
 }
 \seealso{
 The example batch runs the function on a graph from the

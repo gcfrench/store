@@ -17,22 +17,11 @@
 #'
 #' @export
 #'
+#' @example man/examples/heaviest_penguins.R
+#'
 #' @examples
 #' \dontrun{
-#'suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'    library(palmerpenguins)
-#'    library(dplyr)
-#'  })
-#'})
-#' # display top 5 heaviest penguins from each species on each island
-#' heaviest_penguins <- penguins %>%
-#'   select(species, island, body_mass_g) %>%
-#'   group_by(species, island) %>%
-#'   arrange(desc(body_mass_g)) %>%
-#'   slice_head(n = 5) %>%
-#'   ungroup()
+#' # display table of penguin weights for each species on each island
 #' display_table(heaviest_penguins)
 #' }
 display_table <- function(data, rows = nrow(data)) {
@@ -70,81 +59,33 @@ display_table <- function(data, rows = nrow(data)) {
 #'
 #' @export
 #'
+#' @example man/examples/penguins_mass_flipper_plot.R
+#'
 #' @examples
-#' \dontrun{
 #' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(fs)
-#'   library(dplyr)
-#'   library(ggplot2)
-#'   library(here)
-#'   library(magick)
-#'   library(future)
-#'  library(furrr)
-#'  })
+#'    suppressWarnings({
+#'       library(fs)
+#'       library(here)
+#'       library(future)
+#'       library(furrr)
+#'    })
 #' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#' if (!dir_exists("output/images")) {dir_create("output/images")}
-#'
-#' # example taken from palmerpenguins example analysis of mass vs. flipper length
-#' # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
-#'
-#' # data
-#' mass_flipper_data <- penguins %>%
-#'   select(species, flipper_length_mm, body_mass_g, )
-#' mass_flipper_data
-#'
-#' # graph
-#' mass_flipper_graph <- ggplot(data = mass_flipper_data,
-#'                              aes(x = flipper_length_mm,
-#'                                  y = body_mass_g)) +
-#'   geom_point(aes(color = species,
-#'                  shape = species),
-#'              size = 3,
-#'              alpha = 0.8) +
-#'   theme_minimal() +
-#'   scale_color_manual(values = c("darkorange","purple","cyan4")) +
-#'   labs(title = "Penguin size, Palmer Station LTER",
-#'        subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
-#'        x = "Flipper length (mm)",
-#'        y = "Body mass (g)",
-#'        color = "Penguin species",
-#'        shape = "Penguin species") +
-#'   theme(legend.position = c(0.2, 0.7),
-#'         legend.background = element_rect(fill = "white", color = NA),
-#'         plot.title.position = "plot",
-#'         plot.caption = element_text(hjust = 0, face= "italic"),
-#'         plot.caption.position = "plot")
-#'
-#' # save graph
-#' ggsave(filename = here("output", "images", "palmerpenguins_graph.png"),
-#'        plot = mass_flipper_graph,
-#'        type = "cairo-png",
-#'        width = 6,
-#'        height = 6,
-#'        units = "in",
-#'       dpi = 72)
-#'
-#' # graph image
-#' mass_flipper_graph <- image_read(here("output", "images", "palmerpenguins_graph.png"))
-#' mass_flipper_graph
 #'
 #' # add shadows to graph image
 #' plan(multisession)
-#' here("output", "images") %>%
-#'   dir_ls(., glob = "*.png") %>%
-#'   future_map(add_image_shadow,
-#'              .options = furrr_options(seed = TRUE),
+#' path(tempdir(), "figures") %>%
+#'    dir_ls(., glob = "*.png") %>%
+#'    future_map(add_image_shadow,
+#'               .options = furrr_options(seed = TRUE),
 #'               .progress = TRUE)
 #'
-#' # shadowed graph
-#' mass_flipper_graph_shadow <- image_read(here("output", "images", "palmerpenguins_graph.png"))
-#' mass_flipper_graph_shadow
-#' }
+#' # copy shadow graph to man directory
+#' file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+#'           here("man", "figures", "penguins_mass_flipper_plot.png"),
+#'           overwrite = TRUE)
+#'
+#' @section Figures:
+#' \if{html}{\figure{penguins_mass_flipper_plot.png}{options: width=100\%}}
 add_image_shadow <- function(path_image) {
 
    # create archive directory if does not exist
