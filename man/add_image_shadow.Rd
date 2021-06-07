@@ -19,7 +19,7 @@ in a separate archive sub-directory
 }
 \section{Figures}{
 
-\if{html}{\figure{penguins_mass_flipper_plot.png}{options: width=100\%}}
+\figure{penguins_mass_flipper_plot.png}
 }
 
 \examples{
@@ -76,24 +76,30 @@ suppressWarnings({
        dpi = 72)
 })
 
+# add shadows to graph image
 suppressPackageStartupMessages({
    suppressWarnings({
       library(fs)
-      library(here)
       library(future)
       library(furrr)
    })
 })
 
-# add shadows to graph image
 plan(multisession)
-path(tempdir(), "figures") \%>\%
-   dir_ls(., glob = "*.png") \%>\%
-   future_map(add_image_shadow,
+path(tempdir(), "figures") \%>\% {
+   suppressMessages({dir_ls(., glob = "*.png")})} \%>\%
+   future_walk(add_image_shadow,
               .options = furrr_options(seed = TRUE),
               .progress = TRUE)
 
 # copy shadow graph to man directory
+suppressPackageStartupMessages({
+   suppressWarnings({
+      library(fs)
+      library(here)
+   })
+})
+
 file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
           here("man", "figures", "penguins_mass_flipper_plot.png"),
           overwrite = TRUE)

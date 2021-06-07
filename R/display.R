@@ -62,30 +62,36 @@ display_table <- function(data, rows = nrow(data)) {
 #' @example man/examples/penguins_mass_flipper_plot.R
 #'
 #' @examples
+#' # add shadows to graph image
 #' suppressPackageStartupMessages({
 #'    suppressWarnings({
 #'       library(fs)
-#'       library(here)
 #'       library(future)
 #'       library(furrr)
 #'    })
 #' })
 #'
-#' # add shadows to graph image
 #' plan(multisession)
-#' path(tempdir(), "figures") %>%
-#'    dir_ls(., glob = "*.png") %>%
-#'    future_map(add_image_shadow,
+#' path(tempdir(), "figures") %>% {
+#'    suppressMessages({dir_ls(., glob = "*.png")})} %>%
+#'    future_walk(add_image_shadow,
 #'               .options = furrr_options(seed = TRUE),
 #'               .progress = TRUE)
 #'
 #' # copy shadow graph to man directory
+#' suppressPackageStartupMessages({
+#'    suppressWarnings({
+#'       library(fs)
+#'       library(here)
+#'    })
+#' })
+#'
 #' file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
 #'           here("man", "figures", "penguins_mass_flipper_plot.png"),
 #'           overwrite = TRUE)
 #'
 #' @section Figures:
-#' \if{html}{\figure{penguins_mass_flipper_plot.png}{options: width=100\%}}
+#' ![Penguins mass v flipper plot](penguins_mass_flipper_plot.png)
 add_image_shadow <- function(path_image) {
 
    # create archive directory if does not exist

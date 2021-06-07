@@ -94,7 +94,7 @@ compare_dataset_versions <- function(old_dataset, new_dataset, skip_rows = 0) {
   difference_dataset <- readr::read_csv(temp_file,
                                         col_types = readr::cols(X1 = readr::col_skip()),
                                         skip = skip_rows) %>%
-    dplyr::mutate(differences = case_when(
+    dplyr::mutate(differences = dplyr::case_when(
       `@@` == "->" ~ "# row changed",
       `@@` == "+++" ~ "# row added",
       `@@` == "---" ~ "# row removed",
