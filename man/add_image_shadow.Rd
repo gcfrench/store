@@ -17,9 +17,15 @@ used in a piped workflow
 This function adds a border shadow to the image, archiving the original image
 in a separate archive sub-directory
 }
+\details{
+The example batch runs the function on a graph from the
+\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
+and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
+and \href{https://davisvaughan.github.io/furrr/}{furrr} packages
+}
 \section{Figures}{
 
-\figure{penguins_mass_flipper_plot.png}
+\figure{penguins_mass_flipper_plot_shadow.png}
 }
 
 \examples{
@@ -101,16 +107,10 @@ suppressPackageStartupMessages({
 })
 
 file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-          here("man", "figures", "penguins_mass_flipper_plot.png"),
+          here("man", "figures", "penguins_mass_flipper_plot_shadow.png"),
           overwrite = TRUE)
-
 }
 \seealso{
-The example batch runs the function on a graph from the
-\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
-and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
-and \href{https://davisvaughan.github.io/furrr/}{furrr} packages
-
 Other image manipulation functions: 
 \code{\link{reduce_image_size}()}
 }

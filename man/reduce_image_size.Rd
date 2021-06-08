@@ -16,11 +16,24 @@ The path name of image returned invisibly so that the function can be
 used in a piped workflow
 }
 \description{
-This function reduces the size of an image, archiving the
-original image in a separate archive sub-directory
+This function reduces the size of an image, archiving the original image in a
+separate archive sub-directory
 }
+\details{
+The example batch runs the function on a graph from the
+\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
+and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
+and \href{https://davisvaughan.github.io/furrr/}{furrr} packages
+}
+\section{Figures}{
+
+\figure{penguins_mass_flipper_plot_reduced.png}
+}
+
 \examples{
-\dontrun{
+# example taken from palmerpenguins example analysis of mass vs. flipper length
+# https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+
 suppressPackageStartupMessages({
   library(store)
   suppressWarnings({
@@ -28,29 +41,20 @@ suppressPackageStartupMessages({
     library(fs)
     library(dplyr)
     library(ggplot2)
-    library(here)
-    library(magick)
-    library(future)
-    library(furrr)
   })
 })
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
-if (!dir_exists("output/images")) {dir_create("output/images")}
 
-# example taken from palmerpenguins example analysis of mass vs. flipper length
-# https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+# create temp directory
+dir_create(path(tempdir(), "figures"))
 
 # data
-mass_flipper_data <- penguins \%>\%
-  select(species, flipper_length_mm, body_mass_g, )
-mass_flipper_data
+penguins_mass_flipper <- penguins \%>\%
+  select(species, flipper_length_mm, body_mass_g)
 
 # graph
-mass_flipper_graph <- ggplot(data = mass_flipper_data,
-                             aes(x = flipper_length_mm,
-                                 y = body_mass_g)) +
+penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
+                                     aes(x = flipper_length_mm,
+                                         y = body_mass_g)) +
   geom_point(aes(color = species,
                  shape = species),
              size = 3,
@@ -70,65 +74,46 @@ mass_flipper_graph <- ggplot(data = mass_flipper_data,
         plot.caption.position = "plot")
 
 # save graph
-ggsave(filename = here("output", "images", "palmerpenguins_graph.png"),
-       plot = mass_flipper_graph,
+suppressWarnings({
+  ggsave(filename = path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+       plot = penguins_mass_flipper_plot,
        type = "cairo-png",
-       width = 8,
-       height = 8,
+       width = 6,
+       height = 6,
        units = "in",
        dpi = 72)
-
-# graph image
-mass_flipper_graph <- image_read(here("output", "images", "palmerpenguins_graph.png"))
-mass_flipper_graph
-
-# graph information
-image_info(mass_flipper_graph)
-
-# image taken from Allison Horst's Art for teaching with palmerpengiuns
-# Citation: Artwork by @allison_horst
-lter_penguins <- image_read("https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png")
-lter_penguins
-
-# image information
-image_info(lter_penguins)
-
-# save image
-image_write(image = lter_penguins,
-            path = here("output", "images", "palmerpenguins_image.png"))
+})
 
 # batch reduce images
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(fs)
+    library(future)
+    library(furrr)
+  })
+})
+
 plan(multisession)
-here("output/images") \%>\%
-  dir_ls(., glob = "*.png") \%>\%
-  future_map(reduce_image_size,
-             image_size = "50\%",
-             .options = furrr_options(seed = TRUE),
-             .progress = TRUE)
+path(tempdir(), "figures") \%>\% {
+  suppressMessages({dir_ls(., glob = "*.png")})} \%>\%
+  future_walk(reduce_image_size,
+              image_size = "50\%",
+              .options = furrr_options(seed = TRUE),
+              .progress = TRUE)
 
-# reduced graph
-mass_flipper_graph_reduce <- image_read(here("output", "images", "palmerpenguins_graph.png"))
-mass_flipper_graph_reduce
+# copy reduced graph image to man directory
+suppressPackageStartupMessages({
+   suppressWarnings({
+      library(fs)
+      library(here)
+   })
+})
 
-# reduced graph information
-image_info(mass_flipper_graph_reduce)
-
-# reduced image
-lter_penguins_reduce <- image_read(here("output", "images", "palmerpenguins_image.png"))
-lter_penguins_reduce
-
-# reduced image information
-image_info(lter_penguins_reduce)
-}
+file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+          here("man", "figures", "penguins_mass_flipper_plot_reduced.png"),
+          overwrite = TRUE)
 }
 \seealso{
-The example batch runs the function on a graph from the
-\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
-and \href{https://allisonhorst.github.io/palmerpenguins/articles/art.html}{palmer penguins image}
-from Allison Horst's Art work. Artwork by @allison_horst and is an example of parallelization using
-the \href{https://github.com/HenrikBengtsson/future}{future} and \href{https://davisvaughan.github.io/furrr/}{furrr}
-packages
-
 \href{https://www.jumpingrivers.com/}{Jumping rivers} has written a series of
 four blogs for \href{https://www.jumpingrivers.com/blog/knitr-include-graphics-external/}{displaying images on web pages}.
 
