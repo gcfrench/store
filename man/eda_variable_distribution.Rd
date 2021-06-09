@@ -7,10 +7,11 @@
 eda_variable_distribution(.dataset)
 }
 \arguments{
-\item{.dataset}{data frame, dataset for exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis}
 }
 \value{
-dataset returned invisibly
+The data frame is returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -18,10 +19,11 @@ dataset returned invisibly
 Exports the distribution of the numeric variables within a data frame, including
 a histogram for each variable and table of summary statistics. These statistics
 include the range, quartiles, mean, medium, standard deviation, standard error of
-the mean, level of skewness, kurtosis and normality
-
+the mean, level of skewness, kurtosis and normality.
+}
+\details{
 The output directory is created in the project root directory which may be changed
-using here::i_am function
+using here::i_am function.
 }
 \examples{
 \dontrun{
@@ -43,9 +45,6 @@ eda_variable_distribution(penguins_raw)
 }
 }
 \seealso{
-This is an example of exploratory data analsyis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
-and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages
-
 Other exploratory data analysis: 
 \code{\link{eda_variable_correlation}()},
 \code{\link{eda_variable_outliers}()},

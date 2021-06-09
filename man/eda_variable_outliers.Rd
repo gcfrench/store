@@ -7,20 +7,22 @@
 eda_variable_outliers(.dataset)
 }
 \arguments{
-\item{.dataset}{data frame, dataset for exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis}
 }
 \value{
-dataset returned invisibly
+The data frame is returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Exports the variable outliers within a data frame with a boxplot, and
 summary statistics including count outliers and mean of each variable
-with outliers included and excluded
-
+with outliers included and excluded.
+}
+\details{
 The output directory is created in the project root directory which may be changed
-using here::i_am function
+using here::i_am function.
 }
 \examples{
 \dontrun{
@@ -42,9 +44,6 @@ eda_variable_outliers(penguins_raw)
 }
 }
 \seealso{
-This is an example of exploratory data analsyis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
-and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages
-
 Other exploratory data analysis: 
 \code{\link{eda_variable_correlation}()},
 \code{\link{eda_variable_distribution}()},

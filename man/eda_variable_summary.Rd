@@ -7,10 +7,11 @@
 eda_variable_summary(.dataset)
 }
 \arguments{
-\item{.dataset}{data frame, dataset for exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis}
 }
 \value{
-dataset returned invisibly
+The data frame is returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -18,10 +19,11 @@ dataset returned invisibly
 Exports the basic statistics of the variables within a data frame into an output
 directory. This includes a plots of the prevalence of missing values and frequency
 of category levels and a table image containing variable's type summary count of
-the number of rows, missing values, unique values and zero values for each variable
-
+the number of rows, missing values, unique values and zero values for each variable.
+}
+\details{
 The output directory is created in the project root directory which may be changed
-using here::i_am function
+using here::i_am function.
 }
 \examples{
 \dontrun{
@@ -43,8 +45,8 @@ eda_variable_summary(penguins_raw)
 }
 }
 \seealso{
-This is an example of exploratory data analsyis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
-and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages
+This is an example of exploratory data analysis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
+and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages.
 
 Other exploratory data analysis: 
 \code{\link{eda_variable_correlation}()},

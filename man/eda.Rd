@@ -13,28 +13,30 @@ eda(
 )
 }
 \arguments{
-\item{.dataset}{data frame, dataset for exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis}
 
-\item{summary}{boolean, display variable summary (FALSE to turn off)}
+\item{summary}{Use the default TRUE to display variable summary or FALSE to not display variable summary}
 
-\item{outliers}{boolean, display outliers (FALSE to turn off)}
+\item{outliers}{Use the default TRUE to display outliers or FALSE to not display outliers}
 
-\item{distribution}{boolean, display variable distribution (FALSE to turn off)}
+\item{distribution}{Use the default TRUE to display variable distribution or FALSE to not display variable distribution}
 
-\item{correlation}{boolean, display variable correlation (FALSE to turn off)}
+\item{correlation}{Use the default TRUE to display variable correlation orFALSE to not display variable correlation}
 }
 \value{
-dataset returned invisibly
+The data frame is returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Export the collection of exploratory data analyses plots and tables. This includes
 the summary, distribution and correlation of variables and presence of outliers
-exported by default, any of which may be excluded in the export
-
+exported by default, any of which may be excluded in the export.
+}
+\details{
 The output directory is created in the project root directory which may be changed
-using here::i_am function
+using here::i_am function.
 }
 \examples{
 \dontrun{
@@ -56,9 +58,6 @@ eda_variable_collection(penguins_raw)
 }
 }
 \seealso{
-This is an example of exploratory data analsyis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
-and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages
-
 Other exploratory data analysis: 
 \code{\link{eda_variable_correlation}()},
 \code{\link{eda_variable_distribution}()},

@@ -7,19 +7,21 @@
 eda_variable_correlation(.dataset)
 }
 \arguments{
-\item{.dataset}{data frame, dataset for exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis}
 }
 \value{
-dataset returned invisibly
+The data frame is returned invisibly so that the function can be
+used in a piped workflow
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Exports a plot of the correlation matrix for each variable, showing the
-correlation values between each variable combination
-
+correlation values between each variable combination.
+}
+\details{
 The output directory is created in the project root directory which may be changed
-using here::i_am function
+using here::i_am function.
 }
 \examples{
 \dontrun{
@@ -41,9 +43,6 @@ eda_variable_correlation(penguins_raw)
 }
 }
 \seealso{
-This is an example of exploratory data analsyis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}
-and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages
-
 Other exploratory data analysis: 
 \code{\link{eda_variable_distribution}()},
 \code{\link{eda_variable_outliers}()},

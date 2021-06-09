@@ -7,20 +7,23 @@
 #' Exports the basic statistics of the variables within a data frame into an output
 #' directory. This includes a plots of the prevalence of missing values and frequency
 #' of category levels and a table image containing variable's type summary count of
-#' the number of rows, missing values, unique values and zero values for each variable
+#' the number of rows, missing values, unique values and zero values for each variable.
 #'
+#' @details
 #' The output directory is created in the project root directory which may be changed
-#' using here::i_am function
+#' using here::i_am function.
 #'
 #' @seealso
-#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
-#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#' This is an example of exploratory data analysis using the [dlookr](https://github.com/choonghyunryu/dlookr)
+#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages.
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, dataset for exploratory data analysis
+#' @param .dataset A data frame requiring exploratory data analysis
 #'
-#' @return dataset returned invisibly
+#' @return The data frame is returned invisibly so that the function can be
+#' used in a piped workflow
+#'
 #' @export
 #'
 #' @examples
@@ -125,20 +128,18 @@ eda_variable_summary <- function(.dataset) {
 #'
 #' Exports the variable outliers within a data frame with a boxplot, and
 #' summary statistics including count outliers and mean of each variable
-#' with outliers included and excluded
+#' with outliers included and excluded.
 #'
-#' The output directory is created in the project root directory which may be changed
-#' using here::i_am function
+#' @inherit eda_variable_summary return details
 #'
-#' @seealso
-#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
-#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#' @inherit eda_variable_summary return seealso
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, dataset for exploratory data analysis
+#' @inheritParams eda_variable_summary
 #'
-#' @return dataset returned invisibly
+#' @inherit eda_variable_summary return return
+#'
 #' @export
 #'
 #' @examples
@@ -227,20 +228,18 @@ eda_variable_outliers <- function(.dataset) {
 #' Exports the distribution of the numeric variables within a data frame, including
 #' a histogram for each variable and table of summary statistics. These statistics
 #' include the range, quartiles, mean, medium, standard deviation, standard error of
-#' the mean, level of skewness, kurtosis and normality
+#' the mean, level of skewness, kurtosis and normality.
 #'
-#' The output directory is created in the project root directory which may be changed
-#' using here::i_am function
+#' @inherit eda_variable_summary return details
 #'
-#' @seealso
-#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
-#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#' @inherit eda_variable_summary return seealso
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, dataset for exploratory data analysis
+#' @inheritParams eda_variable_summary
 #'
-#' @return dataset returned invisibly
+#' @inherit eda_variable_summary return return
+#'
 #' @export
 #'
 #' @examples
@@ -321,20 +320,18 @@ eda_variable_distribution <- function(.dataset) {
 #' `r lifecycle::badge("experimental")`
 #'
 #' Exports a plot of the correlation matrix for each variable, showing the
-#' correlation values between each variable combination
+#' correlation values between each variable combination.
 #'
-#' The output directory is created in the project root directory which may be changed
-#' using here::i_am function
+#' @inherit eda_variable_summary return details
 #'
-#' @seealso
-#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
-#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#' @inherit eda_variable_summary return seealso
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, dataset for exploratory data analysis
+#' @inheritParams eda_variable_summary
 #'
-#' @return dataset returned invisibly
+#' @inherit eda_variable_summary return return
+#'
 #' @export
 #'
 #' @examples
@@ -394,24 +391,22 @@ eda_variable_correlation <- function(.dataset) {
 #'
 #' Export the collection of exploratory data analyses plots and tables. This includes
 #' the summary, distribution and correlation of variables and presence of outliers
-#' exported by default, any of which may be excluded in the export
+#' exported by default, any of which may be excluded in the export.
 #'
-#' The output directory is created in the project root directory which may be changed
-#' using here::i_am function
+#' @inherit eda_variable_summary return details
 #'
-#' @seealso
-#' This is an example of exploratory data analsyis using the [dlookr](https://github.com/choonghyunryu/dlookr)
-#' and [inspectdf](https://alastairrushworth.github.io/inspectdf/) packages
+#' @inherit eda_variable_summary return seealso
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset data frame, dataset for exploratory data analysis
-#' @param summary boolean, display variable summary (FALSE to turn off)
-#' @param outliers boolean, display outliers (FALSE to turn off)
-#' @param distribution boolean, display variable distribution (FALSE to turn off)
-#' @param correlation boolean, display variable correlation (FALSE to turn off)
+#' @inheritParams eda_variable_summary
+#' @param summary Use the default TRUE to display variable summary or FALSE to not display variable summary
+#' @param outliers Use the default TRUE to display outliers or FALSE to not display outliers
+#' @param distribution Use the default TRUE to display variable distribution or FALSE to not display variable distribution
+#' @param correlation Use the default TRUE to display variable correlation orFALSE to not display variable correlation
 #'
-#' @return dataset returned invisibly
+#' @inherit eda_variable_summary return return
+#'
 #' @export
 #'
 #' @examples
