@@ -21,10 +21,6 @@ a histogram for each variable and table of summary statistics. These statistics
 include the range, quartiles, mean, medium, standard deviation, standard error of
 the mean, level of skewness, kurtosis and normality.
 }
-\details{
-The output directory is created in the project root directory which may be changed
-using here::i_am function.
-}
 \examples{
 \dontrun{
 suppressPackageStartupMessages({

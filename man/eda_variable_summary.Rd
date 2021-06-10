@@ -16,33 +16,46 @@ used in a piped workflow
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Exports the basic statistics of the variables within a data frame into an output
+Exports the basic statistics of the variables within a data frame into a temporary
 directory. This includes a plots of the prevalence of missing values and frequency
 of category levels and a table image containing variable's type summary count of
 the number of rows, missing values, unique values and zero values for each variable.
 }
-\details{
-The output directory is created in the project root directory which may be changed
-using here::i_am function.
-}
-\examples{
-\dontrun{
-suppressPackageStartupMessages({
- library(store)
- suppressWarnings({
-  library(palmerpenguins)
-  library(here)
-  library(fs)
- })
-})
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
+\section{Figures}{
 
+\figure{01-summary_table.png}
+\figure{02-missing_data.png}
+\figure{03-category_data.png}
+}
+
+\examples{
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-eda_variable_summary(penguins_raw)
-}
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+  })
+})
+
+suppressMessages({eda_variable_summary(penguins_raw)})
+
+# move figures from temporary directory
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(fs)
+    library(here)
+  })
+})
+
+file_move(path(tempdir(), "figures", "01-summary_table.png"),
+          here("man", "figures", "01-summary_table.png"))
+
+file_move(path(tempdir(), "figures", "02-missing_data.png"),
+          here("man", "figures", "02-missing_data.png"))
+
+file_move(path(tempdir(), "figures", "03-category_data.png"),
+         here("man", "figures", "03-category_data.png"))
 }
 \seealso{
 This is an example of exploratory data analysis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}

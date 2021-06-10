@@ -34,10 +34,6 @@ Export the collection of exploratory data analyses plots and tables. This includ
 the summary, distribution and correlation of variables and presence of outliers
 exported by default, any of which may be excluded in the export.
 }
-\details{
-The output directory is created in the project root directory which may be changed
-using here::i_am function.
-}
 \examples{
 \dontrun{
 suppressPackageStartupMessages({

@@ -101,7 +101,7 @@ path(tempdir(), "figures") \%>\% {
               .options = furrr_options(seed = TRUE),
               .progress = TRUE)
 
-# copy reduced graph image to man directory
+# move figures from temporary directory
 suppressPackageStartupMessages({
    suppressWarnings({
       library(fs)
@@ -109,9 +109,8 @@ suppressPackageStartupMessages({
    })
 })
 
-file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-          here("man", "figures", "penguins_mass_flipper_plot_reduced.png"),
-          overwrite = TRUE)
+file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+          here("man", "figures", "penguins_mass_flipper_plot_reduced.png"))
 }
 \seealso{
 \href{https://www.jumpingrivers.com/}{Jumping rivers} has written a series of

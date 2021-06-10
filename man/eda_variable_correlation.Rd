@@ -19,10 +19,6 @@ used in a piped workflow
 Exports a plot of the correlation matrix for each variable, showing the
 correlation values between each variable combination.
 }
-\details{
-The output directory is created in the project root directory which may be changed
-using here::i_am function.
-}
 \examples{
 \dontrun{
 suppressPackageStartupMessages({

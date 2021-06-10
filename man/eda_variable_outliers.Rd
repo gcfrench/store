@@ -16,32 +16,41 @@ used in a piped workflow
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Exports the variable outliers within a data frame with a boxplot, and
-summary statistics including count outliers and mean of each variable
-with outliers included and excluded.
+Exports the variable outliers within a data frame into a temporary directory.
+This includes displaying outliers in a box plot and summary statistics including
+count outliers and mean of each variable with outliers included and excluded.
 }
-\details{
-The output directory is created in the project root directory which may be changed
-using here::i_am function.
-}
-\examples{
-\dontrun{
-suppressPackageStartupMessages({
- library(store)
- suppressWarnings({
-  library(palmerpenguins)
-  library(here)
-  library(fs)
- })
-})
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
+\section{Figures}{
 
+\figure{04-outliers_table.png}
+\figure{05-variable_outliers.png}
+}
+
+\examples{
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-eda_variable_outliers(penguins_raw)
-}
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+  })
+})
+
+suppressMessages({eda_variable_outliers(penguins_raw)})
+
+# move figures from temporary directory
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(fs)
+    library(here)
+  })
+})
+
+file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+          here("man", "figures", "04-outliers_table.png"))
+
+file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+          here("man", "figures", "05-variable_outliers.png"))
 }
 \seealso{
 Other exploratory data analysis: 

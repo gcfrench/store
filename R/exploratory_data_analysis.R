@@ -4,14 +4,15 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Exports the basic statistics of the variables within a data frame into an output
+#' Exports the basic statistics of the variables within a data frame into a temporary
 #' directory. This includes a plots of the prevalence of missing values and frequency
 #' of category levels and a table image containing variable's type summary count of
 #' the number of rows, missing values, unique values and zero values for each variable.
 #'
-#' @details
-#' The output directory is created in the project root directory which may be changed
-#' using here::i_am function.
+#' @section Figures:
+#' ![01-summary_table](01-summary_table.png)
+#' ![02-missing_data](02-missing_data.png)
+#' ![03-category_data](03-category_data.png)
 #'
 #' @seealso
 #' This is an example of exploratory data analysis using the [dlookr](https://github.com/choonghyunryu/dlookr)
@@ -27,29 +28,38 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(here)
-#'   library(fs)
-#'  })
-#' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' eda_variable_summary(penguins_raw)
-#' }
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(palmerpenguins)
+#'   })
+#' })
+#'
+#' suppressMessages({eda_variable_summary(penguins_raw)})
+#'
+#' # move figures from temporary directory
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(fs)
+#'     library(here)
+#'   })
+#' })
+#'
+#' file_move(path(tempdir(), "figures", "01-summary_table.png"),
+#'           here("man", "figures", "01-summary_table.png"))
+#'
+#' file_move(path(tempdir(), "figures", "02-missing_data.png"),
+#'           here("man", "figures", "02-missing_data.png"))
+#'
+#' file_move(path(tempdir(), "figures", "03-category_data.png"),
+#'          here("man", "figures", "03-category_data.png"))
 eda_variable_summary <- function(.dataset) {
-
   # export plot as image
   export_plot <- function(plot, plot_name,
                           figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = here::here("output", stringr::str_glue("{plot_name}.png")),
+    ggplot2::ggsave(filename = fs::path(tempdir(), "figures", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
                     type = "cairo-png",
                     width = figure_width,
@@ -59,8 +69,8 @@ eda_variable_summary <- function(.dataset) {
     invisible(plot)
   }
 
-  # create output directory in project root
-  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
+  # create temp directory
+  fs::dir_create(fs::path(tempdir(), "figures"))
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -126,11 +136,13 @@ eda_variable_summary <- function(.dataset) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Exports the variable outliers within a data frame with a boxplot, and
-#' summary statistics including count outliers and mean of each variable
-#' with outliers included and excluded.
+#' Exports the variable outliers within a data frame into a temporary directory.
+#' This includes displaying outliers in a box plot and summary statistics including
+#' count outliers and mean of each variable with outliers included and excluded.
 #'
-#' @inherit eda_variable_summary return details
+#' @section Figures:
+#' ![04-outliers_table](04-outliers_table.png)
+#' ![05-variable_outliers](05-variable_outliers.png)
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -143,29 +155,36 @@ eda_variable_summary <- function(.dataset) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(here)
-#'   library(fs)
-#'  })
-#' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' eda_variable_outliers(penguins_raw)
-#' }
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(palmerpenguins)
+#'   })
+#' })
+#'
+#' suppressMessages({eda_variable_outliers(penguins_raw)})
+#'
+#' # move figures from temporary directory
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(fs)
+#'     library(here)
+#'   })
+#' })
+#'
+#' file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+#'           here("man", "figures", "04-outliers_table.png"))
+#'
+#' file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+#'           here("man", "figures", "05-variable_outliers.png"))
 eda_variable_outliers <- function(.dataset) {
 
   # export plot as image
   export_plot <- function(plot, plot_name,
                           figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = here::here("output", stringr::str_glue("{plot_name}.png")),
+    ggplot2::ggsave(filename = fs::path(tempdir(), "figures", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
                     type = "cairo-png",
                     width = figure_width,
@@ -175,8 +194,8 @@ eda_variable_outliers <- function(.dataset) {
     invisible(plot)
   }
 
-  # create output directory in project root
-  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
+  # create temp directory
+  fs::dir_create(fs::path(tempdir(), "figures"))
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -229,8 +248,6 @@ eda_variable_outliers <- function(.dataset) {
 #' a histogram for each variable and table of summary statistics. These statistics
 #' include the range, quartiles, mean, medium, standard deviation, standard error of
 #' the mean, level of skewness, kurtosis and normality.
-#'
-#' @inherit eda_variable_summary return details
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -322,8 +339,6 @@ eda_variable_distribution <- function(.dataset) {
 #' Exports a plot of the correlation matrix for each variable, showing the
 #' correlation values between each variable combination.
 #'
-#' @inherit eda_variable_summary return details
-#'
 #' @inherit eda_variable_summary return seealso
 #'
 #' @family exploratory data analysis
@@ -392,8 +407,6 @@ eda_variable_correlation <- function(.dataset) {
 #' Export the collection of exploratory data analyses plots and tables. This includes
 #' the summary, distribution and correlation of variables and presence of outliers
 #' exported by default, any of which may be excluded in the export.
-#'
-#' @inherit eda_variable_summary return details
 #'
 #' @inherit eda_variable_summary return seealso
 #'

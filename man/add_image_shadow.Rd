@@ -98,7 +98,7 @@ path(tempdir(), "figures") \%>\% {
               .options = furrr_options(seed = TRUE),
               .progress = TRUE)
 
-# copy shadow graph to man directory
+# move figures from temporary directory
 suppressPackageStartupMessages({
    suppressWarnings({
       library(fs)
@@ -106,9 +106,8 @@ suppressPackageStartupMessages({
    })
 })
 
-file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-          here("man", "figures", "penguins_mass_flipper_plot_shadow.png"),
-          overwrite = TRUE)
+file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+          here("man", "figures", "penguins_mass_flipper_plot_shadow.png"))
 }
 \seealso{
 Other image manipulation functions: 

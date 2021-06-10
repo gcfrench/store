@@ -81,7 +81,7 @@ display_table <- function(data, rows = nrow(data)) {
 #'               .options = furrr_options(seed = TRUE),
 #'               .progress = TRUE)
 #'
-#' # copy shadow graph to man directory
+#' # move figures from temporary directory
 #' suppressPackageStartupMessages({
 #'    suppressWarnings({
 #'       library(fs)
@@ -89,9 +89,8 @@ display_table <- function(data, rows = nrow(data)) {
 #'    })
 #' })
 #'
-#' file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-#'           here("man", "figures", "penguins_mass_flipper_plot_shadow.png"),
-#'           overwrite = TRUE)
+#' file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+#'           here("man", "figures", "penguins_mass_flipper_plot_shadow.png"))
 add_image_shadow <- function(path_image) {
 
    # create archive directory if does not exist
@@ -158,7 +157,7 @@ add_image_shadow <- function(path_image) {
 #'               .options = furrr_options(seed = TRUE),
 #'               .progress = TRUE)
 #'
-#' # copy reduced graph image to man directory
+#' # move figures from temporary directory
 #' suppressPackageStartupMessages({
 #'    suppressWarnings({
 #'       library(fs)
@@ -166,9 +165,8 @@ add_image_shadow <- function(path_image) {
 #'    })
 #' })
 #'
-#' file_copy(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-#'           here("man", "figures", "penguins_mass_flipper_plot_reduced.png"),
-#'           overwrite = TRUE)
+#' file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+#'           here("man", "figures", "penguins_mass_flipper_plot_reduced.png"))
  reduce_image_size <- function(path_image, image_size = "50%") {
 
    # create archive directory if does not exist
