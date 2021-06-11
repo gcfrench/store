@@ -16,33 +16,42 @@ used in a piped workflow
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Exports a plot of the correlation matrix for each variable, showing the
-correlation values between each variable combination.
+Exports a plot of the correlation matrix for each variable into a temporary
+directory, showing the correlation values between each variable combination.
 }
-\examples{
-\dontrun{
-suppressPackageStartupMessages({
- library(store)
- suppressWarnings({
-  library(palmerpenguins)
-  library(here)
-  library(fs)
- })
-})
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
+\section{Figures}{
 
+\figure{08-correlation_plot.png}
+}
+
+\examples{
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-eda_variable_correlation(penguins_raw)
-}
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+  })
+})
+
+suppressMessages({eda_variable_correlation(penguins_raw)})
+
+# move figures from temporary directory
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(fs)
+    library(here)
+  })
+})
+
+file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+          here("man", "figures", "08-correlation_plot.png"))
 }
 \seealso{
 Other exploratory data analysis: 
+\code{\link{eda_variable_collection}()},
 \code{\link{eda_variable_distribution}()},
 \code{\link{eda_variable_outliers}()},
-\code{\link{eda_variable_summary}()},
-\code{\link{eda}()}
+\code{\link{eda_variable_summary}()}
 }
 \concept{exploratory data analysis}

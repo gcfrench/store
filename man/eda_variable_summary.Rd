@@ -62,9 +62,9 @@ This is an example of exploratory data analysis using the \href{https://github.c
 and \href{https://alastairrushworth.github.io/inspectdf/}{inspectdf} packages.
 
 Other exploratory data analysis: 
+\code{\link{eda_variable_collection}()},
 \code{\link{eda_variable_correlation}()},
 \code{\link{eda_variable_distribution}()},
-\code{\link{eda_variable_outliers}()},
-\code{\link{eda}()}
+\code{\link{eda_variable_outliers}()}
 }
 \concept{exploratory data analysis}

@@ -244,10 +244,14 @@ eda_variable_outliers <- function(.dataset) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Exports the distribution of the numeric variables within a data frame, including
-#' a histogram for each variable and table of summary statistics. These statistics
-#' include the range, quartiles, mean, medium, standard deviation, standard error of
+#' Exports the distribution of the numeric variables within a data frame into a temporary
+#' directory. This includes a histogram for each variable and table of summary statistics,
+#' including the range, quartiles, mean, medium, standard deviation, standard error of
 #' the mean, level of skewness, kurtosis and normality.
+#'
+#' @section Figures:
+#' ![06-distribution_table](06-distribution_table.png)
+#' ![07-distribution_plot](07-distribution_plot.png)
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -260,29 +264,36 @@ eda_variable_outliers <- function(.dataset) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(here)
-#'   library(fs)
-#'  })
-#' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' eda_variable_distribution(penguins_raw)
-#' }
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(palmerpenguins)
+#'   })
+#' })
+#'
+#' suppressMessages({eda_variable_distribution(penguins_raw)})
+#'
+#' # move figures from temporary directory
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(fs)
+#'     library(here)
+#'   })
+#' })
+#'
+#' file_move(path(tempdir(), "figures", "06-distribution_table.png"),
+#'           here("man", "figures", "06-distribution_table.png"))
+#'
+#' file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
+#'           here("man", "figures", "07-distribution_plot.png"))
 eda_variable_distribution <- function(.dataset) {
 
   # export plot as image
   export_plot <- function(plot, plot_name,
                           figure_width = 6, figure_height = 6) {
-    ggplot2::ggsave(filename = here::here("output", stringr::str_glue("{plot_name}.png")),
+    ggplot2::ggsave(filename = fs::path(tempdir(), "figures", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
                     type = "cairo-png",
                     width = figure_width,
@@ -292,8 +303,8 @@ eda_variable_distribution <- function(.dataset) {
     invisible(plot)
   }
 
-  # create output directory in project root
-  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
+  # create temp directory
+  fs::dir_create(fs::path(tempdir(), "figures"))
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
@@ -336,8 +347,11 @@ eda_variable_distribution <- function(.dataset) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Exports a plot of the correlation matrix for each variable, showing the
-#' correlation values between each variable combination.
+#' Exports a plot of the correlation matrix for each variable into a temporary
+#' directory, showing the correlation values between each variable combination.
+#'
+#' @section Figures:
+#' ![08-correlation_plot](08-correlation_plot.png)
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -350,27 +364,31 @@ eda_variable_distribution <- function(.dataset) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(here)
-#'   library(fs)
-#'  })
-#' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' eda_variable_correlation(penguins_raw)
-#' }
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(palmerpenguins)
+#'   })
+#' })
+#'
+#' suppressMessages({eda_variable_correlation(penguins_raw)})
+#'
+#' # move figures from temporary directory
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(fs)
+#'     library(here)
+#'   })
+#' })
+#'
+#' file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+#'           here("man", "figures", "08-correlation_plot.png"))
 eda_variable_correlation <- function(.dataset) {
 
-  # create output directory in project root
-  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
+  # create temp directory
+  fs::dir_create(fs::path(tempdir(), "figures"))
 
   # check for types
   check_numeric <- any(c("numeric", "integer") %in% (dlookr::diagnose(.dataset)$types))
@@ -387,7 +405,8 @@ eda_variable_correlation <- function(.dataset) {
     dplyr::select(sort(names(.)))
 
   # variable correlation plot
-  png(here::here("output", "08-correlation_plot.png"), width = 600, height = 600, type = "cairo-png")
+  png(fs::path(tempdir(), "figures", "08-correlation_plot.png"),
+      width = 600, height = 600, type = "cairo-png")
   .dataset %>%
     cor(use = "complete.obs", method = "pearson") %>%
     corrplot::corrplot(method = "number", number.digits = 3,
@@ -404,9 +423,20 @@ eda_variable_correlation <- function(.dataset) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Export the collection of exploratory data analyses plots and tables. This includes
-#' the summary, distribution and correlation of variables and presence of outliers
-#' exported by default, any of which may be excluded in the export.
+#' Export the collection of exploratory data analyses plots and tables into a temporary
+#' directory. This includes the summary, distribution and correlation of variables
+#' and presence of outliers exported by default, any of which may be excluded in the
+#' export.
+#'
+#' @section Figures:
+#' ![01-summary_table](01-summary_table.png)
+#' ![02-missing_data](02-missing_data.png)
+#' ![03-category_data](03-category_data.png)
+#' ![04-outliers_table](04-outliers_table.png)
+#' ![05-variable_outliers](05-variable_outliers.png)
+#' ![06-distribution_table](06-distribution_table.png)
+#' ![07-distribution_plot](07-distribution_plot.png)
+#' ![08-correlation_plot](08-correlation_plot.png)
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -424,30 +454,57 @@ eda_variable_correlation <- function(.dataset) {
 #'
 #' @examples
 #' \dontrun{
-#' suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'   library(palmerpenguins)
-#'   library(here)
-#'   library(fs)
-#'  })
-#' })
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
-#'
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
-#' eda_variable_collection(penguins_raw)
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(palmerpenguins)
+#'   })
+#' })
+#'
+#' suppressMessages({eda_variable_collection(penguins_raw)})
+#'
+#' # move figures from temporary directory
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(fs)
+#'     library(here)
+#'   })
+#' })
+#'
+#' file_move(path(tempdir(), "figures", "01-summary_table.png"),
+#'           here("man", "figures", "01-summary_table.png"))
+#'
+#' file_move(path(tempdir(), "figures", "02-missing_data.png"),
+#'           here("man", "figures", "02-missing_data.png"))
+#'
+#' file_move(path(tempdir(), "figures", "03-category_data.png"),
+#'          here("man", "figures", "03-category_data.png"))
+#'
+#' file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+#'           here("man", "figures", "04-outliers_table.png"))
+#'
+#' file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+#'           here("man", "figures", "05-variable_outliers.png"))
+#'
+#' file_move(path(tempdir(), "figures", "06-distribution_table.png"),
+#'           here("man", "figures", "06-distribution_table.png"))
+#'
+#' file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
+#'           here("man", "figures", "07-distribution_plot.png"))
+#'
+#' file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+#'           here("man", "figures", "08-correlation_plot.png"))
 #' }
-eda <- function(.dataset,
+eda_variable_collection <- function(.dataset,
                 summary = TRUE,
                 outliers = TRUE,
                 distribution = TRUE,
                 correlation = TRUE) {
 
-  # create output directory in project root
-  if (!dir_exists(here::here("output"))) {dir_create(here::here("output"))}
+  # create temp directory
+  fs::dir_create(fs::path(tempdir(), "figures"))
 
   # basic statistics of the variables
   if(summary) {

@@ -53,7 +53,7 @@ reference:
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"
   contents:
-  - eda
+  - eda_variable_collection
   - eda_variable_summary
   - eda_variable_distribution
   - eda_variable_outliers

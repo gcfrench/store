@@ -54,9 +54,9 @@ file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
 }
 \seealso{
 Other exploratory data analysis: 
+\code{\link{eda_variable_collection}()},
 \code{\link{eda_variable_correlation}()},
 \code{\link{eda_variable_distribution}()},
-\code{\link{eda_variable_summary}()},
-\code{\link{eda}()}
+\code{\link{eda_variable_summary}()}
 }
 \concept{exploratory data analysis}
