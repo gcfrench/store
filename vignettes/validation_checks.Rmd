@@ -102,6 +102,14 @@ penguins %>%
          success_fun = success_logical, error_fun = error_stop)
 ```
 
+All penguins weight are positive values
+```{r}
+penguins %>% 
+  dplyr::filter(!is.na(body_mass_g)) %>% 
+  assert(assertive::assert_all_are_positive, body_mass_g,
+         success_fun = success_logical, error_fun = error_stop)
+```
+
 All penguins weigh between 2700 and 6300 grams, inclusively
 ```{r}
 penguins %>% 

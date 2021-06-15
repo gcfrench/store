@@ -74,11 +74,11 @@ eda_variable_summary <- function(.dataset) {
 
   # check for types
   check_numeric <- any(c("numeric") %in% (dlookr::diagnose(.dataset)$types))
-  check_nominal <- any(c("factor", "character") %in% (dlookr::diagnose(.dataset)$types))
+  check_nominal <- any(c("factor", "character", "Date") %in% (dlookr::diagnose(.dataset)$types))
 
   # sort column names
   .dataset <- .dataset %>%
-    dplyr::select(sort(names(.)))
+   dplyr::select(sort(names(.)))
 
   # variable summary table --------------------------------------------------
 
@@ -93,7 +93,7 @@ eda_variable_summary <- function(.dataset) {
 
   ## nominal variable statistics table
   if(check_nominal) {
-    nominal_table <-dlookr::diagnose(.dataset) %>%
+    nominal_table <- dlookr::diagnose(.dataset) %>%
       dplyr::inner_join(dlookr::diagnose_category(.dataset)) %>%
       dplyr::rename(n = N) %>%
       dplyr::select(variables, types, n, contains("count")) %>%

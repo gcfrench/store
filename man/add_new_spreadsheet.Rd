@@ -14,27 +14,28 @@ add_new_spreadsheet(
 )
 }
 \arguments{
-\item{spreadsheet_name}{character string, name of spreadsheet to add}
+\item{spreadsheet_name}{The name of the spreadsheet to which the data and optionally an image will be added}
 
-\item{data}{data_frame, data to add to spreadsheet}
+\item{data}{The name of the data frame containing the data to add to the spreadsheet}
 
-\item{image_path}{character string, path to image file if present, default is NA}
+\item{image_path}{The path name for the image to be optionally added to the spreadsheet}
 
-\item{image_width}{double, width of image in inches}
+\item{image_width}{The width of image in inches to be optionally added to the spreadsheet}
 
-\item{image_height}{double, height of image in inches}
+\item{image_height}{The height of image in inches to be optionally added to the spreadsheet}
 
-\item{filter}{logical, add filter to spreadsheet (default = TRUE) or not (FALSE)}
+\item{filter}{Should a filter be added to the data (default TRUE) in the spreadsheet or not (FALSE)}
 }
 \value{
-data_frame, the inputted data frame is returned invisibly
+The data frame is returned invisibly so that the function can be used in a piped workflow
 }
 \description{
 This function adds a data frame and optional image to a new spreadsheet in an
 Excel workbook.
-
+}
+\details{
 The text is left aligned with the first header row made bold. The widths of the
-columns in the spreadsheet are also  automatically adjusted to fit the text and
+columns in the spreadsheet are also automatically adjusted to fit the text and
 the filter functionality is switched on.
 
 An image may be inserted to the right of the text with both the image's width
@@ -42,37 +43,30 @@ and height sizes adjustable by providing their sizes in inches in the function's
 parameters.
 }
 \examples{
-\dontrun{
+# example taken from palmerpenguins example analysis of mass vs. flipper length
+# https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+
 suppressPackageStartupMessages({
   library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(fs)
     library(dplyr)
-    library(stringr)
     library(ggplot2)
-    library(here)
-    library(lubridate)
-    library(openxlsx)
   })
 })
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
-if (!dir_exists("output/images")) {dir_create("output/images")}
 
-# example taken from palmerpenguins example analysis of mass vs. flipper length
-# https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+# create temp directory
+dir_create(path(tempdir(), "figures"))
 
-## data
-mass_flipper_data <- penguins \%>\%
-  select(species, flipper_length_mm, body_mass_g, )
-mass_flipper_data
+# data
+penguins_mass_flipper <- penguins \%>\%
+  select(species, flipper_length_mm, body_mass_g)
 
-## graph
-mass_flipper_graph <- ggplot(data = mass_flipper_data,
-                             aes(x = flipper_length_mm,
-                                 y = body_mass_g)) +
+# graph
+penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
+                                     aes(x = flipper_length_mm,
+                                         y = body_mass_g)) +
   geom_point(aes(color = species,
                  shape = species),
              size = 3,
@@ -83,7 +77,7 @@ mass_flipper_graph <- ggplot(data = mass_flipper_data,
        subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
        x = "Flipper length (mm)",
        y = "Body mass (g)",
-      color = "Penguin species",
+       color = "Penguin species",
        shape = "Penguin species") +
   theme(legend.position = c(0.2, 0.7),
         legend.background = element_rect(fill = "white", color = NA),
@@ -91,21 +85,38 @@ mass_flipper_graph <- ggplot(data = mass_flipper_data,
         plot.caption = element_text(hjust = 0, face= "italic"),
         plot.caption.position = "plot")
 
-mass_flipper_graph
+# save graph
+suppressWarnings({
+  ggsave(filename = path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+       plot = penguins_mass_flipper_plot,
+       type = "cairo-png",
+       width = 6,
+       height = 6,
+       units = "in",
+       dpi = 72)
+})
 
-## save image
-ggsave(filename = "output/images/palmerpenguin_graph.png",
-       plot = mass_flipper_graph)
-
+\dontrun{
 ## export data and graph into spreadsheet
-workbook_path <- str_glue("output/example_{today()}.xlsx")
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(fs)
+    library(stringr)
+    library(here)
+    library(lubridate)
+    library(openxlsx)
+  })
+})
+
+workbook_path <- path(tempdir(), str_glue("example_{today()}.xlsx"))
 if(!file_exists(workbook_path)) {
   workbook <- createWorkbook()
 } else {
   loadWorkbook(workbook_path)
 }
-add_new_spreadsheet("palmerpenguins", mass_flipper_data,
-                    image_path = "output/images/palmerpenguin_graph.png",
+add_new_spreadsheet(spreadsheet_name = "palmerpenguins",
+                    data = penguins_mass_flipper,
+                    image_path = path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
                     image_width = 6,
                     image_height = 6)
 saveWorkbook(workbook, workbook_path, overwrite = TRUE)
