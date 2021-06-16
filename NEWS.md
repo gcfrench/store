@@ -6,6 +6,9 @@ editor_options:
 
 ## store 0.5.0
 
+-   Updated **compare_dataset_versions** function to automatically
+    detect the row containing the column names on importing the results
+    file
 -   Updated **country_codes** look up table to link to the table view in
     documentation. The table view was created using the
     [gt](https://gt.rstudio.com/) package
@@ -24,8 +27,8 @@ editor_options:
 -   Added **create_bounding_box** function to create a bounding box from
     corner coordinates using the
     [sf](https://r-spatial.github.io/sf/reference/st.html) package
--   Added **compare_datasets** function to identify changes between
-    older and newer versions of a dataset, using the
+-   Added **compare_dataset_versions** function to identify changes
+    between older and newer versions of a dataset, using the
     [daff](https://github.com/edwindj/daff) package
 -   Added **extract_polygons** function to extract and dissolve polygons
     from geometry collections using the

@@ -56,7 +56,9 @@ Suggests:
     knitr,
     rmarkdown,
     palmerpenguins,
-    forcats
+    forcats,
+    waldo,
+    readr
 Config/testthat/edition: 3
 BugReports: https://github.com/gcfrench/store/issues
 VignetteBuilder: knitr
