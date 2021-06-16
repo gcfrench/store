@@ -7,34 +7,40 @@
 \method{precision}{gridref}(grid_reference)
 }
 \arguments{
-\item{grid_reference}{character gridref class, British or Irish grid reference}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
 }
 \value{
-integer, precision of grid reference in metres.
+The precision of the grid reference in metres
 }
 \description{
 This function returns the grid reference's precision in metres.
-It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-
+}
+\details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }
 \examples{
 \dontrun{
+# add precision column
 suppressPackageStartupMessages({
   library(store)
+  suppressWarnings({
+    library(dplyr)
+    library(janitor)
+  })
 })
 
-# add precision column
 nbn_demonstration_dataset \%>\%
-  janitor::clean_names() \%>\%
-  dplyr::select(grid_reference) \%>\%
-  dplyr::mutate(grid_reference = as_gridref(grid_reference)) \%>\%
-  dplyr::rowwise() \%>\%
-  dplyr::mutate(precision = precision(grid_reference))
+  clean_names() \%>\%
+  select(grid_reference) \%>\%
+  mutate(grid_reference = as_gridref(grid_reference)) \%>\%
+  rowwise() \%>\%
+  mutate(precision = precision(grid_reference))
 }
 }
 \seealso{
+The function calls the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
+
 Other grid reference functions: 
 \code{\link{easting.gridref}()},
 \code{\link{gridsquare_geometry.gridref}()},

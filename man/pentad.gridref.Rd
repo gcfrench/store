@@ -4,7 +4,7 @@
 \alias{pentad.gridref}
 \title{Get the 5km grid reference}
 \usage{
-\method{pentad}{gridref}(grid)
+\method{pentad}{gridref}(grid_reference)
 }
 \arguments{
 \item{grid_reference}{character gridref class, British or Irish grid reference}

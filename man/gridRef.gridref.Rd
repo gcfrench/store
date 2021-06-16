@@ -7,36 +7,31 @@
 \method{gridRef}{gridref}(format)
 }
 \arguments{
-\item{format}{character, the format you want back. The possibilities are: sq10km,
-sq5km, tetrad, sq1km, sq100m, sq10m}
+\item{format}{The required grid reference format, either sq10km, sq5km, tetrad,
+sq1km, sq100m or sq10m}
 
-\item{grid}{character, the grid reference to be manipulated}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
 }
 \value{
-a list of class "gridref" with the following contents:
-\itemize{
-\item the original grid reference
-\item the grid reference string formatted as requested
-\item the grid reference system, either "OSGB" or "OSNI"
-\item the precision of the formatted grid reference in metres
-}
+The grid reference string formatted as requested
 }
 \description{
 Extracts grid reference strings at various precisions from the supplied grid
-reference string - if possible! For example, if you supply a 1km square reference
-TL2998, then you could get the 10km square TL29, but not a 100m square grid reference.
-
-function from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}
+reference string when possible. For example supplying a 1km square reference TL2998,
+will return the 10km square TL29 but not a 100m square grid reference.
 }
-\seealso{
-Tetrads are 2x2km squares and are often used for mapping distributions at a the
+\details{
+Tetrads are 2x2km squares and are often used for mapping distributions at the
 scale of a county or similar sized local area. They are labelled using the 10km
-square followed by a single, upper-case letter (since there are 25 tetrads in a
-10km square, the letter "O" is not used to avoid confusion with zero). This is
+square followed by a single, upper-case letter. Since there are 25 tetrads in a
+10km square, the letter "O" is not used to avoid confusion with zero. This is
 named the DINTY system after the letters in the second row of this table.
 
-5x5km squares (sometimes called "pentads") are used for mapping at a regional scale.
-They are labelled using the name of the 10km square followed by two upper-case letters.
+Pentads are 5x5km squares used for mapping at a regional scale. They are labelled
+using the name of the 10km square followed by two upper-case letters.
+}
+\seealso{
+Function taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}
 }
 \author{
 Stuart Ball

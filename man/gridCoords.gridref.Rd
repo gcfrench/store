@@ -2,33 +2,34 @@
 % Please edit documentation in R/gridref.R
 \name{gridCoords.gridref}
 \alias{gridCoords.gridref}
-\title{Get x,y coordinates from a grid reference}
+\title{Get the x, y coordinates from a grid reference}
 \usage{
-\method{gridCoords}{gridref}(grid, units = c("km", "m"))
+\method{gridCoords}{gridref}(grid_reference, units = c("km", "m"))
 }
 \arguments{
-\item{grid}{character, an OSGB or OSNI grid reference string}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
 
-\item{units}{character, metres or kilometres (default)}
+\item{units}{Should the returned coordinates be in metres (m) or kilometres (km)}
 }
 \value{
-a list of class "gridref" with the following contents:
+A list of class gridref with the following contents:
 \itemize{
-\item grid	the original grid reference
-\item system	the grid reference system, either "OSGB" or "OSNI"
-\item x the x coordinate (easting) in requested units
-\item y the y coordinate (northing)in requested units
-\item units "m" or "km"
-\item precision the precision of the original grid reference in metres
+\item grid_reference: the original grid reference
+\item system:	the grid reference projection system, either "OSGB" or "OSNI"
+\item x: the easting coordinate in requested units
+\item y: the northing coordinate in requested units
+\item units: the requested units either metres (m) or kilometres (km)
+\item precision: the precision of the original grid reference in metres
 }
 }
 \description{
-Given an OSGB or OSNI grid reference string, get the x,y coordinates of the OSGB
+Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
 or OSNI grid for the bottom, left-hand corner of the grid square. The units
 parameter controls the units (metres m or kilometres km) in which the coordinates
-should be returned
-
-function from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}
+should be returned.
+}
+\seealso{
+Function taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}
 }
 \author{
 Stuart Ball

@@ -4,7 +4,7 @@
 \alias{tetrad.gridref}
 \title{Get the 2km grid reference}
 \usage{
-\method{tetrad}{gridref}(grid)
+\method{tetrad}{gridref}(grid_reference)
 }
 \arguments{
 \item{grid_reference}{character gridref class, British or Irish grid reference}

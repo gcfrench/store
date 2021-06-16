@@ -4,29 +4,37 @@
 \alias{as_gridref}
 \title{Convert a string to a gridref object}
 \usage{
-as_gridref(x = character())
+as_gridref(grid_reference = character())
 }
 \arguments{
-\item{x}{character, grid reference string}
+\item{grid_reference}{A Great British or Irish grid reference character string}
 }
 \value{
-x, grid reference string with class gridref
+A grid reference character string with an added gridref class
 }
 \description{
-Convert character string to gridref object
+Converts a valid grid reference character string to a gridref object
+}
+\details{
+Checks that the character string is a valid grid reference before converting to
+a gridref class. Returns an error if the grid reference is invalid.
 }
 \examples{
-\dontrun{
+# convert grid_reference to gridref class
 suppressPackageStartupMessages({
   library(store)
+  suppressWarnings({
+    library(dplyr)
+    library(janitor)
+    library(purrr)
+  })
 })
 
-# convert to gridref class
 nbn_demonstration_dataset \%>\%
-  janitor::clean_names() \%>\%
-  dplyr::select(grid_reference) \%>\%
-  dplyr::mutate(grid_reference = as_gridref(grid_reference))
-}
+ clean_names() \%>\%
+ select(grid_reference) \%>\%
+ mutate(grid_reference = as_gridref(grid_reference)) \%>\%
+ map_chr(., class)
 }
 \seealso{
 Constructor function for gridref class as described in \href{https://adv-r.hadley.nz/s3.html}{S3}

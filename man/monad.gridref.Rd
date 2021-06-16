@@ -4,7 +4,7 @@
 \alias{monad.gridref}
 \title{Get the 1km grid reference}
 \usage{
-\method{monad}{gridref}(grid)
+\method{monad}{gridref}(grid_reference)
 }
 \arguments{
 \item{grid_reference}{character gridref class, British or Irish grid reference}

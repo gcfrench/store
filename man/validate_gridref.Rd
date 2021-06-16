@@ -2,20 +2,22 @@
 % Please edit documentation in R/gridref.R
 \name{validate_gridref}
 \alias{validate_gridref}
-\title{Validate grid reference}
+\title{Validate a grid reference}
 \usage{
-validate_gridref(grid)
+validate_gridref(grid_reference)
 }
 \arguments{
-\item{grid}{character, grid reference string to validate}
+\item{grid_reference}{A Great British or Irish grid reference character string}
 }
 \value{
-grid, validated grid reference string
+A validated grid reference character string
 }
 \description{
-Validator function to check that grid reference is valid. Taken from
-\href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}.
-Error returned if invalid
+Internal validator function to check that a grid reference is valid before
+converting to a gridref class. Returns an error if the grid reference is invalid.
+}
+\details{
+Taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}.
 }
 \author{
 Stuart Ball

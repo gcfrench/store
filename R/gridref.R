@@ -2,58 +2,68 @@
 #' Convert a string to a gridref object
 #'
 #' @description
-#' Convert character string to gridref object
+#' Converts a valid grid reference character string to a gridref object
+#'
+#' @details
+#' Checks that the character string is a valid grid reference before converting to
+#' a gridref class. Returns an error if the grid reference is invalid.
 #'
 #' @seealso
 #' Constructor function for gridref class as described in [S3](https://adv-r.hadley.nz/s3.html)
 #' chapter of Advanced R second additon by Hadley Wickham
 #'
-#' @param x character, grid reference string
+#' @param grid_reference A Great British or Irish grid reference character string
 #'
-#' @return x, grid reference string with class gridref
+#' @return A grid reference character string with an added gridref class
+#'
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' # convert grid_reference to gridref class
 #' suppressPackageStartupMessages({
 #'   library(store)
-#'})
+#'   suppressWarnings({
+#'     library(dplyr)
+#'     library(janitor)
+#'     library(purrr)
+#'   })
+#' })
 #'
-#' # convert to gridref class
 #' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference))
-#'}
-as_gridref <- function(x = character()) {
+#'  clean_names() %>%
+#'  select(grid_reference) %>%
+#'  mutate(grid_reference = as_gridref(grid_reference)) %>%
+#'  map_chr(., class)
+as_gridref <- function(grid_reference = character()) {
 
   # gridref must be a character string
-  stopifnot(is.character(x))
+  stopifnot(is.character(grid_reference))
 
   # gridref must be a valid grid reference
-  validate_gridref(x)
+  validate_gridref(grid_reference)
 
   # convert to gridref class
-  structure(x, class = "gridref")
+  structure(grid_reference, class = "gridref")
 }
 
-# validator function
 #' @title
-#' Validate grid reference
+#' Validate a grid reference
 #'
 #' @description
-#' Validator function to check that grid reference is valid. Taken from
-#' [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
-#' Error returned if invalid
+#' Internal validator function to check that a grid reference is valid before
+#' converting to a gridref class. Returns an error if the grid reference is invalid.
+#'
+#' @details
+#' Taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
 #'
 #' @author Stuart Ball
 #'
-#' @param grid character, grid reference string to validate
+#' @inheritParams as_gridref
 #'
-#' @return grid, validated grid reference string
-validate_gridref <- function(grid) {
+#' @return A validated grid reference character string
+validate_gridref <- function(grid_reference) {
 
-  gr <- toupper(gsub(" ", "", grid))
+  gr <- toupper(gsub(" ", "", grid_reference))
   v <- regexec("^([H,N,O,S,T][A-H,J-Z]|[B-D,F-J,L-O,Q-T,V-X])([0-9]{2,10})([A-N,P-Z]{0,1})$",
                gr)
   if (v[[1]][[1]] > 0) {
@@ -65,211 +75,104 @@ validate_gridref <- function(grid) {
     stop("not a valid grid reference string")
   }
 
-  return(grid)
+  return(grid_reference)
 }
 
-#' @title
-#' Generic function for gridCoords
-#'
-#' @description
-#' Generic function for gridCoords as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by function gridCoords
-#'
-#' @return
+#' @noRd
 gridCoords <- function(x, ...) {
   UseMethod("gridCoords", x)
 }
 
-#' @title
-#' Generic function for precision
-#'
-#' @description
-#' Generic function for precision as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function precision
-#'
-#' @return
+#' @noRd
 #' @export
 precision <- function(x, ...) {
   UseMethod("precision", x)
 }
 
-#' @title
-#' Generic function for projection
-#'
-#' @description
-#' Generic function for projection as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function projection
-#'
-#' @return
+#' @noRd
 #' @export
 projection <- function(x, ...) {
   UseMethod("projection", x)
 }
 
-#' @title
-#' Generic function for easting
-#'
-#' @description
-#' Generic function for easting as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function easting
-#'
-#' @return
+#' @noRd
 #' @export
 easting <- function(x, ...) {
   UseMethod("easting", x)
 }
 
-#' @title
-#' Generic function for northing
-#'
-#' @description
-#' Generic function for northing as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function northing
-#'
-#' @return
+#' @noRd
 #' @export
 northing <- function(x, ...) {
   UseMethod("northing", x)
 }
 
-#' @title
-#' Generic function for gridRef
-#'
-#' @description
-#' Generic function for gridRef as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by function gridRef
-#'
-#' @return
+#' @noRd
 gridRef <- function(x, ...) {
   UseMethod("gridRef", x)
 }
 
-#' @title
-#' Generic function for hectad
-#'
-#' @description
-#' Generic function for hectad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function hectad
-#'
-#' @return
+#' @noRd
 #' @export
 hectad <- function(x, ...) {
   UseMethod("hectad", x)
 }
 
-#' @title
-#' Generic function for pentad
-#'
-#' @description
-#' Generic function for hectad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function pentad
-#'
-#' @return
+#' @noRd
 #' @export
 pentad <- function(x, ...) {
   UseMethod("pentad", x)
 }
 
-#' @title
-#' Generic function for tetrad
-#'
-#' @description
-#' Generic function for hectad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function tetrad
-#'
-#' @return
+#' @noRd
 #' @export
 tetrad <- function(x, ...) {
   UseMethod("tetrad", x)
 }
 
-#' @title
-#' Generic function for monad
-#'
-#' @description
-#' Generic function for monad as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function monad
-#'
-#' @return
+#' @noRd
 #' @export
 monad <- function(x, ...) {
   UseMethod("monad", x)
 }
 
-#' @title
-#' Generic function for hectare
-#'
-#' @description
-#' Generic function for hectare as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function hectare
-#'
-#' @return
+#' @noRd
 #' @export
 hectare <- function(x, ...) {
   UseMethod("hectare", x)
 }
 
-#' @title
-#' Generic function for gridsquare_geometry
-#'
-#' @description
-#' Generic function for gridsquare_geometry as described in [The S3 Object system](http://adv-r.had.co.nz/S3.html)
-#' chapter of Advanced R by Hadley Wickham
-#'
-#' @param x object, contains class for method dispatch by generic function gridsquare_geometry
-#'
-#' @return
+#' @noRd
 #' @export
 gridsquare_geometry <- function(x, ...) {
   UseMethod("gridsquare_geometry", x)
 }
 
 #' @title
-#' Get x,y coordinates from a grid reference
+#' Get the x, y coordinates from a grid reference
 #'
 #' @description
-#' Given an OSGB or OSNI grid reference string, get the x,y coordinates of the OSGB
+#' Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
 #' or OSNI grid for the bottom, left-hand corner of the grid square. The units
 #' parameter controls the units (metres m or kilometres km) in which the coordinates
-#' should be returned
+#' should be returned.
 #'
-#' function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
+#' @seealso
+#' Function taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
 #'
 #' @author Stuart Ball
 #'
-#' @param grid character, an OSGB or OSNI grid reference string
-#' @param units character, metres or kilometres (default)
+#' @param grid_reference A Great British or Irish grid reference character string with class gridref
+#' @param units Should the returned coordinates be in metres (m) or kilometres (km)
 #'
-#' @return a list of class "gridref" with the following contents:
-#' * grid	the original grid reference
-#' * system	the grid reference system, either "OSGB" or "OSNI"
-#' * x the x coordinate (easting) in requested units
-#' * y the y coordinate (northing)in requested units
-#' * units "m" or "km"
-#' * precision the precision of the original grid reference in metres
-gridCoords.gridref <-  function (grid, units = c("km", "m")) {
+#' @return A list of class gridref with the following contents:
+#' * grid_reference: the original grid reference
+#' * system:	the grid reference projection system, either "OSGB" or "OSNI"
+#' * x: the easting coordinate in requested units
+#' * y: the northing coordinate in requested units
+#' * units: the requested units either metres (m) or kilometres (km)
+#' * precision: the precision of the original grid reference in metres
+gridCoords.gridref <-  function (grid_reference, units = c("km", "m")) {
   decodeTetrad <- function(letter) {
     l = as.integer(charToRaw(letter)) - 65
     if (l > 13)
@@ -280,7 +183,7 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
     return(coord)
   }
   units <- match.arg(units)
-  gr <- toupper(gsub(" ", "", grid))
+  gr <- toupper(gsub(" ", "", grid_reference))
   v <- regexec("^([H,N,O,S,T][A-H,J-Z]|[B-D,F-J,L-O,Q-T,V-X])([0-9]{2,10})([A-N,P-Z]{0,1})$",
                gr)
   letters <- unlist(regmatches(gr, v))[2]
@@ -290,7 +193,7 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
   n <- n%/%2
   precision <- 10^(5 - n)
   gridref <- list()
-  gridref$grid <- grid
+  gridref$grid_reference <- grid_reference
   if (nchar(letters) == 2) {
     gridref$system <- "OSGB"
   }
@@ -341,35 +244,31 @@ gridCoords.gridref <-  function (grid, units = c("km", "m")) {
 #'
 #' @description
 #' Extracts grid reference strings at various precisions from the supplied grid
-#' reference string - if possible! For example, if you supply a 1km square reference
-#' TL2998, then you could get the 10km square TL29, but not a 100m square grid reference.
+#' reference string when possible. For example supplying a 1km square reference TL2998,
+#' will return the 10km square TL29 but not a 100m square grid reference.
 #'
-#' function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
-#'
-#' @seealso
-#' Tetrads are 2x2km squares and are often used for mapping distributions at a the
+#' @details
+#' Tetrads are 2x2km squares and are often used for mapping distributions at the
 #' scale of a county or similar sized local area. They are labelled using the 10km
-#' square followed by a single, upper-case letter (since there are 25 tetrads in a
-#' 10km square, the letter "O" is not used to avoid confusion with zero). This is
+#' square followed by a single, upper-case letter. Since there are 25 tetrads in a
+#' 10km square, the letter "O" is not used to avoid confusion with zero. This is
 #' named the DINTY system after the letters in the second row of this table.
 #'
-#' 5x5km squares (sometimes called "pentads") are used for mapping at a regional scale.
-#' They are labelled using the name of the 10km square followed by two upper-case letters.
+#' Pentads are 5x5km squares used for mapping at a regional scale. They are labelled
+#' using the name of the 10km square followed by two upper-case letters.
+#'
+#' @inherit gridCoords.gridref return seealso
 #'
 #' @author Stuart Ball
 #'
-#' @param grid character, the grid reference to be manipulated
-#' @param format character, the format you want back. The possibilities are: sq10km,
-#' sq5km, tetrad, sq1km, sq100m, sq10m
+#' @param grid_reference A Great British or Irish grid reference character string with class gridref
+#' @param format The required grid reference format, either sq10km, sq5km, tetrad,
+#' sq1km, sq100m or sq10m
 #'
-#' @return a list of class "gridref" with the following contents:
-#' * the original grid reference
-#' * the grid reference string formatted as requested
-#' * the grid reference system, either "OSGB" or "OSNI"
-#' * the precision of the formatted grid reference in metres
+#' @return The grid reference string formatted as requested
 gridRef.gridref <- function(format){
 
-  function(grid) {
+  function(grid_reference) {
 
     tetradLetter <- function(nums, n) {
       x2 <- as.integer(substr(nums, 2, 2))
@@ -386,7 +285,7 @@ gridRef.gridref <- function(format){
                                          1])
     }
 
-    gr <- toupper(gsub(" ", "", grid))
+    gr <- toupper(gsub(" ", "", grid_reference))
     v <- regexec("^([H,N,O,S,T][A-H,J-Z]|[B-D,F-J,L-O,Q-T,V-X])([0-9]{2,10})([A-N,P-Z]{0,1})$",
                  gr)
     letters <- unlist(regmatches(gr, v))[2]
@@ -395,7 +294,7 @@ gridRef.gridref <- function(format){
     n <- nchar(nums)
     n <- n%/%2
     gret <- list()
-    gret$grid <- grid
+    gret$grid_reference <- grid_reference
     ifelse(nchar(letters) == 2, gret$system <- "OSGB",
            gret$system <- "OSNI")
     switch(format, sq10km = {
@@ -463,38 +362,45 @@ gridRef.gridref <- function(format){
 #'
 #' @description
 #' This function returns the grid reference's precision in metres.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
+#' @details
 #' It can check either British or Irish grid references up to 10 figure (1m precision),
 #' including tetrads (2000m precision)
 #'
+#' @seealso
+#' The function calls the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @param grid_reference A Great British or Irish grid reference character string with class gridref
 #'
-#' @return integer, precision of grid reference in metres.
+#' @return The precision of the grid reference in metres
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
+#' # add precision column
 #' suppressPackageStartupMessages({
 #'   library(store)
-#'})
+#'   suppressWarnings({
+#'     library(dplyr)
+#'     library(janitor)
+#'   })
+#' })
 #'
-#' # add precision column
 #' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(precision = precision(grid_reference))
+#'   clean_names() %>%
+#'   select(grid_reference) %>%
+#'   mutate(grid_reference = as_gridref(grid_reference)) %>%
+#'   rowwise() %>%
+#'   mutate(precision = precision(grid_reference))
 #'}
 precision.gridref <- function(grid_reference) {
 
   gridCoords(grid_reference, units = "m") %>%
     purrr::pluck("precision")
 }
-
 
 #' @title
 #' Get the projection of a grid reference

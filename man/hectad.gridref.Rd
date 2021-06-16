@@ -4,7 +4,7 @@
 \alias{hectad.gridref}
 \title{Get the 10km grid reference}
 \usage{
-\method{hectad}{gridref}(grid)
+\method{hectad}{gridref}(grid_reference)
 }
 \arguments{
 \item{grid_reference}{character, British or Irish grid reference}
