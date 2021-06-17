@@ -18,21 +18,17 @@
 #'
 #' @export
 #'
+#' @example man/examples/grid_references.R
+#'
 #' @examples
-#' # convert grid_reference to gridref class
+#' # check grid_reference class
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
-#'     library(dplyr)
-#'     library(janitor)
 #'     library(purrr)
 #'   })
 #' })
 #'
-#' nbn_demonstration_dataset %>%
-#'  clean_names() %>%
-#'  select(grid_reference) %>%
-#'  mutate(grid_reference = as_gridref(grid_reference)) %>%
+#' grid_references %>%
 #'  map_chr(., class)
 as_gridref <- function(grid_reference = character()) {
 
@@ -51,7 +47,7 @@ as_gridref <- function(grid_reference = character()) {
 #'
 #' @description
 #' Internal validator function to check that a grid reference is valid before
-#' converting to a gridref class. Returns an error if the grid reference is invalid.
+#' converting to a gridref class. Returns an error if the grid reference is invalid
 #'
 #' @details
 #' Taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
@@ -155,7 +151,7 @@ gridsquare_geometry <- function(x, ...) {
 #' Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
 #' or OSNI grid for the bottom, left-hand corner of the grid square. The units
 #' parameter controls the units (metres m or kilometres km) in which the coordinates
-#' should be returned.
+#' should be returned
 #'
 #' @seealso
 #' Function taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
@@ -245,17 +241,17 @@ gridCoords.gridref <-  function (grid_reference, units = c("km", "m")) {
 #' @description
 #' Extracts grid reference strings at various precisions from the supplied grid
 #' reference string when possible. For example supplying a 1km square reference TL2998,
-#' will return the 10km square TL29 but not a 100m square grid reference.
+#' will return the 10km square TL29 but not a 100m square grid reference
 #'
 #' @details
 #' Tetrads are 2x2km squares and are often used for mapping distributions at the
 #' scale of a county or similar sized local area. They are labelled using the 10km
 #' square followed by a single, upper-case letter. Since there are 25 tetrads in a
 #' 10km square, the letter "O" is not used to avoid confusion with zero. This is
-#' named the DINTY system after the letters in the second row of this table.
+#' named the DINTY system after the letters in the second row of this table
 #'
 #' Pentads are 5x5km squares used for mapping at a regional scale. They are labelled
-#' using the name of the 10km square followed by two upper-case letters.
+#' using the name of the 10km square followed by two upper-case letters
 #'
 #' @inherit gridCoords.gridref return seealso
 #'
@@ -361,14 +357,14 @@ gridRef.gridref <- function(format){
 #' Get the precision of a grid reference
 #'
 #' @description
-#' This function returns the grid reference's precision in metres.
+#' This function returns the grid reference's precision in metres
 #'
 #' @details
 #' It can check either British or Irish grid references up to 10 figure (1m precision),
 #' including tetrads (2000m precision)
 #'
 #' @seealso
-#' The function calls the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#' The function calls the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package
 #'
 #' @family grid reference functions
 #'
@@ -378,24 +374,19 @@ gridRef.gridref <- function(format){
 #'
 #' @export
 #'
+#' @example man/examples/grid_references.R
+#'
 #' @examples
-#' \dontrun{
 #' # add precision column
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(dplyr)
-#'     library(janitor)
 #'   })
 #' })
 #'
-#' nbn_demonstration_dataset %>%
-#'   clean_names() %>%
-#'   select(grid_reference) %>%
-#'   mutate(grid_reference = as_gridref(grid_reference)) %>%
+#' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(precision = precision(grid_reference))
-#'}
 precision.gridref <- function(grid_reference) {
 
   gridCoords(grid_reference, units = "m") %>%
@@ -407,32 +398,33 @@ precision.gridref <- function(grid_reference) {
 #'
 #' @description
 #' This function returns the grid reference's projection, either as OSGB or OSNI.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package
 #'
-#' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
+#' @return The projection of the grid reference in British National Grid (OSGB) or Irish National Grid (OSNI)
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
+#' @examples
 #' # add projection column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(projection = projection(grid_reference))
-#'}
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(projection = projection(grid_reference))
 projection.gridref <- function(grid_reference) {
 
   gridCoords(grid_reference) %>%
@@ -444,33 +436,33 @@ projection.gridref <- function(grid_reference) {
 #'
 #' @description
 #' This function returns the grid reference's easting in metres.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
-#' @param centre logical, easting for either lower left hand corner (default) or centre point (TRUE)
+#' @inheritParams precision.gridref
+#' @param centre Should the easting be for the lower left hand corner (default FALSE) or the centre point (TRUE)
 #'
-#' @return integer, easting of grid reference in metres.
+#' @return The easting of grid reference in metres
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
-#' # add easting column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(easting = easting(grid_reference, centre = FALSE))
-#'}
+#' @examples
+#' # add easting column for the centre point
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(easting = easting(grid_reference, centre = TRUE))
 easting.gridref <- function(grid_reference, centre = FALSE) {
 
   # Get easting for lower left hand corner using rNBN
@@ -481,7 +473,7 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
   if(centre) {
 
     # Get precision using rNBN
-    precision <- gridCoords(grid = grid_reference, units = "m") %>%
+    precision <- gridCoords(grid_reference = grid_reference, units = "m") %>%
       purrr::pluck("precision")
 
     easting <- easting + (precision / 2L)
@@ -494,34 +486,34 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
 #' Get the northing of a grid reference
 #'
 #' @description
-#' This function returns the grid reference's northing in metres.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#' This function returns the grid reference's northing in metres
 #'
-#' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
-#' @param centre logical, northing for either lower left hand corner (default) or centre point (TRUE)
+#' @inheritParams precision.gridref
+#' @param centre Should the northing be for the lower left hand corner (default FALSE) or the centre point (TRUE)
 #'
-#' @return integer, northing of grid reference in metres.
+#' @return The northing of grid reference in metres
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
-#' # add northing column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(northing = northing(grid_reference, centre = FALSE))
-#'}
+#' @examples
+#' # add northing column for the centre point
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(northing = northing(grid_reference, centre = TRUE))
 northing.gridref <- function(grid_reference, centre = FALSE) {
 
   # Get northing for lower left hand corner using rNBN
@@ -532,7 +524,7 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
   if(centre) {
 
     # Get precision using rNBN
-    precision <- gridCoords(grid = grid_reference, units = "m") %>%
+    precision <- gridCoords(grid_reference = grid_reference, units = "m") %>%
       purrr::pluck("precision")
 
     northing <- northing + (precision / 2L)

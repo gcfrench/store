@@ -7,34 +7,46 @@
 \method{northing}{gridref}(grid_reference, centre = FALSE)
 }
 \arguments{
-\item{grid_reference}{character gridref class, British or Irish grid reference}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
 
-\item{centre}{logical, northing for either lower left hand corner (default) or centre point (TRUE)}
+\item{centre}{Should the northing be for the lower left hand corner (default FALSE) or the centre point (TRUE)}
 }
 \value{
-integer, northing of grid reference in metres.
+The northing of grid reference in metres
 }
 \description{
-This function returns the grid reference's northing in metres.
-It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-
+This function returns the grid reference's northing in metres
+}
+\details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }
 \examples{
-\dontrun{
+ suppressPackageStartupMessages({
+   library(store)
+   suppressWarnings({
+     library(dplyr)
+     library(janitor)
+   })
+ })
+
+ grid_references <- nbn_demonstration_dataset \%>\%
+   clean_names() \%>\%
+   slice_tail(n = 15) \%>\%
+   select(grid_reference) \%>\%
+   mutate(grid_reference = as_gridref(grid_reference))
+
+
+# add northing column for the centre point
 suppressPackageStartupMessages({
-  library(store)
+  suppressWarnings({
+    library(dplyr)
+  })
 })
 
-# add northing column
-nbn_demonstration_dataset \%>\%
-  janitor::clean_names() \%>\%
-  dplyr::select(grid_reference) \%>\%
-  dplyr::mutate(grid_reference = as_gridref(grid_reference)) \%>\%
-  dplyr::rowwise() \%>\%
-  dplyr::mutate(northing = northing(grid_reference, centre = FALSE))
-}
+grid_references \%>\%
+  rowwise() \%>\%
+  mutate(northing = northing(grid_reference, centre = TRUE))
 }
 \seealso{
 Other grid reference functions: 

@@ -26,7 +26,7 @@ A list of class gridref with the following contents:
 Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
 or OSNI grid for the bottom, left-hand corner of the grid square. The units
 parameter controls the units (metres m or kilometres km) in which the coordinates
-should be returned.
+should be returned
 }
 \seealso{
 Function taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}

@@ -7,32 +7,45 @@
 \method{projection}{gridref}(grid_reference)
 }
 \arguments{
-\item{grid_reference}{character gridref class, British or Irish grid reference}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
 }
 \value{
-character, grid reference projection in British National Grid (OSGB) or Irish National Grid (OSNI).
+The projection of the grid reference in British National Grid (OSGB) or Irish National Grid (OSNI)
 }
 \description{
 This function returns the grid reference's projection, either as OSGB or OSNI.
-It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-
+It uses the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package
+}
+\details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }
 \examples{
-\dontrun{
-suppressPackageStartupMessages({
-  library(store)
-})
+ suppressPackageStartupMessages({
+   library(store)
+   suppressWarnings({
+     library(dplyr)
+     library(janitor)
+   })
+ })
+
+ grid_references <- nbn_demonstration_dataset \%>\%
+   clean_names() \%>\%
+   slice_tail(n = 15) \%>\%
+   select(grid_reference) \%>\%
+   mutate(grid_reference = as_gridref(grid_reference))
+
 
 # add projection column
-nbn_demonstration_dataset \%>\%
-  janitor::clean_names() \%>\%
-  dplyr::select(grid_reference) \%>\%
-  dplyr::mutate(grid_reference = as_gridref(grid_reference)) \%>\%
-  dplyr::rowwise() \%>\%
-  dplyr::mutate(projection = projection(grid_reference))
-}
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(dplyr)
+  })
+})
+
+grid_references \%>\%
+  rowwise() \%>\%
+  mutate(projection = projection(grid_reference))
 }
 \seealso{
 Other grid reference functions: 

@@ -47,6 +47,7 @@ suppressPackageStartupMessages({
     library(dplyr)
   })
 })
+
 # select top 5 heaviest penguins from each species on each island
 heaviest_penguins <- penguins \%>\%
   select(species, island, body_mass_g) \%>\%
@@ -62,6 +63,7 @@ suppressPackageStartupMessages({
    library(purrr)
   })
 })
+
 heaviest_penguins \%>\%
  group_nest(across(c(species:island)), .key = "penguins") \%>\%
  mutate(weight = map_chr(penguins, extract_comma_delimited_list, column_name = "body_mass_g")) \%>\%

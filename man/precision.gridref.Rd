@@ -13,33 +13,41 @@
 The precision of the grid reference in metres
 }
 \description{
-This function returns the grid reference's precision in metres.
+This function returns the grid reference's precision in metres
 }
 \details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision)
 }
 \examples{
-\dontrun{
+ suppressPackageStartupMessages({
+   library(store)
+   suppressWarnings({
+     library(dplyr)
+     library(janitor)
+   })
+ })
+
+ grid_references <- nbn_demonstration_dataset \%>\%
+   clean_names() \%>\%
+   slice_tail(n = 15) \%>\%
+   select(grid_reference) \%>\%
+   mutate(grid_reference = as_gridref(grid_reference))
+
+
 # add precision column
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(dplyr)
-    library(janitor)
   })
 })
 
-nbn_demonstration_dataset \%>\%
-  clean_names() \%>\%
-  select(grid_reference) \%>\%
-  mutate(grid_reference = as_gridref(grid_reference)) \%>\%
+grid_references \%>\%
   rowwise() \%>\%
   mutate(precision = precision(grid_reference))
 }
-}
 \seealso{
-The function calls the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
+The function calls the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package
 
 Other grid reference functions: 
 \code{\link{easting.gridref}()},

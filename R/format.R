@@ -74,6 +74,7 @@ extract_delimited_list <- function(delimiter) {
 #'    library(purrr)
 #'   })
 #' })
+#'
 #' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_comma_delimited_list, column_name = "body_mass_g")) %>%
@@ -106,6 +107,7 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #'    library(purrr)
 #'   })
 #' })
+#'
 #' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_semicolon_delimited_list, column_name = "body_mass_g")) %>%
@@ -166,6 +168,7 @@ extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 #'    library(purrr)
 #'   })
 #' })
+#'
 #' heaviest_penguins %>%
 #'  group_nest(across(c(species:island)), .key = "penguins") %>%
 #'  mutate(weight = map_chr(penguins, extract_paragraph_delimited_list, column_name = "body_mass_g")) %>%
@@ -198,6 +201,7 @@ extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n
 #'    library(forcats)
 #'   })
 #' })
+#'
 #' heaviest_penguins %>%
 #'   filter(species == "Adelie") %>%
 #'   mutate(species = fct_drop(species)) %>%

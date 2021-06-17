@@ -14,7 +14,7 @@ A validated grid reference character string
 }
 \description{
 Internal validator function to check that a grid reference is valid before
-converting to a gridref class. Returns an error if the grid reference is invalid.
+converting to a gridref class. Returns an error if the grid reference is invalid
 }
 \details{
 Taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}.

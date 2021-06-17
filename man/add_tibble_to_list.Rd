@@ -30,6 +30,7 @@ suppressPackageStartupMessages({
     library(dplyr)
   })
 })
+
 # select top 5 heaviest penguins from each species on each island
 heaviest_penguins <- penguins \%>\%
   select(species, island, body_mass_g) \%>\%
@@ -45,6 +46,7 @@ suppressPackageStartupMessages({
    library(forcats)
   })
 })
+
 heaviest_penguins \%>\%
   filter(species == "Adelie") \%>\%
   mutate(species = fct_drop(species)) \%>\%
