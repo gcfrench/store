@@ -20,10 +20,10 @@
 #'
 #' @family exploratory data analysis
 #'
-#' @param .dataset A data frame requiring exploratory data analysis
+#' @param .dataset A data frame requiring exploratory data analysis.
 #'
 #' @return The data frame is returned invisibly so that the function can be
-#' used in a piped workflow
+#' used in a piped workflow.
 #'
 #' @export
 #'
@@ -443,10 +443,10 @@ eda_variable_correlation <- function(.dataset) {
 #' @family exploratory data analysis
 #'
 #' @inheritParams eda_variable_summary
-#' @param summary Use the default TRUE to display variable summary or FALSE to not display variable summary
-#' @param outliers Use the default TRUE to display outliers or FALSE to not display outliers
-#' @param distribution Use the default TRUE to display variable distribution or FALSE to not display variable distribution
-#' @param correlation Use the default TRUE to display variable correlation orFALSE to not display variable correlation
+#' @param summary Use the default TRUE to display variable summary or FALSE to not display variable summary.
+#' @param outliers Use the default TRUE to display outliers or FALSE to not display outliers.
+#' @param distribution Use the default TRUE to display variable distribution or FALSE to not display variable distribution.
+#' @param correlation Use the default TRUE to display variable correlation orFALSE to not display variable correlation.
 #'
 #' @inherit eda_variable_summary return return
 #'

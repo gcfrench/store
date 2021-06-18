@@ -7,13 +7,13 @@
 as_gridref(grid_reference = character())
 }
 \arguments{
-\item{grid_reference}{A Great British or Irish grid reference character string}
+\item{grid_reference}{A Great British or Irish grid reference character string.}
 }
 \value{
-A grid reference character string with an added gridref class
+A grid reference character string with an added gridref class.
 }
 \description{
-Converts a valid grid reference character string to a gridref object
+Converts a valid grid reference character string to a gridref object.
 }
 \details{
 Checks that the character string is a valid grid reference before converting to
@@ -47,5 +47,5 @@ grid_references \%>\%
 }
 \seealso{
 Constructor function for gridref class as described in \href{https://adv-r.hadley.nz/s3.html}{S3}
-chapter of Advanced R second additon by Hadley Wickham
+chapter of Advanced R second additon by Hadley Wickham.
 }

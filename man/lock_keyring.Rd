@@ -7,10 +7,10 @@
 lock_keyring(keyring_name)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 }
 \description{
-Lock the keyring requiring keyring password
+Lock the keyring requiring keyring password.
 }
 \seealso{
 Other keyring functions: 

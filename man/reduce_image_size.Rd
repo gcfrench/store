@@ -7,23 +7,23 @@
 reduce_image_size(path_image, image_size = "50\%")
 }
 \arguments{
-\item{path_image}{The character string of the image path name}
+\item{path_image}{The character string of the image path name.}
 
-\item{image_size}{Percentage size reduction with 50\% as the default}
+\item{image_size}{Percentage size reduction with 50\% as the default.}
 }
 \value{
 The path name of image returned invisibly so that the function can be
-used in a piped workflow
+used in a piped workflow.
 }
 \description{
 This function reduces the size of an image, archiving the original image in a
-separate archive sub-directory
+separate archive sub-directory.
 }
 \details{
 The example batch runs the function on a graph from the
 \href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
 and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
-and \href{https://davisvaughan.github.io/furrr/}{furrr} packages
+and \href{https://davisvaughan.github.io/furrr/}{furrr} packages.
 }
 \section{Figures}{
 

@@ -7,12 +7,12 @@
 get_postgres_connection(keyring_name, service_name)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 
-\item{service_name}{A character string providing the name of the key}
+\item{service_name}{A character string providing the name of the key.}
 }
 \value{
-A PostgreSQL database connection object
+A PostgreSQL database connection object.
 }
 \description{
 This function initiates a PostgreSQL connection using stored database credentials

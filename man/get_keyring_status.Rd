@@ -7,10 +7,10 @@
 get_keyring_status(keyring_name)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 }
 \value{
-A message giving the locked status of the keyring
+A message giving the locked status of the keyring.
 }
 \description{
 Check the current status of the keyring. The default status of the keyring is to be locked,

@@ -14,18 +14,18 @@ extract_semicolon_delimited_list(
 )
 }
 \arguments{
-\item{.df}{A data frame containing the column with the delimited list to extract}
+\item{.df}{A data frame containing the column with the delimited list to extract.}
 
-\item{column_name}{The name of the column containing the delimited list to extract}
+\item{column_name}{The name of the column containing the delimited list to extract.}
 
-\item{sort}{Should the delimited list be sorted (TRUE) or not (default FALSE)}
+\item{sort}{Should the delimited list be sorted (TRUE) or not (default FALSE).}
 
-\item{unique_list}{Should the delimited list contain duplicated elements (default FALSE) or not (TRUE)}
+\item{unique_list}{Should the delimited list contain duplicated elements (default FALSE) or not (TRUE).}
 
-\item{last_delimiter}{An optional character string used to separate the last two items in the delimited list}
+\item{last_delimiter}{An optional character string used to separate the last two items in the delimited list.}
 }
 \value{
-The semi-colon separated delimited list as a character string
+The semi-colon separated delimited list as a character string.
 }
 \description{
 This function extracts a semi-colon delimited list from a data frame's column. It

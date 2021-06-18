@@ -7,13 +7,13 @@
 display_table(data, rows = nrow(data))
 }
 \arguments{
-\item{data}{A data frame containing the data to display}
+\item{data}{A data frame containing the data to display.}
 
-\item{rows}{Number of rows to display as an integer with total row number as the default}
+\item{rows}{Number of rows to display as an integer with total row number as the default.}
 }
 \value{
 A html table displaying the first page of the data limited to the specified number
-of rows
+of rows.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

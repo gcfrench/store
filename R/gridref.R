@@ -1,8 +1,10 @@
+# S3 construction function -----------------------------------------------------
+
 #' @title
 #' Convert a string to a gridref object
 #'
 #' @description
-#' Converts a valid grid reference character string to a gridref object
+#' Converts a valid grid reference character string to a gridref object.
 #'
 #' @details
 #' Checks that the character string is a valid grid reference before converting to
@@ -10,11 +12,11 @@
 #'
 #' @seealso
 #' Constructor function for gridref class as described in [S3](https://adv-r.hadley.nz/s3.html)
-#' chapter of Advanced R second additon by Hadley Wickham
+#' chapter of Advanced R second additon by Hadley Wickham.
 #'
-#' @param grid_reference A Great British or Irish grid reference character string
+#' @param grid_reference A Great British or Irish grid reference character string.
 #'
-#' @return A grid reference character string with an added gridref class
+#' @return A grid reference character string with an added gridref class.
 #'
 #' @export
 #'
@@ -42,21 +44,23 @@ as_gridref <- function(grid_reference = character()) {
   structure(grid_reference, class = "gridref")
 }
 
+# S3 Validator function --------------------------------------------------------
+
 #' @title
 #' Validate a grid reference
 #'
 #' @description
 #' Internal validator function to check that a grid reference is valid before
-#' converting to a gridref class. Returns an error if the grid reference is invalid
+#' converting to a gridref class. Returns an error if the grid reference is invalid.
 #'
 #' @details
 #' Taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
 #'
-#' @author Stuart Ball
+#' @author Stuart Ball.
 #'
 #' @inheritParams as_gridref
 #'
-#' @return A validated grid reference character string
+#' @return A validated grid reference character string.
 validate_gridref <- function(grid_reference) {
 
   gr <- toupper(gsub(" ", "", grid_reference))
@@ -73,6 +77,8 @@ validate_gridref <- function(grid_reference) {
 
   return(grid_reference)
 }
+
+# S3 generic functions ---------------------------------------------------------
 
 #' @noRd
 gridCoords <- function(x, ...) {
@@ -144,6 +150,8 @@ gridsquare_geometry <- function(x, ...) {
   UseMethod("gridsquare_geometry", x)
 }
 
+# S3 method functions ----------------------------------------------------------
+
 #' @title
 #' Get the x, y coordinates from a grid reference
 #'
@@ -151,23 +159,23 @@ gridsquare_geometry <- function(x, ...) {
 #' Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
 #' or OSNI grid for the bottom, left-hand corner of the grid square. The units
 #' parameter controls the units (metres m or kilometres km) in which the coordinates
-#' should be returned
+#' should be returned.
 #'
 #' @seealso
-#' Function taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37)
+#' Function taken from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
 #'
-#' @author Stuart Ball
+#' @author Stuart Ball.
 #'
-#' @param grid_reference A Great British or Irish grid reference character string with class gridref
-#' @param units Should the returned coordinates be in metres (m) or kilometres (km)
+#' @param grid_reference A Great British or Irish grid reference character string with class gridref.
+#' @param units Should the returned coordinates be in metres (m) or kilometres (km).
 #'
 #' @return A list of class gridref with the following contents:
-#' * grid_reference: the original grid reference
-#' * system:	the grid reference projection system, either "OSGB" or "OSNI"
-#' * x: the easting coordinate in requested units
-#' * y: the northing coordinate in requested units
-#' * units: the requested units either metres (m) or kilometres (km)
-#' * precision: the precision of the original grid reference in metres
+#' * grid_reference: the original grid reference.
+#' * system:	the grid reference projection system, either "OSGB" or "OSNI".
+#' * x: the easting coordinate in requested units.
+#' * y: the northing coordinate in requested units.
+#' * units: the requested units either metres (m) or kilometres (km).
+#' * precision: the precision of the original grid reference in metres.
 gridCoords.gridref <-  function (grid_reference, units = c("km", "m")) {
   decodeTetrad <- function(letter) {
     l = as.integer(charToRaw(letter)) - 65
@@ -241,27 +249,27 @@ gridCoords.gridref <-  function (grid_reference, units = c("km", "m")) {
 #' @description
 #' Extracts grid reference strings at various precisions from the supplied grid
 #' reference string when possible. For example supplying a 1km square reference TL2998,
-#' will return the 10km square TL29 but not a 100m square grid reference
+#' will return the 10km square TL29 but not a 100m square grid reference.
 #'
 #' @details
 #' Tetrads are 2x2km squares and are often used for mapping distributions at the
 #' scale of a county or similar sized local area. They are labelled using the 10km
 #' square followed by a single, upper-case letter. Since there are 25 tetrads in a
 #' 10km square, the letter "O" is not used to avoid confusion with zero. This is
-#' named the DINTY system after the letters in the second row of this table
+#' named the DINTY system after the letters in the second row of this table.
 #'
 #' Pentads are 5x5km squares used for mapping at a regional scale. They are labelled
-#' using the name of the 10km square followed by two upper-case letters
+#' using the name of the 10km square followed by two upper-case letters.
 #'
 #' @inherit gridCoords.gridref return seealso
 #'
-#' @author Stuart Ball
+#' @author Stuart Ball.
 #'
 #' @param grid_reference A Great British or Irish grid reference character string with class gridref
 #' @param format The required grid reference format, either sq10km, sq5km, tetrad,
-#' sq1km, sq100m or sq10m
+#' sq1km, sq100m or sq10m.
 #'
-#' @return The grid reference string formatted as requested
+#' @return The grid reference string formatted as requested.
 gridRef.gridref <- function(format){
 
   function(grid_reference) {
@@ -357,20 +365,20 @@ gridRef.gridref <- function(format){
 #' Get the precision of a grid reference
 #'
 #' @description
-#' This function returns the grid reference's precision in metres
+#' This function returns the grid reference's precision in metres.
 #'
 #' @details
 #' It can check either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' including tetrads (2000m precision).
 #'
 #' @seealso
-#' The function calls the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package
+#' The function calls the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference A Great British or Irish grid reference character string with class gridref
+#' @param grid_reference A Great British or Irish grid reference character string with class gridref.
 #'
-#' @return The precision of the grid reference in metres
+#' @return The precision of the grid reference in metres.
 #'
 #' @export
 #'
@@ -398,7 +406,6 @@ precision.gridref <- function(grid_reference) {
 #'
 #' @description
 #' This function returns the grid reference's projection, either as OSGB or OSNI.
-#' It uses the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package
 #'
 #' @inherit precision.gridref return details
 #'
@@ -408,7 +415,7 @@ precision.gridref <- function(grid_reference) {
 #'
 #' @inheritParams precision.gridref
 #'
-#' @return The projection of the grid reference in British National Grid (OSGB) or Irish National Grid (OSNI)
+#' @return The projection of the grid reference in British National Grid (OSGB) or Irish National Grid (OSNI).
 #'
 #' @export
 #'
@@ -444,9 +451,9 @@ projection.gridref <- function(grid_reference) {
 #' @family grid reference functions
 #'
 #' @inheritParams precision.gridref
-#' @param centre Should the easting be for the lower left hand corner (default FALSE) or the centre point (TRUE)
+#' @param centre Should the easting be for the lower left hand corner (default FALSE) or the centre point (TRUE).
 #'
-#' @return The easting of grid reference in metres
+#' @return The easting of grid reference in metres.
 #'
 #' @export
 #'
@@ -473,7 +480,7 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
   if(centre) {
 
     # Get precision using rNBN
-    precision <- gridCoords(grid_reference = grid_reference, units = "m") %>%
+    precision <- gridCoords(grid_reference, units = "m") %>%
       purrr::pluck("precision")
 
     easting <- easting + (precision / 2L)
@@ -486,7 +493,7 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
 #' Get the northing of a grid reference
 #'
 #' @description
-#' This function returns the grid reference's northing in metres
+#' This function returns the grid reference's northing in metres.
 #'
 #' @inherit precision.gridref return details
 #'
@@ -495,9 +502,9 @@ easting.gridref <- function(grid_reference, centre = FALSE) {
 #' @family grid reference functions
 #'
 #' @inheritParams precision.gridref
-#' @param centre Should the northing be for the lower left hand corner (default FALSE) or the centre point (TRUE)
+#' @param centre Should the northing be for the lower left hand corner (default FALSE) or the centre point (TRUE).
 #'
-#' @return The northing of grid reference in metres
+#' @return The northing of grid reference in metres.
 #'
 #' @export
 #'
@@ -524,7 +531,7 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
   if(centre) {
 
     # Get precision using rNBN
-    precision <- gridCoords(grid_reference = grid_reference, units = "m") %>%
+    precision <- gridCoords(grid_reference, units = "m") %>%
       purrr::pluck("precision")
 
     northing <- northing + (precision / 2L)
@@ -538,32 +545,32 @@ northing.gridref <- function(grid_reference, centre = FALSE) {
 #'
 #' @description
 #' This function returns the 10km grid reference for a higher precision grid reference.
-#' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return character, 10km grid reference
+#' @return The grid reference at 10km resolution.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
+#' @examples
 #' # add ten_km column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(ten_km = hectad(grid_reference))
-#'}
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(ten_km = hectad(grid_reference))
 hectad.gridref <- gridRef.gridref(format = "sq10km")
 
 #' @title
@@ -571,32 +578,32 @@ hectad.gridref <- gridRef.gridref(format = "sq10km")
 #'
 #' @description
 #' This function returns the 5km grid reference for a higher precision grid reference.
-#' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' but does not convert tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return character, 5km grid reference
+#' @return The grid reference at 5km resolution.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
+#' @examples
 #' # add five_km column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(five_km = pentad(grid_reference))
-#'}
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(five_km = pentad(grid_reference))
 pentad.gridref <- gridRef.gridref(format = "sq5km")
 
 #' @title
@@ -604,32 +611,32 @@ pentad.gridref <- gridRef.gridref(format = "sq5km")
 #'
 #' @description
 #' This function returns the 2km grid reference for a higher precision grid reference.
-#' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return character, 2km grid reference
+#' @return The grid reference at 2km resolution.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
+#' @examples
 #' # add two_km column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(two_km = tetrad(grid_reference))
-#'}
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(two_km = tetrad(grid_reference))
 tetrad.gridref <- gridRef.gridref(format = "tetrad")
 
 #' @title
@@ -637,32 +644,32 @@ tetrad.gridref <- gridRef.gridref(format = "tetrad")
 #'
 #' @description
 #' This function returns the 1km grid reference for a higher precision grid reference.
-#' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' but does not convert tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return character, 1km grid reference
+#' @return The grid reference at 2km resolution.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
+#' @examples
 #' # add one_km column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(one_km = monad(grid_reference))
-#'}
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(one_km = monad(grid_reference))
 monad.gridref <- gridRef.gridref(format = "sq1km")
 
 #' @title
@@ -670,32 +677,32 @@ monad.gridref <- gridRef.gridref(format = "sq1km")
 #'
 #' @description
 #' This function returns the 100m grid reference for a higher precision grid reference.
-#' It uses the gridRef function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision)
+#' @inherit precision.gridref return details
+#'
+#' @inherit precision.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return character, 100m grid reference
+#' @return The grid reference at 100m resolution.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'})
+#' @example man/examples/grid_references.R
 #'
+#' @examples
 #' # add one_hundred_m column
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::select(grid_reference) %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(one_hundred_m = hectare(grid_reference))
-#'}
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(one_hundred_m = hectare(grid_reference))
 hectare.gridref <- gridRef.gridref(format = "sq100m")
 
 #' @title
@@ -703,42 +710,35 @@ hectare.gridref <- gridRef.gridref(format = "sq100m")
 #'
 #' @description
 #' This function converts a grid reference to its square polygon geometry feature
-#' through conversion to well-known text. It uses the gridCoords function in the
-#' archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
+#' through conversion to well-known text.
 #'
-#' It can convert either British or Irish grid references up to 10 figure (1m precision),
-#' including tetrads (2000m precision) and returns an empty polygon feature for
-#' an invalid grid reference
+#' @inherit precision.gridref return details
+#'
+#' @inherit gridCoords.gridref return seealso
 #'
 #' @family grid reference functions
 #'
-#' @param grid_reference character gridref class, British or Irish grid reference
+#' @inheritParams precision.gridref
 #'
-#' @return geometry, square polygon feature
+#' @return The square polygon geometry feature
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
-#'    library(here)
-#'    library(fs)
-#'   })
-#'})
-#' # create output directory
-#' i_am("example.Rmd")
-#' if (!dir_exists("output")) {dir_create("output")}
+#' @example man/examples/grid_references.R
 #'
-#' # create sf data frame and export as shape file
-#' nbn_demonstration_dataset %>%
-#'   janitor::clean_names() %>%
-#'   dplyr::mutate(grid_reference = as_gridref(grid_reference)) %>%
-#'   dplyr::rowwise() %>%
-#'   dplyr::mutate(geometry = gridsquare_geometry(grid_reference)) %>%
-#'   sf::st_as_sf() %>%
-#'   sf::st_write("output/nbn_demonstration_dataset.shp")
-#'}
+#' @examples
+#' # create sf data frame
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'     library(sf)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(geometry = gridsquare_geometry(grid_reference)) %>%
+#'   st_as_sf()
 gridsquare_geometry.gridref <- function(grid_reference) {
 
   coords <- gridCoords(grid_reference, unit = "m")

@@ -7,42 +7,47 @@
 \method{gridsquare_geometry}{gridref}(grid_reference)
 }
 \arguments{
-\item{grid_reference}{character gridref class, British or Irish grid reference}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref.}
 }
 \value{
-geometry, square polygon feature
+The square polygon geometry feature
 }
 \description{
 This function converts a grid reference to its square polygon geometry feature
-through conversion to well-known text. It uses the gridCoords function in the
-archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-
-It can convert either British or Irish grid references up to 10 figure (1m precision),
-including tetrads (2000m precision) and returns an empty polygon feature for
-an invalid grid reference
+through conversion to well-known text.
+}
+\details{
+It can check either British or Irish grid references up to 10 figure (1m precision),
+including tetrads (2000m precision).
 }
 \examples{
-\dontrun{
+ suppressPackageStartupMessages({
+   library(store)
+   suppressWarnings({
+     library(dplyr)
+     library(janitor)
+   })
+ })
+
+ grid_references <- nbn_demonstration_dataset \%>\%
+   clean_names() \%>\%
+   slice_tail(n = 15) \%>\%
+   select(grid_reference) \%>\%
+   mutate(grid_reference = as_gridref(grid_reference))
+
+
+# create sf data frame
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
-   library(here)
-   library(fs)
+    library(dplyr)
+    library(sf)
   })
 })
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
 
-# create sf data frame and export as shape file
-nbn_demonstration_dataset \%>\%
-  janitor::clean_names() \%>\%
-  dplyr::mutate(grid_reference = as_gridref(grid_reference)) \%>\%
-  dplyr::rowwise() \%>\%
-  dplyr::mutate(geometry = gridsquare_geometry(grid_reference)) \%>\%
-  sf::st_as_sf() \%>\%
-  sf::st_write("output/nbn_demonstration_dataset.shp")
-}
+grid_references \%>\%
+  rowwise() \%>\%
+  mutate(geometry = gridsquare_geometry(grid_reference)) \%>\%
+  st_as_sf()
 }
 \seealso{
 Other grid reference functions: 

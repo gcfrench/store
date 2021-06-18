@@ -56,13 +56,14 @@ extract_delimited_list <- function(delimiter) {
 #'
 #' @family delimited functions
 #'
-#' @param .df A data frame containing the column with the delimited list to extract
-#' @param column_name The name of the column containing the delimited list to extract
-#' @param sort Should the delimited list be sorted (TRUE) or not (default FALSE)
-#' @param unique_list Should the delimited list contain duplicated elements (default FALSE) or not (TRUE)
-#' @param last_delimiter An optional character string used to separate the last two items in the delimited list
+#' @param .df A data frame containing the column with the delimited list to extract.
+#' @param column_name The name of the column containing the delimited list to extract.
+#' @param sort Should the delimited list be sorted (TRUE) or not (default FALSE).
+#' @param unique_list Should the delimited list contain duplicated elements (default FALSE) or not (TRUE).
+#' @param last_delimiter An optional character string used to separate the last two items in the delimited list.
 #'
-#' @return The comma separated delimited list as a character string
+#' @return The comma separated delimited list as a character string.
+#'
 #' @export
 #'
 #' @example man/examples/heaviest_penguins.R
@@ -95,7 +96,8 @@ extract_comma_delimited_list <- extract_delimited_list(delimiter = ", ")
 #'
 #' @inheritParams extract_comma_delimited_list
 #'
-#' @return The semi-colon separated delimited list as a character string
+#' @return The semi-colon separated delimited list as a character string.
+#'
 #' @export
 #'
 #' @example man/examples/heaviest_penguins.R
@@ -128,7 +130,8 @@ extract_semicolon_delimited_list <- extract_delimited_list(delimiter = "; ")
 #'
 #' @inheritParams extract_comma_delimited_list
 #'
-#' @return The space separated delimited list as a character string
+#' @return The space separated delimited list as a character string.
+#'
 #' @export
 #'
 #' @example man/examples/heaviest_penguins.R
@@ -156,7 +159,8 @@ extract_space_delimited_list <- extract_delimited_list(delimiter = " ")
 #'
 #' @inheritParams extract_comma_delimited_list
 #'
-#' @return The paragraph separated delimited list as a character string
+#' @return The paragraph separated delimited list as a character string.
+#'
 #' @export
 #'
 #' @example man/examples/heaviest_penguins.R
@@ -180,16 +184,17 @@ extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n
 #'
 #' @description
 #' This function prepends tibbles to a list, creating the list in the environment
-#' calling this function if not already present
+#' calling this function if not already present.
 #'
 #' @details
-#' Adding a tibble to a list is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html)
+#' Adding a tibble to a list is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html).
 #'
-#' @param .data The tibble to be added to the beginning of the list
-#' @param .name The name of the tibble to be added to the beginning of the list
+#' @param .data The tibble to be added to the beginning of the list.
+#' @param .name The name of the tibble to be added to the beginning of the list.
 #'
 #' @return The tibble is returned invisibly so that the function may be used within
-#' a pipe workflow
+#' a pipe workflow.
+#'
 #' @export
 #'
 #' @example man/examples/heaviest_penguins.R

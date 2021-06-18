@@ -7,19 +7,19 @@
 \method{northing}{gridref}(grid_reference, centre = FALSE)
 }
 \arguments{
-\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref.}
 
-\item{centre}{Should the northing be for the lower left hand corner (default FALSE) or the centre point (TRUE)}
+\item{centre}{Should the northing be for the lower left hand corner (default FALSE) or the centre point (TRUE).}
 }
 \value{
-The northing of grid reference in metres
+The northing of grid reference in metres.
 }
 \description{
-This function returns the grid reference's northing in metres
+This function returns the grid reference's northing in metres.
 }
 \details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
-including tetrads (2000m precision)
+including tetrads (2000m precision).
 }
 \examples{
  suppressPackageStartupMessages({

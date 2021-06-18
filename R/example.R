@@ -7,7 +7,7 @@
 #' to TL28 10km grid square, recorded in 2008 for the purpose of demonstrating the
 #' functionality of the NBN Gateway. This website collated and made freely available
 #' biological species records across the UK. It was superseded in March 2017 by
-#' the [NBN Atlas](https://nbnatlas.org/)
+#' the [NBN Atlas](https://nbnatlas.org/).
 #'
 #' @format
 #' A tibble with `r nrow(nbn_demonstration_dataset)` rows and `r ncol(nbn_demonstration_dataset)` variables

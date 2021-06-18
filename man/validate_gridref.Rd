@@ -7,18 +7,18 @@
 validate_gridref(grid_reference)
 }
 \arguments{
-\item{grid_reference}{A Great British or Irish grid reference character string}
+\item{grid_reference}{A Great British or Irish grid reference character string.}
 }
 \value{
-A validated grid reference character string
+A validated grid reference character string.
 }
 \description{
 Internal validator function to check that a grid reference is valid before
-converting to a gridref class. Returns an error if the grid reference is invalid
+converting to a gridref class. Returns an error if the grid reference is invalid.
 }
 \details{
 Taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}.
 }
 \author{
-Stuart Ball
+Stuart Ball.
 }

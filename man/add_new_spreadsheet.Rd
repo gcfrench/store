@@ -14,20 +14,20 @@ add_new_spreadsheet(
 )
 }
 \arguments{
-\item{spreadsheet_name}{The name of the spreadsheet to which the data and optionally an image will be added}
+\item{spreadsheet_name}{The name of the spreadsheet to which the data and optionally an image will be added.}
 
-\item{data}{The name of the data frame containing the data to add to the spreadsheet}
+\item{data}{The name of the data frame containing the data to add to the spreadsheet.}
 
-\item{image_path}{The path name for the image to be optionally added to the spreadsheet}
+\item{image_path}{The path name for the image to be optionally added to the spreadsheet.}
 
-\item{image_width}{The width of image in inches to be optionally added to the spreadsheet}
+\item{image_width}{The width of image in inches to be optionally added to the spreadsheet.}
 
-\item{image_height}{The height of image in inches to be optionally added to the spreadsheet}
+\item{image_height}{The height of image in inches to be optionally added to the spreadsheet.}
 
-\item{filter}{Should a filter be added to the data (default TRUE) in the spreadsheet or not (FALSE)}
+\item{filter}{Should a filter be added to the data (default TRUE) in the spreadsheet or not (FALSE).}
 }
 \value{
-The data frame is returned invisibly so that the function can be used in a piped workflow
+The data frame is returned invisibly so that the function can be used in a piped workflow.
 }
 \description{
 This function adds a data frame and optional image to a new spreadsheet in an

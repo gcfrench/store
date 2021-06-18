@@ -35,6 +35,6 @@ nature reserves, Monks Wood, Woodwalton Fen and Holme Fen, occuring in or adjace
 to TL28 10km grid square, recorded in 2008 for the purpose of demonstrating the
 functionality of the NBN Gateway. This website collated and made freely available
 biological species records across the UK. It was superseded in March 2017 by
-the \href{https://nbnatlas.org/}{NBN Atlas}
+the \href{https://nbnatlas.org/}{NBN Atlas}.
 }
 \keyword{datasets}

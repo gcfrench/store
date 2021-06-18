@@ -7,13 +7,13 @@
 delete_key(keyring_name, service_name)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 
-\item{service_name}{A character string providing the name of the key}
+\item{service_name}{A character string providing the name of the key.}
 }
 \description{
-Remove a key from the keyring by supplying both the keyring name
-and name of key to remove
+Remove a key from the keyring by supplying both the keyring name and name of
+key to remove.
 }
 \seealso{
 Other keyring functions: 

@@ -16,14 +16,14 @@
 #'
 #' @family excel functions
 #'
-#' @param spreadsheet_name The name of the spreadsheet to which the data and optionally an image will be added
-#' @param data The name of the data frame containing the data to add to the spreadsheet
-#' @param image_path The path name for the image to be optionally added to the spreadsheet
-#' @param image_width The width of image in inches to be optionally added to the spreadsheet
-#' @param image_height The height of image in inches to be optionally added to the spreadsheet
-#' @param filter Should a filter be added to the data (default TRUE) in the spreadsheet or not (FALSE)
+#' @param spreadsheet_name The name of the spreadsheet to which the data and optionally an image will be added.
+#' @param data The name of the data frame containing the data to add to the spreadsheet.
+#' @param image_path The path name for the image to be optionally added to the spreadsheet.
+#' @param image_width The width of image in inches to be optionally added to the spreadsheet.
+#' @param image_height The height of image in inches to be optionally added to the spreadsheet.
+#' @param filter Should a filter be added to the data (default TRUE) in the spreadsheet or not (FALSE).
 #'
-#' @return The data frame is returned invisibly so that the function can be used in a piped workflow
+#' @return The data frame is returned invisibly so that the function can be used in a piped workflow.
 #'
 #' @export
 #'

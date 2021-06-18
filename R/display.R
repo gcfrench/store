@@ -9,11 +9,11 @@
 #' through or display all the rows. The ability to search for table content and
 #' sort columns is also available.
 #'
-#' @param data A data frame containing the data to display
-#' @param rows Number of rows to display as an integer with total row number as the default
+#' @param data A data frame containing the data to display.
+#' @param rows Number of rows to display as an integer with total row number as the default.
 #'
 #' @return A html table displaying the first page of the data limited to the specified number
-#' of rows
+#' of rows.
 #'
 #' @export
 #'
@@ -42,23 +42,23 @@ display_table <- function(data, rows = nrow(data)) {
 #'
 #' @description
 #' This function adds a border shadow to the image, archiving the original image
-#' in a separate archive sub-directory
+#' in a separate archive sub-directory.
 #'
 #' @details
 #' The example batch runs the function on a graph from the
 #' [palmerpenguins package](https://allisonhorst.github.io/palmerpenguins/articles/examples.html)
 #' and is an example of parallelization using the [future](https://github.com/HenrikBengtsson/future)
-#' and [furrr](https://davisvaughan.github.io/furrr/) packages
+#' and [furrr](https://davisvaughan.github.io/furrr/) packages.
 #'
 #' @section Figures:
 #' ![Penguins mass v flipper shadow plot](penguins_mass_flipper_plot_shadow.png)
 #'
 #' @family image manipulation functions
 #'
-#' @param path_image The character string of the image path name
+#' @param path_image The character string of the image path name.
 #'
 #' @return The path name of image returned invisibly so that the function can be
-#' used in a piped workflow
+#' used in a piped workflow.
 #'
 #' @export
 #'
@@ -118,7 +118,7 @@ add_image_shadow <- function(path_image) {
 #'
 #' @description
 #' This function reduces the size of an image, archiving the original image in a
-#' separate archive sub-directory
+#' separate archive sub-directory.
 #'
 #' @inherit add_image_shadow return details
 #'
@@ -131,7 +131,7 @@ add_image_shadow <- function(path_image) {
 #' @family image manipulation functions
 #'
 #' @inheritParams add_image_shadow
-#' @param image_size Percentage size reduction with 50% as the default
+#' @param image_size Percentage size reduction with 50% as the default.
 #'
 #' @inherit add_image_shadow return return
 #'

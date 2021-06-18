@@ -7,17 +7,17 @@
 \method{precision}{gridref}(grid_reference)
 }
 \arguments{
-\item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref.}
 }
 \value{
-The precision of the grid reference in metres
+The precision of the grid reference in metres.
 }
 \description{
-This function returns the grid reference's precision in metres
+This function returns the grid reference's precision in metres.
 }
 \details{
 It can check either British or Irish grid references up to 10 figure (1m precision),
-including tetrads (2000m precision)
+including tetrads (2000m precision).
 }
 \examples{
  suppressPackageStartupMessages({
@@ -47,7 +47,7 @@ grid_references \%>\%
   mutate(precision = precision(grid_reference))
 }
 \seealso{
-The function calls the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package
+The function calls the gridCoords function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
 
 Other grid reference functions: 
 \code{\link{easting.gridref}()},

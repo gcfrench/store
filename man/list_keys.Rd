@@ -7,10 +7,10 @@
 list_keys(keyring_name)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 }
 \value{
-A data frame listing the keys in the keyring
+A data frame listing the keys in the keyring.
 }
 \description{
 List the current keys stored on the keyring.

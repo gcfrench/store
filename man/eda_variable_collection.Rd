@@ -13,19 +13,19 @@ eda_variable_collection(
 )
 }
 \arguments{
-\item{.dataset}{A data frame requiring exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis.}
 
-\item{summary}{Use the default TRUE to display variable summary or FALSE to not display variable summary}
+\item{summary}{Use the default TRUE to display variable summary or FALSE to not display variable summary.}
 
-\item{outliers}{Use the default TRUE to display outliers or FALSE to not display outliers}
+\item{outliers}{Use the default TRUE to display outliers or FALSE to not display outliers.}
 
-\item{distribution}{Use the default TRUE to display variable distribution or FALSE to not display variable distribution}
+\item{distribution}{Use the default TRUE to display variable distribution or FALSE to not display variable distribution.}
 
-\item{correlation}{Use the default TRUE to display variable correlation orFALSE to not display variable correlation}
+\item{correlation}{Use the default TRUE to display variable correlation orFALSE to not display variable correlation.}
 }
 \value{
 The data frame is returned invisibly so that the function can be
-used in a piped workflow
+used in a piped workflow.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

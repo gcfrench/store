@@ -17,7 +17,7 @@
 #'
 #' @family keyring functions
 #'
-#' @param keyring_name A character string providing the name of the keyring
+#' @param keyring_name A character string providing the name of the keyring.
 #'
 #' @export
 create_locked_keyring <- function(keyring_name) {
@@ -37,7 +37,7 @@ create_locked_keyring <- function(keyring_name) {
 #'
 #' @family keyring functions
 #'
-#' @return A message giving the locked status of the keyring
+#' @return A message giving the locked status of the keyring.
 #'
 #' @export
 get_keyring_status <- function(keyring_name) {
@@ -52,7 +52,7 @@ get_keyring_status <- function(keyring_name) {
 #' Unlock a keyring
 #'
 #' @description
-#' Unlock the keyring requiring keyring password
+#' Unlock the keyring requiring keyring password.
 #'
 #' @family keyring functions
 #'
@@ -68,7 +68,7 @@ unlock_keyring <- function(keyring_name) {
 #' Lock a keyring
 #'
 #' @description
-#' Lock the keyring requiring keyring password
+#' Lock the keyring requiring keyring password.
 #'
 #' @family keyring functions
 #'
@@ -91,7 +91,7 @@ lock_keyring <- function(keyring_name) {
 #'
 #' @inheritParams create_locked_keyring
 #'
-#' @return A data frame listing the keys in the keyring
+#' @return A data frame listing the keys in the keyring.
 #'
 #' @export
 list_keys <- function(keyring_name) {
@@ -109,14 +109,14 @@ list_keys <- function(keyring_name) {
 #' On creating the key, the name of the key relating to the database is added under the service name
 #' and the database connections string is added as a json string in the password dialog box.
 #'
-#' * SQL Server windows authentication: \{"server":"SERVER_NAME", "database":"DATABASE_NAME"\}
-#' * PostGresSQL database: \{"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"\}
-#' * For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS"
+#' * SQL Server windows authentication: \{"server":"SERVER_NAME", "database":"DATABASE_NAME"\}.
+#' * PostGresSQL database: \{"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"\}.
+#' * For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS".
 #'
 #' @family keyring functions
 #'
 #' @inheritParams create_locked_keyring
-#' @param service_name A character string providing the name of the key
+#' @param service_name A character string providing the name of the key.
 #'
 #' @export
 add_key <- function(keyring_name, service_name){
@@ -134,8 +134,8 @@ add_key <- function(keyring_name, service_name){
 #' Delete a key from a keyring
 #'
 #' @description
-#' Remove a key from the keyring by supplying both the keyring name
-#' and name of key to remove
+#' Remove a key from the keyring by supplying both the keyring name and name of
+#' key to remove.
 #'
 #' @family keyring functions
 #'
@@ -195,9 +195,10 @@ delete_key <- function(keyring_name, service_name) {
 #' @family database functions
 #'
 #' @inheritParams add_key
-#' @param keyring default TRUE uses the keyring, FALSE requests credentials
+#' @param keyring default TRUE uses the keyring, FALSE requests credentials.
 #'
-#' @return A SQL Server database connection object
+#' @return A SQL Server database connection object.
+#'
 #' @export
 get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE) {
 
@@ -262,7 +263,8 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #'
 #' @inheritParams add_key
 #'
-#' @return A MySQL database connection object
+#' @return A MySQL database connection object.
+#'
 #' @export
 get_mysql_connection <- function(keyring_name, service_name) {
 
@@ -322,7 +324,8 @@ get_mysql_connection <- function(keyring_name, service_name) {
 #'
 #' @inheritParams add_key
 #'
-#' @return A PostgreSQL database connection object
+#' @return A PostgreSQL database connection object.
+#'
 #' @export
 get_postgres_connection <- function(keyring_name, service_name) {
 

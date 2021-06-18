@@ -7,14 +7,14 @@
 get_sqlserver_connection(keyring_name, service_name, keyring = TRUE)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 
-\item{service_name}{A character string providing the name of the key}
+\item{service_name}{A character string providing the name of the key.}
 
-\item{keyring}{default TRUE uses the keyring, FALSE requests credentials}
+\item{keyring}{default TRUE uses the keyring, FALSE requests credentials.}
 }
 \value{
-A SQL Server database connection object
+A SQL Server database connection object.
 }
 \description{
 This function initiates a SQL Server connection using windows authentication,

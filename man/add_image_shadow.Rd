@@ -7,21 +7,21 @@
 add_image_shadow(path_image)
 }
 \arguments{
-\item{path_image}{The character string of the image path name}
+\item{path_image}{The character string of the image path name.}
 }
 \value{
 The path name of image returned invisibly so that the function can be
-used in a piped workflow
+used in a piped workflow.
 }
 \description{
 This function adds a border shadow to the image, archiving the original image
-in a separate archive sub-directory
+in a separate archive sub-directory.
 }
 \details{
 The example batch runs the function on a graph from the
 \href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
 and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
-and \href{https://davisvaughan.github.io/furrr/}{furrr} packages
+and \href{https://davisvaughan.github.io/furrr/}{furrr} packages.
 }
 \section{Figures}{
 

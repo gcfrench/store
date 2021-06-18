@@ -7,32 +7,44 @@
 \method{hectare}{gridref}(grid_reference)
 }
 \arguments{
-\item{grid_reference}{character gridref class, British or Irish grid reference}
+\item{grid_reference}{A Great British or Irish grid reference character string with class gridref.}
 }
 \value{
-character, 100m grid reference
+The grid reference at 100m resolution.
 }
 \description{
 This function returns the 100m grid reference for a higher precision grid reference.
-It uses the gridRef function in the archived \href{https://github.com/ropensci-archive/rnbn/issues/37}{rnbn} package.
-
-It can convert either British or Irish grid references up to 10 figure (1m precision),
-including tetrads (2000m precision)
+}
+\details{
+It can check either British or Irish grid references up to 10 figure (1m precision),
+including tetrads (2000m precision).
 }
 \examples{
-\dontrun{
-suppressPackageStartupMessages({
-  library(store)
-})
+ suppressPackageStartupMessages({
+   library(store)
+   suppressWarnings({
+     library(dplyr)
+     library(janitor)
+   })
+ })
+
+ grid_references <- nbn_demonstration_dataset \%>\%
+   clean_names() \%>\%
+   slice_tail(n = 15) \%>\%
+   select(grid_reference) \%>\%
+   mutate(grid_reference = as_gridref(grid_reference))
+
 
 # add one_hundred_m column
-nbn_demonstration_dataset \%>\%
-  janitor::clean_names() \%>\%
-  dplyr::select(grid_reference) \%>\%
-  dplyr::mutate(grid_reference = as_gridref(grid_reference)) \%>\%
-  dplyr::rowwise() \%>\%
-  dplyr::mutate(one_hundred_m = hectare(grid_reference))
-}
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(dplyr)
+  })
+})
+
+grid_references \%>\%
+  rowwise() \%>\%
+  mutate(one_hundred_m = hectare(grid_reference))
 }
 \seealso{
 Other grid reference functions: 

@@ -8,31 +8,31 @@
 }
 \arguments{
 \item{format}{The required grid reference format, either sq10km, sq5km, tetrad,
-sq1km, sq100m or sq10m}
+sq1km, sq100m or sq10m.}
 
 \item{grid_reference}{A Great British or Irish grid reference character string with class gridref}
 }
 \value{
-The grid reference string formatted as requested
+The grid reference string formatted as requested.
 }
 \description{
 Extracts grid reference strings at various precisions from the supplied grid
 reference string when possible. For example supplying a 1km square reference TL2998,
-will return the 10km square TL29 but not a 100m square grid reference
+will return the 10km square TL29 but not a 100m square grid reference.
 }
 \details{
 Tetrads are 2x2km squares and are often used for mapping distributions at the
 scale of a county or similar sized local area. They are labelled using the 10km
 square followed by a single, upper-case letter. Since there are 25 tetrads in a
 10km square, the letter "O" is not used to avoid confusion with zero. This is
-named the DINTY system after the letters in the second row of this table
+named the DINTY system after the letters in the second row of this table.
 
 Pentads are 5x5km squares used for mapping at a regional scale. They are labelled
-using the name of the 10km square followed by two upper-case letters
+using the name of the 10km square followed by two upper-case letters.
 }
 \seealso{
-Function taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}
+Function taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rnbn package}.
 }
 \author{
-Stuart Ball
+Stuart Ball.
 }

@@ -7,7 +7,7 @@
 create_locked_keyring(keyring_name)
 }
 \arguments{
-\item{keyring_name}{A character string providing the name of the keyring}
+\item{keyring_name}{A character string providing the name of the keyring.}
 }
 \description{
 Add a password protected keyring to the Windows Credential Store.

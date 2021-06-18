@@ -7,11 +7,11 @@
 eda_variable_summary(.dataset)
 }
 \arguments{
-\item{.dataset}{A data frame requiring exploratory data analysis}
+\item{.dataset}{A data frame requiring exploratory data analysis.}
 }
 \value{
 The data frame is returned invisibly so that the function can be
-used in a piped workflow
+used in a piped workflow.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
