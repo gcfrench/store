@@ -5,7 +5,7 @@
 \alias{gridsquare_geometry.gridref}
 \title{Convert a OSGB or OSNI grid reference to a polygon geometry feature}
 \usage{
-gridsquare_geometry(x, ...)
+gridsquare_geometry(x)
 
 \method{gridsquare_geometry}{gridref}(grid_reference)
 }

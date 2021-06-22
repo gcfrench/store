@@ -5,7 +5,7 @@
 \alias{hectad.gridref}
 \title{Get the 10km grid reference}
 \usage{
-hectad(x, ...)
+hectad(x)
 
 \method{hectad}{gridref}(grid_reference)
 }

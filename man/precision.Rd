@@ -5,7 +5,7 @@
 \alias{precision.gridref}
 \title{Get the precision of a grid reference}
 \usage{
-precision(x, ...)
+precision(x)
 
 \method{precision}{gridref}(grid_reference)
 }

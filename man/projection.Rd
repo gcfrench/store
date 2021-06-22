@@ -5,7 +5,7 @@
 \alias{projection.gridref}
 \title{Get the projection of a grid reference}
 \usage{
-projection(x, ...)
+projection(x)
 
 \method{projection}{gridref}(grid_reference)
 }

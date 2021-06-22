@@ -135,7 +135,7 @@ gridCoords <- function(x, ...) {
 #' sq1km, sq100m or sq10m.
 #'
 #' @return The grid reference string formatted as requested.
-gridRef <- function(x, ...) {
+gridRef <- function(x) {
   UseMethod("gridRef", x)
 }
 
@@ -173,7 +173,7 @@ gridRef <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(precision = precision(grid_reference))
-precision <- function(x, ...) {
+precision <- function(x) {
   UseMethod("precision", x)
 }
 
@@ -208,7 +208,7 @@ precision <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(projection = projection(grid_reference))
-projection <- function(x, ...) {
+projection <- function(x) {
   UseMethod("projection", x)
 }
 
@@ -315,7 +315,7 @@ northing <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(ten_km = hectad(grid_reference))
-hectad <- function(x, ...) {
+hectad <- function(x) {
   UseMethod("hectad", x)
 }
 
@@ -350,7 +350,7 @@ hectad <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(five_km = pentad(grid_reference))
-pentad <- function(x, ...) {
+pentad <- function(x) {
   UseMethod("pentad", x)
 }
 
@@ -385,7 +385,7 @@ pentad <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(two_km = tetrad(grid_reference))
-tetrad <- function(x, ...) {
+tetrad <- function(x) {
   UseMethod("tetrad", x)
 }
 
@@ -420,7 +420,7 @@ tetrad <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(one_km = monad(grid_reference))
-monad <- function(x, ...) {
+monad <- function(x) {
   UseMethod("monad", x)
 }
 
@@ -455,7 +455,7 @@ monad <- function(x, ...) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(one_hundred_m = hectare(grid_reference))
-hectare <- function(x, ...) {
+hectare <- function(x) {
   UseMethod("hectare", x)
 }
 
@@ -493,7 +493,7 @@ hectare <- function(x, ...) {
 #'   rowwise() %>%
 #'   mutate(geometry = gridsquare_geometry(grid_reference)) %>%
 #'   st_as_sf()
-gridsquare_geometry <- function(x, ...) {
+gridsquare_geometry <- function(x) {
   UseMethod("gridsquare_geometry", x)
 }
 

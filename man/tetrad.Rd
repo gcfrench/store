@@ -5,7 +5,7 @@
 \alias{tetrad.gridref}
 \title{Get the 2km grid reference}
 \usage{
-tetrad(x, ...)
+tetrad(x)
 
 \method{tetrad}{gridref}(grid_reference)
 }

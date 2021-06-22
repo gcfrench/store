@@ -5,7 +5,7 @@
 \alias{hectare.gridref}
 \title{Get the 100m grid reference}
 \usage{
-hectare(x, ...)
+hectare(x)
 
 \method{hectare}{gridref}(grid_reference)
 }

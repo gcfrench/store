@@ -4,7 +4,7 @@
 \alias{gridRef}
 \title{Manipulate OSGB or OSNI grid reference string}
 \usage{
-gridRef(x, ...)
+gridRef(x)
 }
 \arguments{
 \item{grid_reference}{A Great British or Irish grid reference character string with class gridref}

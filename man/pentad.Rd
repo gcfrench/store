@@ -5,7 +5,7 @@
 \alias{pentad.gridref}
 \title{Get the 5km grid reference}
 \usage{
-pentad(x, ...)
+pentad(x)
 
 \method{pentad}{gridref}(grid_reference)
 }

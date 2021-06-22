@@ -5,7 +5,7 @@
 \alias{monad.gridref}
 \title{Get the 1km grid reference}
 \usage{
-monad(x, ...)
+monad(x)
 
 \method{monad}{gridref}(grid_reference)
 }
