@@ -21,7 +21,7 @@ eda_variable_collection(
 
 \item{distribution}{Use the default TRUE to display variable distribution or FALSE to not display variable distribution.}
 
-\item{correlation}{Use the default TRUE to display variable correlation orFALSE to not display variable correlation.}
+\item{correlation}{Use the default TRUE to display variable correlation or FALSE to not display variable correlation.}
 }
 \value{
 The data frame is returned invisibly so that the function can be
@@ -37,14 +37,14 @@ export.
 }
 \section{Figures}{
 
-\figure{01-summary_table.png}
-\figure{02-missing_data.png}
-\figure{03-category_data.png}
-\figure{04-outliers_table.png}
-\figure{05-variable_outliers.png}
-\figure{06-distribution_table.png}
-\figure{07-distribution_plot.png}
-\figure{08-correlation_plot.png}
+\if{html}{\figure{01-summary_table.png}{options: width=100\%}}
+\if{html}{\figure{02-missing_data.png}{options: width=100\%}}
+\if{html}{\figure{03-category_data.png}{options: width=100\%}}
+\if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
+\if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
+\if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
+\if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
+\if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
 }
 
 \examples{

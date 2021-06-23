@@ -51,7 +51,7 @@ display_table <- function(data, rows = nrow(data)) {
 #' and [furrr](https://davisvaughan.github.io/furrr/) packages.
 #'
 #' @section Figures:
-#' ![Penguins mass v flipper shadow plot](penguins_mass_flipper_plot_shadow.png)
+#' \if{html}{\figure{penguins_mass_flipper_plot_shadow.png}{options: width=100\%}}
 #'
 #' @family image manipulation functions
 #'
@@ -123,7 +123,7 @@ add_image_shadow <- function(path_image) {
 #' @inherit add_image_shadow return details
 #'
 #' @section Figures:
-#' ![Penguins mass v flipper reduced plot](penguins_mass_flipper_plot_reduced.png)
+#' \if{html}{\figure{penguins_mass_flipper_plot_reduced.png}}
 #'
 #' @seealso [Jumping rivers](https://www.jumpingrivers.com/) has written a series of
 #' four blogs for [displaying images on web pages](https://www.jumpingrivers.com/blog/knitr-include-graphics-external/).

@@ -22,8 +22,8 @@ count outliers and mean of each variable with outliers included and excluded.
 }
 \section{Figures}{
 
-\figure{04-outliers_table.png}
-\figure{05-variable_outliers.png}
+\if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
+\if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
 }
 
 \examples{

@@ -10,9 +10,9 @@
 #' the number of rows, missing values, unique values and zero values for each variable.
 #'
 #' @section Figures:
-#' ![01-summary_table](01-summary_table.png)
-#' ![02-missing_data](02-missing_data.png)
-#' ![03-category_data](03-category_data.png)
+#' \if{html}{\figure{01-summary_table.png}{options: width=100\%}}
+#' \if{html}{\figure{02-missing_data.png}{options: width=100\%}}
+#' \if{html}{\figure{03-category_data.png}{options: width=100\%}}
 #'
 #' @seealso
 #' This is an example of exploratory data analysis using the [dlookr](https://github.com/choonghyunryu/dlookr)
@@ -141,8 +141,8 @@ eda_variable_summary <- function(.dataset) {
 #' count outliers and mean of each variable with outliers included and excluded.
 #'
 #' @section Figures:
-#' ![04-outliers_table](04-outliers_table.png)
-#' ![05-variable_outliers](05-variable_outliers.png)
+#' \if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
+#' \if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -250,8 +250,8 @@ eda_variable_outliers <- function(.dataset) {
 #' the mean, level of skewness, kurtosis and normality.
 #'
 #' @section Figures:
-#' ![06-distribution_table](06-distribution_table.png)
-#' ![07-distribution_plot](07-distribution_plot.png)
+#' \if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
+#' \if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -351,7 +351,7 @@ eda_variable_distribution <- function(.dataset) {
 #' directory, showing the correlation values between each variable combination.
 #'
 #' @section Figures:
-#' ![08-correlation_plot](08-correlation_plot.png)
+#' \if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -429,14 +429,14 @@ eda_variable_correlation <- function(.dataset) {
 #' export.
 #'
 #' @section Figures:
-#' ![01-summary_table](01-summary_table.png)
-#' ![02-missing_data](02-missing_data.png)
-#' ![03-category_data](03-category_data.png)
-#' ![04-outliers_table](04-outliers_table.png)
-#' ![05-variable_outliers](05-variable_outliers.png)
-#' ![06-distribution_table](06-distribution_table.png)
-#' ![07-distribution_plot](07-distribution_plot.png)
-#' ![08-correlation_plot](08-correlation_plot.png)
+#' \if{html}{\figure{01-summary_table.png}{options: width=100\%}}
+#' \if{html}{\figure{02-missing_data.png}{options: width=100\%}}
+#' \if{html}{\figure{03-category_data.png}{options: width=100\%}}
+#' \if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
+#' \if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
+#' \if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
+#' \if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
+#' \if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -446,7 +446,7 @@ eda_variable_correlation <- function(.dataset) {
 #' @param summary Use the default TRUE to display variable summary or FALSE to not display variable summary.
 #' @param outliers Use the default TRUE to display outliers or FALSE to not display outliers.
 #' @param distribution Use the default TRUE to display variable distribution or FALSE to not display variable distribution.
-#' @param correlation Use the default TRUE to display variable correlation orFALSE to not display variable correlation.
+#' @param correlation Use the default TRUE to display variable correlation or FALSE to not display variable correlation.
 #'
 #' @inherit eda_variable_summary return return
 #'

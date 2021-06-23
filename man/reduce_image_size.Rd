@@ -27,7 +27,7 @@ and \href{https://davisvaughan.github.io/furrr/}{furrr} packages.
 }
 \section{Figures}{
 
-\figure{penguins_mass_flipper_plot_reduced.png}
+\if{html}{\figure{penguins_mass_flipper_plot_reduced.png}}
 }
 
 \examples{

@@ -7,11 +7,11 @@
 \format{
 A tibble with 363518 rows and 5 variables
 \describe{
-\item{grid_square}{OSGB 10km, 2km or 1km grid square}
-\item{precsion}{precision of grid square in metres}
-\item{vc_dominant}{dominant vice county number occupying the largest grid square area}
-\item{vc_count}{number of vice counties overlapping the grid square}
-\item{vc_list}{hash separated list of vice counties numbers overlapping the grid square}
+\item{grid_square}{OSGB 10km, 2km or 1km grid square.}
+\item{precsion}{Precision of grid square in metres.}
+\item{vc_dominant}{Dominant vice county number occupying the largest grid square area.}
+\item{vc_count}{Number of vice counties overlapping the grid square.}
+\item{vc_list}{Hash separated list of vice counties numbers overlapping the grid square.}
 }
 }
 \usage{
@@ -21,8 +21,9 @@ vc_grid_square_intersects
 A list of OSGB 10km, 2km and 1km grid squares with the dominant vice county that
 overlaps the grid square and list of all vice counties overlapping the grid square
 at the vice county borders.
-
+}
+\seealso{
 The list of British vice-counties can be downloaded from the \href{https://www.brc.ac.uk/article/british-vice-counties}{Biological Records Centre}
-website, with the vice-county boundaries downloaded from \href{https://github.com/BiologicalRecordsCentre/vice-counties}{Biological Records Centre's github page}
+website, with the vice-county boundaries downloaded from \href{https://github.com/BiologicalRecordsCentre/vice-counties}{Biological Records Centre's github page}.
 }
 \keyword{datasets}

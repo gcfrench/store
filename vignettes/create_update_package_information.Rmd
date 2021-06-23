@@ -227,7 +227,6 @@ renv::restore()
 ### Add documentation folders --------------------------------------------
 ```{r}
 fs::dir_create("man/figures")
-fs::dir_create("man/tables")
 fs::dir_create("man/examples")
 ```
 

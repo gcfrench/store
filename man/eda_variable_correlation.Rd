@@ -21,7 +21,7 @@ directory, showing the correlation values between each variable combination.
 }
 \section{Figures}{
 
-\figure{08-correlation_plot.png}
+\if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
 }
 
 \examples{

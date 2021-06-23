@@ -7,12 +7,12 @@
 \format{
 A tibble with 11219 rows and 6 variables
 \describe{
-\item{ten_km}{ten km grid square}
-\item{country}{list of countries containing the 10km grid square}
-\item{uk}{whether the 10km grid square is in the UK or not}
-\item{mid_longitude}{longitude of 10km grid square centroid, to three decimal points}
-\item{mid_latitude}{latitude of 10km grid square centroid, to three decimal points}
-\item{geographical}{whether the 10km grid square is on land or in the sea}
+\item{ten_km}{Ten km grid square.}
+\item{country}{List of countries containing the 10km grid square.}
+\item{uk}{Whether the 10km grid square is in the UK or not.}
+\item{mid_longitude}{Longitude of 10km grid square centroid, to three decimal points.}
+\item{mid_latitude}{Latitude of 10km grid square centroid, to three decimal points.}
+\item{geographical}{Whether the 10km grid square is on land or in the sea.}
 }
 }
 \usage{
@@ -22,6 +22,6 @@ uk_ireland_tenkm_grid_squares
 This datasets lists the 10km grid squares occurring in the UK and Ireland, as
 well as the Channel Islands and Isle of Man. For each 10km grid square which
 country(s) it occurs in, whether it is in the UK and is on land or in sea is
-given, as well as the latitude and longitude for the mid centroid point
+given, as well as the latitude and longitude for the mid centroid point.
 }
 \keyword{datasets}

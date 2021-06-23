@@ -58,7 +58,8 @@ Suggests:
     palmerpenguins,
     forcats,
     waldo,
-    readr
+    readr,
+    bookdown
 Config/testthat/edition: 3
 BugReports: https://github.com/gcfrench/store/issues
 VignetteBuilder: knitr

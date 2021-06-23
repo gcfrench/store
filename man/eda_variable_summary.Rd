@@ -23,9 +23,9 @@ the number of rows, missing values, unique values and zero values for each varia
 }
 \section{Figures}{
 
-\figure{01-summary_table.png}
-\figure{02-missing_data.png}
-\figure{03-category_data.png}
+\if{html}{\figure{01-summary_table.png}{options: width=100\%}}
+\if{html}{\figure{02-missing_data.png}{options: width=100\%}}
+\if{html}{\figure{03-category_data.png}{options: width=100\%}}
 }
 
 \examples{
