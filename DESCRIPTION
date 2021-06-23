@@ -59,7 +59,7 @@ Suggests:
     forcats,
     waldo,
     readr,
-    bookdown
+    pagedown
 Config/testthat/edition: 3
 BugReports: https://github.com/gcfrench/store/issues
 VignetteBuilder: knitr

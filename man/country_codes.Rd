@@ -39,7 +39,7 @@ suppressPackageStartupMessages({
   library(gt)
   library(here)
   library(fs)
-  library(bookdown)
+  library(pagedown)
  })
 })
 
@@ -48,10 +48,10 @@ dir_create(path(tempdir(), "figures"))
 
 # create html table
 country_codes \%>\%
+  filter(un_region_name == "Europe") \%>\%
   gt(groupname_col = "un_region_name") \%>\%
   tab_header(title = md("**ISO-3166 three letter country codes**"),
-             subtitle = md("*Includes United Nations regions and European
-                                Union membership*")) \%>\%
+             subtitle = md("*European countries including European Union membership*")) \%>\%
   cols_hide(eu_member) \%>\%
   tab_style(
     style = list(
