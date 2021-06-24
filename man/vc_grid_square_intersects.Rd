@@ -5,7 +5,7 @@
 \alias{vc_grid_square_intersects}
 \title{Vice counties grid square intersections}
 \format{
-A tibble with 363518 rows and 5 variables
+A tibble with 363518 rows and 5 variables.
 \describe{
 \item{grid_square}{OSGB 10km, 2km or 1km grid square.}
 \item{precsion}{Precision of grid square in metres.}
@@ -21,6 +21,42 @@ vc_grid_square_intersects
 A list of OSGB 10km, 2km and 1km grid squares with the dominant vice county that
 overlaps the grid square and list of all vice counties overlapping the grid square
 at the vice county borders.
+}
+\section{Figures}{
+
+Sample of 10 rows from vc_grid_square_intersects dataset.
+
+\if{html}{\figure{vc_grid_square_intersects.png}{options: width=80\%}}
+}
+
+\examples{
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+  library(dplyr)
+  library(gt)
+  library(here)
+  library(fs)
+  library(pagedown)
+ })
+})
+
+# create figures directory
+dir_create(path(tempdir(), "figures"))
+
+# create html table
+vc_grid_square_intersects \%>\%
+  slice_sample(n = 10) \%>\%
+  gt_preview(top_n = 10, incl_rownums = FALSE) \%>\%
+  gtsave(path(tempdir(), "figures", "vc_grid_square_intersects.html"))
+
+# convert to image
+chrome_print(path(tempdir(), "figures", "vc_grid_square_intersects.html"),
+             format = "png")
+
+# move image
+file_move(path(tempdir(), "figures", "vc_grid_square_intersects.png"),
+         here("man", "figures", "vc_grid_square_intersects.png"))
 }
 \seealso{
 The list of British vice-counties can be downloaded from the \href{https://www.brc.ac.uk/article/british-vice-counties}{Biological Records Centre}

@@ -5,7 +5,7 @@
 \alias{country_codes}
 \title{ISO-3166 three letter country codes with United Nations regions and European Union membership}
 \format{
-A tibble with 250 rows and 4 variables
+A tibble with 250 rows and 4 variables.
 \describe{
 \item{alpha_3}{ISO_3166_1 country code.}
 \item{country_name}{Name of country.}
@@ -29,7 +29,7 @@ countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.
 }
 \section{Figures}{
 
-\if{html}{\figure{country_codes_table.png}{options: width=100\%}}
+\if{html}{\figure{country_codes_table.png}{options: width=80\%}}
 }
 
 \examples{

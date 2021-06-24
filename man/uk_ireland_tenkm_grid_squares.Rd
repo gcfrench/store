@@ -5,7 +5,7 @@
 \alias{uk_ireland_tenkm_grid_squares}
 \title{UK and Ireland 10km grid squares}
 \format{
-A tibble with 11219 rows and 6 variables
+A tibble with 11219 rows and 6 variables.
 \describe{
 \item{ten_km}{Ten km grid square.}
 \item{country}{List of countries containing the 10km grid square.}
@@ -23,5 +23,42 @@ This datasets lists the 10km grid squares occurring in the UK and Ireland, as
 well as the Channel Islands and Isle of Man. For each 10km grid square which
 country(s) it occurs in, whether it is in the UK and is on land or in sea is
 given, as well as the latitude and longitude for the mid centroid point.
+}
+\section{Figures}{
+
+Sample of 10 rows from uk_ireland_tenkm_grid_squares dataset.
+
+\if{html}{\figure{uk_ireland_tenkm_grid_squares.png}{options: width=80\%}}
+}
+
+\examples{
+suppressPackageStartupMessages({
+ library(store)
+ suppressWarnings({
+  library(dplyr)
+  library(gt)
+  library(here)
+  library(fs)
+  library(pagedown)
+ })
+})
+
+# create figures directory
+dir_create(path(tempdir(), "figures"))
+
+# create html table
+uk_ireland_tenkm_grid_squares \%>\%
+  filter(!is.na(country)) \%>\%
+  slice_sample(n = 10) \%>\%
+  gt_preview(top_n = 10, incl_rownums = FALSE) \%>\%
+  gtsave(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.html"))
+
+# convert to image
+chrome_print(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.html"),
+             format = "png")
+
+# move image
+file_move(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.png"),
+         here("man", "figures", "uk_ireland_tenkm_grid_squares.png"))
 }
 \keyword{datasets}

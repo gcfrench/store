@@ -51,7 +51,7 @@ display_table <- function(data, rows = nrow(data)) {
 #' and [furrr](https://davisvaughan.github.io/furrr/) packages.
 #'
 #' @section Figures:
-#' \if{html}{\figure{penguins_mass_flipper_plot_shadow.png}{options: width=100\%}}
+#' \if{html}{\figure{penguins_mass_flipper_plot_shadow.png}{options: width=80\%}}
 #'
 #' @family image manipulation functions
 #'

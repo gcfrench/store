@@ -13,9 +13,9 @@
 #' countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.
 #'
 #' @section Figures:
-#' \if{html}{\figure{country_codes_table.png}{options: width=100\%}}
+#' \if{html}{\figure{country_codes_table.png}{options: width=80\%}}
 #'
-#' @format A tibble with `r nrow(country_codes)` rows and `r ncol(country_codes)` variables
+#' @format A tibble with `r nrow(country_codes)` rows and `r ncol(country_codes)` variables.
 #' \describe{
 #'   \item{alpha_3}{ISO_3166_1 country code.}
 #'   \item{country_name}{Name of country.}
@@ -80,8 +80,13 @@
 #' well as the Channel Islands and Isle of Man. For each 10km grid square which
 #' country(s) it occurs in, whether it is in the UK and is on land or in sea is
 #' given, as well as the latitude and longitude for the mid centroid point.
-
-#' @format A tibble with `r nrow(uk_ireland_tenkm_grid_squares)` rows and `r ncol(uk_ireland_tenkm_grid_squares)` variables
+#'
+#' @section Figures:
+#' Sample of 10 rows from uk_ireland_tenkm_grid_squares dataset.
+#'
+#' \if{html}{\figure{uk_ireland_tenkm_grid_squares.png}{options: width=80\%}}
+#'
+#' @format A tibble with `r nrow(uk_ireland_tenkm_grid_squares)` rows and `r ncol(uk_ireland_tenkm_grid_squares)` variables.
 #' \describe{
 #'   \item{ten_km}{Ten km grid square.}
 #'   \item{country}{List of countries containing the 10km grid square.}
@@ -90,6 +95,36 @@
 #'   \item{mid_latitude}{Latitude of 10km grid square centroid, to three decimal points.}
 #'   \item{geographical}{Whether the 10km grid square is on land or in the sea.}
 #' }
+#'
+#' @examples
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(dplyr)
+#'   library(gt)
+#'   library(here)
+#'   library(fs)
+#'   library(pagedown)
+#'  })
+#' })
+#'
+#' # create figures directory
+#' dir_create(path(tempdir(), "figures"))
+#'
+#' # create html table
+#' uk_ireland_tenkm_grid_squares %>%
+#'   filter(!is.na(country)) %>%
+#'   slice_sample(n = 10) %>%
+#'   gt_preview(top_n = 10, incl_rownums = FALSE) %>%
+#'   gtsave(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.html"))
+#'
+#' # convert to image
+#' chrome_print(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.html"),
+#'              format = "png")
+#'
+#' # move image
+#' file_move(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.png"),
+#'          here("man", "figures", "uk_ireland_tenkm_grid_squares.png"))
 "uk_ireland_tenkm_grid_squares"
 
 #' @title
@@ -100,11 +135,16 @@
 #' overlaps the grid square and list of all vice counties overlapping the grid square
 #' at the vice county borders.
 #'
+#' @section Figures:
+#' Sample of 10 rows from vc_grid_square_intersects dataset.
+#'
+#' \if{html}{\figure{vc_grid_square_intersects.png}{options: width=80\%}}
+#'
 #' @seealso
 #' The list of British vice-counties can be downloaded from the [Biological Records Centre](https://www.brc.ac.uk/article/british-vice-counties)
 #' website, with the vice-county boundaries downloaded from [Biological Records Centre's github page](https://github.com/BiologicalRecordsCentre/vice-counties).
 #'
-#' @format A tibble with `r nrow(vc_grid_square_intersects)` rows and `r ncol(vc_grid_square_intersects)` variables
+#' @format A tibble with `r nrow(vc_grid_square_intersects)` rows and `r ncol(vc_grid_square_intersects)` variables.
 #' \describe{
 #'   \item{grid_square}{OSGB 10km, 2km or 1km grid square.}
 #'   \item{precsion}{Precision of grid square in metres.}
@@ -112,8 +152,36 @@
 #'   \item{vc_count}{Number of vice counties overlapping the grid square.}
 #'   \item{vc_list}{Hash separated list of vice counties numbers overlapping the grid square.}
 #' }
+#'
+#' @examples
+#' suppressPackageStartupMessages({
+#'  library(store)
+#'  suppressWarnings({
+#'   library(dplyr)
+#'   library(gt)
+#'   library(here)
+#'   library(fs)
+#'   library(pagedown)
+#'  })
+#' })
+#'
+#' # create figures directory
+#' dir_create(path(tempdir(), "figures"))
+#'
+#' # create html table
+#' vc_grid_square_intersects %>%
+#'   slice_sample(n = 10) %>%
+#'   gt_preview(top_n = 10, incl_rownums = FALSE) %>%
+#'   gtsave(path(tempdir(), "figures", "vc_grid_square_intersects.html"))
+#'
+#' # convert to image
+#' chrome_print(path(tempdir(), "figures", "vc_grid_square_intersects.html"),
+#'              format = "png")
+#'
+#' # move image
+#' file_move(path(tempdir(), "figures", "vc_grid_square_intersects.png"),
+#'          here("man", "figures", "vc_grid_square_intersects.png"))
 "vc_grid_square_intersects"
 
-# pagedown::chrome_print("man/tables/country_codes_table.html",
-#                        format = "png")
+
 
