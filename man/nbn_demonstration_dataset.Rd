@@ -41,7 +41,7 @@ the \href{https://nbnatlas.org/}{NBN Atlas}.
 
 Sample of 10 rows from nbn_demonstration_dataset dataset.
 
-\if{html}{\figure{nbn_demonstration_dataset.png}{options: width=80\%}}
+\if{html}{\figure{nbn_demonstration_dataset.png}{options: width=100\%}}
 }
 
 \examples{
@@ -50,9 +50,7 @@ suppressPackageStartupMessages({
  suppressWarnings({
   library(dplyr)
   library(gt)
-  library(here)
   library(fs)
-  library(pagedown)
  })
 })
 
@@ -66,11 +64,7 @@ nbn_demonstration_dataset \%>\%
   gtsave(path(tempdir(), "figures", "nbn_demonstration_dataset.html"))
 
 # convert to image
-chrome_print(path(tempdir(), "figures", "nbn_demonstration_dataset.html"),
-             format = "png")
-
-# move image
-file_move(path(tempdir(), "figures", "nbn_demonstration_dataset.png"),
-         here("man", "figures", "nbn_demonstration_dataset.png"))
+## pagedown::chrome_print cropped the table columns
+## manually produced the image from screenshot of html page
 }
 \keyword{datasets}
