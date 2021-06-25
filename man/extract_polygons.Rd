@@ -7,16 +7,16 @@
 extract_polygons(sf_data)
 }
 \arguments{
-\item{sf_data}{sf object, spatial data frame containing geometry collections}
+\item{sf_data}{The spatial data frame as a sf spatial object, containing geometry collections.}
 }
 \value{
-sf object, spatial data frame containing extracted multipolygons
+The spatial data frame as a sf spatial object, containing extracted multipolygons.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 This function extracts polygons from a geometry collection, dissolving them into
-multipolygons
+multipolygons.
 }
 \examples{
 \dontrun{

@@ -13,13 +13,13 @@
 #' the column names are identical and that there has not been any addition or removal
 #' of columns between dataset versions, so that the dataset schema can be made the same
 #' between versions if necessary. This check can be done using the compare function
-#' in the [waldo package](https://www.tidyverse.org/blog/2020/10/waldo/)
+#' in the [waldo package](https://www.tidyverse.org/blog/2020/10/waldo/).
 #'
-#' @param old_version The earlier version of the dataset as a data frame
-#' @param new_version The later version of the dataset as a data frame
+#' @param old_version The earlier version of the dataset as a data frame.
+#' @param new_version The later version of the dataset as a data frame.
 #'
 #' @return The data frame with an additional difference column indicating new, removed or
-#' updated rows highlighted with #
+#' updated rows highlighted with #.
 #'
 #' @export
 #'

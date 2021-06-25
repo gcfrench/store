@@ -8,9 +8,9 @@ SNS Regional Geological Maps (Open Source) layer}
 \format{
 A simple feature data frame with 6 rows and 3 variables
 \describe{
-\item{country}{country name}
-\item{uk}{whether country is in UK or not}
-\item{geometry}{polygon genometry}
+\item{country}{The name of the country.}
+\item{uk}{Is the country in the United Kingdom or not.}
+\item{geometry}{The country's polygon geometry.}
 }
 }
 \source{
@@ -20,10 +20,11 @@ Created by Owen Boswarva, 2018-07-04. Downloadable from \href{https://www.datada
 uk_ireland_base_map
 }
 \description{
-A simple features data frame of the British and Irish coastline
-derived from the Oil and Gas Authority's OGA and Lloyd's Register
-SNS Regional Geological Maps (Open Source) layer.
-
+A simple features data frame of the British and Irish coastline derived from
+the Oil and Gas Authority's OGA and Lloyd's Register SNS Regional Geological Maps
+(Open Source) layer.
+}
+\details{
 UKIrelandIoM_DECC_OSGB36 This dataset contains generalised boundaries for the
 four countries of the UK, the Isle of Man, and Ireland. The dataset is suitable
 as a reference for simple background mapping, and is re-usable under the Open
@@ -33,53 +34,66 @@ This boundary dataset was created from a subset of the DECC_OFF_Coastline_ED50
 layer published by the Oil & Gas Authority in the following data package:
 
 OGA and Lloyd's Register SNS Regional Geological Maps (Open Source)
-http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyd\%27s+Register+SNS+Regional+Geological+Maps&sort_by=relevanc
+http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyd\%27s+Register+SNS+Regional+Geological+Maps&sort_by=relevanc.
 
 The data has been converted from ED50 to OSGB36 and numerous individual polygons
 have been merged to create a set of polygons for each of Scotland, England, Wales,
 Northern Ireland, the Isle of Man, and Ireland.
+}
+\section{Licence}{
 
-Licence: Open Government Licence v3 (OGL)
+Open Government Licence v3 (OGL)
 http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 Attribution: Contains data © 2017 Oil & Gas Authority
 }
+
+\section{Figures}{
+
+\if{html}{\figure{uk_ireland_base_map.png}{options: width=80\%}}
+}
+
 \examples{
-\dontrun{
 suppressPackageStartupMessages({
- library(store)
- suppressWarnings({
-   library(here)
-   library(fs)
-   library(tmap)
- })
+  library(store)
+  suppressWarnings({
+    library(here)
+    library(fs)
+    library(tmap)
+  })
 })
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
+
+# create temp directory
+dir_create(path(tempdir(), "figures"))
 
 # save UK Ireland base map as shape file
-uk_ireland_base_map \%>\% sf::st_write("output/uk_ireland_base_map.shp")
+suppressMessages({uk_ireland_base_map \%>\% sf::st_write(path(tempdir(), "uk_ireland_base_map.shp"),
+                                         delete_layer = TRUE)})
 
 # create UK Ireland base map image
 uk_ireland <- tm_shape(uk_ireland_base_map) +
- tm_fill(col = "uk", style = "cat", palette = c("lightgreen", "darkgreen")) +
- tm_borders(col = "black") +
- tm_compass(type = "8star", size = 4,
-            position = c(0.8, 0.85)) +
- tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.8,
-              position = c(0.68, 0.02)) +
- tm_layout(bg.color = "lightblue",
-           frame.double.line = TRUE,
-           inner.margin = 0.05,
-           outer.margin = 0.05,
-           legend.show = FALSE,
-          title = "UK and Ireland base map",
+  tm_fill(col = "uk", style = "cat", palette = c("lightgreen", "darkgreen")) +
+  tm_borders(col = "black") +
+  tm_compass(type = "8star", size = 4,
+             position = c(0.8, 0.85)) +
+  tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.8,
+               position = c(0.68, 0.02)) +
+  tm_layout(bg.color = "lightblue",
+            frame.double.line = TRUE,
+            inner.margin = 0.05,
+            outer.margin = 0.05,
+            legend.show = FALSE,
+            title = "UK and Ireland base map",
            title.size = 1.5,
-           title.fontface = "bold")
+            title.fontface = "bold")
 
 # save UK Ireland base map image
-uk_ireland \%>\%  tmap_save("output/uk_ireland_base_map.png", type = "cairo-png",
-                        width = 8, height = 8, units = "in", dpi = 72)
-}
+suppressMessages({uk_ireland \%>\% tmap_save(path(tempdir(), "figures", "uk_ireland_base_map.png"),
+                         type = "cairo-png",
+                         width = 8, height = 8,
+                         units = "in", dpi = 72)})
+
+# move figure from temporary directory
+file_move(path(tempdir(), "figures", "uk_ireland_base_map.png"),
+          here("man", "figures", "uk_ireland_base_map.png"))
 }
 \keyword{datasets}

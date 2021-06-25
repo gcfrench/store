@@ -6,30 +6,31 @@
 #'
 #' This function tidies spatial data converting the attribute columns to snake case,
 #' set the supplied coordinate reference system, extracting the polygons from a
-#' geometry collection and optionally checking for invalid geometry
+#' geometry collection and optionally checking for invalid geometry.
 #'
-#' @param sf_data sf object, spatial data frame to tidy
-#' @param epsg integer, EPSG number
-#' @param check_valid logical, whether to check for invalid geometry (TRUE) or not (default)
+#' @param sf_data The spatial data frame to tidy as a sf spatial object.
+#' @param epsg_number EPSG number as an integer.
+#' @param check_valid Should the invalid geometry by checked (TRUE) or not as the default (FALSE).
 #'
-#' @return sf object, tidied spatial data frame
+#' @return The tidied spatial data frame returned as a sf spatial object.
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' tidy_spatial_data(sf_data = uk_ireland_base_map, epsg = 27700, check_valid = TRUE)
+#' tidy_spatial_data(sf_data = uk_ireland_base_map, epsg_number = 27700, check_valid = TRUE)
 #' }
-tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
+tidy_spatial_data <- function(sf_data, epsg_number, check_valid = FALSE) {
 
   # Make column names snake_case
   sf_data <- sf_data %>%
     janitor::clean_names()
 
   # Set CRS
-  if (is.na(sf::st_crs(sf_data[["epsg"]]))) {
-    sf_data <- sf::st_set_crs(sf_data, epsg)
-  } else if (sf::st_crs(sf_data[["epsg"]] != epsg)) {
-    sf_data <- sf::st_transform(sf_data, espg)
+  if (is.na(sf::st_crs(sf_data[["epsg_number"]]))) {
+    sf_data <- sf::st_set_crs(sf_data, epsg_number)
+  } else if (sf::st_crs(sf_data[["epsg_number"]] != epsg_number)) {
+    sf_data <- sf::st_transform(sf_data, espg_number)
   }
 
   # Extract multipolygons from GeometryCollection
@@ -68,11 +69,12 @@ tidy_spatial_data <- function(sf_data, epsg, check_valid = FALSE) {
 #' `r lifecycle::badge("experimental")`
 #'
 #' This function extracts polygons from a geometry collection, dissolving them into
-#' multipolygons
+#' multipolygons.
 #'
-#' @param sf_data sf object, spatial data frame containing geometry collections
+#' @param sf_data The spatial data frame as a sf spatial object, containing geometry collections.
 #'
-#' @return sf object, spatial data frame containing extracted multipolygons
+#' @return The spatial data frame as a sf spatial object, containing extracted multipolygons.
+#'
 #' @export
 #'
 #' @examples
@@ -111,39 +113,31 @@ extract_polygons <- function(sf_data) {
 #'
 #' @description
 #' This function creates a bounding box polygon from it's corner coordinates,
-#' setting the coordinate reference system from the supplied [EPSG value](https://epsg.org/home.html)
+#' setting the coordinate reference system from the supplied [EPSG value](https://epsg.org/home.html).
 #'
 #' @seealso
-#' see stack overflow [polygons from coordinates](https://stackoverflow.com/questions/44335246/polygons-from-coordinates)
+#' The function was created following the approach taken in the stack overflow
+#' [polygons from coordinates](https://stackoverflow.com/questions/44335246/polygons-from-coordinates).
 #'
-#' @param xmin integer, left corner coordinate
-#' @param ymin integer, lower corner coordinate
-#' @param xmax integer, right corner coordinate
-#' @param ymax integer, upper corner coordinate
+#' @param xmin The left corners easting coordinate as an integer or double.
+#' @param ymin The lower corners northing coordinate as an integer or double.
+#' @param xmax The right corners easting coordinate as an integer or double.
+#' @param ymax The upper corners northing coordinate as an integer or double.
+#' @param epsg_number EPSG number as an integer.
 #'
-#' @return sf object, bounding box polygon
+#' @return The bounding box polygon returned as a sf spatial object.
+#'
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' suppressPackageStartupMessages({
 #'   library(store)
-#'   suppressWarnings({
-#'    library(here)
-#'    library(fs)
-#'   })
-#'})
-#'# create output directory
-#'i_am("example.Rmd")
-#'if (!dir_exists("output")) {dir_create("output")}
-#'
-#'create_bounding_box(xmin = -10.81,
-#'                    ymin = 49.85,
-#'                    xmax = 2.07,
-#'                    ymax = 60.96,
-#'                    epsg = 4326) %>%
-#' sf::st_write("output/uk_ireland_bounding_box.shp")
-#' }
+#' })
+#' create_bounding_box(xmin = -10.81,
+#'                     ymin = 49.85,
+#'                     xmax = 2.07,
+#'                     ymax = 60.96,
+#'                     epsg = 4326)
 create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 
   # create corner points
@@ -172,10 +166,11 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #' SNS Regional Geological Maps (Open Source) layer
 #'
 #' @description
-#' A simple features data frame of the British and Irish coastline
-#' derived from the Oil and Gas Authority's OGA and Lloyd's Register
-#' SNS Regional Geological Maps (Open Source) layer.
+#' A simple features data frame of the British and Irish coastline derived from
+#' the Oil and Gas Authority's OGA and Lloyd's Register SNS Regional Geological Maps
+#' (Open Source) layer.
 #'
+#' @details
 #' UKIrelandIoM_DECC_OSGB36 This dataset contains generalised boundaries for the
 #' four countries of the UK, the Isle of Man, and Ireland. The dataset is suitable
 #' as a reference for simple background mapping, and is re-usable under the Open
@@ -185,61 +180,72 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #' layer published by the Oil & Gas Authority in the following data package:
 #'
 #' OGA and Lloyd's Register SNS Regional Geological Maps (Open Source)
-#' http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyd%27s+Register+SNS+Regional+Geological+Maps&sort_by=relevanc
+#' http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyd%27s+Register+SNS+Regional+Geological+Maps&sort_by=relevanc.
 #'
 #' The data has been converted from ED50 to OSGB36 and numerous individual polygons
 #' have been merged to create a set of polygons for each of Scotland, England, Wales,
 #' Northern Ireland, the Isle of Man, and Ireland.
 #'
-#' Licence: Open Government Licence v3 (OGL)
+#' @section Licence:
+#' Open Government Licence v3 (OGL)
 #' http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 #' Attribution: Contains data © 2017 Oil & Gas Authority
 #'
-#' @examples
-#' \dontrun{
-#'suppressPackageStartupMessages({
-#'  library(store)
-#'  suppressWarnings({
-#'    library(here)
-#'    library(fs)
-#'    library(tmap)
-#'  })
-#'})
-#'# create output directory
-#'i_am("example.Rmd")
-#'if (!dir_exists("output")) {dir_create("output")}
+#' @section Figures:
+#' \if{html}{\figure{uk_ireland_base_map.png}{options: width=80\%}}
 #'
-#'# save UK Ireland base map as shape file
-#'uk_ireland_base_map %>% sf::st_write("output/uk_ireland_base_map.shp")
-#'
-#'# create UK Ireland base map image
-#'uk_ireland <- tm_shape(uk_ireland_base_map) +
-#'  tm_fill(col = "uk", style = "cat", palette = c("lightgreen", "darkgreen")) +
-#'  tm_borders(col = "black") +
-#'  tm_compass(type = "8star", size = 4,
-#'             position = c(0.8, 0.85)) +
-#'  tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.8,
-#'               position = c(0.68, 0.02)) +
-#'  tm_layout(bg.color = "lightblue",
-#'            frame.double.line = TRUE,
-#'            inner.margin = 0.05,
-#'            outer.margin = 0.05,
-#'            legend.show = FALSE,
-#'           title = "UK and Ireland base map",
-#'            title.size = 1.5,
-#'            title.fontface = "bold")
-#'
-#'# save UK Ireland base map image
-#'uk_ireland %>%  tmap_save("output/uk_ireland_base_map.png", type = "cairo-png",
-#'                         width = 8, height = 8, units = "in", dpi = 72)
-#' }
-#' @format A simple feature data frame with 6 rows and 3 variables
-#' \describe{
-#'   \item{country}{country name}
-#'   \item{uk}{whether country is in UK or not}
-#'   \item{geometry}{polygon genometry}
-#' }
 #' @source
 #' Created by Owen Boswarva, 2018-07-04. Downloadable from [DataAdaptive](https://www.datadaptive.com/?pg=14)
+#'
+#' @format A simple feature data frame with 6 rows and 3 variables
+#' \describe{
+#'   \item{country}{The name of the country.}
+#'   \item{uk}{Is the country in the United Kingdom or not.}
+#'   \item{geometry}{The country's polygon geometry.}
+#' }
+#'
+#' @examples
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(here)
+#'     library(fs)
+#'     library(tmap)
+#'   })
+#' })
+#'
+#' # create temp directory
+#' dir_create(path(tempdir(), "figures"))
+#'
+#' # save UK Ireland base map as shape file
+#' suppressMessages({uk_ireland_base_map %>% sf::st_write(path(tempdir(), "uk_ireland_base_map.shp"),
+#'                                          delete_layer = TRUE)})
+#'
+#' # create UK Ireland base map image
+#' uk_ireland <- tm_shape(uk_ireland_base_map) +
+#'   tm_fill(col = "uk", style = "cat", palette = c("lightgreen", "darkgreen")) +
+#'   tm_borders(col = "black") +
+#'   tm_compass(type = "8star", size = 4,
+#'              position = c(0.8, 0.85)) +
+#'   tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.8,
+#'                position = c(0.68, 0.02)) +
+#'   tm_layout(bg.color = "lightblue",
+#'             frame.double.line = TRUE,
+#'             inner.margin = 0.05,
+#'             outer.margin = 0.05,
+#'             legend.show = FALSE,
+#'             title = "UK and Ireland base map",
+#'            title.size = 1.5,
+#'             title.fontface = "bold")
+#'
+#' # save UK Ireland base map image
+#' suppressMessages({uk_ireland %>% tmap_save(path(tempdir(), "figures", "uk_ireland_base_map.png"),
+#'                          type = "cairo-png",
+#'                          width = 8, height = 8,
+#'                          units = "in", dpi = 72)})
+#'
+#' # move figure from temporary directory
+#' file_move(path(tempdir(), "figures", "uk_ireland_base_map.png"),
+#'           here("man", "figures", "uk_ireland_base_map.png"))
 "uk_ireland_base_map"
 

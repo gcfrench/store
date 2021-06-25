@@ -7,42 +7,34 @@
 create_bounding_box(xmin, ymin, xmax, ymax, epsg_number)
 }
 \arguments{
-\item{xmin}{integer, left corner coordinate}
+\item{xmin}{The left corners easting coordinate as an integer or double.}
 
-\item{ymin}{integer, lower corner coordinate}
+\item{ymin}{The lower corners northing coordinate as an integer or double.}
 
-\item{xmax}{integer, right corner coordinate}
+\item{xmax}{The right corners easting coordinate as an integer or double.}
 
-\item{ymax}{integer, upper corner coordinate}
+\item{ymax}{The upper corners northing coordinate as an integer or double.}
+
+\item{epsg_number}{EPSG number as an integer.}
 }
 \value{
-sf object, bounding box polygon
+The bounding box polygon returned as a sf spatial object.
 }
 \description{
 This function creates a bounding box polygon from it's corner coordinates,
-setting the coordinate reference system from the supplied \href{https://epsg.org/home.html}{EPSG value}
+setting the coordinate reference system from the supplied \href{https://epsg.org/home.html}{EPSG value}.
 }
 \examples{
-\dontrun{
 suppressPackageStartupMessages({
   library(store)
-  suppressWarnings({
-   library(here)
-   library(fs)
-  })
 })
-# create output directory
-i_am("example.Rmd")
-if (!dir_exists("output")) {dir_create("output")}
-
 create_bounding_box(xmin = -10.81,
-                   ymin = 49.85,
-                   xmax = 2.07,
-                   ymax = 60.96,
-                   epsg = 4326) \%>\%
-sf::st_write("output/uk_ireland_bounding_box.shp")
-}
+                    ymin = 49.85,
+                    xmax = 2.07,
+                    ymax = 60.96,
+                    epsg = 4326)
 }
 \seealso{
-see stack overflow \href{https://stackoverflow.com/questions/44335246/polygons-from-coordinates}{polygons from coordinates}
+The function was created following the approach taken in the stack overflow
+\href{https://stackoverflow.com/questions/44335246/polygons-from-coordinates}{polygons from coordinates}.
 }

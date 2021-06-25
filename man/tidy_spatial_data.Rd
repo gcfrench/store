@@ -4,27 +4,27 @@
 \alias{tidy_spatial_data}
 \title{Tidy spatial data}
 \usage{
-tidy_spatial_data(sf_data, epsg, check_valid = FALSE)
+tidy_spatial_data(sf_data, epsg_number, check_valid = FALSE)
 }
 \arguments{
-\item{sf_data}{sf object, spatial data frame to tidy}
+\item{sf_data}{The spatial data frame to tidy as a sf spatial object.}
 
-\item{epsg}{integer, EPSG number}
+\item{epsg_number}{EPSG number as an integer.}
 
-\item{check_valid}{logical, whether to check for invalid geometry (TRUE) or not (default)}
+\item{check_valid}{Should the invalid geometry by checked (TRUE) or not as the default (FALSE).}
 }
 \value{
-sf object, tidied spatial data frame
+The tidied spatial data frame returned as a sf spatial object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 This function tidies spatial data converting the attribute columns to snake case,
 set the supplied coordinate reference system, extracting the polygons from a
-geometry collection and optionally checking for invalid geometry
+geometry collection and optionally checking for invalid geometry.
 }
 \examples{
 \dontrun{
-tidy_spatial_data(sf_data = uk_ireland_base_map, epsg = 27700, check_valid = TRUE)
+tidy_spatial_data(sf_data = uk_ireland_base_map, epsg_number = 27700, check_valid = TRUE)
 }
 }

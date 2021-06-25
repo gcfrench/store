@@ -7,13 +7,13 @@
 compare_dataset_versions(old_version, new_version)
 }
 \arguments{
-\item{old_version}{The earlier version of the dataset as a data frame}
+\item{old_version}{The earlier version of the dataset as a data frame.}
 
-\item{new_version}{The later version of the dataset as a data frame}
+\item{new_version}{The later version of the dataset as a data frame.}
 }
 \value{
 The data frame with an additional difference column indicating new, removed or
-updated rows highlighted with #
+updated rows highlighted with #.
 }
 \description{
 This function compares two versions of a dataset returning the dataset with the added, removed
@@ -27,7 +27,7 @@ An initial check should be performed prior to comparing versions to check that
 the column names are identical and that there has not been any addition or removal
 of columns between dataset versions, so that the dataset schema can be made the same
 between versions if necessary. This check can be done using the compare function
-in the \href{https://www.tidyverse.org/blog/2020/10/waldo/}{waldo package}
+in the \href{https://www.tidyverse.org/blog/2020/10/waldo/}{waldo package}.
 }
 \examples{
 suppressPackageStartupMessages({
