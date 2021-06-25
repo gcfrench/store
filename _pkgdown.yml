@@ -103,6 +103,8 @@ navbar:
         href: articles/validation_checks.html
       - text: "GDAL commands"
         href: articles/gdal_commands.html
+      - text: "Docker notes"
+        href: articles/docker_notes.html
     - text: "lookups and functions"
       href: reference/index.html
     - text: "versions"

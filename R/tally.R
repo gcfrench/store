@@ -1,14 +1,35 @@
-# parent counter object
+#' Parent R6 class representing a counter
+#'
+#' @description
+#'
+#' @details
+#'
 counter <- R6::R6Class("counter",
   private = list(
+
+    #' @field start The starting count number.
     ..start = NULL,
+
+    #' @field end The end count number.
     ..end = NULL,
+
+    #' @field count The current count number.
     ..count = NULL,
+
+    #' @field increment Whether to increase (add) or decrease (subtract) count number.
     ..increment = NULL,
+
+    #' @field pad The number of digits for count number.
     ..pad = NULL,
+
+    #' @field status Whether the counter is active (ON) or inactive (OFF).
     ..status = "ON"
   ),
   public = list(
+
+    #' @description
+    #' Increments count number depending on increment value (add or subtract). Changes
+    #' status to OFF if count number has reached the end count number.
     counter = function() {
       if (private$..increment == "add") {
         private$..count <- private$..count + 1
@@ -19,23 +40,36 @@ counter <- R6::R6Class("counter",
         private$..status <- "OFF"
       }
     },
+    #' @description
+    #' Displays count number padded with zeros.
     display = function() {
        stringr::str_c(stringr::str_pad(private$..count, private$..pad, pad = "0"))
     },
+    #' @description
+    #' Empty function not used on finalizing counter
     finalize = function() {
     }
   ),
   active = list(
+    #' @description
+    #' Returns counter status (ON or OFF)
     status = function() {
       private$..status
     }
   )
 )
 
-# child add counter object
+#' Child R6 class representing incrementing counter by adding count number.
 counter_add <- R6::R6Class("counter_add",
   inherit = counter,
   public = list(
+    #' @description
+    #' Increments the counter by adding count number, defining maximum count.
+    #'
+    #' @param limit Maximum count as an integer.
+    #'
+    #' @return
+    #' A new counter object
     initialize = function(limit) {
       private$..end <- limit
       private$..start <- 0L
@@ -51,10 +85,16 @@ counter_add <- R6::R6Class("counter_add",
   )
 )
 
-# child subtract counter object
-counter_subtract <- R6::R6Class("counter_add",
+#' Child R6 class representing incrementing counter by subtracting count number.
+counter_subtract <- R6::R6Class("counter_subtract",
    inherit = counter,
    public = list(
+     #' @description
+     #' Increments the counter by subtracting count number, defining maximum count.
+     #'
+     #' @inheritParams counter_add
+     #'
+     #' @inheritSection counter_add return return
      initialize = function(limit) {
        private$..end <- 0L
        private$..start <- limit
@@ -71,7 +111,7 @@ counter_subtract <- R6::R6Class("counter_add",
 )
 
 #' @title
-#' Count the number of remaining interations
+#' Count the number of remaining interactions
 #'
 #' @description
 #' The main goal of the tally_counter is to provide a quick and easy way to monitor
@@ -144,7 +184,7 @@ counter_subtract <- R6::R6Class("counter_add",
 #' }
 tally_counter <- function(data, ...) {
 
-  # get function arguements
+  # get function arguments
   arg_list <- list(...)
   if (any(class(data) == "data.frame")) {
     max_limit <- nrow(data)

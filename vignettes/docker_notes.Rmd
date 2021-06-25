@@ -1,0 +1,30 @@
+---
+title: "Docker notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Docker notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+These notes were made whilst going through Microsoft's [Build a containerized web application with Docker](https://docs.microsoft.com/en-us/learn/modules/intro-to-containers/) workshop, as well other online resources relevant to R. These additional resources were
+
+-   Colin Fay's [An introduction to Docker for R Users](https://colinfay.me/docker-r-reproducibility/).
+
+Online resources for Docker include
+
+-   [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) - required for running Docker containers locally.
+-   [The Rocker Project](https://www.rocker-project.org/) - Docker Containers for the R Enviroment.
+
+Online resources for publishing Docker images and containers
+
+-   [Docker Hub](https://hub.docker.com/) - public repository for Docker images.
+
+-   [Azure Portal](https://azure.microsoft.com/en-gb/features/azure-portal/) - private repository for Docker images stored in [Azure Container Registry](https://azure.microsoft.com/en-gb/services/container-registry/) and containers ran in [Azure Container Instance Services](https://azure.microsoft.com/en-gb/services/container-instances/).

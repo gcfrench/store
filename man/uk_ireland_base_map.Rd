@@ -33,8 +33,7 @@ Government Licence v3.
 This boundary dataset was created from a subset of the DECC_OFF_Coastline_ED50
 layer published by the Oil & Gas Authority in the following data package:
 
-OGA and Lloyd's Register SNS Regional Geological Maps (Open Source)
-http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyd\%27s+Register+SNS+Regional+Geological+Maps&sort_by=relevanc.
+\href{http://data-ogauthority.opendata.arcgis.com/datasets?q=OGA+and+Lloyds+Register+SNS+Regional+Geological+Maps}{OGA and Lloyd's Register SNS Regional Geological Maps Open Data}.
 
 The data has been converted from ED50 to OSGB36 and numerous individual polygons
 have been merged to create a set of polygons for each of Scotland, England, Wales,
@@ -42,8 +41,7 @@ Northern Ireland, the Isle of Man, and Ireland.
 }
 \section{Licence}{
 
-Open Government Licence v3 (OGL)
-http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+\href{http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/}{Open Government Licence v3 (OGL)}
 Attribution: Contains data © 2017 Oil & Gas Authority
 }
 
@@ -66,8 +64,8 @@ suppressPackageStartupMessages({
 dir_create(path(tempdir(), "figures"))
 
 # save UK Ireland base map as shape file
-suppressMessages({uk_ireland_base_map \%>\% sf::st_write(path(tempdir(), "uk_ireland_base_map.shp"),
-                                         delete_layer = TRUE)})
+uk_ireland_base_map \%>\% sf::st_write(path(tempdir(), "uk_ireland_base_map.shp"),
+                                         delete_layer = TRUE, quiet = TRUE)
 
 # create UK Ireland base map image
 uk_ireland <- tm_shape(uk_ireland_base_map) +

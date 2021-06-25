@@ -6,6 +6,9 @@ editor_options:
 
 ## store 0.5.0
 
+-   Added **Docker notes** for writing Dockerfiles, creating Docker
+    images, running Docker containers both locally and using cloud
+    services.
 -   Updated **compare_dataset_versions** function to automatically
     detect the row containing the column names on importing the results
     file

@@ -1,8 +1,8 @@
 ---
-title: "gdal_commands"
+title: "GDAL commands"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{gdal_commands}
+  %\VignetteIndexEntry{GDAL commands}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
