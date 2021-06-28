@@ -9,6 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  eval=FALSE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -16,7 +17,9 @@ knitr::opts_chunk$set(
 
 These notes were made whilst going through Microsoft's [Build a containerized web application with Docker](https://docs.microsoft.com/en-us/learn/modules/intro-to-containers/) workshop, as well other online resources relevant to R. These additional resources were
 
--   Colin Fay's [An introduction to Docker for R Users](https://colinfay.me/docker-r-reproducibility/).
+-   Colin Fay's [An introduction to Docker for R Users](https://colinfay.me/docker-r-reproducibility/) blog.
+-   Oliver Guggenbuhlühl's [Running your R script in Docker](https://www.statworx.com/de/blog/running-your-r-script-in-docker/) blog.
+-   Oliver Guggenbuhlühl's [How to Dockerize ShinyApps](https://www.statworx.com/ch/blog/how-to-dockerize-shinyapps/) blog.
 
 Online resources for Docker include
 
@@ -26,5 +29,103 @@ Online resources for Docker include
 Online resources for publishing Docker images and containers
 
 -   [Docker Hub](https://hub.docker.com/) - public repository for Docker images.
-
 -   [Azure Portal](https://azure.microsoft.com/en-gb/features/azure-portal/) - private repository for Docker images stored in [Azure Container Registry](https://azure.microsoft.com/en-gb/services/container-registry/) and containers ran in [Azure Container Instance Services](https://azure.microsoft.com/en-gb/services/container-instances/).
+
+# Dockerfile
+
+### Dockerfile for shiny apps
+
+Dockerfile taken from Oliver Guggenbuhlühl's [How to Dockerize ShinyApps](https://www.statworx.com/ch/blog/how-to-dockerize-shinyapps/) blog,
+
+```{bash}
+# Shiny base image from rocker
+FROM rocker/shiny:latest
+
+# system libraries of general use
+## install debian packages
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+    libxml2-dev \
+    libcario2-dev \
+    libsqlite3-dev \
+    libmariadbd-dev \
+    libpq-dev \
+    libssh2-1-dev \
+    unixodbc-dev \
+    libcurl4-openssl-dev \
+    libssl-dev
+    
+## update system libaries
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get clean
+    
+# copy necessary files
+## app folder
+COPY /<app directory> ./app
+
+## renv.lock file
+COPY /<app directory>/renv.lock ./renv.lock
+
+# install renv and restore packages
+RUN Rscript -e 'install.packages("renv")'
+RUN Rscript -e 'renv:consent(provided = TRUE)'
+RUN Rscript -e 'renv::restore()'
+    
+# expose port
+EXPOSE 3838
+
+# run app on container start
+CMD ["R", "-e", "shiny::runApp('/app', host = '0.0.0.0', port = 3838)"]
+```
+
+# Images
+
+### Get image from Docker Hub
+
+```{bash}
+docker pull <repository name>:<tagname>
+docker image ls
+```
+
+### Build image from dockerfile
+
+```{bash}
+docker build -t <image_name> .
+docker build -t <my-shinyapp-image> .
+```
+
+### Remove image
+
+```{bash}
+docker image rm <image_id>
+```
+
+# Containers
+
+### Run container from image
+
+```{bash}
+# -p Map container port to host port
+# -d Run container in background
+# --name Name to give to container
+docker run -d -p <host_port_number>:<container_port_number> <image_id>
+docker run -d -p <host_port_number>:<container_port_number> --name <container_name> <image_name>
+docker run -d --rm -p 3838:3838 <my-shinyapp-image>
+
+# -a Include stopped containers in list
+docker container ls -a
+```
+
+### Stop and restart container
+
+```{bash}
+docker stop <container name>
+docker start <container name>
+```
+
+### Remove container
+
+```{bash}
+# -f Force container to stop
+docker container rm -f <container name>
+```
