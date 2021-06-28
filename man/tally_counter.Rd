@@ -2,18 +2,19 @@
 % Please edit documentation in R/tally.R
 \name{tally_counter}
 \alias{tally_counter}
-\title{Count the number of remaining interations}
+\title{Count the number of remaining interactions}
 \usage{
 tally_counter(data, ...)
 }
 \arguments{
-\item{data}{a data frame to be used in the iteration}
+\item{data}{The data frame to be used in the iteration.}
 
-\item{type}{character string indicating type of counter to use, either adding (add)
-or subtracting (default = subtract) counts}
+\item{type}{Which type of counter to use, either adding (add) or subtracting
+(default = subtract) counts.}
 }
 \value{
-the data frame is returned so that the function is pipe friendly
+The data frame is returned invisibly so that the function can be
+used in a piped workflow.
 }
 \description{
 The main goal of the tally_counter is to provide a quick and easy way to monitor
@@ -23,7 +24,8 @@ long enough to run the script in the background, coming back to the console at
 regular intervals to check the progress. To help with monitoring this progress,
 the number of rows remaining can be displayed in the console so that you can see
 at a glance how far the script has progressed and how far there is left to go.
-
+}
+\details{
 The counter is initiated by passing the data frame into this tally_counter function.
 This can be done within a pipeline containing the iteration step, for example in
 conjunction with the tidyverse suite of packages. It is used in conjunction with
@@ -42,7 +44,6 @@ the number of digits increases to five, above 99,999 iterations six digits will 
 displayed and so on.
 }
 \examples{
-\dontrun{
 suppressPackageStartupMessages({
   library(store)
   suppressWarnings({
@@ -69,12 +70,16 @@ penguin_stats <- function(...) {
   message(stringr::str_glue("{click()} : The body mass for the {sex} {species} penguin recorded in {year} on {island} island is {body_mass_g} grams"))
 
 }
-penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.25))
+penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.1))
 
 penguins \%>\%
-  slice_sample(n = 25) \%>\%
+  slice_sample(n = 10) \%>\%
   arrange(desc(body_mass_g)) \%>\%
   tally_counter(type = "add") \%>\%
   pwalk(penguin_stats_slow)
 }
+\seealso{
+Other tally counter methods: 
+\code{\link{click}()}
 }
+\concept{tally counter methods}

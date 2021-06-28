@@ -1,25 +1,22 @@
+# Parent class -----------------------------------------------------------------
+
 #' Parent R6 class representing a counter
-#'
-#' @description
-#'
-#' @details
-#'
 counter <- R6::R6Class("counter",
   private = list(
 
-    #' @field start The starting count number.
+    #' start The starting count number.
     ..start = NULL,
 
-    #' @field end The end count number.
+    #' end The end count number.
     ..end = NULL,
 
-    #' @field count The current count number.
+    #' count The current count number.
     ..count = NULL,
 
-    #' @field increment Whether to increase (add) or decrease (subtract) count number.
+    #' increment Whether to increase (add) or decrease (subtract) count number.
     ..increment = NULL,
 
-    #' @field pad The number of digits for count number.
+    #' pad The number of digits for count number.
     ..pad = NULL,
 
     #' @field status Whether the counter is active (ON) or inactive (OFF).
@@ -51,13 +48,13 @@ counter <- R6::R6Class("counter",
     }
   ),
   active = list(
-    #' @description
-    #' Returns counter status (ON or OFF)
     status = function() {
       private$..status
     }
   )
 )
+
+# Children classes ----------------------------------------------------------------
 
 #' Child R6 class representing incrementing counter by adding count number.
 counter_add <- R6::R6Class("counter_add",
@@ -69,7 +66,7 @@ counter_add <- R6::R6Class("counter_add",
     #' @param limit Maximum count as an integer.
     #'
     #' @return
-    #' A new counter object
+    #' Create a new counter object
     initialize = function(limit) {
       private$..end <- limit
       private$..start <- 0L
@@ -92,9 +89,10 @@ counter_subtract <- R6::R6Class("counter_subtract",
      #' @description
      #' Increments the counter by subtracting count number, defining maximum count.
      #'
-     #' @inheritParams counter_add
+     #' @param limit Maximum count as an integer.
      #'
-     #' @inheritSection counter_add return return
+     #' @return
+     #' Create a new counter object
      initialize = function(limit) {
        private$..end <- 0L
        private$..start <- limit
@@ -110,6 +108,8 @@ counter_subtract <- R6::R6Class("counter_subtract",
     )
 )
 
+# Methods ----------------------------------------------------------------------
+
 #' @title
 #' Count the number of remaining interactions
 #'
@@ -122,6 +122,7 @@ counter_subtract <- R6::R6Class("counter_subtract",
 #' the number of rows remaining can be displayed in the console so that you can see
 #' at a glance how far the script has progressed and how far there is left to go.
 #'
+#' @details
 #' The counter is initiated by passing the data frame into this tally_counter function.
 #' This can be done within a pipeline containing the iteration step, for example in
 #' conjunction with the tidyverse suite of packages. It is used in conjunction with
@@ -139,49 +140,18 @@ counter_subtract <- R6::R6Class("counter_subtract",
 #' the number of digits increases to five, above 99,999 iterations six digits will be
 #' displayed and so on.
 #'
-#' @param data a data frame to be used in the iteration
-#' @param type character string indicating type of counter to use, either adding (add)
-#' or subtracting (default = subtract) counts
+#' @family tally counter methods
 #'
-#' @return the data frame is returned so that the function is pipe friendly
+#' @param data The data frame to be used in the iteration.
+#' @param type Which type of counter to use, either adding (add) or subtracting
+#' (default = subtract) counts.
+#'
+#' @return The data frame is returned invisibly so that the function can be
+#' used in a piped workflow.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(stringr)
-#'     library(purrr)
-#'   })
-#' })
-#'
-#' penguin_stats <- function(...) {
-#'
-#'   # get row
-#'   data <- list(...)
-#'
-#'   # get penguins stats
-#'   species <- purrr::pluck(data, "species")
-#'   island <- purrr::pluck(data, "island")
-#'   body_mass_g <- purrr::pluck(data, "body_mass_g")
-#'   sex <- purrr::pluck(data, "sex")
-#'   year <- purrr::pluck(data, "year")
-#'
-#'   # print penguin stats
-#'   message(stringr::str_glue("{click()} : The body mass for the {sex} {species} penguin recorded in {year} on {island} island is {body_mass_g} grams"))
-#'
-#' }
-#' penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.25))
-#'
-#' penguins %>%
-#'   slice_sample(n = 25) %>%
-#'   arrange(desc(body_mass_g)) %>%
-#'   tally_counter(type = "add") %>%
-#'   pwalk(penguin_stats_slow)
-#' }
+#' @example man/examples/penguin_body_mass.R
 tally_counter <- function(data, ...) {
 
   # get function arguments
@@ -217,44 +187,13 @@ tally_counter <- function(data, ...) {
 #' to a minimum of four characters. Once counter has finished the environment and counter
 #' object are removed.
 #'
+#' @family tally counter methods
+#'
+#' @return The count number padded to a minimum of four characters.
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' suppressPackageStartupMessages({
-#'   library(store)
-#'   suppressWarnings({
-#'     library(palmerpenguins)
-#'     library(dplyr)
-#'     library(stringr)
-#'     library(purrr)
-#'   })
-#' })
-#'
-#' penguin_stats <- function(...) {
-#'
-#'   # get row
-#'   data <- list(...)
-#'
-#'   # get penguins stats
-#'   species <- purrr::pluck(data, "species")
-#'   island <- purrr::pluck(data, "island")
-#'   body_mass_g <- purrr::pluck(data, "body_mass_g")
-#'   sex <- purrr::pluck(data, "sex")
-#'   year <- purrr::pluck(data, "year")
-#'
-#'   # print penguin stats
-#'   message(stringr::str_glue("{click()} : The body mass for the {sex} {species} penguin recorded in {year} on {island} island is {body_mass_g} grams"))
-#'
-#' }
-#' penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.25))
-#'
-#' penguins %>%
-#'   slice_sample(n = 25) %>%
-#'   arrange(desc(body_mass_g)) %>%
-#'   tally_counter(type = "add") %>%
-#'   pwalk(penguin_stats_slow)
-#' }
+#' @example man/examples/penguin_body_mass.R
 click <- function() {
 
   # get counter object

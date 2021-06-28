@@ -6,6 +6,9 @@
 \usage{
 click()
 }
+\value{
+The count number padded to a minimum of four characters.
+}
 \description{
 This function adds or subtracts one from the counter depending on the tally counter
 type used, defined within the tally_counter function. It returns the number padded
@@ -13,7 +16,6 @@ to a minimum of four characters. Once counter has finished the environment and c
 object are removed.
 }
 \examples{
-\dontrun{
 suppressPackageStartupMessages({
   library(store)
   suppressWarnings({
@@ -40,12 +42,16 @@ penguin_stats <- function(...) {
   message(stringr::str_glue("{click()} : The body mass for the {sex} {species} penguin recorded in {year} on {island} island is {body_mass_g} grams"))
 
 }
-penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.25))
+penguin_stats_slow <- slowly(penguin_stats, rate_delay(0.1))
 
 penguins \%>\%
-  slice_sample(n = 25) \%>\%
+  slice_sample(n = 10) \%>\%
   arrange(desc(body_mass_g)) \%>\%
   tally_counter(type = "add") \%>\%
   pwalk(penguin_stats_slow)
 }
+\seealso{
+Other tally counter methods: 
+\code{\link{tally_counter}()}
 }
+\concept{tally counter methods}
