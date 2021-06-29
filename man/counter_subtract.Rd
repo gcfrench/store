@@ -44,7 +44,7 @@ Increments the counter by subtracting count number, defining maximum count.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Create a new counter object
+Create a new counter object.
 }
 }
 \if{html}{\out{<hr>}}

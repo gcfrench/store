@@ -43,7 +43,7 @@ counter <- R6::R6Class("counter",
        stringr::str_c(stringr::str_pad(private$..count, private$..pad, pad = "0"))
     },
     #' @description
-    #' Empty function not used on finalizing counter
+    #' Empty function not used on finalizing counter.
     finalize = function() {
     }
   ),
@@ -66,7 +66,7 @@ counter_add <- R6::R6Class("counter_add",
     #' @param limit Maximum count as an integer.
     #'
     #' @return
-    #' Create a new counter object
+    #' Create a new counter object.
     initialize = function(limit) {
       private$..end <- limit
       private$..start <- 0L
@@ -92,7 +92,7 @@ counter_subtract <- R6::R6Class("counter_subtract",
      #' @param limit Maximum count as an integer.
      #'
      #' @return
-     #' Create a new counter object
+     #' Create a new counter object.
      initialize = function(limit) {
        private$..end <- 0L
        private$..start <- limit

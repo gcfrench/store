@@ -64,7 +64,7 @@ Displays count number padded with zeros.
 \if{html}{\out{<a id="method-finalize"></a>}}
 \if{latex}{\out{\hypertarget{method-finalize}{}}}
 \subsection{Method \code{finalize()}}{
-Empty function not used on finalizing counter
+Empty function not used on finalizing counter.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{counter$finalize()}\if{html}{\out{</div>}}
 }
