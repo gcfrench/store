@@ -50,7 +50,8 @@ Imports:
     raster,
     daff,
     R6,
-    gt
+    gt,
+    ragg
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

@@ -61,7 +61,7 @@ eda_variable_summary <- function(.dataset) {
                           figure_width = 6, figure_height = 6) {
     ggplot2::ggsave(filename = fs::path(tempdir(), "figures", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
-                    type = "cairo-png",
+                    device = ragg::agg_png,
                     width = figure_width,
                     height = figure_height,
                     units = "in",
@@ -186,7 +186,7 @@ eda_variable_outliers <- function(.dataset) {
                           figure_width = 6, figure_height = 6) {
     ggplot2::ggsave(filename = fs::path(tempdir(), "figures", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
-                    type = "cairo-png",
+                    device = ragg::agg_png,
                     width = figure_width,
                     height = figure_height,
                     units = "in",
@@ -295,7 +295,7 @@ eda_variable_distribution <- function(.dataset) {
                           figure_width = 6, figure_height = 6) {
     ggplot2::ggsave(filename = fs::path(tempdir(), "figures", stringr::str_glue("{plot_name}.png")),
                     plot = plot,
-                    type = "cairo-png",
+                    device = ragg::agg_png,
                     width = figure_width,
                     height = figure_height,
                     units = "in",

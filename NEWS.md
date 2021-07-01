@@ -8,7 +8,8 @@ editor_options:
 
 -   Updated [roxygen2](https://roxygen2.r-lib.org/index.html)
     documentation and examples tags for functions and lookups removing
-    repeated text and examples.
+    repeated text and examples and using [ragg](https://ragg.r-lib.org/)
+    package for saving png images.
 -   Added **Docker notes** for writing Dockerfiles, creating Docker
     images, running Docker containers both locally and using cloud
     services.

@@ -8,6 +8,7 @@ suppressPackageStartupMessages({
     library(fs)
     library(dplyr)
     library(ggplot2)
+    library(ragg)
   })
 })
 
@@ -44,7 +45,7 @@ penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
 suppressWarnings({
   ggsave(filename = path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
        plot = penguins_mass_flipper_plot,
-       type = "cairo-png",
+       device = agg_png,
        width = 6,
        height = 6,
        units = "in",
