@@ -23,7 +23,7 @@ count outliers and mean of each variable with outliers included and excluded.
 \section{Figures}{
 
 \if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
-\if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
+\if{html}{\figure{05-variable_outliers.png}{options: width=80\%}}
 }
 
 \examples{
@@ -36,7 +36,11 @@ suppressPackageStartupMessages({
   })
 })
 
-suppressMessages({eda_variable_outliers(penguins_raw)})
+suppressWarnings({
+  suppressMessages({
+    eda_variable_outliers(penguins_raw)
+  })
+})
 
 # move figures from temporary directory
 suppressPackageStartupMessages({

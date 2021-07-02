@@ -37,14 +37,14 @@ export.
 }
 \section{Figures}{
 
-\if{html}{\figure{01-summary_table.png}{options: width=100\%}}
-\if{html}{\figure{02-missing_data.png}{options: width=100\%}}
-\if{html}{\figure{03-category_data.png}{options: width=100\%}}
+\if{html}{\figure{01-summary_table.png}{options: width=80\%}}
+\if{html}{\figure{02-missing_data.png}{options: width=80\%}}
+\if{html}{\figure{03-category_data.png}{options: width=80\%}}
 \if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
-\if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
+\if{html}{\figure{05-variable_outliers.png}{options: width=80\%}}
 \if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
-\if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
-\if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
+\if{html}{\figure{07-distribution_plot.png}{options: width=80\%}}
+\if{html}{\figure{08-correlation_plot.png}{options: width=80\%}}
 }
 
 \examples{

@@ -10,9 +10,9 @@
 #' the number of rows, missing values, unique values and zero values for each variable.
 #'
 #' @section Figures:
-#' \if{html}{\figure{01-summary_table.png}{options: width=100\%}}
-#' \if{html}{\figure{02-missing_data.png}{options: width=100\%}}
-#' \if{html}{\figure{03-category_data.png}{options: width=100\%}}
+#' \if{html}{\figure{01-summary_table.png}{options: width=80\%}}
+#' \if{html}{\figure{02-missing_data.png}{options: width=80\%}}
+#' \if{html}{\figure{03-category_data.png}{options: width=80\%}}
 #'
 #' @seealso
 #' This is an example of exploratory data analysis using the [dlookr](https://github.com/choonghyunryu/dlookr)
@@ -37,7 +37,11 @@
 #'   })
 #' })
 #'
-#' suppressMessages({eda_variable_summary(penguins_raw)})
+#' suppressWarnings({
+#'   suppressMessages({
+#'     eda_variable_summary(penguins_raw)
+#'   })
+#' })
 #'
 #' # move figures from temporary directory
 #' suppressPackageStartupMessages({
@@ -142,7 +146,7 @@ eda_variable_summary <- function(.dataset) {
 #'
 #' @section Figures:
 #' \if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
-#' \if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
+#' \if{html}{\figure{05-variable_outliers.png}{options: width=80\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -164,7 +168,11 @@ eda_variable_summary <- function(.dataset) {
 #'   })
 #' })
 #'
-#' suppressMessages({eda_variable_outliers(penguins_raw)})
+#' suppressWarnings({
+#'   suppressMessages({
+#'     eda_variable_outliers(penguins_raw)
+#'   })
+#' })
 #'
 #' # move figures from temporary directory
 #' suppressPackageStartupMessages({
@@ -251,7 +259,7 @@ eda_variable_outliers <- function(.dataset) {
 #'
 #' @section Figures:
 #' \if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
-#' \if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
+#' \if{html}{\figure{07-distribution_plot.png}{options: width=80\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -351,7 +359,7 @@ eda_variable_distribution <- function(.dataset) {
 #' directory, showing the correlation values between each variable combination.
 #'
 #' @section Figures:
-#' \if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
+#' \if{html}{\figure{08-correlation_plot.png}{options: width=80\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'
@@ -429,14 +437,14 @@ eda_variable_correlation <- function(.dataset) {
 #' export.
 #'
 #' @section Figures:
-#' \if{html}{\figure{01-summary_table.png}{options: width=100\%}}
-#' \if{html}{\figure{02-missing_data.png}{options: width=100\%}}
-#' \if{html}{\figure{03-category_data.png}{options: width=100\%}}
+#' \if{html}{\figure{01-summary_table.png}{options: width=80\%}}
+#' \if{html}{\figure{02-missing_data.png}{options: width=80\%}}
+#' \if{html}{\figure{03-category_data.png}{options: width=80\%}}
 #' \if{html}{\figure{04-outliers_table.png}{options: width=100\%}}
-#' \if{html}{\figure{05-variable_outliers.png}{options: width=100\%}}
+#' \if{html}{\figure{05-variable_outliers.png}{options: width=80\%}}
 #' \if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
-#' \if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
-#' \if{html}{\figure{08-correlation_plot.png}{options: width=100\%}}
+#' \if{html}{\figure{07-distribution_plot.png}{options: width=80\%}}
+#' \if{html}{\figure{08-correlation_plot.png}{options: width=80\%}}
 #'
 #' @inherit eda_variable_summary return seealso
 #'

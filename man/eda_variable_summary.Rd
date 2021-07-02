@@ -23,9 +23,9 @@ the number of rows, missing values, unique values and zero values for each varia
 }
 \section{Figures}{
 
-\if{html}{\figure{01-summary_table.png}{options: width=100\%}}
-\if{html}{\figure{02-missing_data.png}{options: width=100\%}}
-\if{html}{\figure{03-category_data.png}{options: width=100\%}}
+\if{html}{\figure{01-summary_table.png}{options: width=80\%}}
+\if{html}{\figure{02-missing_data.png}{options: width=80\%}}
+\if{html}{\figure{03-category_data.png}{options: width=80\%}}
 }
 
 \examples{
@@ -38,7 +38,11 @@ suppressPackageStartupMessages({
   })
 })
 
-suppressMessages({eda_variable_summary(penguins_raw)})
+suppressWarnings({
+  suppressMessages({
+    eda_variable_summary(penguins_raw)
+  })
+})
 
 # move figures from temporary directory
 suppressPackageStartupMessages({

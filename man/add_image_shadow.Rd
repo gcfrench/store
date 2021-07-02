@@ -14,103 +14,62 @@ The path name of image returned invisibly so that the function can be
 used in a piped workflow.
 }
 \description{
-This function adds a border shadow to the image, archiving the original image
-in a separate archive sub-directory.
+This function adds a shadow to the image, archiving the original image in a
+separate archive sub-directory.
 }
 \details{
-The example batch runs the function on a graph from the
-\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
-and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
-and \href{https://davisvaughan.github.io/furrr/}{furrr} packages.
+An internal shadow may be added when the function is called for the first time.
+Calling the function a second time then adds a border shadow.
 }
 \section{Figures}{
 
-\if{html}{\figure{penguins_mass_flipper_plot_shadow.png}{options: width=80\%}}
+\if{html}{\figure{penguins_shadow.png}{options: width=80\%}}
 }
 
 \examples{
-# example taken from palmerpenguins example analysis of mass vs. flipper length
-# https://allisonhorst.github.io/palmerpenguins/articles/examples.html
+# example taken from Art for teaching with palmerpenguins. Artwork by @allison_horst
+# https://allisonhorst.github.io/palmerpenguins/articles/art.html
 
 suppressPackageStartupMessages({
-  library(store)
-  suppressWarnings({
-    library(palmerpenguins)
-    library(fs)
-    library(dplyr)
-    library(ggplot2)
-    library(ragg)
-  })
-})
-
-# create temp directory
-dir_create(path(tempdir(), "figures"))
-
-# data
-penguins_mass_flipper <- penguins \%>\%
-  select(species, flipper_length_mm, body_mass_g)
-
-# graph
-penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
-                                     aes(x = flipper_length_mm,
-                                         y = body_mass_g)) +
-  geom_point(aes(color = species,
-                 shape = species),
-             size = 3,
-             alpha = 0.8) +
-  theme_minimal() +
-  scale_color_manual(values = c("darkorange","purple","cyan4")) +
-  labs(title = "Penguin size, Palmer Station LTER",
-       subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
-       x = "Flipper length (mm)",
-       y = "Body mass (g)",
-       color = "Penguin species",
-       shape = "Penguin species") +
-  theme(legend.position = c(0.2, 0.7),
-        legend.background = element_rect(fill = "white", color = NA),
-        plot.title.position = "plot",
-        plot.caption = element_text(hjust = 0, face= "italic"),
-        plot.caption.position = "plot")
-
-# save graph
-suppressWarnings({
-  ggsave(filename = path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-       plot = penguins_mass_flipper_plot,
-       device = agg_png,
-       width = 6,
-       height = 6,
-       units = "in",
-       dpi = 72)
-})
-
-# add shadows to graph image
-suppressPackageStartupMessages({
+   library(store)
    suppressWarnings({
       library(fs)
+      library(here)
       library(future)
       library(furrr)
    })
 })
 
+# create temp directory
+dir_create(path(tempdir(), "figures"))
+
+# copy image to temp directory
+file_copy(here("man", "figures", "penguins.png"),
+          path(tempdir(), "figures", "penguins.png"))
+
+# add shadows to graph image
 plan(multisession)
 path(tempdir(), "figures") \%>\% {
    suppressMessages({dir_ls(., glob = "*.png")})} \%>\%
+   # internal shadow created
    future_walk(add_image_shadow,
               .options = furrr_options(seed = TRUE),
+               .progress = TRUE) \%>\%
+   # outer border shadow created
+   future_walk(add_image_shadow,
+               .options = furrr_options(seed = TRUE),
               .progress = TRUE)
 
 # move figures from temporary directory
-suppressPackageStartupMessages({
-   suppressWarnings({
-      library(fs)
-      library(here)
-   })
-})
-
-file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-          here("man", "figures", "penguins_mass_flipper_plot_shadow.png"))
+file_move(path(tempdir(), "figures", "penguins.png"),
+          here("man", "figures", "penguins_shadow.png"))
 }
 \seealso{
+The example batch runs the function on a graph from the
+\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
+and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
+and \href{https://davisvaughan.github.io/furrr/}{furrr} packages.
+
 Other image manipulation functions: 
 \code{\link{reduce_image_size}()}
 }

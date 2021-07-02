@@ -41,17 +41,21 @@ display_table <- function(data, rows = nrow(data)) {
 #' Add a shadow to an image
 #'
 #' @description
-#' This function adds a border shadow to the image, archiving the original image
-#' in a separate archive sub-directory.
+#' This function adds a shadow to the image, archiving the original image in a
+#' separate archive sub-directory.
 #'
 #' @details
+#' An internal shadow may be added when the function is called for the first time.
+#' Calling the function a second time then adds a border shadow.
+#'
+#' @seealso
 #' The example batch runs the function on a graph from the
 #' [palmerpenguins package](https://allisonhorst.github.io/palmerpenguins/articles/examples.html)
 #' and is an example of parallelization using the [future](https://github.com/HenrikBengtsson/future)
 #' and [furrr](https://davisvaughan.github.io/furrr/) packages.
 #'
 #' @section Figures:
-#' \if{html}{\figure{penguins_mass_flipper_plot_shadow.png}{options: width=80\%}}
+#' \if{html}{\figure{penguins_shadow.png}{options: width=80\%}}
 #'
 #' @family image manipulation functions
 #'
@@ -62,35 +66,43 @@ display_table <- function(data, rows = nrow(data)) {
 #'
 #' @export
 #'
-#' @example man/examples/penguins_mass_flipper_plot.R
-#'
 #' @examples
-#' # add shadows to graph image
+#' # example taken from Art for teaching with palmerpenguins. Artwork by @allison_horst
+#' # https://allisonhorst.github.io/palmerpenguins/articles/art.html
+#'
 #' suppressPackageStartupMessages({
+#'    library(store)
 #'    suppressWarnings({
 #'       library(fs)
+#'       library(here)
 #'       library(future)
 #'       library(furrr)
 #'    })
 #' })
 #'
+#' # create temp directory
+#' dir_create(path(tempdir(), "figures"))
+#'
+#' # copy image to temp directory
+#' file_copy(here("man", "figures", "penguins.png"),
+#'           path(tempdir(), "figures", "penguins.png"))
+#'
+#' # add shadows to graph image
 #' plan(multisession)
 #' path(tempdir(), "figures") %>% {
 #'    suppressMessages({dir_ls(., glob = "*.png")})} %>%
+#'    # internal shadow created
 #'    future_walk(add_image_shadow,
 #'               .options = furrr_options(seed = TRUE),
+#'                .progress = TRUE) %>%
+#'    # outer border shadow created
+#'    future_walk(add_image_shadow,
+#'                .options = furrr_options(seed = TRUE),
 #'               .progress = TRUE)
 #'
 #' # move figures from temporary directory
-#' suppressPackageStartupMessages({
-#'    suppressWarnings({
-#'       library(fs)
-#'       library(here)
-#'    })
-#' })
-#'
-#' file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-#'           here("man", "figures", "penguins_mass_flipper_plot_shadow.png"))
+#' file_move(path(tempdir(), "figures", "penguins.png"),
+#'           here("man", "figures", "penguins_shadow.png"))
 add_image_shadow <- function(path_image) {
 
    # create archive directory if does not exist
@@ -106,7 +118,7 @@ add_image_shadow <- function(path_image) {
    # save image with shadow in original directory
    magick::image_read(path_archive) %>%
       magick::image_border(geometry = "1x1") %>%
-      magick::image_shadow() %>%
+      magick::image_shadow(operator = "over") %>%
       magick::image_write(path_image)
 
    # return path to reduced image

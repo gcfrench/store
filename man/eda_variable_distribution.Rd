@@ -24,7 +24,7 @@ the mean, level of skewness, kurtosis and normality.
 \section{Figures}{
 
 \if{html}{\figure{06-distribution_table.png}{options: width=100\%}}
-\if{html}{\figure{07-distribution_plot.png}{options: width=100\%}}
+\if{html}{\figure{07-distribution_plot.png}{options: width=80\%}}
 }
 
 \examples{

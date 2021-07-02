@@ -20,10 +20,8 @@ This function reduces the size of an image, archiving the original image in a
 separate archive sub-directory.
 }
 \details{
-The example batch runs the function on a graph from the
-\href{https://allisonhorst.github.io/palmerpenguins/articles/examples.html}{palmerpenguins package}
-and is an example of parallelization using the \href{https://github.com/HenrikBengtsson/future}{future}
-and \href{https://davisvaughan.github.io/furrr/}{furrr} packages.
+An internal shadow may be added when the function is called for the first time.
+Calling the function a second time then adds a border shadow.
 }
 \section{Figures}{
 
