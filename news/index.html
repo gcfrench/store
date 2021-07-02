@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -94,10 +94,19 @@
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -138,63 +147,85 @@
       <small>Source: <a href='https://github.com/gcfrench/store/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="store-040" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.0">
-<a href="#store-040" class="anchor"></a>store 0.4.0</h1>
+    <div id="store-100-2021-07-02" class="section level2">
+<h2 class="hasAnchor">
+<a href="#store-100-2021-07-02" class="anchor"></a>store 1.0.0 <font size="4">2021-07-02</font>
+</h2>
 <ul>
-<li>Added <strong>gridsquare_geometry</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a> to convert British and Irish grid reference to its square polygon geometry feature. Example uses <a href="https://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a> function to apply function to each grid reference in the dataset</li>
-<li>Added <strong>hectad</strong>, <strong>pentad</strong>, <strong>tetrad</strong>, <strong>monad</strong> and <strong>hectare</strong> S3 class of grid reference functions to convert higher resolution grid references using parent <strong>gridRef</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>
-</li>
-<li>Added <strong>as_gridref</strong>, <strong>precision</strong>, <strong>projection</strong>, <strong>easting</strong> and <strong>northing</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>. S3 classes described in <a href="https://adv-r.hadley.nz/s3.html">S3</a> chapter of Advanced R</li>
-<li>Added <strong>extract_paragraph_delimited_list</strong> to family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter</li>
-<li>Added <strong>vc_grid_square_intersects</strong> A data frame listing the vice counties intersects with 10km, 2km and 1km grid squares</li>
-<li>Added <strong>uk_ireland_tenkm_grid_squares</strong> A data frame listing UK and Ireland 10km grid squares along with their country and whether in the UK, on land or sea</li>
-<li>Added <strong>nbn_demonstration_dataset</strong> An example data frame containing bird example records used to demonstrate the NBN Gateway</li>
-<li>Updated <strong>get_database_connections</strong> examples to include using <a href="https://db.rstudio.com/dplyr/">dplyr with databases</a>
-</li>
-<li>Added <strong>GDAL commands</strong> document for importing and exporting spatial layers into SQL Server, PostGres and Spatialite</li>
-<li>Updated <strong>add_tibble_to_list</strong> to add list to the parent environment calling the function rather than the global environment, as described in the <a href="https://rlang.r-lib.org/index.html">rlang</a> package</li>
-<li>Added <strong>tidy_spatial_data</strong> to help in cleaning spatial data frames using the <a href="https://r-spatial.github.io/sf/">sf</a> package</li>
-<li>Added <strong>Run validation checks</strong> document to information, providing examples of the use of the <a href="https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html">assertr</a> and <a href="https://github.com/hadley/assertthat">assertthat</a> packages for validation</li>
-<li>Updated <strong>extract_delimited_list</strong> parent function to apply sort, handle NAs and optionally add additional text to separate last two items. Additional <strong>extract_space_delimited_list</strong> function added</li>
-<li>Added <strong>uk_ireland_base_map</strong> A simple features data frame of the British and Irish coastline derived from the Oil and Gas Authority’s OGA and Lloyd’s Register SNS Regional Geological Maps (Open Source) layer</li>
+<li>Updated <strong>add_image_shadow</strong> which creates both an internal image and image shadow to include example image taken from <a href="https://allisonhorst.github.io/palmerpenguins/articles/art.html">Alison Horst’s penguins art</a>.</li>
+<li>Updated <a href="https://roxygen2.r-lib.org/index.html">roxygen2</a> documentation and examples tags for functions and lookups removing repeated text and examples and using <a href="https://ragg.r-lib.org/">ragg</a> package for saving png images.</li>
+<li>Added <strong>Docker notes</strong> for writing Dockerfiles, creating Docker images, running Docker containers both locally and using cloud services.</li>
+<li>Updated <strong>compare_dataset_versions</strong> function to automatically detect the row containing the column names on importing the results file.</li>
+<li>Updated <strong>country_codes</strong> look up table to link to the table view in documentation. The table view was created using the <a href="https://gt.rstudio.com/">gt</a> package.</li>
+<li>Updated <strong>Create and update a package</strong> document.</li>
+<li>Added <strong>tally_counter</strong> and <strong>click</strong> R6 functions to provide a quick and easy way to monitor progress whilst iterating through a data frame. These functions are written using <a href="https://r6.r-lib.org/">R6 object-orientated programming</a> with an example of using purrr’s <a href="https://purrr.tidyverse.org/reference/map2.html">pwalk function</a> and … to pass one row of a data frame at a time into a function.</li>
+<li>Updated <strong>uk_ireland_base_map</strong> example to include map image using <a href="https://github.com/mtennekes/tmap">tmap</a> package, following instructions in <a href="https://geocompr.robinlovelace.net/adv-map.html">Geocomputation with R Chapter 8 Making maps with R</a> by Robin Lovelace, Jakub Nowosad and Jannes Muenchow.</li>
+<li>Added <strong>create_bounding_box</strong> function to create a bounding box from corner coordinates using the <a href="https://r-spatial.github.io/sf/reference/st.html">sf</a> package.</li>
+<li>Added <strong>compare_dataset_versions</strong> function to identify changes between older and newer versions of a dataset, using the <a href="https://github.com/edwindj/daff">daff</a> package.</li>
+<li>Added <strong>extract_polygons</strong> function to extract and dissolve polygons from geometry collections using the <a href="https://r-spatial.github.io/sf/">sf</a> package.</li>
+<li>Added <strong>PostgreSQL database notes</strong> containing useful SQL, database management and link to Microsoft Access guidance.</li>
+<li>Updated <strong>extract_delimited_list</strong> parent function to optionally remove duplicated elements in a list.</li>
+<li>Added <strong>Raster package tutorial notes</strong> made whilst reading <a href="https://rspatial.org/raster/pkg/index.html">The Raster package</a> by Robert J. Hijmans.</li>
 </ul>
 </div>
-    <div id="store-030" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.0">
-<a href="#store-030" class="anchor"></a>store 0.3.0</h1>
+    <div id="store-040-2021-04-23" class="section level2">
+<h2 class="hasAnchor">
+<a href="#store-040-2021-04-23" class="anchor"></a>store 0.4.0 <font size="4">2021-04-23</font>
+</h2>
 <ul>
-<li>Added <strong>eda_variable_collection</strong> to run all the exploratory data analyses on a data frame, provides examples of using the <a href="https://github.com/choonghyunryu/dlookr">dlookr</a> and <a href="https://alastairrushworth.github.io/inspectdf/">inspectdf</a> packages and setting the project root directory using <a href="https://github.com/r-lib/here">here</a> package</li>
-<li>Added <strong>eda_variable_correlation</strong> to display a plot of the correlation matrix for each variable within a data frame</li>
-<li>Added <strong>eda_variable_outliers</strong> to display the variable outliers within a data frame</li>
-<li>Added <strong>eda_variable_distribution</strong> to display the distribution of numerical variables within a data frame</li>
-<li>Added <strong>eda_variable_summary</strong> to export a summary of the variables within a data frame as plots and a table</li>
-<li>Added <strong>add_image_shadow</strong> to add a shadow border to an image, with the example of parallelization using the <a href="https://github.com/HenrikBengtsson/future">future</a> and <a href="https://davisvaughan.github.io/furrr/">furrr</a> packages to batch add border shadows to images within a directory</li>
-<li>Updated <strong>add_new_spreadsheet</strong> added filter parameter to turn off adding filter to spreadsheet capability</li>
-<li>Updated <strong>country_codes</strong> look up table to include European Union membership</li>
-<li>Added <strong>reduce_image_size</strong> to reduce the size of an image, with the example of parallelization using the <a href="https://github.com/HenrikBengtsson/future">future</a> and <a href="https://davisvaughan.github.io/furrr/">furrr</a> packages to batch reduce images size within a directory</li>
+<li>Added <strong>gridsquare_geometry</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a> to convert British and Irish grid reference to its square polygon geometry feature. Example uses <a href="https://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a> function to apply function to each grid reference in the dataset.</li>
+<li>Added <strong>hectad</strong>, <strong>pentad</strong>, <strong>tetrad</strong>, <strong>monad</strong> and <strong>hectare</strong> S3 class of grid reference functions to convert higher resolution grid references using parent <strong>gridRef</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>.</li>
+<li>Added <strong>as_gridref</strong>, <strong>precision</strong>, <strong>projection</strong>, <strong>easting</strong> and <strong>northing</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>. S3 classes described in <a href="https://adv-r.hadley.nz/s3.html">S3</a> chapter of Advanced R.</li>
+<li>Added <strong>extract_paragraph_delimited_list</strong> to family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter.</li>
+<li>Added <strong>vc_grid_square_intersects</strong> A data frame listing the vice counties intersects with 10km, 2km and 1km grid squares.</li>
+<li>Added <strong>uk_ireland_tenkm_grid_squares</strong> A data frame listing UK and Ireland 10km grid squares along with their country and whether in the UK, on land or sea.</li>
+<li>Added <strong>nbn_demonstration_dataset</strong> An example data frame containing bird example records used to demonstrate the NBN Gateway.</li>
+<li>Updated <strong>get_database_connections</strong> examples to include using <a href="https://db.rstudio.com/dplyr/">dplyr with databases</a>.</li>
+<li>Added <strong>GDAL commands</strong> document for importing and exporting spatial layers into SQL Server, PostGres and Spatialite.</li>
+<li>Updated <strong>add_tibble_to_list</strong> to add list to the parent environment calling the function rather than the global environment, as described in the <a href="https://rlang.r-lib.org/index.html">rlang</a> package.</li>
+<li>Added <strong>tidy_spatial_data</strong> to help in cleaning spatial data frames using the <a href="https://r-spatial.github.io/sf/">sf</a> package.</li>
+<li>Added <strong>Run validation checks</strong> document to information, providing examples of the use of the <a href="https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html">assertr</a> and <a href="https://github.com/hadley/assertthat">assertthat</a> packages for validation.</li>
+<li>Updated <strong>extract_delimited_list</strong> parent function to apply sort, handle NAs and optionally add additional text to separate last two items. Additional <strong>extract_space_delimited_list</strong> function added.</li>
+<li>Added <strong>uk_ireland_base_map</strong> A simple features data frame of the British and Irish coastline derived from the Oil and Gas Authority’s OGA and Lloyd’s Register SNS Regional Geological Maps (Open Source) layer.</li>
 </ul>
 </div>
-    <div id="store-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#store-020" class="anchor"></a>store 0.2.0</h1>
+    <div id="store-030-2021-03-17" class="section level2">
+<h2 class="hasAnchor">
+<a href="#store-030-2021-03-17" class="anchor"></a>store 0.3.0 <font size="4">2021-03-17</font>
+</h2>
 <ul>
-<li>Added <strong>get_postgres_connection</strong> to connect to PostgreSQL database</li>
-<li>Added <strong>display_table</strong> to display data frames in a formatted html table</li>
-<li>Added <strong>county_codes</strong> look up table of ISO-3166 three letter country codes and United Nations regions</li>
-<li>Added <strong>add_new_spreadsheet</strong> to add a tibble and optional image to an Excel spreadsheet</li>
-<li>Added <strong>add_tibble_to_list</strong> to prepend multiple tibbles into a list which can then be converted into a single tibble using dplyr::bind_rows function</li>
-<li>Added <strong>get_mysql_connection</strong> and <strong>get_sqlserver_connection</strong> to connect to these databases</li>
-<li>Added functions to use the <strong>keyring</strong> package to store securely store database credentials</li>
-<li>Added <strong>extract_comma_delimited_list</strong> and <strong>extract_semicolon_delimited_list</strong> functions. These are an example of the use of a <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a>, <a href="https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/">tidy evaluation</a> and purrr’s <a href="https://purrr.tidyverse.org/reference/map.html">map function</a> with example using a <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html">nested data frame</a>
-</li>
+<li>Added <strong>eda_variable_collection</strong> to run all the exploratory data analyses on a data frame, provides examples of using the <a href="https://github.com/choonghyunryu/dlookr">dlookr</a> and <a href="https://alastairrushworth.github.io/inspectdf/">inspectdf</a> packages and setting the project root directory using <a href="https://github.com/r-lib/here">here</a> package.</li>
+<li>Added <strong>eda_variable_correlation</strong> to display a plot of the correlation matrix for each variable within a data frame.</li>
+<li>Added <strong>eda_variable_outliers</strong> to display the variable outliers within a data frame.</li>
+<li>Added <strong>eda_variable_distribution</strong> to display the distribution of numerical variables within a data frame.</li>
+<li>Added <strong>eda_variable_summary</strong> to export a summary of the variables within a data frame as plots and a table.</li>
+<li>Added <strong>add_image_shadow</strong> to add a shadow border to an image, with the example of parallelization using the <a href="https://github.com/HenrikBengtsson/future">future</a> and <a href="https://davisvaughan.github.io/furrr/">furrr</a> packages to batch add border shadows to images within a directory.</li>
+<li>Updated <strong>add_new_spreadsheet</strong> added filter parameter to turn off adding filter to spreadsheet capability.</li>
+<li>Updated <strong>country_codes</strong> look up table to include European Union membership.</li>
+<li>Added <strong>reduce_image_size</strong> to reduce the size of an image, with the example of parallelization using the <a href="https://github.com/HenrikBengtsson/future">future</a> and <a href="https://davisvaughan.github.io/furrr/">furrr</a> packages to batch reduce images size within a directory.</li>
 </ul>
 </div>
-    <div id="store-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#store-010" class="anchor"></a>store 0.1.0</h1>
+    <div id="store-020-2021-03-02" class="section level2">
+<h2 class="hasAnchor">
+<a href="#store-020-2021-03-02" class="anchor"></a>store 0.2.0 <font size="4">2021-03-02</font>
+</h2>
 <ul>
-<li>Added <strong>Create and update a package</strong> document to information, providing steps for the creation and documentation of a package using the <a href="https://usethis.r-lib.org/">usethis</a> and <a href="https://pkgdown.r-lib.org/">pkgdown</a> packages</li>
+<li>Added <strong>get_postgres_connection</strong> to connect to PostgreSQL database.</li>
+<li>Added <strong>display_table</strong> to display data frames in a formatted html table.</li>
+<li>Added <strong>county_codes</strong> look up table of ISO-3166 three letter country codes and United Nations regions.</li>
+<li>Added <strong>add_new_spreadsheet</strong> to add a tibble and optional image to an Excel spreadsheet.</li>
+<li>Added <strong>add_tibble_to_list</strong> to prepend multiple tibbles into a list which can then be converted into a single tibble using dplyr::bind_rows function.</li>
+<li>Added <strong>get_mysql_connection</strong> and <strong>get_sqlserver_connection</strong> to connect to these databases.</li>
+<li>Added functions to use the <strong>keyring</strong> package to store securely store database credentials.</li>
+<li>Added <strong>extract_comma_delimited_list</strong> and <strong>extract_semicolon_delimited_list</strong> functions. These are an example of the use of a <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a>, <a href="https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/">tidy evaluation</a> and purrr’s <a href="https://purrr.tidyverse.org/reference/map.html">map function</a> with example using a <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html">nested data frame</a>.</li>
+</ul>
+</div>
+    <div id="store-010-2021-02-20" class="section level2">
+<h2 class="hasAnchor">
+<a href="#store-010-2021-02-20" class="anchor"></a>store 0.1.0 <font size="4">2021-02-20</font>
+</h2>
+<ul>
+<li>Added <strong>Create and update a package</strong> document to information, providing steps for the creation and documentation of a package using the <a href="https://usethis.r-lib.org/">usethis</a> and <a href="https://pkgdown.r-lib.org/">pkgdown</a> packages.</li>
 </ul>
 </div>
   </div>

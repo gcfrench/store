@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Display variable summary — eda_variable_summary • store</title>
+<title>Display a summary of the variables — eda_variable_summary • store</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,12 @@
 
 
 
-<meta property="og:title" content="Display variable summary — eda_variable_summary" />
+<meta property="og:title" content="Display a summary of the variables — eda_variable_summary" />
 <meta property="og:description" content="
-Exports the basic statistics of the variables within a data frame into an output
+Exports the basic statistics of the variables within a data frame into a temporary
 directory. This includes a plots of the prevalence of missing values and frequency
 of category levels and a table image containing variable's type summary count of
-the number of rows, missing values, unique values and zero values for each variable
-The output directory is created in the project root directory which may be changed
-using here::i_am function" />
+the number of rows, missing values, unique values and zero values for each variable." />
 
 
 
@@ -78,7 +76,7 @@ using here::i_am function" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -101,10 +99,19 @@ using here::i_am function" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -141,19 +148,17 @@ using here::i_am function" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Display variable summary</h1>
+    <h1>Display a summary of the variables</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/exploratory_data_analysis.R'><code>R/exploratory_data_analysis.R</code></a></small>
     <div class="hidden name"><code>eda_variable_summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
-<p>Exports the basic statistics of the variables within a data frame into an output
+<p>Exports the basic statistics of the variables within a data frame into a temporary
 directory. This includes a plots of the prevalence of missing values and frequency
 of category levels and a table image containing variable's type summary count of
-the number of rows, missing values, unique values and zero values for each variable</p>
-<p>The output directory is created in the project root directory which may be changed
-using here::i_am function</p>
+the number of rows, missing values, unique values and zero values for each variable.</p>
     </div>
 
     <pre class="usage"><span class='fu'>eda_variable_summary</span><span class='op'>(</span><span class='va'>.dataset</span><span class='op'>)</span></pre>
@@ -163,42 +168,64 @@ using here::i_am function</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.dataset</th>
-      <td><p>data frame, dataset for exploratory data analysis</p></td>
+      <td><p>A data frame requiring exploratory data analysis.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>dataset returned invisibly</p>
+    <p>The data frame is returned invisibly so that the function can be
+used in a piped workflow.</p>
+    <h2 class="hasAnchor" id="figures"><a class="anchor" href="#figures"></a>Figures</h2>
+
+    
+
+<p><img src='figures/01-summary_table.png' width=80% />
+<img src='figures/02-missing_data.png' width=80% />
+<img src='figures/03-category_data.png' width=80% /></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is an example of exploratory data analsyis using the <a href='https://github.com/choonghyunryu/dlookr'>dlookr</a>
-and <a href='https://alastairrushworth.github.io/inspectdf/'>inspectdf</a> packages</p>
+    <div class='dont-index'><p>This is an example of exploratory data analysis using the <a href='https://github.com/choonghyunryu/dlookr'>dlookr</a>
+and <a href='https://alastairrushworth.github.io/inspectdf/'>inspectdf</a> packages.</p>
 <p>Other exploratory data analysis: 
+<code><a href='eda_variable_collection.html'>eda_variable_collection</a>()</code>,
 <code><a href='eda_variable_correlation.html'>eda_variable_correlation</a>()</code>,
 <code><a href='eda_variable_distribution.html'>eda_variable_distribution</a>()</code>,
-<code><a href='eda_variable_outliers.html'>eda_variable_outliers</a>()</code>,
-<code><a href='eda.html'>eda</a>()</code></p></div>
+<code><a href='eda_variable_outliers.html'>eda_variable_outliers</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
- <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
- <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
- <span class='op'>}</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-<span class='co'># create output directory</span>
-<span class='fu'><a href='https://here.r-lib.org//reference/i_am.html'>i_am</a></span><span class='op'>(</span><span class='st'>"example.Rmd"</span><span class='op'>)</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='http://fs.r-lib.org/reference/file_access.html'>dir_exists</a></span><span class='op'>(</span><span class='st'>"output"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='st'>"output"</span><span class='op'>)</span><span class='op'>}</span>
-
-<span class='co'># example from palmerpenguins</span>
+    <pre class="examples"><div class='input'><span class='co'># example from palmerpenguins</span>
 <span class='co'># https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html</span>
-<span class='fu'>eda_variable_summary</span><span class='op'>(</span><span class='va'>penguins_raw</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+    <span class='fu'>eda_variable_summary</span><span class='op'>(</span><span class='va'>penguins_raw</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='co'># move figures from temporary directory</span>
+<span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span>,
+          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/01-summary_table.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/01-summary_table.png': no such file or directory</span></div><div class='input'>
+<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span>,
+          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/02-missing_data.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/02-missing_data.png': no such file or directory</span></div><div class='input'>
+<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span>,
+         <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/03-category_data.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/03-category_data.png': no such file or directory</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

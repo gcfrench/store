@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>extract_semicolon_delimited_list — extract_semicolon_delimited_list • store</title>
+<title>Extract a semi-colon delimited list of items — extract_semicolon_delimited_list • store</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,10 @@
 
 
 
-<meta property="og:title" content="extract_semicolon_delimited_list — extract_semicolon_delimited_list" />
-<meta property="og:description" content="It is an example of the use of a function factory,
-tidy evaluation
-and purrr's map function.
-The function may be called on a nested data frame
-to extract the semi-colon delimited list" />
+<meta property="og:title" content="Extract a semi-colon delimited list of items — extract_semicolon_delimited_list" />
+<meta property="og:description" content="This function extracts a semi-colon delimited list from a data frame's column. It
+excludes NAs, optionally removes duplicate elements, sorts the character string
+and adds text as a delimiter to the last two items." />
 
 
 
@@ -76,7 +74,7 @@ to extract the semi-colon delimited list" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -99,10 +97,19 @@ to extract the semi-colon delimited list" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -139,50 +146,61 @@ to extract the semi-colon delimited list" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>extract_semicolon_delimited_list</h1>
+    <h1>Extract a semi-colon delimited list of items</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/format.R'><code>R/format.R</code></a></small>
     <div class="hidden name"><code>extract_semicolon_delimited_list.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>It is an example of the use of a <a href='https://adv-r.hadley.nz/function-factories.html'>function factory</a>,
-<a href='https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/'>tidy evaluation</a>
-and purrr's <a href='https://purrr.tidyverse.org/reference/map.html'>map function</a>.
-The function may be called on a <a href='https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html'>nested data frame</a>
-to extract the semi-colon delimited list</p>
+    <p>This function extracts a semi-colon delimited list from a data frame's column. It
+excludes NAs, optionally removes duplicate elements, sorts the character string
+and adds text as a delimiter to the last two items.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_semicolon_delimited_list</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>column_name</span>, sort <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>extract_semicolon_delimited_list</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  <span class='va'>column_name</span>,
+  sort <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  unique_list <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  last_delimiter <span class='op'>=</span> <span class='st'>""</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.df</th>
-      <td><p>data frame, data frame containing the column to extract the delimited list</p></td>
+      <td><p>A data frame containing the column with the delimited list to extract.</p></td>
     </tr>
     <tr>
       <th>column_name</th>
-      <td><p>character, name of column to extract the delimited list</p></td>
+      <td><p>The name of the column containing the delimited list to extract.</p></td>
     </tr>
     <tr>
       <th>sort</th>
-      <td><p>logical, whether the list is sorted (TRUE) or not (default FALSE)</p></td>
+      <td><p>Should the delimited list be sorted (TRUE) or not (default FALSE).</p></td>
     </tr>
     <tr>
-      <th>last, </th>
-      <td><p>character, optional string used to separate the last two items</p></td>
+      <th>unique_list</th>
+      <td><p>Should the delimited list contain duplicated elements (default FALSE) or not (TRUE).</p></td>
+    </tr>
+    <tr>
+      <th>last_delimiter</th>
+      <td><p>An optional character string used to separate the last two items in the delimited list.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character, semi-colon delimited list</p>
+    <p>The semi-colon separated delimited list as a character string.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function extracts a semi-colon list from a data frame's column. It
-excludes NAs, optionally sorts the character string and adds text as a delimiter
-to the last two items</p>
+    <p>It is an example of the use of a <a href='https://adv-r.hadley.nz/function-factories.html'>function factory</a>,
+<a href='https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/'>tidy evaluation</a>
+and purrr's <a href='https://purrr.tidyverse.org/reference/map.html'>map function</a>.
+The function may be called on a <a href='https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html'>nested data frame</a>
+to extract the delimited list.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other delimited functions: 
@@ -196,16 +214,16 @@ to the last two items</p>
   <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://purrr.tidyverse.org'>purrr</a></span><span class='op'>)</span>
   <span class='op'>}</span><span class='op'>)</span>
 <span class='op'>}</span><span class='op'>)</span>
+
 <span class='co'># select top 5 heaviest penguins from each species on each island</span>
 <span class='va'>heaviest_penguins</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span> <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span>, <span class='va'>body_mass_g</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span>, <span class='va'>body_mass_g</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>heaviest_penguins</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 25 x 3</span><span>
 #&gt;    species island body_mass_g
@@ -222,11 +240,16 @@ to the last two items</p>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> Adelie  Dream         </span><span style='text-decoration: underline;'>4</span><span>400
 #&gt; </span><span style='color: #949494;'># ... with 15 more rows</span><span></div><div class='input'>
 <span class='co'># extract comma separated list of penguin weights for each species on each island</span>
-<span class='va'>heaviest_penguins</span> <span class='op'>&lt;-</span> <span class='va'>heaviest_penguins</span> <span class='op'>%&gt;%</span>
+<span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://purrr.tidyverse.org'>purrr</a></span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='va'>heaviest_penguins</span> <span class='op'>%&gt;%</span>
  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_nest.html'>group_nest</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>:</span><span class='va'>island</span><span class='op'>)</span><span class='op'>)</span>, .key <span class='op'>=</span> <span class='st'>"penguins"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>weight <span class='op'>=</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_chr</a></span><span class='op'>(</span><span class='va'>penguins</span>, <span class='va'>extract_semicolon_delimited_list</span>, column_name <span class='op'>=</span> <span class='st'>"body_mass_g"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>penguins</span><span class='op'>)</span>
-<span class='va'>heaviest_penguins</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 3</span><span>
 #&gt;   species   island    weight                      
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       

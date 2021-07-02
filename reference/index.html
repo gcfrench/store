@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -94,10 +94,19 @@
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -162,43 +171,43 @@
         <td>
           <p><code><a href="create_locked_keyring.html">create_locked_keyring()</a></code> </p>
         </td>
-        <td><p>create_locked_keyring</p></td>
+        <td><p>Create a new keyring</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_keyring_status.html">get_keyring_status()</a></code> </p>
         </td>
-        <td><p>get_keyring_status</p></td>
+        <td><p>Get the status of a keyring</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="list_keys.html">list_keys()</a></code> </p>
         </td>
-        <td><p>list_keys</p></td>
+        <td><p>List the keys within a keyring</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="unlock_keyring.html">unlock_keyring()</a></code> </p>
         </td>
-        <td><p>unlock_keyring</p></td>
+        <td><p>Unlock a keyring</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="add_key.html">add_key()</a></code> </p>
         </td>
-        <td><p>add_key</p></td>
+        <td><p>Add a key to a keyring</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="delete_key.html">delete_key()</a></code> </p>
         </td>
-        <td><p>delete_key</p></td>
+        <td><p>Delete a key from a keyring</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="lock_keyring.html">lock_keyring()</a></code> </p>
         </td>
-        <td><p>lock_keyring</p></td>
+        <td><p>Lock a keyring</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -217,19 +226,19 @@
         <td>
           <p><code><a href="get_sqlserver_connection.html">get_sqlserver_connection()</a></code> </p>
         </td>
-        <td><p>get_sqlserver_connection</p></td>
+        <td><p>Connect to a SQL Server database</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_postgres_connection.html">get_postgres_connection()</a></code> </p>
         </td>
-        <td><p>get_postgres_connection</p></td>
+        <td><p>Connect to a PostgreSQL database</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_mysql_connection.html">get_mysql_connection()</a></code> </p>
         </td>
-        <td><p>get_mysql_connection</p></td>
+        <td><p>Connect to a MySQL database</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -260,7 +269,7 @@
         <td>
           <p><code><a href="vc_grid_square_intersects.html">vc_grid_square_intersects</a></code> </p>
         </td>
-        <td><p>Vice counties grid square intersects</p></td>
+        <td><p>Vice counties grid square intersections</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -302,6 +311,18 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="extract_polygons.html">extract_polygons()</a></code> </p>
+        </td>
+        <td><p>Extract and dissolve polygons from geometry collection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_bounding_box.html">create_bounding_box()</a></code> </p>
+        </td>
+        <td><p>Create bounding box polygon</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="uk_ireland_base_map.html">uk_ireland_base_map</a></code> </p>
         </td>
         <td><p>UK Ireland Base Map derived from the Oil and Gas Authority's OGA and Lloyd's Register
@@ -324,67 +345,67 @@ SNS Regional Geological Maps (Open Source) layer</p></td>
         <td>
           <p><code><a href="as_gridref.html">as_gridref()</a></code> </p>
         </td>
-        <td><p>Convert to gridref object</p></td>
+        <td><p>Convert a string to a gridref object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="precision.gridref.html">precision(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="precision.html">precision()</a></code> </p>
         </td>
-        <td><p>Get precision for grid reference</p></td>
+        <td><p>Get the precision of a grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="projection.gridref.html">projection(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="projection.html">projection()</a></code> </p>
         </td>
-        <td><p>Get projection for grid reference</p></td>
+        <td><p>Get the projection of a grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="easting.gridref.html">easting(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="easting.html">easting()</a></code> </p>
         </td>
-        <td><p>Get easting for grid reference</p></td>
+        <td><p>Get the easting of a grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="northing.gridref.html">northing(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="northing.html">northing()</a></code> </p>
         </td>
-        <td><p>Get northing for grid reference</p></td>
+        <td><p>Get the northing of a grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="hectad.gridref.html">hectad(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="hectad.html">hectad()</a></code> </p>
         </td>
-        <td><p>Get 10km grid reference</p></td>
+        <td><p>Get the 10km grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pentad.gridref.html">pentad(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="pentad.html">pentad()</a></code> </p>
         </td>
-        <td><p>Get 5km grid reference</p></td>
+        <td><p>Get the 5km grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="tetrad.gridref.html">tetrad(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="tetrad.html">tetrad()</a></code> </p>
         </td>
-        <td><p>Get 2km grid reference</p></td>
+        <td><p>Get the 2km grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="monad.gridref.html">monad(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="monad.html">monad()</a></code> </p>
         </td>
-        <td><p>Get 1km grid reference</p></td>
+        <td><p>Get the 1km grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="hectare.gridref.html">hectare(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="hectare.html">hectare()</a></code> </p>
         </td>
-        <td><p>Get 100m grid reference</p></td>
+        <td><p>Get the 100m grid reference</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gridsquare_geometry.gridref.html">gridsquare_geometry(<i>&lt;gridref&gt;</i>)</a></code> </p>
+          <p><code><a href="gridsquare_geometry.html">gridsquare_geometry()</a></code> </p>
         </td>
-        <td><p>Convert OSGB or OSNI Grid reference to polygon geometry feature</p></td>
+        <td><p>Convert a OSGB or OSNI grid reference to a polygon geometry feature</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -401,33 +422,33 @@ SNS Regional Geological Maps (Open Source) layer</p></td>
       <tr>
         
         <td>
-          <p><code><a href="eda.html">eda()</a></code> </p>
+          <p><code><a href="eda_variable_collection.html">eda_variable_collection()</a></code> </p>
         </td>
-        <td><p>Run exploratory data analyses</p></td>
+        <td><p>Run the exploratory data analyses</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="eda_variable_summary.html">eda_variable_summary()</a></code> </p>
         </td>
-        <td><p>Display variable summary</p></td>
+        <td><p>Display a summary of the variables</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="eda_variable_distribution.html">eda_variable_distribution()</a></code> </p>
         </td>
-        <td><p>Display variable distribution</p></td>
+        <td><p>Display the distribution of the variables</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="eda_variable_outliers.html">eda_variable_outliers()</a></code> </p>
         </td>
-        <td><p>Display variable outliers</p></td>
+        <td><p>Display the variable outliers</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="eda_variable_correlation.html">eda_variable_correlation()</a></code> </p>
         </td>
-        <td><p>Display variable correlation</p></td>
+        <td><p>Display the correlation between the variables</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -446,31 +467,56 @@ SNS Regional Geological Maps (Open Source) layer</p></td>
         <td>
           <p><code><a href="extract_comma_delimited_list.html">extract_comma_delimited_list()</a></code> </p>
         </td>
-        <td><p>extract_comma_delimited_list</p></td>
+        <td><p>Extract a comma delimited list of items</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="extract_semicolon_delimited_list.html">extract_semicolon_delimited_list()</a></code> </p>
         </td>
-        <td><p>extract_semicolon_delimited_list</p></td>
+        <td><p>Extract a semi-colon delimited list of items</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="extract_space_delimited_list.html">extract_space_delimited_list()</a></code> </p>
         </td>
-        <td><p>extract_space_delimited_list</p></td>
+        <td><p>Extract a space delimited list of items</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="extract_paragraph_delimited_list.html">extract_paragraph_delimited_list()</a></code> </p>
         </td>
-        <td><p>extract_paragraph_delimited_list</p></td>
+        <td><p>Extract a paragraph delimited list of items</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="add_tibble_to_list.html">add_tibble_to_list()</a></code> </p>
         </td>
-        <td><p>add tibble to list</p></td>
+        <td><p>Add a tibble to a list</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-iteration" class="hasAnchor"><a href="#section-iteration" class="anchor"></a>Iteration</h2>
+          <p class="section-desc"><p>Functions used to help with iterating through a dataset</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="tally_counter.html">tally_counter()</a></code> </p>
+        </td>
+        <td><p>Count the number of remaining interactions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="click.html">click()</a></code> </p>
+        </td>
+        <td><p>Increment the tally counter</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -489,19 +535,38 @@ SNS Regional Geological Maps (Open Source) layer</p></td>
         <td>
           <p><code><a href="display_table.html">display_table()</a></code> </p>
         </td>
-        <td><p>display_table</p></td>
+        <td><p>Display a dataset as a table</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="reduce_image_size.html">reduce_image_size()</a></code> </p>
         </td>
-        <td><p>reduce_image_size</p></td>
+        <td><p>Reduce the size of an image</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="add_image_shadow.html">add_image_shadow()</a></code> </p>
         </td>
-        <td><p>add_image_shadow</p></td>
+        <td><p>Add a shadow to an image</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-quality-assurance" class="hasAnchor"><a href="#section-quality-assurance" class="anchor"></a>Quality assurance</h2>
+          <p class="section-desc"><p>Functions and tables used in quality assurance</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="compare_dataset_versions.html">compare_dataset_versions()</a></code> </p>
+        </td>
+        <td><p>Compare two versions of a dataset</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -520,7 +585,7 @@ SNS Regional Geological Maps (Open Source) layer</p></td>
         <td>
           <p><code><a href="add_new_spreadsheet.html">add_new_spreadsheet()</a></code> </p>
         </td>
-        <td><p>add_new_spreadsheet</p></td>
+        <td><p>Add a new spreadsheet containing data and an image to an Excel workbook</p></td>
       </tr>
     </tbody>
     </table>

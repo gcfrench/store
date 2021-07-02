@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>display_table — display_table • store</title>
+<title>Display a dataset as a table — display_table • store</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="display_table — display_table" />
+<meta property="og:title" content="Display a dataset as a table — display_table" />
 <meta property="og:description" content="
 This function displays a data frame as a html table using the reactable
 package. The top ten rows in the table are displayed with the options to click
@@ -76,7 +76,7 @@ sort columns is also available." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -99,10 +99,19 @@ sort columns is also available." />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -139,7 +148,7 @@ sort columns is also available." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>display_table</h1>
+    <h1>Display a dataset as a table</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/display.R'><code>R/display.R</code></a></small>
     <div class="hidden name"><code>display_table.Rd</code></div>
     </div>
@@ -159,35 +168,55 @@ sort columns is also available.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>data frame, data to display</p></td>
+      <td><p>A data frame containing the data to display.</p></td>
     </tr>
     <tr>
       <th>rows</th>
-      <td><p>integer, number of rows to display with total rows as default</p></td>
+      <td><p>Number of rows to display as an integer with total row number as the default.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>html table to display</p>
+    <p>A html table displaying the first page of the data limited to the specified number
+of rows.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
- <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
- <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
-   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
-   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
- <span class='op'>}</span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
 <span class='op'>}</span><span class='op'>)</span>
-<span class='co'># display top 5 heaviest penguins from each species on each island</span>
+
+<span class='co'># select top 5 heaviest penguins from each species on each island</span>
 <span class='va'>heaviest_penguins</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span>, <span class='va'>body_mass_g</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='va'>island</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>heaviest_penguins</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 25 x 3</span><span>
+#&gt;    species island body_mass_g
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Adelie  Biscoe        </span><span style='text-decoration: underline;'>4</span><span>775
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Adelie  Biscoe        </span><span style='text-decoration: underline;'>4</span><span>725
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Adelie  Biscoe        </span><span style='text-decoration: underline;'>4</span><span>600
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Adelie  Biscoe        </span><span style='text-decoration: underline;'>4</span><span>400
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Adelie  Biscoe        </span><span style='text-decoration: underline;'>4</span><span>300
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Adelie  Dream         </span><span style='text-decoration: underline;'>4</span><span>650
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Adelie  Dream         </span><span style='text-decoration: underline;'>4</span><span>600
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Adelie  Dream         </span><span style='text-decoration: underline;'>4</span><span>475
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Adelie  Dream         </span><span style='text-decoration: underline;'>4</span><span>450
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Adelie  Dream         </span><span style='text-decoration: underline;'>4</span><span>400
+#&gt; </span><span style='color: #949494;'># ... with 15 more rows</span><span></div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># display table of penguin weights for each species on each island</span>
 <span class='fu'>display_table</span><span class='op'>(</span><span class='va'>heaviest_penguins</span><span class='op'>)</span>
-</div></pre>
+<span class='op'>}</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

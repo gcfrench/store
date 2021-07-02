@@ -45,7 +45,7 @@ nature reserves, Monks Wood, Woodwalton Fen and Holme Fen, occuring in or adjace
 to TL28 10km grid square, recorded in 2008 for the purpose of demonstrating the
 functionality of the NBN Gateway. This website collated and made freely available
 biological species records across the UK. It was superseded in March 2017 by
-the NBN Atlas" />
+the NBN Atlas." />
 
 
 
@@ -77,7 +77,7 @@ the NBN Atlas" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -100,10 +100,19 @@ the NBN Atlas" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -151,7 +160,7 @@ nature reserves, Monks Wood, Woodwalton Fen and Holme Fen, occuring in or adjace
 to TL28 10km grid square, recorded in 2008 for the purpose of demonstrating the
 functionality of the NBN Gateway. This website collated and made freely available
 biological species records across the UK. It was superseded in March 2017 by
-the <a href='https://nbnatlas.org/'>NBN Atlas</a></p>
+the <a href='https://nbnatlas.org/'>NBN Atlas</a>.</p>
     </div>
 
     <pre class="usage"><span class='va'>nbn_demonstration_dataset</span></pre>
@@ -159,28 +168,57 @@ the <a href='https://nbnatlas.org/'>NBN Atlas</a></p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 100 rows and 17 variables</p><dl>
-<dt>RecordKey</dt><dd><p>primary key associated with the occurrence record</p></dd>
-<dt>SurveyKey</dt><dd><p>identifier key for the survey</p></dd>
-<dt>StartDate</dt><dd><p>start date of vague date range</p></dd>
-<dt>EndDate</dt><dd><p>end date of vague date range</p></dd>
-<dt>DateType</dt><dd><p>date type of vague date range</p></dd>
-<dt>Sensitive</dt><dd><p>whether the record is sensitive or not</p></dd>
-<dt>TaxonVersionKey</dt><dd><p>identifier key for taxon version in UK Species Inventory</p></dd>
-<dt>GridReference</dt><dd><p>grid reference of occurrence record</p></dd>
-<dt>Precision</dt><dd><p>spatial precision of the georeference in metres</p></dd>
-<dt>Projection</dt><dd><p>projection system for the grid reference</p></dd>
-<dt>SiteKey</dt><dd><p>identifier key for the site</p></dd>
-<dt>SiteName</dt><dd><p>name of the site or location where the species was recorded</p></dd>
-<dt>Recorder</dt><dd><p>name or list of names for one or more recorders for the species record</p></dd>
-<dt>Determiner</dt><dd><p>name or list of names for one or more determiners for the species record</p></dd>
-<dt>Abundance</dt><dd><p>attribute field containing number of individuals recorded</p></dd>
-<dt>TaxonName</dt><dd><p>attribute field containing scientific name of species recorded</p></dd>
-<dt>CommonName</dt><dd><p>attribute field containing common name of species recorded</p></dd>
+    <p>A tibble with 100 rows and 17 variables.</p><dl>
+<dt>RecordKey</dt><dd><p>Primary key associated with the occurrence record.</p></dd>
+<dt>SurveyKey</dt><dd><p>Identifier key for the survey.</p></dd>
+<dt>StartDate</dt><dd><p>Start date of vague date range.</p></dd>
+<dt>EndDate</dt><dd><p>End date of vague date range.</p></dd>
+<dt>DateType</dt><dd><p>Date type of vague date range.</p></dd>
+<dt>Sensitive</dt><dd><p>Whether the record is sensitive or not.</p></dd>
+<dt>TaxonVersionKey</dt><dd><p>Identifier key for taxon version in UK Species Inventory.</p></dd>
+<dt>GridReference</dt><dd><p>Grid reference of occurrence record.</p></dd>
+<dt>Precision</dt><dd><p>Spatial precision of the georeference in metres.</p></dd>
+<dt>Projection</dt><dd><p>Projection system for the grid reference.</p></dd>
+<dt>SiteKey</dt><dd><p>Identifier key for the site.</p></dd>
+<dt>SiteName</dt><dd><p>Name of the site or location where the species was recorded.</p></dd>
+<dt>Recorder</dt><dd><p>Name or list of names for one or more recorders for the species record.</p></dd>
+<dt>Determiner</dt><dd><p>Name or list of names for one or more determiners for the species record.</p></dd>
+<dt>Abundance</dt><dd><p>Attribute field containing number of individuals recorded.</p></dd>
+<dt>TaxonName</dt><dd><p>Attribute field containing scientific name of species recorded.</p></dd>
+<dt>CommonName</dt><dd><p>Attribute field containing common name of species recorded.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="figures"><a class="anchor" href="#figures"></a>Figures</h2>
 
+    
+
+<p>Sample of 10 rows from nbn_demonstration_dataset dataset.</p>
+<p><img src='figures/nbn_demonstration_dataset.png' width=100% /></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+ <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
+ <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='co'># create figures directory</span>
+<span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># create html table</span>
+<span class='va'>nbn_demonstration_dataset</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_sample</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt_preview.html'>gt_preview</a></span><span class='op'>(</span>top_n <span class='op'>=</span> <span class='fl'>10</span>, incl_rownums <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gtsave.html'>gtsave</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"nbn_demonstration_dataset.html"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># convert to image</span>
+<span class='co'>## pagedown::chrome_print cropped the table columns</span>
+<span class='co'>## manually produced the image from screenshot of html page</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generic function for gridCoords — gridCoords • store</title>
+<title>Get the x, y coordinates from a grid reference — gridCoords • store</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,11 @@
 
 
 
-<meta property="og:title" content="Generic function for gridCoords — gridCoords" />
-<meta property="og:description" content="Generic function for gridCoords as described in The S3 Object system
-chapter of Advanced R by Hadley Wickham" />
+<meta property="og:title" content="Get the x, y coordinates from a grid reference — gridCoords" />
+<meta property="og:description" content="Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
+or OSNI grid for the bottom, left-hand corner of the grid square. The units
+parameter controls the units (metres m or kilometres km) in which the coordinates
+should be returned." />
 
 
 
@@ -73,7 +75,7 @@ chapter of Advanced R by Hadley Wickham" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -96,10 +98,19 @@ chapter of Advanced R by Hadley Wickham" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -136,14 +147,16 @@ chapter of Advanced R by Hadley Wickham" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generic function for gridCoords</h1>
+    <h1>Get the x, y coordinates from a grid reference</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/gridref.R'><code>R/gridref.R</code></a></small>
     <div class="hidden name"><code>gridCoords.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generic function for gridCoords as described in <a href='http://adv-r.had.co.nz/S3.html'>The S3 Object system</a>
-chapter of Advanced R by Hadley Wickham</p>
+    <p>Given an OSGB or OSNI grid reference string, get the x, y coordinates of the OSGB
+or OSNI grid for the bottom, left-hand corner of the grid square. The units
+parameter controls the units (metres m or kilometres km) in which the coordinates
+should be returned.</p>
     </div>
 
     <pre class="usage"><span class='fu'>gridCoords</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -152,16 +165,32 @@ chapter of Advanced R by Hadley Wickham</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>object, contains class for method dispatch by function gridCoords</p></td>
+      <th>grid_reference</th>
+      <td><p>A Great British or Irish grid reference character string with class gridref.</p></td>
+    </tr>
+    <tr>
+      <th>units</th>
+      <td><p>Should the returned coordinates be in metres (m) or kilometres (km).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>A list of class gridref with the following contents:</p><ul>
+<li><p>grid_reference: the original grid reference.</p></li>
+<li><p>system:	the grid reference projection system, either "OSGB" or "OSNI".</p></li>
+<li><p>x: the easting coordinate in requested units.</p></li>
+<li><p>y: the northing coordinate in requested units.</p></li>
+<li><p>units: the requested units either metres (m) or kilometres (km).</p></li>
+<li><p>precision: the precision of the original grid reference in metres</p></li>
+</ul>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Function taken from <a href='https://github.com/ropensci-archive/rnbn/issues/37'>archived rnbn package</a>.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Stuart Ball.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

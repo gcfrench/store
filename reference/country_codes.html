@@ -43,10 +43,7 @@
 <meta property="og:description" content="International Organisation for Standardisation three letter codes for the
 representation of country names taken from the ISOcodes package
 , associated with UN regions taken from United Nations website,
-and whether the country is the member of the European Union
-The missing old European country Yugoslavia was added, along with the UN regions
-for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
-countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China." />
+and whether the country is the member of the European Union." />
 
 
 
@@ -78,7 +75,7 @@ countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -101,10 +98,19 @@ countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China." />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -150,10 +156,7 @@ countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China." />
     <p>International Organisation for Standardisation three letter codes for the
 representation of country names taken from the <a href='https://cran.r-project.org/web/packages/ISOcodes/index.html'>ISOcodes package</a>
 , associated with UN regions taken from <a href='https://unstats.un.org/unsd/methodology/m49/'>United Nations website</a>,
-and whether the country is the member of the <a href='https://europa.eu/european-union/about-eu/countries_en'>European Union</a></p>
-<p>The missing old European country Yugoslavia was added, along with the UN regions
-for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
-countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.</p>
+and whether the country is the member of the <a href='https://europa.eu/european-union/about-eu/countries_en'>European Union</a>.</p>
     </div>
 
     <pre class="usage"><span class='va'>country_codes</span></pre>
@@ -161,15 +164,73 @@ countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.</p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 250 rows and 4 variables</p><dl>
-<dt>alpha_3</dt><dd><p>ISO_3166_1 country code</p></dd>
-<dt>country_name</dt><dd><p>Name of country</p></dd>
-<dt>un_region_name</dt><dd><p>Name of United Nations region</p></dd>
-<dt>eu_member</dt><dd><p>Whether the country is a member of the European Union or not</p></dd>
+    <p>A tibble with 250 rows and 4 variables.</p><dl>
+<dt>alpha_3</dt><dd><p>ISO_3166_1 country code.</p></dd>
+<dt>country_name</dt><dd><p>Name of country.</p></dd>
+<dt>un_region_name</dt><dd><p>Name of United Nations region.</p></dd>
+<dt>eu_member</dt><dd><p>Whether the country is a member of the European Union or not.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>The missing old European country Yugoslavia was added, along with the UN regions
+for one Americas country BES Bonaire, Sint Eustatius and Saba, and three Asian
+countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.</p>
+    <h2 class="hasAnchor" id="figures"><a class="anchor" href="#figures"></a>Figures</h2>
+
+    
+
+<p><img src='figures/country_codes_table.png' width=80% /></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+ <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/pagedown'>pagedown</a></span><span class='op'>)</span>
+ <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='co'># create figures directory</span>
+<span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># create html table</span>
+<span class='va'>country_codes</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>un_region_name</span> <span class='op'>==</span> <span class='st'>"Europe"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span>groupname_col <span class='op'>=</span> <span class='st'>"un_region_name"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_header.html'>tab_header</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='https://gt.rstudio.com/reference/md.html'>md</a></span><span class='op'>(</span><span class='st'>"**ISO-3166 three letter country codes**"</span><span class='op'>)</span>,
+             subtitle <span class='op'>=</span> <span class='fu'><a href='https://gt.rstudio.com/reference/md.html'>md</a></span><span class='op'>(</span><span class='st'>"*European countries including European Union membership*"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/cols_hide.html'>cols_hide</a></span><span class='op'>(</span><span class='va'>eu_member</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_style.html'>tab_style</a></span><span class='op'>(</span>
+    style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+      <span class='fu'><a href='https://gt.rstudio.com/reference/cell_fill.html'>cell_fill</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#000099"</span><span class='op'>)</span>, <span class='co'># Pantone Reflex Blue</span>
+      <span class='fu'><a href='https://gt.rstudio.com/reference/cell_text.html'>cell_text</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#FFCC00"</span><span class='op'>)</span><span class='op'>)</span>, <span class='co'># Pantone Yellow</span>
+    locations <span class='op'>=</span> <span class='fu'><a href='https://gt.rstudio.com/reference/cells_body.html'>cells_body</a></span><span class='op'>(</span>rows <span class='op'>=</span> <span class='va'>eu_member</span> <span class='op'>==</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+ <span class='fu'><a href='https://gt.rstudio.com/reference/tab_options.html'>tab_options</a></span><span class='op'>(</span>
+    heading.align <span class='op'>=</span> <span class='st'>"left"</span>,
+    heading.background.color <span class='op'>=</span> <span class='st'>"#2C3E50"</span>,
+    column_labels.hidden <span class='op'>=</span> <span class='cn'>TRUE</span>,
+    row_group.font.weight <span class='op'>=</span> <span class='st'>"bold"</span>,
+    row_group.background.color <span class='op'>=</span> <span class='st'>"#2C3E50"</span>,
+    table.width <span class='op'>=</span> <span class='fu'><a href='https://gt.rstudio.com/reference/pct.html'>pct</a></span><span class='op'>(</span><span class='fl'>50</span><span class='op'>)</span>,
+    table.font.size <span class='op'>=</span> <span class='st'>"smaller"</span>,
+    data_row.padding <span class='op'>=</span> <span class='fu'><a href='https://gt.rstudio.com/reference/px.html'>px</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/opt_table_lines.html'>opt_table_lines</a></span><span class='op'>(</span><span class='st'>"none"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gtsave.html'>gtsave</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"country_codes_table.html"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># convert to image</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pagedown/man/chrome_print.html'>chrome_print</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"country_codes_table.html"</span><span class='op'>)</span>,
+           format <span class='op'>=</span> <span class='st'>"png"</span><span class='op'>)</span>
+
+<span class='co'># move image</span>
+<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"country_codes_table.png"</span><span class='op'>)</span>,
+          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"country_codes_table.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/country_codes_table.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/country_codes_table.png': no such file or directory</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

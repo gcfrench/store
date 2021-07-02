@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -54,10 +54,19 @@
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -91,7 +100,7 @@
 
       
 
-      </header><script src="validation_checks_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="validation_checks_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Validation checks</h1>
@@ -118,10 +127,10 @@
 <h2 class="hasAnchor">
 <a href="#validation-checks" class="anchor"></a>Validation checks</h2>
 <p>Data validation is performed using the <a href="https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html">assertr</a> package, with extra checks provided by the <a href="https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html">assertive</a> package. The <a href="https://github.com/hadley/assertthat">assertthat</a> package can also be used as an alternative to stopifnot(). All examples perform checks on the <a href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html">palmerpenguins dataset</a> and return TRUE if validation check passes and stops with an error if the validation check fails</p>
-<p>The file path to the palmerpenguins image exists</p>
+<p>The file path to the validation checks markdown document exists</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/assertthat/man/assert_that.html">assert_that</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="st">"palmerpenguins_image.png"</span><span class="op">)</span>, 
-            msg <span class="op">=</span> <span class="st">"Path palmerpenguins image is UNSUCCESSFUL"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/assertthat/man/assert_that.html">assert_that</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="st">"validation_checks.Rmd"</span><span class="op">)</span>, 
+            msg <span class="op">=</span> <span class="st">"Path to validation check markdown document is UNSUCCESSFUL"</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>The penguin dataset is not empty</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -131,7 +140,7 @@
 <p>The penguins dataset contains 344 rows</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">344</span>,
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">344</span>,
          success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>The penguins dataset contains eight named columns</p>
@@ -146,7 +155,7 @@
     <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"body_mass_g"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"sex"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="va">chain_end</span>
 <span class="co">#&gt; # A tibble: 344 x 8</span>
 <span class="co">#&gt;    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span>
@@ -182,14 +191,21 @@
   <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/assert.html">assert</a></span><span class="op">(</span><span class="va">not_na</span>, <span class="va">species</span>, <span class="va">island</span>,  
          success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>All penguins are either male or female</p>
+<p>All penguins are either male or female (set parameters allow.na = TRUE to exclude NAs and inverse = TRUE to check if all penguins do not contain either male or female)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/assert.html">assert</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/in_set.html">in_set</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span>, <span class="va">sex</span>,
          success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>All penguins weigh between 2700 and 6300 grams, inclusively</p>
+<p>All penguins weight are positive values</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/assert.html">assert</a></span><span class="op">(</span><span class="fu">assertive</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/assertive/man/is_in_range.html">assert_all_are_positive</a></span>, <span class="va">body_mass_g</span>,
+         success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<p>All penguins weigh between 2700 and 6300 grams, inclusively</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/assert.html">assert</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/within_bounds.html">within_bounds</a></span><span class="op">(</span><span class="fl">2700</span>, <span class="fl">6300</span><span class="op">)</span>, <span class="va">body_mass_g</span>,
          success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
@@ -199,7 +215,7 @@
 <h2 class="hasAnchor">
 <a href="#data-exploration" class="anchor"></a>Data exploration</h2>
 <p>Find the rows in the penguins dataset that are missing all the four bill, flipper and body mass measurements. Row numbers are displayed in the index column</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/assert_rows.html">assert_rows</a></span><span class="op">(</span><span class="va">num_row_NAs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">{</span><span class="va">.x</span> <span class="op">!=</span> <span class="fl">4</span><span class="op">}</span>, <span class="va">bill_length_mm</span><span class="op">:</span><span class="va">body_mass_g</span>,
                success_fun <span class="op">=</span> <span class="va">success_continue</span>, error_fun <span class="op">=</span> <span class="va">just_warn</span><span class="op">)</span>

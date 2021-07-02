@@ -43,7 +43,7 @@
 <meta property="og:description" content="This datasets lists the 10km grid squares occurring in the UK and Ireland, as
 well as the Channel Islands and Isle of Man. For each 10km grid square which
 country(s) it occurs in, whether it is in the UK and is on land or in sea is
-given, as well as the latitude and longitude for the mid centroid point" />
+given, as well as the latitude and longitude for the mid centroid point." />
 
 
 
@@ -75,7 +75,7 @@ given, as well as the latitude and longitude for the mid centroid point" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -98,10 +98,19 @@ given, as well as the latitude and longitude for the mid centroid point" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -147,7 +156,7 @@ given, as well as the latitude and longitude for the mid centroid point" />
     <p>This datasets lists the 10km grid squares occurring in the UK and Ireland, as
 well as the Channel Islands and Isle of Man. For each 10km grid square which
 country(s) it occurs in, whether it is in the UK and is on land or in sea is
-given, as well as the latitude and longitude for the mid centroid point</p>
+given, as well as the latitude and longitude for the mid centroid point.</p>
     </div>
 
     <pre class="usage"><span class='va'>uk_ireland_tenkm_grid_squares</span></pre>
@@ -155,17 +164,53 @@ given, as well as the latitude and longitude for the mid centroid point</p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 250 rows and 4 variables</p><dl>
-<dt>ten_km</dt><dd><p>ten km grid square</p></dd>
-<dt>country</dt><dd><p>list of countries containing the 10km grid square</p></dd>
-<dt>uk</dt><dd><p>whether the 10km grid square is in the UK or not</p></dd>
-<dt>mid_longitude</dt><dd><p>longitude of 10km grid square centroid, to three decimal points</p></dd>
-<dt>mid_latitude</dt><dd><p>latitude of 10km grid square centroid, to three decimal points</p></dd>
-<dt>geographical</dt><dd><p>whether the 10km grid square is on land or in the sea</p></dd>
+    <p>A tibble with 11219 rows and 6 variables.</p><dl>
+<dt>ten_km</dt><dd><p>Ten km grid square.</p></dd>
+<dt>country</dt><dd><p>List of countries containing the 10km grid square.</p></dd>
+<dt>uk</dt><dd><p>Whether the 10km grid square is in the UK or not.</p></dd>
+<dt>mid_longitude</dt><dd><p>Longitude of 10km grid square centroid, to three decimal points.</p></dd>
+<dt>mid_latitude</dt><dd><p>Latitude of 10km grid square centroid, to three decimal points.</p></dd>
+<dt>geographical</dt><dd><p>Whether the 10km grid square is on land or in the sea.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="figures"><a class="anchor" href="#figures"></a>Figures</h2>
 
+    
+
+<p>Sample of 10 rows from uk_ireland_tenkm_grid_squares dataset.</p>
+<p><img src='figures/uk_ireland_tenkm_grid_squares.png' width=80% /></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+ <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://fs.r-lib.org'>fs</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/pagedown'>pagedown</a></span><span class='op'>)</span>
+ <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='co'># create figures directory</span>
+<span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># create html table</span>
+<span class='va'>uk_ireland_tenkm_grid_squares</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>country</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_sample</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt_preview.html'>gt_preview</a></span><span class='op'>(</span>top_n <span class='op'>=</span> <span class='fl'>10</span>, incl_rownums <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gtsave.html'>gtsave</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"uk_ireland_tenkm_grid_squares.html"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># convert to image</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pagedown/man/chrome_print.html'>chrome_print</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"uk_ireland_tenkm_grid_squares.html"</span><span class='op'>)</span>,
+             format <span class='op'>=</span> <span class='st'>"png"</span><span class='op'>)</span>
+
+<span class='co'># move image</span>
+<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"uk_ireland_tenkm_grid_squares.png"</span><span class='op'>)</span>,
+         <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"uk_ireland_tenkm_grid_squares.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/uk_ireland_tenkm_grid_squares.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/uk_ireland_tenkm_grid_squares.png': no such file or directory</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

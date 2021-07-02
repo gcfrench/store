@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>add_key — add_key • store</title>
+<title>Add a key to a keyring — add_key • store</title>
 
 
 <!-- jquery -->
@@ -39,13 +39,9 @@
 
 
 
-<meta property="og:title" content="add_key — add_key" />
+<meta property="og:title" content="Add a key to a keyring — add_key" />
 <meta property="og:description" content="Add a new key to the keyring to store a new database connection string.
-If the keyring is locked then unlock it first with its password.
-On creating the key, the name of the key relating to the database is added under the service name
-and the database connections string is added as a json string in the password dialog box.
-SQL Server windows authentication: &quot;server&quot;:&quot;SERVER_NAME&quot;, &quot;database&quot;:&quot;DATABASE_NAME&quot;
-For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRESS&quot;" />
+If the keyring is locked then unlock it first with its password." />
 
 
 
@@ -77,7 +73,7 @@ For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRES
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -100,10 +96,19 @@ For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRES
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -140,7 +145,7 @@ For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRES
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>add_key</h1>
+    <h1>Add a key to a keyring</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/database.R'><code>R/database.R</code></a></small>
     <div class="hidden name"><code>add_key.Rd</code></div>
     </div>
@@ -148,10 +153,6 @@ For SQLEXPRESS on the local machine the server name is &quot;localhost\SQLEXPRES
     <div class="ref-description">
     <p>Add a new key to the keyring to store a new database connection string.
 If the keyring is locked then unlock it first with its password.</p>
-<p>On creating the key, the name of the key relating to the database is added under the service name
-and the database connections string is added as a json string in the password dialog box.</p>
-<p>SQL Server windows authentication: "server":"SERVER_NAME", "database":"DATABASE_NAME"
-For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS"</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_key</span><span class='op'>(</span><span class='va'>keyring_name</span>, <span class='va'>service_name</span><span class='op'>)</span></pre>
@@ -160,19 +161,23 @@ For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS"</p
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>keyring_name, </th>
-      <td><p>character keyring name</p></td>
+      <th>keyring_name</th>
+      <td><p>A character string providing the name of the keyring.</p></td>
     </tr>
     <tr>
-      <th>service_name, </th>
-      <td><p>character key name</p></td>
+      <th>service_name</th>
+      <td><p>A character string providing the name of the key.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
+    <p>On creating the key, the name of the key relating to the database is added under the service name
+and the database connections string is added as a json string in the password dialog box.</p><ul>
+<li><p>SQL Server windows authentication: {"server":"SERVER_NAME", "database":"DATABASE_NAME"}.</p></li>
+<li><p>PostGresSQL database: {"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"}.</p></li>
+<li><p>For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS".</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -184,11 +189,6 @@ For SQLEXPRESS on the local machine the server name is "localhost\SQLEXPRESS"</p
 <code><a href='lock_keyring.html'>lock_keyring</a>()</code>,
 <code><a href='unlock_keyring.html'>unlock_keyring</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>add_key</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readline.html'>readline</a></span><span class='op'>(</span><span class='st'>"keyring name: "</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/readline.html'>readline</a></span><span class='op'>(</span><span class='st'>"service name: "</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

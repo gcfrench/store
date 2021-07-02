@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — validate_gridref • store</title>
+<title>Validate a grid reference — validate_gridref • store</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Title — validate_gridref" />
-<meta property="og:description" content="Validator function to check that grid reference is valid. Taken from
-archived rnbn package.
-Error returned if invalid" />
+<meta property="og:title" content="Validate a grid reference — validate_gridref" />
+<meta property="og:description" content="Internal validator function to check that a grid reference is valid before
+converting to a gridref class. Returns an error if the grid reference is invalid." />
 
 
 
@@ -74,7 +73,7 @@ Error returned if invalid" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -97,10 +96,19 @@ Error returned if invalid" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -137,34 +145,36 @@ Error returned if invalid" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Validate a grid reference</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/gridref.R'><code>R/gridref.R</code></a></small>
     <div class="hidden name"><code>validate_gridref.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Validator function to check that grid reference is valid. Taken from
-<a href='https://github.com/ropensci-archive/rnbn/issues/37'>archived rnbn package</a>.
-Error returned if invalid</p>
+    <p>Internal validator function to check that a grid reference is valid before
+converting to a gridref class. Returns an error if the grid reference is invalid.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>validate_gridref</span><span class='op'>(</span><span class='va'>grid</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>validate_gridref</span><span class='op'>(</span><span class='va'>grid_reference</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>grid</th>
-      <td><p>character, grid reference string to validate</p></td>
+      <th>grid_reference</th>
+      <td><p>A Great British or Irish grid reference character string.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>grid, validated grid reference string</p>
+    <p>A validated grid reference character string.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Taken from <a href='https://github.com/ropensci-archive/rnbn/issues/37'>archived rnbn package</a>.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Stuart Ball</p>
+    <p>Stuart Ball.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

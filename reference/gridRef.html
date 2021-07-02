@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generic function for gridRef — gridRef • store</title>
+<title>Manipulate OSGB or OSNI grid reference string — gridRef • store</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Generic function for gridRef — gridRef" />
-<meta property="og:description" content="Generic function for gridRef as described in The S3 Object system
-chapter of Advanced R by Hadley Wickham" />
+<meta property="og:title" content="Manipulate OSGB or OSNI grid reference string — gridRef" />
+<meta property="og:description" content="Extracts grid reference strings at various precisions from the supplied grid
+reference string when possible. For example supplying a 1km square reference TL2998,
+will return the 10km square TL29 but not a 100m square grid reference." />
 
 
 
@@ -73,7 +74,7 @@ chapter of Advanced R by Hadley Wickham" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -96,10 +97,19 @@ chapter of Advanced R by Hadley Wickham" />
       <a href="../articles/create_update_package_information.html">Create and update a package</a>
     </li>
     <li>
+      <a href="../articles/raster_package_tutorial_notes.html">Raster package tutorial notes</a>
+    </li>
+    <li>
+      <a href="../articles/postgres_database_notes.html">PostgreSQL database notes</a>
+    </li>
+    <li>
       <a href="../articles/validation_checks.html">Run validation checks</a>
     </li>
     <li>
       <a href="../articles/gdal_commands.html">GDAL commands</a>
+    </li>
+    <li>
+      <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
   </ul>
 </li>
@@ -136,32 +146,51 @@ chapter of Advanced R by Hadley Wickham" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generic function for gridRef</h1>
+    <h1>Manipulate OSGB or OSNI grid reference string</h1>
     <small class="dont-index">Source: <a href='https://github.com/gcfrench/store/blob/master/R/gridref.R'><code>R/gridref.R</code></a></small>
     <div class="hidden name"><code>gridRef.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generic function for gridRef as described in <a href='http://adv-r.had.co.nz/S3.html'>The S3 Object system</a>
-chapter of Advanced R by Hadley Wickham</p>
+    <p>Extracts grid reference strings at various precisions from the supplied grid
+reference string when possible. For example supplying a 1km square reference TL2998,
+will return the 10km square TL29 but not a 100m square grid reference.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gridRef</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>gridRef</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>object, contains class for method dispatch by function gridRef</p></td>
+      <th>grid_reference</th>
+      <td><p>A Great British or Irish grid reference character string with class gridref</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p>The required grid reference format, either sq10km, sq5km, tetrad,
+sq1km, sq100m or sq10m.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>The grid reference string formatted as requested.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>Tetrads are 2x2km squares and are often used for mapping distributions at the
+scale of a county or similar sized local area. They are labelled using the 10km
+square followed by a single, upper-case letter. Since there are 25 tetrads in a
+10km square, the letter "O" is not used to avoid confusion with zero. This is
+named the DINTY system after the letters in the second row of this table.</p>
+<p>Pentads are 5x5km squares used for mapping at a regional scale. They are labelled
+using the name of the 10km square followed by two upper-case letters.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Function taken from <a href='https://github.com/ropensci-archive/rnbn/issues/37'>archived rnbn package</a>.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Stuart Ball.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
