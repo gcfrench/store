@@ -24,10 +24,12 @@ Calling the function a second time then adds a border shadow.
 \section{Figures}{
 
 \if{html}{\figure{penguins_shadow.png}{options: width=80\%}}
+
+Artwork by @allison_horst.
 }
 
 \examples{
-# example taken from Art for teaching with palmerpenguins. Artwork by @allison_horst
+# example taken from Art for teaching with palmerpenguins.
 # https://allisonhorst.github.io/palmerpenguins/articles/art.html
 
 suppressPackageStartupMessages({

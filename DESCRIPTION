@@ -1,6 +1,6 @@
 Package: store
 Title: Store commonly used functions and lookups
-Version: 0.5.0
+Version: 1.0.0
 Authors@R: 
     person(given = "Graham",
            family = "French",
@@ -10,7 +10,7 @@ Description: This package stores the commonly used
     functions and lookups, along with function tests and documentation.
     These can be then used when creating new packages by copy and pasting
     the relevant R scripts and associated test scripts into the new
-    package, as well as updating the pkgdown file
+    package, as well as updating the pkgdown file.
 License: CC0
 URL: https://gcfrench.github.io/store
 Encoding: UTF-8

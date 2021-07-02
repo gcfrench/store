@@ -35,10 +35,10 @@ package. The [assertthat](https://github.com/hadley/assertthat) package can also
 as an alternative to stopifnot(). All examples perform checks on the [palmerpenguins dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) and return 
 TRUE if validation check passes and stops with an error if the validation check fails
 
-The file path to the palmerpenguins image exists
+The file path to the validation checks markdown document exists
 ```{r}
-assert_that(file.exists("palmerpenguins_image.png"), 
-            msg = "Path palmerpenguins image is UNSUCCESSFUL")
+assert_that(file.exists("validation_checks.Rmd"), 
+            msg = "Path to validation check markdown document is UNSUCCESSFUL")
 ```
 
 The penguin dataset is not empty
