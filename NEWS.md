@@ -1,3 +1,5 @@
+## store 1.1.0
+
 ## store 1.0.0 <font size="4">2021-07-02</font>
 
 -   Updated **add_image_shadow** which creates both an internal image and image shadow to include example image taken from [Alison Horst's penguins art](https://allisonhorst.github.io/palmerpenguins/articles/art.html).
