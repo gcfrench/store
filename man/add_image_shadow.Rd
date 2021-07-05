@@ -46,8 +46,10 @@ suppressPackageStartupMessages({
 dir_create(path(tempdir(), "figures"))
 
 # copy image to temp directory
-file_copy(here("man", "figures", "penguins.png"),
-          path(tempdir(), "figures", "penguins.png"))
+if(dir_exists(here("man", "figures"))) {
+   file_copy(here("man", "figures", "penguins.png"),
+             path(tempdir(), "figures", "penguins.png"))
+}
 
 # add shadows to graph image
 plan(multisession)
