@@ -6,7 +6,7 @@
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-## Overview
+## Overview <img src='man/figures/logo.png' align="right" height="139" />
 
 This personal package is a place to the store functions and lookups that
 I have created overtime and may find useful in the future. I started

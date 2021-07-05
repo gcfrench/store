@@ -166,6 +166,12 @@ their current status
 ### YYYY-MM-DD
 ```
 
+**usethis::use_logo** add a hex logo to home page
+```{r}
+# create hex logo using hexmake https://connect.thinkr.fr/hexmake
+usethis::use_logo("image_path")
+```
+
 **pkgdown::build_site** build documentation
 ```{r}
 pkgdown::build_site()
