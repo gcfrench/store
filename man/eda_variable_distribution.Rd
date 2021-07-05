@@ -46,12 +46,13 @@ suppressPackageStartupMessages({
     library(here)
   })
 })
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "06-distribution_table.png"),
+            here("man", "figures", "06-distribution_table.png"))
 
-file_move(path(tempdir(), "figures", "06-distribution_table.png"),
-          here("man", "figures", "06-distribution_table.png"))
-
-file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
-          here("man", "figures", "07-distribution_plot.png"))
+  file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
+            here("man", "figures", "07-distribution_plot.png"))
+}
 }
 \seealso{
 Other exploratory data analysis: 

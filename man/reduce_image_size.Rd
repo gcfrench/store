@@ -108,8 +108,10 @@ suppressPackageStartupMessages({
    })
 })
 
-file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-          here("man", "figures", "penguins_mass_flipper_plot_reduced.png"))
+if(dir_exists(here("man", "figures"))) {
+   file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+             here("man", "figures", "penguins_mass_flipper_plot_reduced.png"))
+}
 }
 \seealso{
 \href{https://www.jumpingrivers.com/}{Jumping rivers} has written a series of

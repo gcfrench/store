@@ -51,15 +51,16 @@ suppressPackageStartupMessages({
     library(here)
   })
 })
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "01-summary_table.png"),
+            here("man", "figures", "01-summary_table.png"))
 
-file_move(path(tempdir(), "figures", "01-summary_table.png"),
-          here("man", "figures", "01-summary_table.png"))
+  file_move(path(tempdir(), "figures", "02-missing_data.png"),
+            here("man", "figures", "02-missing_data.png"))
 
-file_move(path(tempdir(), "figures", "02-missing_data.png"),
-          here("man", "figures", "02-missing_data.png"))
-
-file_move(path(tempdir(), "figures", "03-category_data.png"),
-         here("man", "figures", "03-category_data.png"))
+  file_move(path(tempdir(), "figures", "03-category_data.png"),
+            here("man", "figures", "03-category_data.png"))
+}
 }
 \seealso{
 This is an example of exploratory data analysis using the \href{https://github.com/choonghyunryu/dlookr}{dlookr}

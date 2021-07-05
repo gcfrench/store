@@ -69,8 +69,10 @@
 #'            format = "png")
 #'
 #' # move image
-#' file_move(path(tempdir(), "figures", "country_codes_table.png"),
-#'           here("man", "figures", "country_codes_table.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "country_codes_table.png"),
+#'             here("man", "figures", "country_codes_table.png"))
+#' }
 "country_codes"
 
 #' @title
@@ -124,8 +126,10 @@
 #'              format = "png")
 #'
 #' # move image
-#' file_move(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.png"),
-#'          here("man", "figures", "uk_ireland_tenkm_grid_squares.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.png"),
+#'             here("man", "figures", "uk_ireland_tenkm_grid_squares.png"))
+#' }
 "uk_ireland_tenkm_grid_squares"
 
 #' @title
@@ -180,8 +184,10 @@
 #'              format = "png")
 #'
 #' # move image
-#' file_move(path(tempdir(), "figures", "vc_grid_square_intersects.png"),
-#'          here("man", "figures", "vc_grid_square_intersects.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "vc_grid_square_intersects.png"),
+#'             here("man", "figures", "vc_grid_square_intersects.png"))
+#' }
 "vc_grid_square_intersects"
 
 

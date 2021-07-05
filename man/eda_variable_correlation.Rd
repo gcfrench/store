@@ -44,8 +44,10 @@ suppressPackageStartupMessages({
   })
 })
 
-file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
-          here("man", "figures", "08-correlation_plot.png"))
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+            here("man", "figures", "08-correlation_plot.png"))
+}
 }
 \seealso{
 Other exploratory data analysis: 

@@ -63,8 +63,10 @@ path(tempdir(), "figures") \%>\% {
               .progress = TRUE)
 
 # move figures from temporary directory
-file_move(path(tempdir(), "figures", "penguins.png"),
-          here("man", "figures", "penguins_shadow.png"))
+if(dir_exists(here("man", "figures"))) {
+   file_move(path(tempdir(), "figures", "penguins.png"),
+             here("man", "figures", "penguins_shadow.png"))
+}
 }
 \seealso{
 The example batch runs the function on a graph from the

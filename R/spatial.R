@@ -243,7 +243,9 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #'                          units = "in", dpi = 72)})
 #'
 #' # move figure from temporary directory
-#' file_move(path(tempdir(), "figures", "uk_ireland_base_map.png"),
-#'           here("man", "figures", "uk_ireland_base_map.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "uk_ireland_base_map.png"),
+#'             here("man", "figures", "uk_ireland_base_map.png"))
+#' }
 "uk_ireland_base_map"
 

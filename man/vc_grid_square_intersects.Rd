@@ -55,8 +55,10 @@ chrome_print(path(tempdir(), "figures", "vc_grid_square_intersects.html"),
              format = "png")
 
 # move image
-file_move(path(tempdir(), "figures", "vc_grid_square_intersects.png"),
-         here("man", "figures", "vc_grid_square_intersects.png"))
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "vc_grid_square_intersects.png"),
+            here("man", "figures", "vc_grid_square_intersects.png"))
+}
 }
 \seealso{
 The list of British vice-counties can be downloaded from the \href{https://www.brc.ac.uk/article/british-vice-counties}{Biological Records Centre}

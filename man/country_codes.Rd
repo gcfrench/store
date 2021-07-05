@@ -78,7 +78,9 @@ chrome_print(path(tempdir(), "figures", "country_codes_table.html"),
            format = "png")
 
 # move image
-file_move(path(tempdir(), "figures", "country_codes_table.png"),
-          here("man", "figures", "country_codes_table.png"))
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "country_codes_table.png"),
+            here("man", "figures", "country_codes_table.png"))
+}
 }
 \keyword{datasets}

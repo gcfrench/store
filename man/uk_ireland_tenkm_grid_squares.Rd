@@ -58,7 +58,9 @@ chrome_print(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.html"),
              format = "png")
 
 # move image
-file_move(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.png"),
-         here("man", "figures", "uk_ireland_tenkm_grid_squares.png"))
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "uk_ireland_tenkm_grid_squares.png"),
+            here("man", "figures", "uk_ireland_tenkm_grid_squares.png"))
+}
 }
 \keyword{datasets}

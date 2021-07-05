@@ -91,7 +91,9 @@ suppressMessages({uk_ireland \%>\% tmap_save(path(tempdir(), "figures", "uk_irel
                          units = "in", dpi = 72)})
 
 # move figure from temporary directory
-file_move(path(tempdir(), "figures", "uk_ireland_base_map.png"),
-          here("man", "figures", "uk_ireland_base_map.png"))
+if(dir_exists(here("man", "figures"))) {
+  file_move(path(tempdir(), "figures", "uk_ireland_base_map.png"),
+            here("man", "figures", "uk_ireland_base_map.png"))
+}
 }
 \keyword{datasets}

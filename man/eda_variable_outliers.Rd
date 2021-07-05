@@ -50,11 +50,13 @@ suppressPackageStartupMessages({
   })
 })
 
-file_move(path(tempdir(), "figures", "04-outliers_table.png"),
-          here("man", "figures", "04-outliers_table.png"))
+if(dir_exists(here("man", "figures"))) {
+ file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+           here("man", "figures", "04-outliers_table.png"))
 
-file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
-          here("man", "figures", "05-variable_outliers.png"))
+ file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+           here("man", "figures", "05-variable_outliers.png"))
+}
 }
 \seealso{
 Other exploratory data analysis: 

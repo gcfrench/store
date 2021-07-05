@@ -50,15 +50,16 @@
 #'     library(here)
 #'   })
 #' })
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "01-summary_table.png"),
+#'             here("man", "figures", "01-summary_table.png"))
 #'
-#' file_move(path(tempdir(), "figures", "01-summary_table.png"),
-#'           here("man", "figures", "01-summary_table.png"))
+#'   file_move(path(tempdir(), "figures", "02-missing_data.png"),
+#'             here("man", "figures", "02-missing_data.png"))
 #'
-#' file_move(path(tempdir(), "figures", "02-missing_data.png"),
-#'           here("man", "figures", "02-missing_data.png"))
-#'
-#' file_move(path(tempdir(), "figures", "03-category_data.png"),
-#'          here("man", "figures", "03-category_data.png"))
+#'   file_move(path(tempdir(), "figures", "03-category_data.png"),
+#'             here("man", "figures", "03-category_data.png"))
+#' }
 eda_variable_summary <- function(.dataset) {
   # export plot as image
   export_plot <- function(plot, plot_name,
@@ -182,11 +183,13 @@ eda_variable_summary <- function(.dataset) {
 #'   })
 #' })
 #'
-#' file_move(path(tempdir(), "figures", "04-outliers_table.png"),
-#'           here("man", "figures", "04-outliers_table.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'  file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+#'            here("man", "figures", "04-outliers_table.png"))
 #'
-#' file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
-#'           here("man", "figures", "05-variable_outliers.png"))
+#'  file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+#'            here("man", "figures", "05-variable_outliers.png"))
+#' }
 eda_variable_outliers <- function(.dataset) {
 
   # export plot as image
@@ -290,12 +293,13 @@ eda_variable_outliers <- function(.dataset) {
 #'     library(here)
 #'   })
 #' })
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "06-distribution_table.png"),
+#'             here("man", "figures", "06-distribution_table.png"))
 #'
-#' file_move(path(tempdir(), "figures", "06-distribution_table.png"),
-#'           here("man", "figures", "06-distribution_table.png"))
-#'
-#' file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
-#'           here("man", "figures", "07-distribution_plot.png"))
+#'   file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
+#'             here("man", "figures", "07-distribution_plot.png"))
+#' }
 eda_variable_distribution <- function(.dataset) {
 
   # export plot as image
@@ -391,8 +395,10 @@ eda_variable_distribution <- function(.dataset) {
 #'   })
 #' })
 #'
-#' file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
-#'           here("man", "figures", "08-correlation_plot.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'   file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+#'             here("man", "figures", "08-correlation_plot.png"))
+#' }
 eda_variable_correlation <- function(.dataset) {
 
   # create temp directory
@@ -481,29 +487,31 @@ eda_variable_correlation <- function(.dataset) {
 #'   })
 #' })
 #'
-#' file_move(path(tempdir(), "figures", "01-summary_table.png"),
-#'           here("man", "figures", "01-summary_table.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'  file_move(path(tempdir(), "figures", "01-summary_table.png"),
+#'            here("man", "figures", "01-summary_table.png"))
 #'
-#' file_move(path(tempdir(), "figures", "02-missing_data.png"),
-#'           here("man", "figures", "02-missing_data.png"))
+#'  file_move(path(tempdir(), "figures", "02-missing_data.png"),
+#'            here("man", "figures", "02-missing_data.png"))
 #'
-#' file_move(path(tempdir(), "figures", "03-category_data.png"),
-#'          here("man", "figures", "03-category_data.png"))
+#'  file_move(path(tempdir(), "figures", "03-category_data.png"),
+#'           here("man", "figures", "03-category_data.png"))
 #'
-#' file_move(path(tempdir(), "figures", "04-outliers_table.png"),
-#'           here("man", "figures", "04-outliers_table.png"))
+#'  file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+#'            here("man", "figures", "04-outliers_table.png"))
 #'
-#' file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
-#'           here("man", "figures", "05-variable_outliers.png"))
+#'  file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+#'            here("man", "figures", "05-variable_outliers.png"))
 #'
-#' file_move(path(tempdir(), "figures", "06-distribution_table.png"),
-#'           here("man", "figures", "06-distribution_table.png"))
+#'  file_move(path(tempdir(), "figures", "06-distribution_table.png"),
+#'            here("man", "figures", "06-distribution_table.png"))
 #'
-#' file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
-#'           here("man", "figures", "07-distribution_plot.png"))
+#'  file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
+#'            here("man", "figures", "07-distribution_plot.png"))
 #'
-#' file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
-#'           here("man", "figures", "08-correlation_plot.png"))
+#'  file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+#'            here("man", "figures", "08-correlation_plot.png"))
+#'  }
 #' }
 eda_variable_collection <- function(.dataset,
                 summary = TRUE,

@@ -103,8 +103,10 @@ display_table <- function(data, rows = nrow(data)) {
 #'               .progress = TRUE)
 #'
 #' # move figures from temporary directory
-#' file_move(path(tempdir(), "figures", "penguins.png"),
-#'           here("man", "figures", "penguins_shadow.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'    file_move(path(tempdir(), "figures", "penguins.png"),
+#'              here("man", "figures", "penguins_shadow.png"))
+#' }
 add_image_shadow <- function(path_image) {
 
    # create archive directory if does not exist
@@ -179,8 +181,10 @@ add_image_shadow <- function(path_image) {
 #'    })
 #' })
 #'
-#' file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
-#'           here("man", "figures", "penguins_mass_flipper_plot_reduced.png"))
+#' if(dir_exists(here("man", "figures"))) {
+#'    file_move(path(tempdir(), "figures", "penguins_mass_flipper_plot.png"),
+#'              here("man", "figures", "penguins_mass_flipper_plot_reduced.png"))
+#' }
  reduce_image_size <- function(path_image, image_size = "50%") {
 
    # create archive directory if does not exist

@@ -68,29 +68,31 @@ suppressPackageStartupMessages({
   })
 })
 
-file_move(path(tempdir(), "figures", "01-summary_table.png"),
-          here("man", "figures", "01-summary_table.png"))
+if(dir_exists(here("man", "figures"))) {
+ file_move(path(tempdir(), "figures", "01-summary_table.png"),
+           here("man", "figures", "01-summary_table.png"))
 
-file_move(path(tempdir(), "figures", "02-missing_data.png"),
-          here("man", "figures", "02-missing_data.png"))
+ file_move(path(tempdir(), "figures", "02-missing_data.png"),
+           here("man", "figures", "02-missing_data.png"))
 
-file_move(path(tempdir(), "figures", "03-category_data.png"),
-         here("man", "figures", "03-category_data.png"))
+ file_move(path(tempdir(), "figures", "03-category_data.png"),
+          here("man", "figures", "03-category_data.png"))
 
-file_move(path(tempdir(), "figures", "04-outliers_table.png"),
-          here("man", "figures", "04-outliers_table.png"))
+ file_move(path(tempdir(), "figures", "04-outliers_table.png"),
+           here("man", "figures", "04-outliers_table.png"))
 
-file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
-          here("man", "figures", "05-variable_outliers.png"))
+ file_move(path(tempdir(), "figures", "05-variable_outliers.png"),
+           here("man", "figures", "05-variable_outliers.png"))
 
-file_move(path(tempdir(), "figures", "06-distribution_table.png"),
-          here("man", "figures", "06-distribution_table.png"))
+ file_move(path(tempdir(), "figures", "06-distribution_table.png"),
+           here("man", "figures", "06-distribution_table.png"))
 
-file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
-          here("man", "figures", "07-distribution_plot.png"))
+ file_move(path(tempdir(), "figures", "07-distribution_plot.png"),
+           here("man", "figures", "07-distribution_plot.png"))
 
-file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
-          here("man", "figures", "08-correlation_plot.png"))
+ file_move(path(tempdir(), "figures", "08-correlation_plot.png"),
+           here("man", "figures", "08-correlation_plot.png"))
+ }
 }
 }
 \seealso{
