@@ -8,6 +8,13 @@
 
 <title>Run the exploratory data analyses — eda_variable_collection • store</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -45,6 +52,7 @@ Export the collection of exploratory data analyses plots and tables into a tempo
 directory. This includes the summary, distribution and correlation of variables
 and presence of outliers exported by default, any of which may be excluded in the
 export." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -76,7 +84,7 @@ export." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -239,29 +247,31 @@ used in a piped workflow.</p>
   <span class='op'>}</span><span class='op'>)</span>
 <span class='op'>}</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/file_access.html'>dir_exists</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span>,
-         <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span>,
+          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"04-outliers_table.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"04-outliers_table.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"04-outliers_table.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"04-outliers_table.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"05-variable_outliers.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"05-variable_outliers.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"05-variable_outliers.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"05-variable_outliers.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"06-distribution_table.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"06-distribution_table.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"06-distribution_table.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"06-distribution_table.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"07-distribution_plot.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"07-distribution_plot.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"07-distribution_plot.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"07-distribution_plot.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"08-correlation_plot.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"08-correlation_plot.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"08-correlation_plot.png"</span><span class='op'>)</span>,
+           <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"08-correlation_plot.png"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='op'>}</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

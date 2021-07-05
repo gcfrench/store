@@ -8,6 +8,13 @@
 
 <title>Display a summary of the variables — eda_variable_summary • store</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -45,6 +52,7 @@ Exports the basic statistics of the variables within a data frame into a tempora
 directory. This includes a plots of the prevalence of missing values and frequency
 of category levels and a table image containing variable's type summary count of
 the number of rows, missing values, unique values and zero values for each variable." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -76,7 +84,7 @@ the number of rows, missing values, unique values and zero values for each varia
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">store</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -216,16 +224,17 @@ and <a href='https://alastairrushworth.github.io/inspectdf/'>inspectdf</a> packa
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
   <span class='op'>}</span><span class='op'>)</span>
 <span class='op'>}</span><span class='op'>)</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/file_access.html'>dir_exists</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"01-summary_table.png"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/01-summary_table.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/01-summary_table.png': no such file or directory</span></div><div class='input'>
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span>,
-          <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/02-missing_data.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/02-missing_data.png': no such file or directory</span></div><div class='input'>
-<span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span>,
-         <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: [ENOENT] Failed to move 'C:/Users/GRAHAM~1/AppData/Local/Temp/Rtmpk1Kwux/figures/03-category_data.png'to 'C:/Users/Graham French/AppData/Local/Temp/RtmpUF1nMv/file4adc1e77ad1/man/figures/03-category_data.png': no such file or directory</span></div></pre>
+  <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"02-missing_data.png"</span><span class='op'>)</span><span class='op'>)</span>
+
+  <span class='fu'><a href='http://fs.r-lib.org/reference/file_move.html'>file_move</a></span><span class='op'>(</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"man"</span>, <span class='st'>"figures"</span>, <span class='st'>"03-category_data.png"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
