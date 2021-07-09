@@ -1,3 +1,6 @@
+# Requires
+## penguins_mass_flipper_plot.R example
+
 #' @title
 #' Add a new spreadsheet containing data and an image to an Excel workbook
 #'

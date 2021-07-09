@@ -1,0 +1,70 @@
+---
+title: ""
+output: html_document
+params:
+  species_name: "Chinstrap"
+  island_name: "Dream"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = FALSE}
+suppressPackageStartupMessages({
+  library(store)
+  suppressWarnings({
+    library(palmerpenguins)
+    library(dplyr)
+    library(purrr)
+    library(tidyr)
+    library(stringr)
+    library(gt)
+    library(janitor)
+  })
+})
+```
+
+```{r echo = FALSE}
+species_name <- params$species_name
+island_name <- params$island_name
+penguin_data <- penguins %>% 
+  filter(species == species_name, island == island_name) %>% 
+  select(year, sex, body_mass_g, contains("mm")) %>% 
+  drop_na() %>% 
+  arrange(year)
+```
+
+## `r species_name` penguins on `r island_name` island
+
+The following table lists the body mass, bill and flipper measurements taken<br/> on
+`r nrow(penguin_data)` `r species_name` penguins living on `r island_name` island between `r min(pull(penguin_data, year))` and `r max(pull(penguin_data, year))`.<br/> Penguins with missing measurements are not included.
+
+```{r echo = FALSE}
+penguin_data %>% 
+  gt() %>%
+  tab_header(title = md(str_glue("**{species_name} penguins**")),
+             subtitle = str_glue("{island_name} island")) %>% 
+  cols_label(
+    year = html("Year<br/><br/>"),
+    sex = html("Sex<br/><br/>"),
+    body_mass_g = html("Body mass<br/>grams"),
+    bill_length_mm = html("Bill length<br/>mm"),
+    bill_depth_mm = html("Bill depth<br/>mm"),
+    flipper_length_mm = html("Flipper length<br/>mm"),
+  ) %>% 
+  cols_align(
+    align = "left",
+    columns = everything()
+  ) %>% 
+  tab_options(
+    heading.background.color = "#2C3E50",
+    column_labels.font.weight = "bold",
+    table.align = "left",
+    table.width = pct(50),
+    table.font.size = "smaller",
+    data_row.padding = px(0)
+  )
+```
+
+

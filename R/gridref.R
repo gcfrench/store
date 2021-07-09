@@ -1,3 +1,7 @@
+# Requires
+## grid_references.R example
+## test-gridref.R tests
+
 # S3 construction function -----------------------------------------------------
 
 #' @title

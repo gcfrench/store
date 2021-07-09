@@ -1,3 +1,8 @@
+# Requires
+## heaviest_penguins.R example
+## penguins_mass_flipper_plot.R example
+## penguins.png image
+
 #' @title
 #' Display a dataset as a table
 #'

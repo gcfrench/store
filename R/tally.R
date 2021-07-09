@@ -1,3 +1,6 @@
+# Requires
+## penguin_body_mass.R example
+
 # Parent class -----------------------------------------------------------------
 
 #' Parent R6 class representing a counter
