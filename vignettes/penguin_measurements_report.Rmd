@@ -2,8 +2,8 @@
 title: ""
 output: html_document
 params:
-  species_name: "Chinstrap"
-  island_name: "Dream"
+  species_name: NA_character_
+  island_name: NA_character_
 ---
 
 ```{r setup, include=FALSE}
