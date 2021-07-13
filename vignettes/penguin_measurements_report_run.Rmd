@@ -21,7 +21,7 @@ run_report <- function(...) {
 
   penguin_details <- list(...)
   
-  rmarkdown::render("penguin_measurements_report.Rmd",
+  rmarkdown::render(input = "penguin_measurements_report.Rmd",
                     output_file = str_glue("{pluck(penguin_details, 'species')}_{pluck(penguin_details, 'island')}.html"),
                     output_dir = path(tempdir(), "reports"),
                     params = list(
