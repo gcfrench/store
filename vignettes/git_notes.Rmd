@@ -23,8 +23,6 @@ These notes were made whilst going through Jenny Bryan's [Happy Git and GitHub f
 
 -   Turn on two-factor authentication under: Settings - Account security.
 
--   Create a test repository under Repostitory.
-
 ## [Git](https://happygitwithr.com/install-git.html)
 
 -   Install Git which can be done through [Git for Windows](https://gitforwindows.org).
@@ -35,14 +33,14 @@ These notes were made whilst going through Jenny Bryan's [Happy Git and GitHub f
 
 Check Git installed on local machine
 
-```{}
+```{bash}
 where git
 git --version
 ```
 
 ## [Set Git details](https://happygitwithr.com/hello-git.html)
 
-**usethis::usethis::use_git_config** set Git user name and email
+**usethis::use_git_config** set Git user name and email
 
 ```{r}
 usethis::use_git_config(user.name = "USERNAME", user.email = "EMAIL")
@@ -50,7 +48,7 @@ usethis::use_git_config(user.name = "USERNAME", user.email = "EMAIL")
 
 Check Git user name and email details
 
-```{}
+```{bash}
 git config --global --list
 ```
 
@@ -75,4 +73,43 @@ gitcreds::gitcreds_set()
 gitcreds::gitcreds_get()
 ```
 
-## [Clone repository from GitHub](https://happygitwithr.com/rstudio-git-github.html)
+## [Clone repository from GitHub](https://happygitwithr.com/new-github-first.html)
+
+-   Create a repository under Repository.
+
+-   GitHub: Code - Copy HTTPS URL to clipboard.
+
+-   RStudio: File - New Project - Version Control - Git - Paste HTTPS URL from clipboard.
+
+```{bash}
+git clone HTTPS URL
+```
+
+## [Clone RStudio project to GitHub](https://happygitwithr.com/existing-github-last.html)
+
+**usethis::use_git** Makes project a Git repository
+
+```{r}
+usethis::use_git()
+```
+
+-   Commit files to Git repository: RStudio - Git - Tick staged box - Commit.
+
+**usethis::use_github** Create a new repository on GitHub
+
+```{r}
+usethis::use_github()
+```
+
+-   Pull files from GitHub repository: RStudio Pull button.
+
+-   Push committed files to GitHub: RStudio Push button.
+
+```{bash}
+git add -A
+git commit -m "COMMIT MESSAGE"
+git pull
+git push
+```
+
+
