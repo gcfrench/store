@@ -81,6 +81,8 @@ gitcreds::gitcreds_get()
 
 -   RStudio: File - New Project - Version Control - Git - Paste HTTPS URL from clipboard.
 
+**Git commands**
+
 ```{bash}
 git clone HTTPS URL
 ```
@@ -105,11 +107,11 @@ usethis::use_github()
 
 -   Push committed files to GitHub: RStudio Push button.
 
+**Git commands**
+
 ```{bash}
 git add -A
 git commit -m "COMMIT MESSAGE"
 git pull
 git push
 ```
-
-
