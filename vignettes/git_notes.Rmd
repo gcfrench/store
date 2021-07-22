@@ -17,13 +17,15 @@ knitr::opts_chunk$set(
 
 These notes were made whilst going through Jenny Bryan's [Happy Git and GitHub for the useR](https://happygitwithr.com/) instructions.
 
-## [GitHub](https://happygitwithr.com/github-acct.html)
+## Set up Git and GitHub
+
+### [GitHub](https://happygitwithr.com/github-acct.html)
 
 -   Register a [GitHub](https://github.com/) account.
 
 -   Turn on two-factor authentication under: Settings - Account security.
 
-## [Git](https://happygitwithr.com/install-git.html)
+### [Git](https://happygitwithr.com/install-git.html)
 
 -   Install Git which can be done through [Git for Windows](https://gitforwindows.org).
 
@@ -38,7 +40,7 @@ where git
 git --version
 ```
 
-## [Set Git details](https://happygitwithr.com/hello-git.html)
+### [Set Git details](https://happygitwithr.com/hello-git.html)
 
 **usethis::use_git_config** set Git user name and email
 
@@ -52,13 +54,13 @@ Check Git user name and email details
 git config --global --list
 ```
 
-## [Connect RStudio to Git](https://happygitwithr.com/rstudio-see-git.html)
+### [Connect RStudio to Git](https://happygitwithr.com/rstudio-see-git.html)
 
 -   Tools - Global Options - Git/SVN - Git executable: set path, eg C:/Program Files/Git/bin/git.exe. Ensure **Enable version control interface for RStudio projects** is ticked.
 
 -   Check for [common issues and solutions](https://happygitwithr.com/troubleshooting.html) in Jenny Bryan's instructions.
 
-## [Cache credentials for HTTPS](https://happygitwithr.com/credential-caching.html)
+### [Cache credentials for HTTPS](https://happygitwithr.com/credential-caching.html)
 
 **usethis::create_github_token** Get Personal access taken (PAT), storing token in a password management system
 
@@ -73,13 +75,20 @@ gitcreds::gitcreds_set()
 gitcreds::gitcreds_get()
 ```
 
-## [Clone repository from GitHub](https://happygitwithr.com/new-github-first.html)
+## Clone own repositories
+
+### [Clone own remote repository from GitHub](https://happygitwithr.com/new-github-first.html)
 
 -   Create a repository under Repository.
-
 -   GitHub: Code - Copy HTTPS URL to clipboard.
 
--   RStudio: File - New Project - Version Control - Git - Paste HTTPS URL from clipboard.
+**usethis::create_from_github** Clones a remote repository from GitHub, creating a local project and Git repository.
+
+```{r}
+usethis::create_from_github(repo_spec = HTTPS URL,
+                            destdir = "DESTINATION DIRECTORY PATH"
+                            fork = FALSE)
+```
 
 **Git commands**
 
@@ -87,7 +96,7 @@ gitcreds::gitcreds_get()
 git clone HTTPS URL
 ```
 
-## [Clone RStudio project to GitHub](https://happygitwithr.com/existing-github-last.html)
+### [Clone own RStudio project to GitHub](https://happygitwithr.com/existing-github-last.html)
 
 **usethis::use_git** Makes project a Git repository
 
@@ -110,8 +119,68 @@ usethis::use_github()
 **Git commands**
 
 ```{bash}
+git init
 git add -A
 git commit -m "COMMIT MESSAGE"
 git pull
 git push
 ```
+
+### [Work on a branch](https://happygitwithr.com/git-branches.html)
+
+-   Create and switch to a new branch: RStudio New Branch button
+
+**Git commands**
+
+```{bash}
+git branch BRANCH_NAME
+git checkout BRANCH_NAME
+```
+
+-   Switch and merge branch back into master.
+
+**Git commands**
+
+```{bash}
+git checkout master
+git merge BRANCH_NAME
+```
+
+-   Resolve merge conflicts, edit file either keeping contents of branch or master or modified version of both. Stage edited file and commit to master.
+
+        <<<<<<< branch contents =======
+        ======= master contents >>>>>>>
+
+**Git commands**
+
+```{bash}
+git status
+git add FILE_NAME
+git commit -m "COMMIT MESSAGE"
+
+-- If need to abort merge
+git merge --abort
+```
+
+## Clone others repositories
+
+### [Clone others remote repository from GitHub](https://happygitwithr.com/common-remote-setups.html)
+
+-   GitHub: Code - Copy HTTPS URL to clipboard.
+
+**usethis::create_from_github** Clones and forks others remote repository from GitHub, creating a copy of the repository on Github, a local project and a Git repository.
+
+```{r}
+usethis::create_from_github(repo_spec = HTTPS URL,
+                            destdir = "DESTINATION DIRECTORY PATH"
+                            fork = TRUE)
+```
+
+**Git commands**
+
+```{bash}
+git remote clone HTTPS URL
+git remote add upstream HTTPS URL
+```
+
+-   pull request
