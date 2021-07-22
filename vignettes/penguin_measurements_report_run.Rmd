@@ -1,0 +1,43 @@
+---
+title: "penguin_measurements_report_run"
+output: html_document
+---
+
+```{r}
+library(palmerpenguins)
+library(stringr)
+library(dplyr)
+library(purrr)
+library(fs)
+```
+
+```{r}
+# create temp directory
+dir_create(path(tempdir(), "reports"))
+```
+
+```{r}
+run_report <- function(...) {
+
+  penguin_details <- list(...)
+  
+  rmarkdown::render(input = "penguin_measurements_report.Rmd",
+                    output_file = str_glue("{pluck(penguin_details, 'species')}_{pluck(penguin_details, 'island')}.html"),
+                    output_dir = path(tempdir(), "reports"),
+                    params = list(
+                      species_name = pluck(penguin_details, "species"),
+                      island_name = pluck(penguin_details, "island"))
+  )
+}
+safe_run_report <- safely(run_report)
+```
+
+```{r}
+penguin_details <- penguins %>% 
+  select(species, island) %>% 
+  distinct() 
+
+penguin_details%>% 
+  pmap(safe_run_report)
+```
+
