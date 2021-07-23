@@ -35,6 +35,8 @@ These notes were made whilst going through Jenny Bryan's [Happy Git and GitHub f
 
 Check Git installed on local machine
 
+**Git commands**
+
 ```{bash}
 where git
 git --version
@@ -50,13 +52,15 @@ usethis::use_git_config(user.name = "USERNAME", user.email = "EMAIL")
 
 Check Git user name and email details
 
+**Git commands**
+
 ```{bash}
 git config --global --list
 ```
 
 ### [Connect RStudio to Git](https://happygitwithr.com/rstudio-see-git.html)
 
--   Tools - Global Options - Git/SVN - Git executable: set path, eg C:/Program Files/Git/bin/git.exe. Ensure **Enable version control interface for RStudio projects** is ticked.
+-   RStudio Tools - Global Options - Git/SVN - Git executable: set path, eg C:/Program Files/Git/bin/git.exe. Ensure **Enable version control interface for RStudio projects** is ticked.
 
 -   Check for [common issues and solutions](https://happygitwithr.com/troubleshooting.html) in Jenny Bryan's instructions.
 
@@ -104,7 +108,22 @@ git clone HTTPS URL
 usethis::use_git()
 ```
 
--   Commit files to Git repository: RStudio - Git - Tick staged box - Commit.
+**Git commands**
+
+```{bash}
+git init
+```
+
+-   Commit files to Git repository: RStudio Git - Tick staged box - Commit.
+-   [Repeated amend commits to Git repository](https://happygitwithr.com/repeated-amend.html): RStudio - Tick staged box - Tick Amend previous commit - Commit
+
+**Git commands**
+
+```{bash}
+git add -A
+git commit -m "COMMIT MESSAGE"
+git commit --amend --no-edit
+```
 
 **usethis::use_github** Create a new repository on GitHub
 
@@ -112,23 +131,20 @@ usethis::use_git()
 usethis::use_github()
 ```
 
--   Pull files from GitHub repository: RStudio Pull button.
+-   Pull files from GitHub repository: RStudio Git - Pull button.
 
--   Push committed files to GitHub: RStudio Push button.
+-   Push committed files to GitHub: RStudio Git - Push button.
 
 **Git commands**
 
 ```{bash}
-git init
-git add -A
-git commit -m "COMMIT MESSAGE"
 git pull
 git push
 ```
 
 ### [Work on a branch](https://happygitwithr.com/git-branches.html)
 
--   Create and switch to a new branch: RStudio New Branch button
+-   Create and switch to a new branch: RStudio Git - New Branch button
 
 **Git commands**
 
@@ -155,11 +171,29 @@ git merge BRANCH_NAME
 
 ```{bash}
 git status
-git add FILE_NAME
+git add EDITED_FILE_NAME
 git commit -m "COMMIT MESSAGE"
 
 -- If need to abort merge
 git merge --abort
+```
+
+### Revert back to previous state
+
+-   changes saved but not committed RStudio Git - Diff - Discard All / Discard chunk
+
+**Git commands**
+
+```{bash}
+git reset --hard HEAD
+```
+
+-   changes committed (revert to previous commit)
+
+**Git commands**
+
+```{bash}
+git reset --hard HEAD^
 ```
 
 ## Clone others repositories
