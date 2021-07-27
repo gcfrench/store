@@ -76,7 +76,6 @@ usethis::create_github_token()
 
 ```{r}
 gitcreds::gitcreds_set()
-gitcreds::gitcreds_get()
 ```
 
 ## Clone own repositories
@@ -198,23 +197,64 @@ git reset --hard HEAD^
 
 ## Clone others repositories
 
-### [Clone others remote repository from GitHub](https://happygitwithr.com/common-remote-setups.html)
+### [Clone others remote repository from GitHub](https://happygitwithr.com/fork-and-clone.html)
 
--   GitHub: Code - Copy HTTPS URL to clipboard.
+In others remote repository on GitHub
 
-**usethis::create_from_github** Clones and forks others remote repository from GitHub, creating a copy of the repository on Github, a local project and a Git repository.
+-   GitHub: Fork - Copy others remote repository to your GitHub account.
 
-```{r}
-usethis::create_from_github(repo_spec = HTTPS URL,
-                            destdir = "DESTINATION DIRECTORY PATH"
-                            fork = TRUE)
-```
+In your repositories on GitHub
+
+-   GitHub: Code - Copy forked repository in your GitHub account to HTTPS URL to clipboard.
+-   RStudio: New Project - Version Control - Git - Repository URL - paste HTTPS URL
 
 **Git commands**
 
 ```{bash}
-git remote clone HTTPS URL
-git remote add upstream HTTPS URL
+git clone HTTPS URL
 ```
 
--   pull request
+In others remote repository on GitHub (so that [able to pull changes from other remote repository](https://happygitwithr.com/upstream-changes.html))
+
+-   GitHub: Copy others remote repository to HTTPS URL to clipboard.
+-   RStudio: Add remote: RStudio Git - New Branch button - Add remote - Remote Name - Paste OTHERS REMOTE HTTPS URL.
+
+**Git commands**
+
+```{bash}
+git remote add upstream OTHERS REMOTE HTTPS URL
+```
+
+**usethis::create_from_github** Clones and forks others remote repository from GitHub, creating a copy of the repository on your account in Github, a local project and a Git repository, and adds the others remote repository as an upstream remote repository to allow pulling file changes from this upstream remote.
+
+```{r}
+usethis::create_from_github(repo_spec = "HTTPS URL",
+                            destdir = "DESTINATION DIRECTORY PATH",
+                            fork = TRUE)
+```
+
+-   Check current remotes contains both origin (forked copy of others repository in your github account) and upstream (copy of others repository) repositories.
+
+**Git commands**
+
+```{bash}
+git remote -v
+```
+
+-   Pull changes from others remote repository into master branch, then optionally push to your forked copy (Push committed files to GitHub: RStudio Git - Push button).
+
+**Git commands**
+
+```{bash}
+git pull upstream master --ff-only
+git push
+```
+
+-   Create and switch to a new branch: RStudio Git - New Branch button [Only work on this branch]
+
+**Git commands**
+
+```{bash}
+git branch BRANCH_NAME
+git checkout BRANCH_NAME
+```
