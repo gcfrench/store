@@ -1,6 +1,6 @@
 ## store 1.1.0
 
--   Added **Git notes** for pulling and pushing own and others R projects to Git and GitHub and working on branches, written whilst reading the first 31 chapters of [Happy Git and GitHub for the useR](https://happygitwithr.com/).
+-   Added **Git notes** for setting up the Git and GitHub environment, pulling and pushing own and others R projects to Git and GitHub, working on branches and reverting changes, written whilst reading [Happy Git and GitHub for the useR](https://happygitwithr.com/).
 -   Added hex logo for package using Colin Fay's [hexmake](https://connect.thinkr.fr/hexmake/) shiny app.
 
 ## store 1.0.0 <font size="4">2021-07-02</font>

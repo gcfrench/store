@@ -177,7 +177,7 @@ git commit -m "COMMIT MESSAGE"
 git merge --abort
 ```
 
-### Revert back to previous state
+### [Revert back to previous state](https://happygitwithr.com/reset.html)
 
 -   changes saved but not committed RStudio Git - Diff - Discard All / Discard chunk
 
@@ -187,11 +187,26 @@ git merge --abort
 git reset --hard HEAD
 ```
 
+-   amend previous commit message
+
+**Git commands**
+
+```{bash}
+git commit --amend -m "New commit message"
+```
+
 -   changes committed (revert to previous commit)
 
 **Git commands**
 
 ```{bash}
+-- revert to previous commit, saved and staged changes kept
+git reset --soft HEAD^
+
+-- revert to previous commut, saved changes kept but now unstaged
+git reset HEAD^
+
+-- revert to previous commit, saved and staged changes lost
 git reset --hard HEAD^
 ```
 
@@ -250,7 +265,7 @@ git pull upstream master --ff-only
 git push
 ```
 
--   Create and switch to a new branch: RStudio Git - New Branch button [Only work on this branch]
+-   Create and switch to a new branch: RStudio Git - New Branch button. Make sure Synch branch with remote is ticked
 
 **Git commands**
 
@@ -258,3 +273,7 @@ git push
 git branch BRANCH_NAME
 git checkout BRANCH_NAME
 ```
+
+-   Only work on this branch, committing and pushing changes to the forked repository in your GitHub account
+
+-   GitHub: Compare and pull request button - Create pull request to [submit pull request](https://github.com/forwards/first-contributions) to others remote repository
