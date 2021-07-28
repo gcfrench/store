@@ -1,8 +1,8 @@
 ---
-title: "Git notes"
+title: "Git and GitHub notes"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Git notes}
+  %\VignetteIndexEntry{Git and GitHub notes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

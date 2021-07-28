@@ -32,7 +32,7 @@ The package can be installed from GitHub, which also hosts the [package
 site](https://gcfrench.github.io/store)
 
 ``` r
-devtools::install_github("gcfrench/store")
+remotes::install_github("gcfrench/store")
 ```
 
 ## Usage

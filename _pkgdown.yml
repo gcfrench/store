@@ -105,7 +105,7 @@ navbar:
         href: articles/gdal_commands.html
       - text: "Docker notes"
         href: articles/docker_notes.html
-      - text: "Git notes"
+      - text: "Git and GitHub notes"
         href: articles/git_notes.html
     - text: "lookups and functions"
       href: reference/index.html
