@@ -1,5 +1,6 @@
 ## store 1.1.0
 
+-   Updated **Run validation checks** document to use a [functional sequence](https://riptutorial.com/r/example/5661/functional-sequences) to store verify functions used to validate column names.
 -   Added **Git notes** for setting up the Git and GitHub environment, pulling and pushing own and others R projects to Git and GitHub, working on branches and reverting changes, written whilst reading [Happy Git and GitHub for the useR](https://happygitwithr.com/).
 -   Added hex logo for package using Colin Fay's [hexmake](https://connect.thinkr.fr/hexmake/) shiny app.
 
