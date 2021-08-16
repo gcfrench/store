@@ -1,8 +1,8 @@
 ---
-title: "create_report_notes"
+title: "Create R Markdown reports"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{create_report_notes}
+  %\VignetteIndexEntry{Create R Markdown reports}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,21 +16,22 @@ knitr::opts_chunk$set(
 ```
 
 This document goes through the R Markdown scripts used to split and output data both 
-within a single report and across multiple reports. The example used produces a
-report for each penguin species' measurements, taken at each of their locations, 
-with the measurements split by the year within each report.
+within a single report and across multiple reports. 
+
+This example generates a report for each penguin species' measurements, taken at 
+each of their locations, with the measurements split by the year within each report.
+The penguin measurements are taken from the palmerpenguins package's penguin dataset. 
 
 Creating the reports requires two R Markdown scripts. The first R Markdown, extracts
-the unique list of parameter, which in this example if the unique species and location 
-names, passing these parameters onto the second R Markdown script, which then creates 
-the report. The second script splits the report into child templates used to create
-each of the sections within the report. In the example this produces a table of 
-penguin measurements for each year.
+the unique list of parameters required to creare each report, which in this example 
+are the unique species and location names, passing these parameters onto the second 
+R Markdown script, which then creates the report, splitting the report into child 
+templates to create each of the sections within the report. In the example this 
+produces a table of penguin measurements for each year.
 
 ## First R Markdown script
 
 ---
-title: "penguin_measurements_report_run"
 output: html_document
 ---
 
@@ -69,6 +70,10 @@ penguin_details <- penguins %>%
 
 penguin_details%>% 
   pmap(safe_run_report)
+```
+
+```{r eval=TRUE}
+knitr::knit_exit()
 ```
 
 ## Second R Markdown script
