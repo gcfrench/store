@@ -57,6 +57,7 @@ penguins %>%
 The penguins dataset contains eight named columns. This uses a functional sequence to store verify functions for each column name and number of columns.
 ```{r}
 check_penguins_column_names <- . %>% 
+  chain_start() %>% 
   verify(has_all_names("species")) %>%
   verify(has_all_names("island")) %>%
   verify(has_all_names("bill_length_mm")) %>%
@@ -66,8 +67,8 @@ check_penguins_column_names <- . %>%
   verify(has_all_names("sex")) %>%
   verify(has_all_names("year")) %>%
   verify(ncol(.) == 8) %>% 
-  colnames()
-
+  chain_end(success_fun = success_logical, error_fun = error_stop)
+  
 penguins %>% 
   check_penguins_column_names
 ```
