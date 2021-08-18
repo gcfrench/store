@@ -35,4 +35,42 @@ function(grid_reference, centre = FALSE) {
     store::northing(centre = centre)
 }
 
+#* Gets the 10km grid reference.
+#* @param grid_reference A Great British or Irish grid reference character string.
+#* @get /hectad
+function(grid_reference) {
+  grid_reference <- store::as_gridref(grid_reference) %>%
+    store::hectad()
+}
 
+#* Gets the 5km grid reference.
+#* @param grid_reference A Great British or Irish grid reference character string.
+#* @get /pentad
+function(grid_reference) {
+  grid_reference <- store::as_gridref(grid_reference) %>%
+    store::pentad()
+}
+
+#* Gets the 2km grid reference.
+#* @param grid_reference A Great British or Irish grid reference character string.
+#* @get /tetrad
+function(grid_reference) {
+  grid_reference <- store::as_gridref(grid_reference) %>%
+    store::tetrad()
+}
+
+#* Gets the 1km grid reference.
+#* @param grid_reference A Great British or Irish grid reference character string.
+#* @get /monad
+function(grid_reference) {
+  grid_reference <- store::as_gridref(grid_reference) %>%
+    store::monad()
+}
+
+#* Gets the 100m grid reference.
+#* @param grid_reference A Great British or Irish grid reference character string.
+#* @get /hectare
+function(grid_reference) {
+  grid_reference <- store::as_gridref(grid_reference) %>%
+    store::hectare()
+}
