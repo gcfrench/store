@@ -51,7 +51,8 @@ Imports:
     daff,
     R6,
     gt,
-    ragg
+    ragg,
+    plumber
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
