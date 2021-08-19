@@ -17,13 +17,18 @@ knitr::opts_chunk$set(
 
 These notes were made whilst going through Microsoft's [Build a containerized web application with Docker](https://docs.microsoft.com/en-us/learn/modules/intro-to-containers/) workshop, as well other online resources relevant to R. These additional resources were
 
--   Colin Fay's [An introduction to Docker for R Users](https://colinfay.me/docker-r-reproducibility/) blog.
--   Oliver Guggenbuhlühl's [Running your R script in Docker](https://www.statworx.com/de/blog/running-your-r-script-in-docker/) blog.
--   Oliver Guggenbuhlühl's [How to Dockerize ShinyApps](https://www.statworx.com/ch/blog/how-to-dockerize-shinyapps/) blog.
+-   Colin Fay's [An introduction to Docker for R Users](https://colinfay.me/docker-r-reproducibility/).
+
+-   Oliver Guggenbuhlühl's [Running your R script in Docker](https://www.statworx.com/de/blog/running-your-r-script-in-docker/).
+
+-   Oliver Guggenbuhlühl's [How to Dockerize ShinyApps](https://www.statworx.com/ch/blog/how-to-dockerize-shinyapps/).
+
+-   David Neuzerling's [Determining System Dependencies for R Projects](https://mdneuzerling.com/post/determining-system-dependencies-for-r-projects/).
 
 Online resources for Docker include
 
 -   [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) - required for running Docker containers locally.
+
 -   [The Rocker Project](https://www.rocker-project.org/) - Docker Containers for the R Enviroment.
 
 Online resources for publishing Docker images and containers
