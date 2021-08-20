@@ -3,6 +3,10 @@ template:
     bootswatch: flatly
 
 reference:
+- title: "Package management"
+  desc: "Functions used to management package dependencies"
+  contents:
+  - get_cran_package_system_dependencies
 - title: "Store credentials"
   desc: "Securely store and retrive database connections using the keyring package"
   contents:

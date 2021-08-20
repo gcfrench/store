@@ -1,5 +1,6 @@
 ## store 1.1.0
 
+-   Added **get_cran_package_system_dependencies** to extract a list of system dependencies for CRAN packages listed in a [renv lock file](https://rstudio.github.io/renv/articles/lockfile.html). It is an example of the use of the [httr package](https://httr.r-lib.org/index.html) used to query a REST API and is taken from the collation and modification of functions in the David Neuzerling's [getsysres package](https://github.com/mdneuzerling/getsysreqs/tree/main/R).
 -   Updated **Run validation checks** document to use a [functional sequence](https://riptutorial.com/r/example/5661/functional-sequences) to store verify functions used to validate column names.
 -   Added **Git notes** for setting up the Git and GitHub environment, pulling and pushing own and others R projects to Git and GitHub, working on branches and reverting changes, written whilst reading [Happy Git and GitHub for the useR](https://happygitwithr.com/).
 -   Added hex logo for package using Colin Fay's [hexmake](https://connect.thinkr.fr/hexmake/) shiny app.
@@ -26,7 +27,7 @@
 -   Added **gridsquare_geometry** S3 class of grid reference functions using parent **gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37) to convert British and Irish grid reference to its square polygon geometry feature. Example uses [dplyr::rowwise](https://dplyr.tidyverse.org/reference/rowwise.html) function to apply function to each grid reference in the dataset.
 -   Added **hectad**, **pentad**, **tetrad**, **monad** and **hectare** S3 class of grid reference functions to convert higher resolution grid references using parent **gridRef** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37).
 -   Added **as_gridref**, **precision**, **projection**, **easting** and **northing** S3 class of grid reference functions using parent **gridCoords** function from [archived rnbn package](https://github.com/ropensci-archive/rnbn/issues/37). S3 classes described in [S3](https://adv-r.hadley.nz/s3.html) chapter of Advanced R.
--   Added **extract_paragraph_delimited_list** to family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter.
+-   Added **extract_paragraph_delimited_list** family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter.
 -   Added **vc_grid_square_intersects** A data frame listing the vice counties intersects with 10km, 2km and 1km grid squares.
 -   Added **uk_ireland_tenkm_grid_squares** A data frame listing UK and Ireland 10km grid squares along with their country and whether in the UK, on land or sea.
 -   Added **nbn_demonstration_dataset** An example data frame containing bird example records used to demonstrate the NBN Gateway.
