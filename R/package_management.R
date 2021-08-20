@@ -5,7 +5,8 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #' This function extracts the list of CRAN packages within a renv lock file, querying
-#' the [RStudio Package Manager API](https://packagemanager.rstudio.com/__api__/swagger/index.html)
+#' the [RStudio Package Manager API](https://packagemanager.rstudio.com/__api__/swagger/index.html),
+#' from the [Rstudio Public Package Manager](https://packagemanager.rstudio.com)
 #' to get a list of external system libraries these packages depend on.
 #'
 #' The returned list of system dependencies are intended to help create a Docker file

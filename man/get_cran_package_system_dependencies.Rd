@@ -27,7 +27,8 @@ system dependencies required and their install command, within a list.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 This function extracts the list of CRAN packages within a renv lock file, querying
-the \href{https://packagemanager.rstudio.com/__api__/swagger/index.html}{RStudio Package Manager API}
+the \href{https://packagemanager.rstudio.com/__api__/swagger/index.html}{RStudio Package Manager API},
+from the \href{https://packagemanager.rstudio.com}{Rstudio Public Package Manager}
 to get a list of external system libraries these packages depend on.
 
 The returned list of system dependencies are intended to help create a Docker file
