@@ -24,6 +24,20 @@ This function returns the grid reference's easting in metres.
 It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision).
 }
+\section{REST API}{
+
+A REST API endpoint is available once a Plumber router has been created and can be
+requested by adding \strong{_api} to the end of the function.\preformatted{suppressPackageStartupMessages(\{
+  library(store)
+  suppressWarnings(\{
+    library(plumber)
+  \})
+\})
+pr("../R/gridref_api.R") \%>\%
+  pr_run(port = 8000)
+}
+}
+
 \examples{
  suppressPackageStartupMessages({
    library(store)
