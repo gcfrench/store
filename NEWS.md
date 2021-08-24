@@ -1,5 +1,6 @@
 ## store 1.1.0
 
+-   Added **REST API endpoints** to the grid reference functions using the [plumber](https://www.rplumber.io/) package.
 -   Added **get_cran_package_system_dependencies** to extract a list of system dependencies for CRAN packages listed in a [renv lock file](https://rstudio.github.io/renv/articles/lockfile.html). It is an example of the use of the [httr package](https://httr.r-lib.org/index.html) used to query a REST API and is taken from the collation and modification of functions in the David Neuzerling's [getsysres package](https://github.com/mdneuzerling/getsysreqs/tree/main/R).
 -   Updated **Run validation checks** document to use a [functional sequence](https://riptutorial.com/r/example/5661/functional-sequences) to store verify functions used to validate column names.
 -   Added **Git notes** for setting up the Git and GitHub environment, pulling and pushing own and others R projects to Git and GitHub, working on branches and reverting changes, written whilst reading [Happy Git and GitHub for the useR](https://happygitwithr.com/).

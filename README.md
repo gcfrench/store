@@ -6,7 +6,7 @@
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-## Overview <img src='man/figures/logo.png' align="right" height="139" />
+## Overview
 
 This personal package is a place to the store functions and lookups that
 I have created overtime and may find useful in the future. I started
@@ -32,7 +32,7 @@ The package can be installed from GitHub, which also hosts the [package
 site](https://gcfrench.github.io/store)
 
 ``` r
-remotes::install_github("gcfrench/store")
+devtools::install_github("gcfrench/store")
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ scripts, for example **creating and updating a R package**.
 The **lookups and functions** section contain my useful functions and
 lookup tables. These can be used either directly by installing and
 loading this package or by copying and pasting the R code from the
-package’s data-raw or R sub-directories, avaiable from the package’s
+package’s data-raw or R sub-directories, available from the package’s
 GitHib pages, into your R script. The functions contain examples within
 their documentation to demonstrate their use.
 

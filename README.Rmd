@@ -46,7 +46,7 @@ documents provide information and guidance when writing R scripts, for example
 
 The **lookups and functions** section contain my useful functions and lookup tables. 
 These can be used either directly by installing and loading this package or by copying 
-and pasting the R code from the package's data-raw or R sub-directories, avaiable from
+and pasting the R code from the package's data-raw or R sub-directories, available from
 the package's GitHib pages, into your R script. The functions contain examples within 
 their documentation to demonstrate their use.
 

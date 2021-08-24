@@ -41,7 +41,7 @@ reference:
   - create_bounding_box
   - uk_ireland_base_map
 - title: "Grid Reference"
-  desc: "Extract and format grid reference information"
+  desc: "Extract and format grid reference information, including REST API endpoints."
 - contents:
   - as_gridref
   - precision.gridref
