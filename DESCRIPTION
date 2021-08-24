@@ -52,7 +52,7 @@ Imports:
     R6,
     gt,
     ragg,
-    httr
+    httr,
     plumber
 Suggests: 
     testthat (>= 3.0.0),

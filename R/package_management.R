@@ -22,16 +22,14 @@
 #' @param release Release version of the operating system. This may default to the latest
 #' operating system release.
 #'
-#' @return An httr response, containing the packages requiring system dependencies, the
-#' system dependencies required and their install command, within a list.
+#' @return An httr response converted to a tibble containing the package names and
+#' their system dependencies.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' get_cran_package_system_dependencies(renv_lock_path = "renv.lock",
-#'                                      distribution = "unbuntu",
-#'                                      release = "20.04")
+#' get_cran_package_system_dependencies(renv_lock_path = "renv.lock")
 #' }
 get_cran_package_system_dependencies <- function(renv_lock_path,
                                                  distribution = "ubuntu",
@@ -74,5 +72,13 @@ get_cran_package_system_dependencies <- function(renv_lock_path,
   }
 
   # return package's system dependencies if request has been successful
-  jsonlite::fromJSON(httr::content(response, "text"))
+  # converts list to a tibble of package names and their system dependencies
+  jsonlite::fromJSON(httr::content(response, "text")) %>%
+    purrr::flatten() %>% {
+      tibble::tibble (
+        package = purrr::pluck(., "name"),
+        system_dependency = purrr::pluck(., "requirements", "packages"),
+      )} %>%
+    tidyr::unnest(cols = c(system_dependency)) %>%
+    dplyr::arrange(package, system_dependency)
 }

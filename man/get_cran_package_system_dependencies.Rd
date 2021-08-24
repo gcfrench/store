@@ -20,8 +20,8 @@ the default. Other operating systems include centos.}
 operating system release.}
 }
 \value{
-An httr response, containing the packages requiring system dependencies, the
-system dependencies required and their install command, within a list.
+An httr response converted to a tibble containing the package names and
+their system dependencies.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -36,9 +36,7 @@ used to build a Docker image for a R project.
 }
 \examples{
 \dontrun{
-get_cran_package_system_dependencies(renv_lock_path = "renv.lock",
-                                     distribution = "unbuntu",
-                                     release = "20.04")
+get_cran_package_system_dependencies(renv_lock_path = "renv.lock")
 }
 }
 \seealso{
