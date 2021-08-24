@@ -158,6 +158,9 @@ gridRef <- function(x) {
 #' A REST API endpoint is available once a Plumber router has been created and can be
 #' requested by adding **_api** to the end of the function.
 #'
+#' The API returns "" instead of NULL so that it may be used with the dplyr::mutate function.
+#' Wrap the API call with dplyr::na_if to convert "" to NA.
+#'
 #' ```
 #' suppressPackageStartupMessages({
 #'   library(store)
@@ -268,7 +271,8 @@ projection <- function(x) {
 #'
 #' grid_references %>%
 #'   rowwise() %>%
-#'   mutate(easting = easting(grid_reference, centre = TRUE))
+#'   mutate(easting_corner = easting(grid_reference),
+#'          easting_centre = easting(grid_reference, centre = TRUE))
 easting <- function(x, ...) {
   UseMethod("easting", x)
 }
@@ -306,7 +310,8 @@ easting <- function(x, ...) {
 #'
 #' grid_references %>%
 #'   rowwise() %>%
-#'   mutate(northing = northing(grid_reference, centre = TRUE))
+#'   mutate(northing_corner = northing(grid_reference),
+#'          northing_centre = northing(grid_reference, centre = TRUE))
 northing <- function(x, ...) {
   UseMethod("northing", x)
 }

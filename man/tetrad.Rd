@@ -25,7 +25,10 @@ including tetrads (2000m precision).
 \section{REST API}{
 
 A REST API endpoint is available once a Plumber router has been created and can be
-requested by adding \strong{_api} to the end of the function.\preformatted{suppressPackageStartupMessages(\{
+requested by adding \strong{_api} to the end of the function.
+
+The API returns "" instead of NULL so that it may be used with the dplyr::mutate function.
+Wrap the API call with dplyr::na_if to convert "" to NA.\preformatted{suppressPackageStartupMessages(\{
   library(store)
   suppressWarnings(\{
     library(plumber)

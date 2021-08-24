@@ -40,7 +40,8 @@ function(grid_reference, centre = FALSE) {
 #* @get /hectad
 function(grid_reference) {
   grid_reference <- store::as_gridref(grid_reference) %>%
-    store::hectad()
+    store::hectad() %>%
+    tidyr::replace_na("") # api returns "" instead of NULL
 }
 
 #* Gets the 5km grid reference.
@@ -48,7 +49,8 @@ function(grid_reference) {
 #* @get /pentad
 function(grid_reference) {
   grid_reference <- store::as_gridref(grid_reference) %>%
-    store::pentad()
+    store::pentad() %>%
+    tidyr::replace_na("") # api returns "" instead of NULL
 }
 
 #* Gets the 2km grid reference.
@@ -56,7 +58,8 @@ function(grid_reference) {
 #* @get /tetrad
 function(grid_reference) {
   grid_reference <- store::as_gridref(grid_reference) %>%
-    store::tetrad()
+    store::tetrad() %>%
+    tidyr::replace_na("") # api returns "" instead of NULL
 }
 
 #* Gets the 1km grid reference.
@@ -64,7 +67,8 @@ function(grid_reference) {
 #* @get /monad
 function(grid_reference) {
   grid_reference <- store::as_gridref(grid_reference) %>%
-    store::monad()
+    store::monad() %>%
+    tidyr::replace_na("") # api returns "" instead of NULL
 }
 
 #* Gets the 100m grid reference.
@@ -72,5 +76,6 @@ function(grid_reference) {
 #* @get /hectare
 function(grid_reference) {
   grid_reference <- store::as_gridref(grid_reference) %>%
-    store::hectare()
+    store::hectare() %>%
+    tidyr::replace_na("") # api returns "" instead of NULL
 }
