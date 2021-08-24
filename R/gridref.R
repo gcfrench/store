@@ -1,6 +1,7 @@
 # Requires
 ## grid_references.R example
 ## test-gridref.R tests
+## gridref_api.R
 
 # S3 construction function -----------------------------------------------------
 
@@ -153,6 +154,24 @@ gridRef <- function(x) {
 #' It can check either British or Irish grid references up to 10 figure (1m precision),
 #' including tetrads (2000m precision).
 #'
+#' @section REST API:
+#' A REST API endpoint is available once a Plumber router has been created and can be
+#' requested by adding **_api** to the end of the function.
+#'
+#' The API returns "" instead of NULL so that it may be used with the dplyr::mutate function.
+#' Wrap the API call with dplyr::na_if to convert "" to NA.
+#'
+#' ```
+#' suppressPackageStartupMessages({
+#'   library(store)
+#'   suppressWarnings({
+#'     library(plumber)
+#'   })
+#' })
+#' pr("../R/gridref_api.R") %>%
+#'   pr_run(port = 8000)
+#' ```
+#'
 #' @seealso
 #' The function calls the gridCoords function in the archived [rnbn](https://github.com/ropensci-archive/rnbn/issues/37) package.
 #'
@@ -177,6 +196,7 @@ gridRef <- function(x) {
 #' grid_references %>%
 #'   rowwise() %>%
 #'   mutate(precision = precision(grid_reference))
+#'
 precision <- function(x) {
   UseMethod("precision", x)
 }
@@ -188,6 +208,8 @@ precision <- function(x) {
 #' This function returns the grid reference's projection, either as OSGB or OSNI.
 #'
 #' @inherit precision return details
+#'
+#' @inheritSection precision REST API
 #'
 #' @inherit precision return seealso
 #'
@@ -224,6 +246,8 @@ projection <- function(x) {
 #'
 #' @inherit precision return details
 #'
+#' @inheritSection precision REST API
+#'
 #' @inherit precision return seealso
 #'
 #' @family grid reference functions
@@ -247,7 +271,8 @@ projection <- function(x) {
 #'
 #' grid_references %>%
 #'   rowwise() %>%
-#'   mutate(easting = easting(grid_reference, centre = TRUE))
+#'   mutate(easting_corner = easting(grid_reference),
+#'          easting_centre = easting(grid_reference, centre = TRUE))
 easting <- function(x, ...) {
   UseMethod("easting", x)
 }
@@ -259,6 +284,8 @@ easting <- function(x, ...) {
 #' This function returns the grid reference's northing in metres.
 #'
 #' @inherit precision return details
+#'
+#' @inheritSection precision REST API
 #'
 #' @inherit precision return seealso
 #'
@@ -283,7 +310,8 @@ easting <- function(x, ...) {
 #'
 #' grid_references %>%
 #'   rowwise() %>%
-#'   mutate(northing = northing(grid_reference, centre = TRUE))
+#'   mutate(northing_corner = northing(grid_reference),
+#'          northing_centre = northing(grid_reference, centre = TRUE))
 northing <- function(x, ...) {
   UseMethod("northing", x)
 }
@@ -295,6 +323,8 @@ northing <- function(x, ...) {
 #' This function returns the 10km grid reference for a higher precision grid reference.
 #'
 #' @inherit precision return details
+#'
+#' @inheritSection precision REST API
 #'
 #' @inherit precision return seealso
 #'
@@ -331,6 +361,8 @@ hectad <- function(x) {
 #'
 #' @inherit precision return details
 #'
+#' @inheritSection precision REST API
+#'
 #' @inherit precision return seealso
 #'
 #' @family grid reference functions
@@ -365,6 +397,8 @@ pentad <- function(x) {
 #' This function returns the 2km grid reference for a higher precision grid reference.
 #'
 #' @inherit precision return details
+#'
+#' @inheritSection precision REST API
 #'
 #' @inherit precision return seealso
 #'
@@ -401,6 +435,8 @@ tetrad <- function(x) {
 #'
 #' @inherit precision return details
 #'
+#' @inheritSection precision REST API
+#'
 #' @inherit precision return seealso
 #'
 #' @family grid reference functions
@@ -435,6 +471,8 @@ monad <- function(x) {
 #' This function returns the 100m grid reference for a higher precision grid reference.
 #'
 #' @inherit precision return details
+#'
+#' @inheritSection precision REST API
 #'
 #' @inherit precision return seealso
 #'
@@ -766,4 +804,71 @@ gridsquare_geometry.gridref <- function(grid_reference) {
   sf::st_as_sfc(wkt, crs = epsg)
 }
 
+# gridref_api ##################################################################
 
+#' @noRd
+gridref_api <- function(gridref_method) {
+
+  function(grid_reference, centre = FALSE) {
+
+    # api request
+    url_address <- "http://127.0.0.1:8000"
+    request <- stringr::str_glue("{url_address}/{gridref_method}?grid_reference={grid_reference}")
+
+    # add centre parameter to api request
+    if (gridref_method %in% c("easting", "northing")) {
+      request <- stringr::str_glue("{request}&centre={centre}")
+    }
+
+    # api response
+    response <- httr::GET(request) %>%
+      httr::stop_for_status() %>%
+      httr::content() %>%
+      unlist()
+  }
+}
+
+#' @title precision_api
+#' @inherit precision
+#' @export
+precision_api <- gridref_api(gridref_method = "precision")
+
+#' @title projection_api
+#' @inherit projection
+#' @export
+projection_api <- gridref_api(gridref_method = "projection")
+
+#' @title easting_api
+#' @inherit easting
+#' @export
+easting_api <- gridref_api(gridref_method = "easting")
+
+#' @title northing_api
+#' @inherit northing
+#' @export
+northing_api <- gridref_api(gridref_method = "northing")
+
+#' @title hectad_api
+#' @inherit hectad
+#' @export
+hectad_api <- gridref_api(gridref_method = "hectad")
+
+#' @title pentad_api
+#' @inherit pentad
+#' @export
+pentad_api <- gridref_api(gridref_method = "pentad")
+
+#' @title tetrad_api
+#' @inherit tetrad
+#' @export
+tetrad_api <- gridref_api(gridref_method = "tetrad")
+
+#' @title monad_api
+#' @inherit monad
+#' @export
+monad_api <- gridref_api(gridref_method = "monad")
+
+#' @title hectare_api
+#' @inherit hectare
+#' @export
+hectare_api <- gridref_api(gridref_method = "hectare")

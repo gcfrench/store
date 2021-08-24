@@ -53,6 +53,7 @@ Imports:
     gt,
     ragg,
     httr
+    plumber
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
