@@ -38,7 +38,7 @@ splitting the report into child templates that produce each of the sections
 within the report. In the example this produces a table of penguin measurements
 for each year.
 
-![](images/penguin_measurements_table.png){width="532"}
+![](../man/figures/penguin_measurements_table.png){width="532"}
 
 Example table of penguin measurements, one of the yearly tables within a one of
 the penguin species on a particular island reports.

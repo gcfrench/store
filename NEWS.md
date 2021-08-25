@@ -1,5 +1,6 @@
 ## store 1.1.0
 
+-   Added **Create multiple reports and sections** document containing R markdown used to generate multiple reports that can contain multiple sections, generated from information in a data frame, using the palmerpenguins' [penguins dataset](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) as an example.
 -   Added **REST API endpoints** to the grid reference functions using the [plumber](https://www.rplumber.io/) package.
 -   Added **get_cran_package_system_dependencies** to extract a list of system dependencies for CRAN packages listed in a [renv lock file](https://rstudio.github.io/renv/articles/lockfile.html). It is an example of the use of the [httr package](https://httr.r-lib.org/index.html) used to query a REST API, taken from the collation and modification of functions in the David Neuzerling's [getsysres package](https://github.com/mdneuzerling/getsysreqs/tree/main/R), converting the nested list API response to a tibble.
 -   Updated **Run validation checks** document to use a [functional sequence](https://riptutorial.com/r/example/5661/functional-sequences) to store verify functions used to validate column names.
