@@ -107,6 +107,10 @@ navbar:
         href: articles/docker_notes.html
       - text: "Git notes"
         href: articles/git_notes.html
+    - text: "reporting"
+      menu:
+      - text: "Create multiple reports and sections"
+        href: articles/create_multiple_reports_sections_notes.html
     - text: "lookups and functions"
       href: reference/index.html
     - text: "versions"
