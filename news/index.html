@@ -116,6 +116,21 @@
     <li>
       <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
+    <li>
+      <a href="../articles/git_notes.html">Git and GitHub notes</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    reporting
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/create_multiple_reports_sections_notes.html">Create multiple reports and sections</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -155,10 +170,16 @@
       <small>Source: <a href='https://github.com/gcfrench/store/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="store-110" class="section level2">
+    <div id="store-110-2021-08-26" class="section level2">
 <h2 class="hasAnchor">
-<a href="#store-110" class="anchor"></a>store 1.1.0</h2>
+<a href="#store-110-2021-08-26" class="anchor"></a>store 1.1.0 <font size="4">2021-08-26</font>
+</h2>
 <ul>
+<li>Added <strong>Create multiple reports and sections</strong> document containing R markdown used to generate multiple reports that can contain multiple sections, generated from information in a data frame, using the palmerpenguins’ <a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins dataset</a> as an example.</li>
+<li>Added <strong>REST API endpoints</strong> to the grid reference functions using the <a href="https://www.rplumber.io/">plumber</a> package.</li>
+<li>Added <strong>get_cran_package_system_dependencies</strong> to extract a list of system dependencies for CRAN packages listed in a <a href="https://rstudio.github.io/renv/articles/lockfile.html">renv lock file</a>. It is an example of the use of the <a href="https://httr.r-lib.org/index.html">httr package</a> used to query a REST API, taken from the collation and modification of functions in the David Neuzerling’s <a href="https://github.com/mdneuzerling/getsysreqs/tree/main/R">getsysres package</a>, converting the nested list API response to a tibble.</li>
+<li>Updated <strong>Run validation checks</strong> document to use a <a href="https://riptutorial.com/r/example/5661/functional-sequences">functional sequence</a> to store verify functions used to validate column names.</li>
+<li>Added <strong>Git notes</strong> for setting up the Git and GitHub environment, pulling and pushing own and others R projects to Git and GitHub, working on branches and reverting changes, written whilst reading <a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a>.</li>
 <li>Added hex logo for package using Colin Fay’s <a href="https://connect.thinkr.fr/hexmake/">hexmake</a> shiny app.</li>
 </ul>
 </div>
@@ -191,7 +212,7 @@
 <li>Added <strong>gridsquare_geometry</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a> to convert British and Irish grid reference to its square polygon geometry feature. Example uses <a href="https://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a> function to apply function to each grid reference in the dataset.</li>
 <li>Added <strong>hectad</strong>, <strong>pentad</strong>, <strong>tetrad</strong>, <strong>monad</strong> and <strong>hectare</strong> S3 class of grid reference functions to convert higher resolution grid references using parent <strong>gridRef</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>.</li>
 <li>Added <strong>as_gridref</strong>, <strong>precision</strong>, <strong>projection</strong>, <strong>easting</strong> and <strong>northing</strong> S3 class of grid reference functions using parent <strong>gridCoords</strong> function from <a href="https://github.com/ropensci-archive/rnbn/issues/37">archived rnbn package</a>. S3 classes described in <a href="https://adv-r.hadley.nz/s3.html">S3</a> chapter of Advanced R.</li>
-<li>Added <strong>extract_paragraph_delimited_list</strong> to family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter.</li>
+<li>Added <strong>extract_paragraph_delimited_list</strong> family of extract_delimited_list functions. This function adds two carriage returns and new lines as a delimiter.</li>
 <li>Added <strong>vc_grid_square_intersects</strong> A data frame listing the vice counties intersects with 10km, 2km and 1km grid squares.</li>
 <li>Added <strong>uk_ireland_tenkm_grid_squares</strong> A data frame listing UK and Ireland 10km grid squares along with their country and whether in the UK, on land or sea.</li>
 <li>Added <strong>nbn_demonstration_dataset</strong> An example data frame containing bird example records used to demonstrate the NBN Gateway.</li>

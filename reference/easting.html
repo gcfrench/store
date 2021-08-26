@@ -117,6 +117,21 @@
     <li>
       <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
+    <li>
+      <a href="../articles/git_notes.html">Git and GitHub notes</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    reporting
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/create_multiple_reports_sections_notes.html">Create multiple reports and sections</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -186,6 +201,23 @@
 
     <p>It can check either British or Irish grid references up to 10 figure (1m precision),
 including tetrads (2000m precision).</p>
+    <h2 class="hasAnchor" id="rest-api"><a class="anchor" href="#rest-api"></a>REST API</h2>
+
+    
+
+<p>A REST API endpoint is available once a Plumber router has been created and can be
+requested by adding <strong>_api</strong> to the end of the function.</p>
+<p>The API returns "" instead of NULL so that it may be used with the dplyr::mutate function.
+Wrap the API call with dplyr::na_if to convert "" to NA.</p><pre><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gcfrench.github.io/store'>store</a></span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://www.rplumber.io'>plumber</a></span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='fu'><a href='https://www.rplumber.io/reference/pr.html'>pr</a></span><span class='op'>(</span><span class='st'>"../R/gridref_api.R"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://www.rplumber.io/reference/pr_run.html'>pr_run</a></span><span class='op'>(</span>port <span class='op'>=</span> <span class='fl'>8000</span><span class='op'>)</span>
+</pre>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other grid reference functions: 
@@ -224,26 +256,27 @@ including tetrads (2000m precision).</p>
 
 <span class='va'>grid_references</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rowwise.html'>rowwise</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>easting <span class='op'>=</span> <span class='fu'>easting</span><span class='op'>(</span><span class='va'>grid_reference</span>, centre <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 x 2</span><span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>easting_corner <span class='op'>=</span> <span class='fu'>easting</span><span class='op'>(</span><span class='va'>grid_reference</span><span class='op'>)</span>,
+         easting_centre <span class='op'>=</span> <span class='fu'>easting</span><span class='op'>(</span><span class='va'>grid_reference</span>, centre <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 x 3</span><span>
 #&gt; </span><span style='color: #949494;'># Rowwise: </span><span>
-#&gt;    grid_reference easting
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;gridref&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> TL2384          </span><span style='text-decoration: underline;'>523</span><span>500
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> TL232839        </span><span style='text-decoration: underline;'>523</span><span>250
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> TL2385          </span><span style='text-decoration: underline;'>523</span><span>500
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> TL231840        </span><span style='text-decoration: underline;'>523</span><span>150
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> TL232839        </span><span style='text-decoration: underline;'>523</span><span>250
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> TL23248346      </span><span style='text-decoration: underline;'>523</span><span>245
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> TL23568493      </span><span style='text-decoration: underline;'>523</span><span>565
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> TL23448505      </span><span style='text-decoration: underline;'>523</span><span>445
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> TL23128324      </span><span style='text-decoration: underline;'>523</span><span>125
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> TL234850        </span><span style='text-decoration: underline;'>523</span><span>450
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> TL234846        </span><span style='text-decoration: underline;'>523</span><span>450
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> TL232839        </span><span style='text-decoration: underline;'>523</span><span>250
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> TL231841        </span><span style='text-decoration: underline;'>523</span><span>150
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> TL226846        </span><span style='text-decoration: underline;'>522</span><span>650
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span> TL2384          </span><span style='text-decoration: underline;'>523</span><span>500</div></span></pre>
+#&gt;    grid_reference easting_corner easting_centre
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;gridref&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> TL2384                 </span><span style='text-decoration: underline;'>523</span><span>000         </span><span style='text-decoration: underline;'>523</span><span>500
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> TL232839               </span><span style='text-decoration: underline;'>523</span><span>200         </span><span style='text-decoration: underline;'>523</span><span>250
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> TL2385                 </span><span style='text-decoration: underline;'>523</span><span>000         </span><span style='text-decoration: underline;'>523</span><span>500
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> TL231840               </span><span style='text-decoration: underline;'>523</span><span>100         </span><span style='text-decoration: underline;'>523</span><span>150
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> TL232839               </span><span style='text-decoration: underline;'>523</span><span>200         </span><span style='text-decoration: underline;'>523</span><span>250
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> TL23248346             </span><span style='text-decoration: underline;'>523</span><span>240         </span><span style='text-decoration: underline;'>523</span><span>245
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> TL23568493             </span><span style='text-decoration: underline;'>523</span><span>560         </span><span style='text-decoration: underline;'>523</span><span>565
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> TL23448505             </span><span style='text-decoration: underline;'>523</span><span>440         </span><span style='text-decoration: underline;'>523</span><span>445
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> TL23128324             </span><span style='text-decoration: underline;'>523</span><span>120         </span><span style='text-decoration: underline;'>523</span><span>125
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> TL234850               </span><span style='text-decoration: underline;'>523</span><span>400         </span><span style='text-decoration: underline;'>523</span><span>450
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> TL234846               </span><span style='text-decoration: underline;'>523</span><span>400         </span><span style='text-decoration: underline;'>523</span><span>450
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> TL232839               </span><span style='text-decoration: underline;'>523</span><span>200         </span><span style='text-decoration: underline;'>523</span><span>250
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span> TL231841               </span><span style='text-decoration: underline;'>523</span><span>100         </span><span style='text-decoration: underline;'>523</span><span>150
+#&gt; </span><span style='color: #BCBCBC;'>14</span><span> TL226846               </span><span style='text-decoration: underline;'>522</span><span>600         </span><span style='text-decoration: underline;'>522</span><span>650
+#&gt; </span><span style='color: #BCBCBC;'>15</span><span> TL2384                 </span><span style='text-decoration: underline;'>523</span><span>000         </span><span style='text-decoration: underline;'>523</span><span>500</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

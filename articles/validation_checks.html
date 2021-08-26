@@ -75,6 +75,21 @@
     <li>
       <a href="../articles/docker_notes.html">Docker notes</a>
     </li>
+    <li>
+      <a href="../articles/git_notes.html">Git and GitHub notes</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    reporting
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/create_multiple_reports_sections_notes.html">Create multiple reports and sections</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -150,34 +165,24 @@
   <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">344</span>,
          success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>The penguins dataset contains eight named columns</p>
+<p>The penguins dataset contains eight named columns. This uses a functional sequence to store verify functions for each column name and number of columns.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
-  <span class="va">chain_start</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"species"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"island"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"bill_depth_mm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"flipper_length_mm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"body_mass_g"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"sex"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="va">chain_end</span>
-<span class="co">#&gt; # A tibble: 344 x 8</span>
-<span class="co">#&gt;    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;</span>
-<span class="co">#&gt;  1 Adelie  Torgersen           39.1          18.7               181        3750</span>
-<span class="co">#&gt;  2 Adelie  Torgersen           39.5          17.4               186        3800</span>
-<span class="co">#&gt;  3 Adelie  Torgersen           40.3          18                 195        3250</span>
-<span class="co">#&gt;  4 Adelie  Torgersen           NA            NA                  NA          NA</span>
-<span class="co">#&gt;  5 Adelie  Torgersen           36.7          19.3               193        3450</span>
-<span class="co">#&gt;  6 Adelie  Torgersen           39.3          20.6               190        3650</span>
-<span class="co">#&gt;  7 Adelie  Torgersen           38.9          17.8               181        3625</span>
-<span class="co">#&gt;  8 Adelie  Torgersen           39.2          19.6               195        4675</span>
-<span class="co">#&gt;  9 Adelie  Torgersen           34.1          18.1               193        3475</span>
-<span class="co">#&gt; 10 Adelie  Torgersen           42            20.2               190        4250</span>
-<span class="co">#&gt; # ... with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></code></pre></div>
+<code class="sourceCode R"><span class="va">check_penguins_column_names</span> <span class="op">&lt;-</span> <span class="va">.</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/chaining_functions.html">chain_start</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"species"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"island"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"bill_depth_mm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"flipper_length_mm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"body_mass_g"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"sex"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/assertr/reference/has_all_names.html">has_all_names</a></span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/verify.html">verify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://docs.ropensci.org/assertr/reference/chaining_functions.html">chain_end</a></span><span class="op">(</span>success_fun <span class="op">=</span> <span class="va">success_logical</span>, error_fun <span class="op">=</span> <span class="va">error_stop</span><span class="op">)</span>
+  
+<span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="va">check_penguins_column_names</span>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>Penguins raw dataset date_egg column is a date type</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins_raw</span> <span class="op">%&gt;%</span> 
