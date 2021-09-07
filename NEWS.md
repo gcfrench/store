@@ -1,4 +1,4 @@
-# store 1.2.0
+## store 1.2.0
 
 ## store 1.1.0 <font size="4">2021-08-26</font>
 
