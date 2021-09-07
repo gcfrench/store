@@ -1,3 +1,5 @@
+# store 1.2.0
+
 ## store 1.1.0 <font size="4">2021-08-26</font>
 
 -   Added **Create multiple reports and sections** document containing R markdown used to generate multiple reports that can contain multiple sections, generated from information in a data frame, using the palmerpenguins' [penguins dataset](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) as an example.
