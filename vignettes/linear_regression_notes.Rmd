@@ -1,0 +1,53 @@
+---
+title: "Linear regression notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linear regression notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This example using linear regression to explore the relationship between the body mass and flipper length of palmer penguins, taken from the [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/) package, was created whilst reading
+
+-   Chapter 3 of [An Introduction to Statistical Learning with Applications in R](https://www.statlearning.com/), second edition, by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani
+
+-   [Statistical Inference via Data Science. A ModernDive into R and the Tidyverse](https://moderndive.com/), by Chester Ismay and Albert Kim
+
+```{r echo=FALSE, warning=FALSE, fig.width=4, fig.height=4}
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(palmerpenguins)
+    library(dplyr)
+    library(ggplot2)
+  })
+})
+
+penguins_mass_flipper <- penguins %>%
+  select(species, flipper_length_mm, body_mass_g)
+
+penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
+                                     aes(x = flipper_length_mm,
+                                         y = body_mass_g)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Penguin size, Palmer Station LTER",
+       subtitle = "Flipper length and body mass for 3 species of penguins",
+       x = "Flipper length (mm)",
+       y = "Body mass (g)") +
+  theme(plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
+penguins_mass_flipper_plot
+```
+
+
+
+
+ 
