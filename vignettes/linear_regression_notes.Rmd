@@ -62,9 +62,19 @@ kable(penguins_regression_model)
 
 -   **std.error** indicates how close the sample regression line is to the underlying population regression line, with the 95% confidence interval approximately equal to ± 2 x Standard Error.
 
--   **conf.low** and **conf.high** more accurate upper and lower values for the 95% confidence interval.
+-   **conf.low** and **conf.high** gives the more accurate upper and lower values for the 95% confidence interval.
 
-## Assumptions 
+-   **statistic** t-statistic giving the number of standard deviations the slope value is from zero. The t-distribution is similar to a standard normal distribution when the number of points is approximately more than 30.
+
+-   **p.value** probability that there is a relationship between the X and Y variables where slope does not equal zero, from chance alone. With a small p-value than we reject the null hypothesis that there is no relationship between X and Y, inferring that there is a relationship between X and Y.
+
+Given a relationship between X and Y how well does the regression model fit to the data.
+
+**Residual standard error** (RSE) gives a measure of lack of fit of the regression model to the underlying data, estimating the average amount the response values deviates from the underlying population regression line.
+
+**R^2^ statistic** converts the residual standard error value to a proportion between 0 and 1, with 1 indicating good fit with a large proportion of the variability in Y explained by the regression model and 0 indicating a poor fit with a low proportion of the variability in Y explained by the regression model.
+
+## Assumptions
 
 -   The relationship between the variables is approximately linear.
 
@@ -73,7 +83,3 @@ kable(penguins_regression_model)
 -   The residuals should be normally distributed, centred around zero so that there is an equal number of positive and negative errors above and below the slope, with on average the error equalling zero.
 
 -   The residuals should show equal variance across all values of the explanatory variable, so that the value and spread of the residuals don't depend on the value of the explanatory variable on the x axis.
-
-
-
-
