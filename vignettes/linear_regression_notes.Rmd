@@ -49,30 +49,67 @@ penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
 penguins_mass_flipper_plot
 ```
 
-Linear regression calculates a least squares line with the smallest sum of squared residuals and is run using the **lm function** in the stats package, with the output presented as a more tidy data frame using the **tidy function** in the broom package.
+Linear regression calculates a least squares line with the smallest sum of squared residuals and is run using the **lm function** in the stats package.
 
 ```{r}
 penguins_regression_model <- lm(formula = body_mass_g ~ flipper_length_mm, 
-                                data = penguins_mass_flipper) %>% 
-  tidy(conf.int = TRUE) 
-kable(penguins_regression_model)
+                                data = penguins_mass_flipper)
 ```
 
+## Outcome
+
+The outcome of the linear regression model is presented as a more tidy data frame 
+using the **tidy and glance functions** in the broom package.
+
 -   **estimate** gives the intercept (first row) and slope (second row) values for the regression line.
+
+```{r}
+penguins_regression_model %>% 
+  tidy() %>% 
+  select(term, estimate) %>% 
+  kable()
+```
+
+## Questions
+
+1.  Is there a relationship between the predictor, X and response, Y variables that can be explained by a minimum acceptable probability of chance?
+
+-   **statistic** t-statistic giving the number of standard deviations the slope value is from zero. The t-distribution is similar to a standard normal distribution when the number of points is approximately more than 30.
+
+-   **p.value** probability that there is a relationship between the predictor, X and response, Y variables where slope does not equal zero, from chance alone. With a small p-value than we reject the null hypothesis that there is no relationship between X and Y, inferring that there is a relationship between the predictor X and response Y variables.
+
+```{r}
+penguins_regression_model %>% 
+  tidy() %>% 
+  select(term, estimate, statistic, p.value) %>% 
+  kable()
+```
+
+2.  How well does the model fit this relationship between the predictor, X and response Y variables?
+
+-   **Residual standard error** gives a measure of lack of fit of the regression model to the underlying data, estimating the average amount the response values deviates from the underlying population regression line.
+
+-   **R^2^ statistic** converts the residual standard error value to a proportion between 0 and 1, with 1 indicating good fit with a large proportion of the variability in the response Y variable explained by the regression model and 0 indicating a poor fit with a low proportion of the variability in the response Y variable explained by the regression model.
+
+```{r}
+penguins_regression_model %>% 
+  glance() %>% 
+  select(r.squared, adj.r.squared) %>% 
+  kable()
+```
+
+3.  Within 95% confidence where is the population regression line?
 
 -   **std.error** indicates how close the sample regression line is to the underlying population regression line, with the 95% confidence interval approximately equal to ± 2 x Standard Error.
 
 -   **conf.low** and **conf.high** gives the more accurate upper and lower values for the 95% confidence interval.
 
--   **statistic** t-statistic giving the number of standard deviations the slope value is from zero. The t-distribution is similar to a standard normal distribution when the number of points is approximately more than 30.
-
--   **p.value** probability that there is a relationship between the X and Y variables where slope does not equal zero, from chance alone. With a small p-value than we reject the null hypothesis that there is no relationship between X and Y, inferring that there is a relationship between X and Y.
-
-Given a relationship between X and Y how well does the regression model fit to the data.
-
-**Residual standard error** (RSE) gives a measure of lack of fit of the regression model to the underlying data, estimating the average amount the response values deviates from the underlying population regression line.
-
-**R^2^ statistic** converts the residual standard error value to a proportion between 0 and 1, with 1 indicating good fit with a large proportion of the variability in Y explained by the regression model and 0 indicating a poor fit with a low proportion of the variability in Y explained by the regression model.
+```{r}
+penguins_regression_model %>% 
+  tidy(conf.int = TRUE) %>% 
+  select(term, estimate, std.error, conf.low, conf.high) %>% 
+  kable()
+```
 
 ## Assumptions
 
@@ -82,4 +119,4 @@ Given a relationship between X and Y how well does the regression model fit to t
 
 -   The residuals should be normally distributed, centred around zero so that there is an equal number of positive and negative errors above and below the slope, with on average the error equalling zero.
 
--   The residuals should show equal variance across all values of the explanatory variable, so that the value and spread of the residuals don't depend on the value of the explanatory variable on the x axis.
+-   The residuals should show equal variance across all values of the predictor variable, so that the value and spread of the residuals don't depend on the value of the predictor variable on the x axis.
