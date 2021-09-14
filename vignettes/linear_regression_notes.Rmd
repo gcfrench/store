@@ -28,12 +28,24 @@ suppressPackageStartupMessages({
     library(ggplot2)
     library(broom)
     library(knitr)
+    library(gt)
   })
 })
 
+# gt global table style
+gt_table <- function(.data) {
+  .data %>% 
+    gt() %>% 
+    tab_options(table.align = "left",
+                column_labels.background.color = "grey90",
+                table_body.hlines.color = "white")
+}
+
+# penguins mass flipper data
 penguins_mass_flipper <- penguins %>%
   select(species, flipper_length_mm, body_mass_g)
 
+# penguins mass flipper plot
 penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
                                      aes(x = flipper_length_mm,
                                          y = body_mass_g)) +
@@ -67,7 +79,7 @@ using the **tidy and glance functions** in the broom package.
 penguins_regression_model %>% 
   tidy() %>% 
   select(term, estimate) %>% 
-  kable()
+  gt_table()
 ```
 
 ## Questions
@@ -82,7 +94,7 @@ penguins_regression_model %>%
 penguins_regression_model %>% 
   tidy() %>% 
   select(term, estimate, statistic, p.value) %>% 
-  kable()
+  gt_table()
 ```
 
 2.  How well does the model fit this relationship between the predictor, X and response Y variables?
@@ -95,7 +107,7 @@ penguins_regression_model %>%
 penguins_regression_model %>% 
   glance() %>% 
   select(r.squared, adj.r.squared) %>% 
-  kable()
+  gt_table()
 ```
 
 3.  Within 95% confidence where is the population regression line?
@@ -108,7 +120,7 @@ penguins_regression_model %>%
 penguins_regression_model %>% 
   tidy(conf.int = TRUE) %>% 
   select(term, estimate, std.error, conf.low, conf.high) %>% 
-  kable()
+  gt_table()
 ```
 
 ## Assumptions
