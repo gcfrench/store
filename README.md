@@ -44,6 +44,10 @@ The **information section** is the place where my useful documents are
 stored. These documents provide information and guidance when writing R
 scripts, for example **creating and updating a R package**.
 
+The **reporting section** contains the information and examples on
+creating reports using R Markdown and the **statistics section** notes
+on applying statistical methods to the data.
+
 The **lookups and functions** section contain my useful functions and
 lookup tables. These can be used either directly by installing and
 loading this package or by copying and pasting the R code from the

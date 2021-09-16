@@ -20,7 +20,7 @@ This example using linear regression to explore the relationship between the bod
 
 -   [Statistical Inference via Data Science. A ModernDive into R and the Tidyverse](https://moderndive.com/), by Chester Ismay and Albert Kim
 
-```{r echo=FALSE, warning=FALSE, fig.width=4, fig.height=4}
+```{r echo=FALSE, warning=FALSE}
 suppressPackageStartupMessages({
   suppressWarnings({
     library(palmerpenguins)
@@ -44,12 +44,25 @@ gt_table <- function(.data) {
 # penguins mass flipper data
 penguins_mass_flipper <- penguins %>%
   select(species, flipper_length_mm, body_mass_g)
+```
 
+Linear regression calculates a least squares line with the smallest sum of squared residuals and is run using the **lm function** in the stats package.
+
+```{r}
+penguins_regression_model <- lm(formula = body_mass_g ~ flipper_length_mm, 
+                                data = penguins_mass_flipper)
+```
+
+The regression line along with standard error 95% confidence intervals can be plotted
+using the **geom_smooth** function in the ggplot2 package.
+
+```{r warning=FALSE, message=FALSE, fig.width=4, fig.height=4}
 # penguins mass flipper plot
 penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
                                      aes(x = flipper_length_mm,
                                          y = body_mass_g)) +
   geom_point() +
+  geom_smooth(method = "lm", colour = "darkred") +
   theme_minimal() +
   labs(title = "Penguin size, Palmer Station LTER",
        subtitle = "Flipper length and body mass for 3 species of penguins",
@@ -59,13 +72,6 @@ penguins_mass_flipper_plot <- ggplot(data = penguins_mass_flipper,
         plot.caption = element_text(hjust = 0, face= "italic"),
         plot.caption.position = "plot")
 penguins_mass_flipper_plot
-```
-
-Linear regression calculates a least squares line with the smallest sum of squared residuals and is run using the **lm function** in the stats package.
-
-```{r}
-penguins_regression_model <- lm(formula = body_mass_g ~ flipper_length_mm, 
-                                data = penguins_mass_flipper)
 ```
 
 ## Outcome
@@ -101,7 +107,7 @@ penguins_regression_model %>%
 
 -   **Residual standard error** gives a measure of lack of fit of the regression model to the underlying data, estimating the average amount the response values deviates from the underlying population regression line.
 
--   **R^2^ statistic** converts the residual standard error value to a proportion between 0 and 1, with 1 indicating good fit with a large proportion of the variability in the response Y variable explained by the regression model and 0 indicating a poor fit with a low proportion of the variability in the response Y variable explained by the regression model.
+-   **R^2^ statistic** converts the residual standard error to a proportion between 0 and 1, with 1 indicating good fit with a large proportion of the variability in the response Y variable explained by the regression model and 0 indicating a poor fit with a low proportion of the variability in the response Y variable explained by the regression model.
 
 ```{r}
 penguins_regression_model %>% 
