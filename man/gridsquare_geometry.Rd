@@ -25,7 +25,6 @@ including tetrads (2000m precision).
 }
 \examples{
  suppressPackageStartupMessages({
-   library(store)
    suppressWarnings({
      library(dplyr)
      library(janitor)

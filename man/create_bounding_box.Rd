@@ -25,9 +25,6 @@ This function creates a bounding box polygon from it's corner coordinates,
 setting the coordinate reference system from the supplied \href{https://epsg.org/home.html}{EPSG value}.
 }
 \examples{
-suppressPackageStartupMessages({
-  library(store)
-})
 create_bounding_box(xmin = -10.81,
                     ymin = 49.85,
                     xmax = 2.07,

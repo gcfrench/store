@@ -31,7 +31,6 @@
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(palmerpenguins)
 #'   })
@@ -163,7 +162,6 @@ eda_variable_summary <- function(.dataset) {
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(palmerpenguins)
 #'   })
@@ -278,7 +276,6 @@ eda_variable_outliers <- function(.dataset) {
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(palmerpenguins)
 #'   })
@@ -379,7 +376,6 @@ eda_variable_distribution <- function(.dataset) {
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(palmerpenguins)
 #'   })
@@ -471,7 +467,6 @@ eda_variable_correlation <- function(.dataset) {
 #' # example from palmerpenguins
 #' # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(palmerpenguins)
 #'   })

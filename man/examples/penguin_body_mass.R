@@ -1,5 +1,4 @@
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)

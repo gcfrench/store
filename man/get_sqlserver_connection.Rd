@@ -23,8 +23,7 @@ requesting database credentials in the console. The SQL Server tables are added
 to the connection pane.
 }
 \section{Connect}{
-\preformatted{library(store)
-library(DBI)
+\preformatted{library(DBI)
 library(odbc)
 
 # connect to database, using keyring stored credentials

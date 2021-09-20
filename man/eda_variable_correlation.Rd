@@ -28,7 +28,6 @@ directory, showing the correlation values between each variable combination.
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
   })

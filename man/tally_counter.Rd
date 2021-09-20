@@ -45,7 +45,6 @@ displayed and so on.
 }
 \examples{
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)

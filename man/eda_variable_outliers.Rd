@@ -30,7 +30,6 @@ count outliers and mean of each variable with outliers included and excluded.
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
   })

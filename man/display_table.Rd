@@ -25,7 +25,6 @@ sort columns is also available.
 }
 \examples{
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)

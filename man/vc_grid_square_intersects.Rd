@@ -31,7 +31,6 @@ Sample of 10 rows from vc_grid_square_intersects dataset.
 
 \examples{
 suppressPackageStartupMessages({
- library(store)
  suppressWarnings({
   library(dplyr)
   library(gt)

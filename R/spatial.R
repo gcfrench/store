@@ -130,9 +130,6 @@ extract_polygons <- function(sf_data) {
 #' @export
 #'
 #' @examples
-#' suppressPackageStartupMessages({
-#'   library(store)
-#' })
 #' create_bounding_box(xmin = -10.81,
 #'                     ymin = 49.85,
 #'                     xmax = 2.07,
@@ -204,7 +201,6 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 #'
 #' @examples
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(here)
 #'     library(fs)

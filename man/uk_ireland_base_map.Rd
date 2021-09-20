@@ -52,7 +52,6 @@ Attribution: Contains data © 2017 Oil & Gas Authority
 
 \examples{
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(here)
     library(fs)

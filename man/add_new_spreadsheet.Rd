@@ -47,7 +47,6 @@ parameters.
 # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
 
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(fs)

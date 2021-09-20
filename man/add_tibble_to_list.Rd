@@ -24,7 +24,6 @@ Adding a tibble to a list is an example of \href{http://adv-r.had.co.nz/Environm
 }
 \examples{
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)

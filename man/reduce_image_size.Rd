@@ -33,7 +33,6 @@ Calling the function a second time then adds a border shadow.
 # https://allisonhorst.github.io/palmerpenguins/articles/examples.html
 
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(fs)

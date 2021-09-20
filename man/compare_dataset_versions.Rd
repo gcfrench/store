@@ -31,7 +31,6 @@ in the \href{https://www.tidyverse.org/blog/2020/10/waldo/}{waldo package}.
 }
 \examples{
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)

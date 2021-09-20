@@ -41,7 +41,6 @@ to extract the delimited list.
 }
 \examples{
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
     library(dplyr)

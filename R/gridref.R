@@ -163,7 +163,6 @@ gridRef <- function(x) {
 #'
 #' ```
 #' suppressPackageStartupMessages({
-#'   library(store)
 #'   suppressWarnings({
 #'     library(plumber)
 #'   })

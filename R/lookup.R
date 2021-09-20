@@ -25,7 +25,6 @@
 #'
 #' @examples
 #' suppressPackageStartupMessages({
-#'  library(store)
 #'  suppressWarnings({
 #'   library(dplyr)
 #'   library(gt)
@@ -101,7 +100,6 @@
 #'
 #' @examples
 #' suppressPackageStartupMessages({
-#'  library(store)
 #'  suppressWarnings({
 #'   library(dplyr)
 #'   library(gt)
@@ -160,7 +158,6 @@
 #'
 #' @examples
 #' suppressPackageStartupMessages({
-#'  library(store)
 #'  suppressWarnings({
 #'   library(dplyr)
 #'   library(gt)

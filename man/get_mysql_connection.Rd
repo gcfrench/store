@@ -19,8 +19,7 @@ This function initiates a MySQL connection using stored database credentials
 through the keyring package. The MySQL tables are added to the connection pane.
 }
 \section{Connect}{
-\preformatted{library(store)
-library(DBI)
+\preformatted{library(DBI)
 library(odbc)
 
 # connect to database, using keyring stored credentials

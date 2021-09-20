@@ -163,7 +163,6 @@ delete_key <- function(keyring_name, service_name) {
 #'
 #' @section Connect:
 #' ```
-#' library(store)
 #' library(DBI)
 #' library(odbc)
 #'
@@ -246,7 +245,6 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #'
 #' @section Connect:
 #' ```
-#' library(store)
 #' library(DBI)
 #' library(odbc)
 #'
@@ -307,7 +305,6 @@ get_mysql_connection <- function(keyring_name, service_name) {
 #'
 #' @section Connect:
 #' ```
-#' library(store)
 #' library(DBI)
 #' library(odbc)
 #'

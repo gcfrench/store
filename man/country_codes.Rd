@@ -34,7 +34,6 @@ countries HKG Hong Kong, MAC Macao and TWN Taiwan, Province of China.
 
 \examples{
 suppressPackageStartupMessages({
- library(store)
  suppressWarnings({
   library(dplyr)
   library(gt)

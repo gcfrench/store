@@ -19,8 +19,7 @@ This function initiates a PostgreSQL connection using stored database credential
 through the keyring package. The PostgreSQL tables are added to the connection pane.
 }
 \section{Connect}{
-\preformatted{library(store)
-library(DBI)
+\preformatted{library(DBI)
 library(odbc)
 
 # connect to database, using keyring stored credentials

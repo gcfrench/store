@@ -78,7 +78,6 @@ display_table <- function(data, rows = nrow(data)) {
 #' # https://allisonhorst.github.io/palmerpenguins/articles/art.html
 #'
 #' suppressPackageStartupMessages({
-#'    library(store)
 #'    suppressWarnings({
 #'       library(fs)
 #'       library(here)

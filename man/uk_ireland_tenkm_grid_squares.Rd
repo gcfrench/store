@@ -33,7 +33,6 @@ Sample of 10 rows from uk_ireland_tenkm_grid_squares dataset.
 
 \examples{
 suppressPackageStartupMessages({
- library(store)
  suppressWarnings({
   library(dplyr)
   library(gt)

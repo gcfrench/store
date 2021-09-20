@@ -1,5 +1,4 @@
  suppressPackageStartupMessages({
-   library(store)
    suppressWarnings({
      library(dplyr)
      library(janitor)

@@ -21,7 +21,6 @@ a gridref class. Returns an error if the grid reference is invalid.
 }
 \examples{
  suppressPackageStartupMessages({
-   library(store)
    suppressWarnings({
      library(dplyr)
      library(janitor)

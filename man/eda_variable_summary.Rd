@@ -32,7 +32,6 @@ the number of rows, missing values, unique values and zero values for each varia
 # example from palmerpenguins
 # https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html
 suppressPackageStartupMessages({
-  library(store)
   suppressWarnings({
     library(palmerpenguins)
   })
