@@ -27,6 +27,21 @@ create_locked_keyring <- function(keyring_name) {
 }
 
 #' @title
+#' Delete a keyring
+#'
+#' @description
+#' Deletes a keyring from the Windows Credential Store.
+#'
+#' @family keyring functions
+#'
+#' @inheritParams create_locked_keyring
+#'
+#' @export
+delete_keyring <- function(keyring_name) {
+  keyring::keyring_delete(keyring_name)
+}
+
+#' @title
 #' Get the status of a keyring
 #'
 #' @description

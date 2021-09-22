@@ -17,6 +17,7 @@ reference:
   - add_key
   - delete_key
   - lock_keyring
+  - delete_keyring
 - title: "Database connections"
   desc: "Connect to databases"
   contents:
