@@ -27,6 +27,21 @@ create_locked_keyring <- function(keyring_name) {
 }
 
 #' @title
+#' List the keyrings
+#'
+#' @description
+#' List the keyrings present in the Windows Credential Store.
+#'
+#' @family keyring functions
+#'
+#' @inheritParams create_locked_keyring
+#'
+#' @export
+list_keyrings <- function(keyring_name) {
+  keyring::keyring_list()
+}
+
+#' @title
 #' Delete a keyring
 #'
 #' @description

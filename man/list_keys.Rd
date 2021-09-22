@@ -23,6 +23,7 @@ Other keyring functions:
 \code{\link{delete_keyring}()},
 \code{\link{delete_key}()},
 \code{\link{get_keyring_status}()},
+\code{\link{list_keyrings}()},
 \code{\link{lock_keyring}()},
 \code{\link{unlock_keyring}()}
 }

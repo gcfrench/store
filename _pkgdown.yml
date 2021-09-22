@@ -12,6 +12,7 @@ reference:
   contents:
   - create_locked_keyring
   - get_keyring_status
+  - list_keyrings
   - list_keys
   - unlock_keyring
   - add_key

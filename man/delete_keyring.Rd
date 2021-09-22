@@ -18,6 +18,7 @@ Other keyring functions:
 \code{\link{create_locked_keyring}()},
 \code{\link{delete_key}()},
 \code{\link{get_keyring_status}()},
+\code{\link{list_keyrings}()},
 \code{\link{list_keys}()},
 \code{\link{lock_keyring}()},
 \code{\link{unlock_keyring}()}
