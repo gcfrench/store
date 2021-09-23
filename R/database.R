@@ -161,6 +161,28 @@ add_key <- function(keyring_name, service_name){
 }
 
 #' @title
+#' View key details
+#'
+#' @description
+#' Returns the JSON string containing the connection string stored in the key.
+#' The password to unlock the keyring is required before the key details are returned.
+#'
+#' @family keyring functions
+#'
+#' @inheritParams add_key
+#'
+#' @return The JSON string containing the connection string stored in the key.
+#'
+#' @export
+view_key <- function(keyring_name, service_name) {
+  keyring::keyring_lock(keyring_name)
+  key_details <- keyring::key_get(keyring = keyring_name, service = service_name) %>%
+    stringr::str_remove_all('"')
+  keyring::keyring_lock(keyring_name)
+  return(key_details)
+}
+
+#' @title
 #' Delete a key from a keyring
 #'
 #' @description

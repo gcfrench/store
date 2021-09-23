@@ -21,6 +21,7 @@ Other keyring functions:
 \code{\link{get_keyring_status}()},
 \code{\link{list_keyrings}()},
 \code{\link{list_keys}()},
-\code{\link{lock_keyring}()}
+\code{\link{lock_keyring}()},
+\code{\link{view_key}()}
 }
 \concept{keyring functions}

@@ -1,6 +1,6 @@
 ## store 1.2.0
 
--   Added functions to use the **keyring** package to list and remove keyrings.
+-   Added functions to use the **keyring** package to list and remove keyrings, and view keys.
 -   Added **Linear regression notes** made whilst reading Chapter 3 of [An Introduction to Statistical Learning with Applications in R](https://www.statlearning.com/), second edition, by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani and [Statistical Inference via Data Science. A ModernDive into R and the Tidyverse](https://moderndive.com/), by Chester Ismay and Albert Kim.
 
 ## store 1.1.0 <font size="4">2021-08-26</font>

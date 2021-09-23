@@ -16,6 +16,7 @@ reference:
   - list_keys
   - unlock_keyring
   - add_key
+  - view_key
   - delete_key
   - lock_keyring
   - delete_keyring
