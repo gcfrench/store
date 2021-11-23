@@ -102,47 +102,19 @@ usethis::use_pkgdown()
 
 pkgdown.yml template
 ```{}
-title: ""
 template:
   params:
     bootswatch: flatly
-reference:
-- title: ""
-  desc: ""
-#- contents:
-#  - function_name
- 
+
 navbar:
+  title: TITLE_HERE
   left:
     - icon: fa-home fa-lg
-      href: index.html
-    - text: "information"
-      menu:
-#      - text: ""
-#        href: articles/script_name.html
-    - text: "lookups and functions"
-      href: reference/index.html
-#    - text: "analyses"
-#      menu:
-#      - text: ""
-#        href: articles/script_name.html
-#    - text: "submissions"
-#      menu:
-#      - text: ""
-#        href: articles/script_name.html
-    - text: "archive"
-      menu:
-#      - text: ""
-#        href: articles/script_name.html
     - text: "tasks"
       href: articles/tasks.html
-    - text: "versions"
-      href: news/index.html
-   right:
-#    - icon: "fab fa-twitter fa-lg"
-#      href: https://twitter.com/gcfrench
-#    - icon: "fab fa-github fa-lg"
-#      href: https://github.com/gcfrench/store
+  right:
+    - icon: "fab fa-github fa-lg"
+      href: https://github.com/URL_HERE
 ```
 
 **usethis::use_lifecycle** add the lifecycle badges in the man directory
