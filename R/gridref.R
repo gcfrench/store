@@ -501,6 +501,43 @@ hectare <- function(x) {
 }
 
 #' @title
+#' Get the 10m grid reference
+#'
+#' @description
+#' This function returns the 10m grid reference for a higher precision grid reference.
+#'
+#' @inherit precision return details
+#'
+#' @inheritSection precision REST API
+#'
+#' @inherit precision return seealso
+#'
+#' @family grid reference functions
+#'
+#' @inheritParams precision
+#'
+#' @return The grid reference at 10m resolution.
+#'
+#' @export
+#'
+#' @example man/examples/grid_references.R
+#'
+#' @examples
+#' # add ten_m column
+#' suppressPackageStartupMessages({
+#'   suppressWarnings({
+#'     library(dplyr)
+#'   })
+#' })
+#'
+#' grid_references %>%
+#'   rowwise() %>%
+#'   mutate(ten_m = ten_metre(grid_reference))
+ten_metre <- function(x) {
+  UseMethod("ten_metre", x)
+}
+
+#' @title
 #' Convert a OSGB or OSNI grid reference to a polygon geometry feature
 #'
 #' @description
@@ -778,6 +815,10 @@ monad.gridref <- gridRef.gridref(format = "sq1km")
 #' @export
 hectare.gridref <- gridRef.gridref(format = "sq100m")
 
+#' @rdname ten_metre
+#' @export
+ten_metre.gridref <- gridRef.gridref(format = "sq10m")
+
 #' @rdname gridsquare_geometry
 #' @export
 gridsquare_geometry.gridref <- function(grid_reference) {
@@ -871,3 +912,8 @@ monad_api <- gridref_api(gridref_method = "monad")
 #' @inherit hectare
 #' @export
 hectare_api <- gridref_api(gridref_method = "hectare")
+
+#' @title ten_metre_api
+#' @inherit ten_metre
+#' @export
+ten_metre_api <- gridref_api(gridref_method = "ten_metre")

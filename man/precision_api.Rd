@@ -74,5 +74,6 @@ Other grid reference functions:
 \code{\link{northing}()},
 \code{\link{pentad}()},
 \code{\link{projection}()},
+\code{\link{ten_metre}()},
 \code{\link{tetrad}()}
 }

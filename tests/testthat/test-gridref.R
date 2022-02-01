@@ -608,6 +608,55 @@ test_that("OSNI 1m", {
   expect_equal(hectare(as_gridref("T2111181111")), "T211811")
 })
 
+# ten_metre
+test_that("OSGB hectad", {
+  expect_true(is.na(ten_metre(as_gridref("TL28"))))
+})
+
+test_that("OSGB tetrad", {
+  expect_true(is.na(ten_metre(as_gridref("TL28A"))))
+})
+
+test_that("OSGB monad", {
+  expect_true(is.na(ten_metre(as_gridref("TL2181"))))
+})
+
+test_that("OSGB hectare", {
+  expect_true(is.na(ten_metre(as_gridref("TL211811"))))
+})
+
+test_that("OSGB ten_metre", {
+  expect_equal(ten_metre(as_gridref("TL21118111")), "TL21118111")
+})
+
+test_that("OSGB 1m", {
+  expect_equal(ten_metre(as_gridref("TL2111181111")), "TL21118111")
+})
+
+test_that("OSNI hectad", {
+  expect_true(is.na(ten_metre(as_gridref("T28"))))
+})
+
+test_that("OSNI tetrad", {
+  expect_true(is.na(ten_metre(as_gridref("T28A"))))
+})
+
+test_that("OSNI monad", {
+  expect_true(is.na(ten_metre(as_gridref("T2181"))))
+})
+
+test_that("OSNI hectare", {
+  expect_true(is.na(ten_metre(as_gridref("T211811"))))
+})
+
+test_that("OSNI ten_metre", {
+  expect_equal(ten_metre(as_gridref("T21118111")), "T21118111")
+})
+
+test_that("OSNI 1m", {
+  expect_equal(ten_metre(as_gridref("T2111181111")), "T21118111")
+})
+
 
 
 

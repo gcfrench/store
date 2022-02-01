@@ -71,5 +71,6 @@ Other grid reference functions:
 \code{\link{pentad}()},
 \code{\link{precision}()},
 \code{\link{projection}()},
+\code{\link{ten_metre}()},
 \code{\link{tetrad}()}
 }

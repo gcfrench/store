@@ -16,7 +16,7 @@ URL: https://gcfrench.github.io/store
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     magrittr,
     dplyr,
@@ -47,7 +47,6 @@ Imports:
     glue,
     vctrs,
     rlang,
-    raster,
     daff,
     R6,
     gt,

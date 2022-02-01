@@ -56,6 +56,7 @@ reference:
   - tetrad.gridref
   - monad.gridref
   - hectare.gridref
+  - ten_metre.gridref
   - gridsquare_geometry.gridref
 - title: "Exploratory Data Analysis"
   desc: "Explore datasets"

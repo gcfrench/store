@@ -79,3 +79,12 @@ function(grid_reference) {
     store::hectare() %>%
     tidyr::replace_na("") # api returns "" instead of NULL
 }
+
+#* Gets the 10m grid reference.
+#* @param grid_reference A Great British or Irish grid reference character string.
+#* @get /ten_metre
+function(grid_reference) {
+  grid_reference <- store::as_gridref(grid_reference) %>%
+    store::ten_metre() %>%
+    tidyr::replace_na("") # api returns "" instead of NULL
+}
