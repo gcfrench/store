@@ -118,9 +118,14 @@ git init
 
 **Git commands**
 
+Use Git command if [committing large number of files](https://stackoverflow.com/questions/43690977/commit-a-large-number-of-files-in-rstudio-using-git-panel) as RStudio GIT panel will freeze
+
 ```{bash}
 git add -A
 git commit -m "COMMIT MESSAGE"
+```
+
+```{bash}
 git commit --amend --no-edit
 ```
 
