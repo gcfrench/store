@@ -124,7 +124,7 @@ penguin_details <- penguins %>%
   select(species, island) %>% 
   distinct() 
 
-penguin_details%>% 
+penguin_details %>% 
   pmap(safe_run_report)
 ```
 

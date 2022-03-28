@@ -141,7 +141,7 @@ list_keys <- function(keyring_name) {
 #'
 #' * SQL Server windows authentication: \{"server":"SERVER_NAME", "database":"DATABASE_NAME"\}.
 #' * PostGresSQL database: \{"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"\}.
-#' * For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS".
+#' * For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS". (need to escape back slash with double back slashes)
 #'
 #' @family keyring functions
 #'

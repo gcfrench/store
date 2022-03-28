@@ -184,6 +184,15 @@ git merge --abort
 
 ### [Revert back to previous state](https://happygitwithr.com/reset.html)
 
+**Git commands**
+
+-   check current status of repository
+
+```{bash}
+git status
+
+```
+
 -   changes saved but not committed RStudio Git - Diff - Discard All / Discard chunk
 
 **Git commands**
@@ -213,6 +222,15 @@ git reset HEAD^
 
 -- revert to previous commit, saved and staged changes lost
 git reset --hard HEAD^
+```
+
+**Git commands**
+
+-   commit individual files to master path
+
+```{bash}
+git fetch
+git checkout origin/master FILENAME
 ```
 
 ## Clone others repositories
