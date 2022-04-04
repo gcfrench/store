@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(shinyvalidate)
 library(thematic)
 library(ggplot2)
 library(dplyr)
@@ -37,156 +38,193 @@ species_images <- tribble(
 ### Shiny layout: https://shiny.rstudio.com/articles/layout-guide.html
 
 ui <- dashboardPage(
-        dashboardHeader(title = "Example Shiny App"),
-        dashboardSidebar(
 
-                ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
-                ### shinywidgets https://github.com/dreamRs/shinyWidgets
-                ### colourpicker https://github.com/daattali/colourpicker
-                ### sortable https://rstudio.github.io/sortable
+  dashboardHeader(title = "Example Shiny App"),
+  dashboardSidebar(
 
-                fluidRow(
-                        column(1),
-                        column(11,
+    ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
+    ### shinywidgets https://github.com/dreamRs/shinyWidgets
+    ### colourpicker https://github.com/daattali/colourpicker
+    ### sortable https://rstudio.github.io/sortable
 
-                               ## Immediate reactivity inputs ------------------
-                               radioButtons("species_selected", "Select a penguin species",
-                                            c("Adelie", "Gentoo", "Chinstrap")),
-                               ### Using sliders https://shiny.rstudio.com/articles/sliders.html
-                               sliderInput("year_range", "Select year range",
-                                           value = c(2007, 2009), min = 2006, max = 2010,
-                                           sep = "")
-                        )
-                ),
-                fluidRow(
-                        column(1),
-                        column(11,
-                               htmlOutput("species_image_source"),
-                               imageOutput("species_image"),
-                        )
-                ),
-                fluidRow(
-                        column(1),
-                        column(11,
-                               ## Delayed reactivity inputs --------------------
-                               actionButton("display_button", "Display species measurements",
-                                            class = "btn-sm btn-primary")
-                        )
-                )
-        ),
-        dashboardBody(
-                fluidRow(
-                        column(6,
-                               ## Immediate reactivity outputs -----------------
-                               textOutput("species_text"),
+    fluidRow(
+      column(1),
+      column(11,
 
-                               ### plot input https://gallery.shinyapps.io/095-plot-interaction-advanced/
-                               #### click = clickOpts(id = "plot_click", ...)
-                               #### dblclick = dblClickOpts(id = "plot_dblclick", ...)
-                               #### hover = hoverOpts(id = "plot_hover", ...)
-                               #### brush = brushOpts(id = "plot_brush", ...)
-                               plotOutput("species_plot",
-                                          brush = brushOpts(id = "plot_brush",
-                                                            fill = "gold", stroke = "black",
-                                                            resetOnNew = TRUE),
-                                          height = "550px"),
-                        ),
-                        column(6,
-                               tableOutput("species_plot_selected"),
-                        )
-                ),
-                fluidRow(
-                        ## Delayed reactivity outputs -------------------
-                        column(12,
-                               ### reactable tables https://glin.github.io/reactable/
-                               dataTableOutput("species_table"),
-                        )
+             ## Immediate reactivity inputs ------------------
+             radioButtons("species_selected", "Select a penguin species",
+                          choices = c("Adelie", "Gentoo", "Chinstrap")),
+             ### Using sliders https://shiny.rstudio.com/articles/sliders.html
+             sliderInput("species_year", "Select year",
+                         value = c(2007), min = 2006, max = 2010,
+                         sep = "")
+      )
+    ),
+    fluidRow(
+      column(1),
+      column(11,
+             htmlOutput("species_image_source"),
+             imageOutput("species_image"),
+      )
+    ),
+    fluidRow(
+      column(1),
+      column(11,
+             ## Delayed reactivity inputs --------------------
+             actionButton("display_button", "Display species measurements",
+                          class = "btn-sm btn-primary")
+      )
+    )
+  ),
+  dashboardBody(
+    fluidRow(
+      column(6,
+             ## Immediate reactivity outputs -----------------
+             textOutput("species_text"),
 
-                )
-        )
+             ### plot input https://gallery.shinyapps.io/095-plot-interaction-advanced/
+             #### click = clickOpts(id = "plot_click", ...)
+             #### dblclick = dblClickOpts(id = "plot_dblclick", ...)
+             #### hover = hoverOpts(id = "plot_hover", ...)
+             #### brush = brushOpts(id = "plot_brush", ...)
+             plotOutput("species_plot",
+                        brush = brushOpts(id = "plot_brush",
+                                          fill = "gold", stroke = "black",
+                                          resetOnNew = TRUE),
+                        height = "550px"),
+      ),
+      column(6,
+             tableOutput("species_plot_selected"),
+      )
+    ),
+    fluidRow(
+      ## Delayed reactivity outputs -------------------
+      column(12,
+             ### reactable tables https://glin.github.io/reactable/
+             dataTableOutput("species_table"),
+      )
+
+    )
+  )
 
 )
 
 
 server <- function(input, output, session) {
 
-        # Themes
-        ## https://rstudio.github.io/thematic
-        thematic_shiny()
+  # Validate input values
+  ### shinyValidate: https://rstudio.github.io/shinyvalidate/
 
-        # Immediate Shiny reactivity -------------------------------------------
+    ## initiate validation
+  check_input <- InputValidator$new()
 
-        ## Reactive expressions
-        species_data_plot <- reactive({penguins %>%
-                        filter(species == input$species_selected, between(year, input$year_range[1], input$year_range[2])) %>%
-                        select(-starts_with("bill"))
-        })
+  ## Validation rules
+  check_input$add_rule("species_selected", sv_required())
+  check_input$add_rule("species_year", sv_required())
+  check_input$add_rule("species_year", sv_between(
+                    left = 2007,
+                    right = 2009,
+                    inclusive = c(TRUE, TRUE),
+                    message_fmt = "No year measurements!"))
 
-        ## Outputs
-        ### https://shiny.rstudio.com/articles/images.html
-        output$species_image <- renderImage({
-                list(
-                  src = path("images", str_glue("{input$species_selected}.jpg")),
-                  width = 211,
-                  height = 317
-                )
-        }, deleteFile = FALSE)
+  ## turn on validation
+  check_input$enable()
 
-        output$species_image_source <- renderUI({
-                info <- species_images %>%
-                             filter(species == input$species_selected)
-                HTML(str_glue("<p>
+  # Immediate Shiny reactivity -------------------------------------------
+
+  ## Reactive expressions
+  species_data_plot <- reactive({
+
+    # Only proceed if input values are valid else pause reactivity
+    req(check_input$is_valid())
+
+    # Check combination of input values using shiny::validate
+    ## https://shiny.rstudio.com/reference/shiny/0.14/validate.html
+    if(input$species_selected == "Gentoo" && input$species_year == 2008) {
+      validate("Gentoo measurements for 2008 are not available")
+    }
+
+    penguins %>%
+      filter(species == input$species_selected, year == input$species_year) %>%
+      select(-starts_with("bill"))
+
+  })
+
+  ## Outputs
+  ### https://shiny.rstudio.com/articles/images.html
+  output$species_image <- renderImage({
+
+    list(
+      src = path("images", str_glue("{input$species_selected}.jpg")),
+      width = 211,
+      height = 317
+    )
+  }, deleteFile = FALSE)
+
+  output$species_image_source <- renderUI({
+
+    info <- species_images %>%
+      filter(species == input$species_selected)
+    HTML(str_glue("<p>
                               <a href='https://unsplash.com/photos/{info$id}'>original</a> by
                               <a href='https://unsplash.com/@{info$author}'>{info$author}</a>
                               </p>"))
-        })
+  })
 
-        output$species_text <- renderText(input$species_selected)
-        ### https://plotly-r.com/
-        output$species_plot <- renderPlot({
-                ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
-                        geom_point(size = 2, colour = "grey", alpha = 0.6) +
-                        geom_point(data = species_data_plot(),
-                                   aes(x = flipper_length_mm, y = body_mass_g),
-                                   size = 2, colour = "steelblue") +
-                        ggplot2::theme_bw()
-        }, res = 96)
+  output$species_text <- renderText({
 
-        ### nearPoints: plot_click, plot_dblclick, plot_hover
-        ### brushedPoints: plot_brush
-        output$species_plot_selected <- renderTable({
-                req(input$plot_brush)
-                brushedPoints(species_data_plot(), input$plot_brush)
-        })
+    # Only proceed if input values are valid else pause reactivity
+    req(check_input$is_valid())
+    input$species_selected})
 
 
-        # Delayed Shiny reactivity ---------------------------------------------
+  ### https://plotly-r.com/
+  output$species_plot <- renderPlot({
+    ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+      geom_point(size = 2, colour = "grey", alpha = 0.6) +
+      geom_point(data = species_data_plot(),
+                 aes(x = flipper_length_mm, y = body_mass_g),
+                 size = 2, colour = "steelblue") +
+      ggplot2::theme_bw()
+  }, res = 96)
 
-        ## eventReactive
-        species_data_table <- eventReactive(input$display_button, {
-                species_data_plot()
+  ### nearPoints: plot_click, plot_dblclick, plot_hover
+  ### brushedPoints: plot_brush
+  output$species_plot_selected <- renderTable({
 
-        })
+    # Only proceed if input$plot_brush values are present
+    req(input$plot_brush)
+    brushedPoints(species_data_plot(), input$plot_brush)
+  })
 
-        ## Outputs
-        ### DataTables options https://datatables.net/reference/option/
-        output$species_table <- renderDataTable(species_data_table(), options= list(pageLength = 6))
 
-        # Side effect reactivity -----------------------------------------------
+  # Delayed Shiny reactivity ---------------------------------------------
 
-        ## observeEvent
-        observeEvent(input$species_selected, {
-                message(str_glue("{input$species_selected} penguin species selected"))
-        })
+  ## eventReactive
+  species_data_table <- eventReactive(input$display_button, {
+    species_data_plot()
 
-        # Timed reactivity -----------------------------------------------------
+  })
 
-        ## reactiveTimer
-        timer <- reactiveTimer(5000) # milliseconds
+  ## Outputs
+  ### DataTables options https://datatables.net/reference/option/
+  output$species_table <- renderDataTable(species_data_table(), options= list(pageLength = 6))
 
-        ## Triggered reaction
-        observeEvent(timer(),
-                     message("The app has been working for the past 5 seconds"))
+  # Side effect reactivity -----------------------------------------------
+
+  ## observeEvent
+  observeEvent(input$species_selected, {
+    message(str_glue("{input$species_selected} penguin species selected"))
+  })
+
+  # Timed reactivity -----------------------------------------------------
+
+  ## reactiveTimer
+  timer <- reactiveTimer(5000) # milliseconds
+
+  ## Triggered reaction
+  observeEvent(timer(),
+               message("The app has been working for the past 5 seconds"))
 
 }
 
