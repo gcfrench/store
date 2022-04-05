@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyvalidate)
+library(waiter)
 library(thematic)
 library(ggplot2)
 library(dplyr)
@@ -42,6 +43,9 @@ ui <- dashboardPage(
   dashboardHeader(title = "Example Shiny App"),
   dashboardSidebar(
 
+    # Progress bar ---------------------------------------------------------------
+    use_waitress(),
+
     ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
     ### shinywidgets https://github.com/dreamRs/shinyWidgets
     ### colourpicker https://github.com/daattali/colourpicker
@@ -72,14 +76,22 @@ ui <- dashboardPage(
       column(11,
              ## Delayed reactivity inputs --------------------
              actionButton("display_button", "Display species measurements",
-                          class = "btn-sm btn-primary")
+                          class = "btn-sm btn-primary"),
+      )
+    ),
+    fluidRow(
+      column(1),
+      column(11,
+             ## Delayed reactivity inputs --------------------
+             actionButton("download_button", "Download species measurements",
+                          class = "btn-sm btn-primary"),
       )
     )
   ),
   dashboardBody(
     fluidRow(
       column(6,
-             ## Immediate reactivity outputs -----------------
+             ## Immediate reactivity outputs -----------------------------------
              textOutput("species_text"),
 
              ### plot input https://gallery.shinyapps.io/095-plot-interaction-advanced/
@@ -98,7 +110,7 @@ ui <- dashboardPage(
       )
     ),
     fluidRow(
-      ## Delayed reactivity outputs -------------------
+      ## Delayed reactivity outputs --------------------------------------------
       column(12,
              ### reactable tables https://glin.github.io/reactable/
              dataTableOutput("species_table"),
@@ -112,10 +124,11 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
 
-  # Validate input values
+  # Validate input values ------------------------------------------------------
   ### shinyValidate: https://rstudio.github.io/shinyvalidate/
+  ### shinyFeedback: https://github.com/merlinoa/shinyFeedback
 
-    ## initiate validation
+  ## initiate validation
   check_input <- InputValidator$new()
 
   ## Validation rules
@@ -125,12 +138,18 @@ server <- function(input, output, session) {
                     left = 2007,
                     right = 2009,
                     inclusive = c(TRUE, TRUE),
-                    message_fmt = "No year measurements!"))
+                    message_fmt = "measurements not available"))
 
   ## turn on validation
   check_input$enable()
 
-  # Immediate Shiny reactivity -------------------------------------------
+  # Notification ---------------------------------------------------------------
+  notify <- function(msg, id = NULL, duration = NULL) {
+    showNotification(msg, id = id, duration = duration,
+                     closeButton = FALSE, type = "message")
+  }
+
+  # Immediate Shiny reactivity -------------------------------------------------
 
   ## Reactive expressions
   species_data_plot <- reactive({
@@ -198,10 +217,21 @@ server <- function(input, output, session) {
   })
 
 
-  # Delayed Shiny reactivity ---------------------------------------------
+  # Delayed Shiny reactivity ---------------------------------------------------
 
   ## eventReactive
   species_data_table <- eventReactive(input$display_button, {
+
+    # Progress bar
+    ## shiny withProgress: https://shiny.rstudio.com/articles/progress.html
+    ## waiter: https://waiter.john-coene.com/
+    waitress <- Waitress$new(max = 10)
+    on.exit(waitress$close())
+    for (i in seq_len(10)) {
+      Sys.sleep(0.5)
+      waitress$inc(1)
+    }
+
     species_data_plot()
 
   })
@@ -210,22 +240,38 @@ server <- function(input, output, session) {
   ### DataTables options https://datatables.net/reference/option/
   output$species_table <- renderDataTable(species_data_table(), options= list(pageLength = 6))
 
-  # Side effect reactivity -----------------------------------------------
+  # Side effect reactivity -----------------------------------------------------
 
   ## observeEvent
   observeEvent(input$species_selected, {
-    message(str_glue("{input$species_selected} penguin species selected"))
+    id <- notify(str_glue("Getting {input$species_selected} penguin data"))
+    on.exit(removeNotification(id), add = TRUE)
+    Sys.sleep(1)
+
+    notify(str_glue("Getting {input$species_selected} penguin image"), id = id)
+    Sys.sleep(1)
+
+    notify(str_glue("Extracting measurements for {input$species_year}"), id = id)
+    Sys.sleep(1)
+
+    notify(str_glue("Creating {input$species_selected} penguin plot"), id = id)
+    Sys.sleep(1)
   })
 
-  # Timed reactivity -----------------------------------------------------
+  observeEvent(input$species_year, {
+    id <- notify(str_glue("Extracting measurements for {input$species_year}"))
+    on.exit(removeNotification(id), add = TRUE)
+    Sys.sleep(1)
+  })
+
+  # Timed reactivity -----------------------------------------------------------
 
   ## reactiveTimer
-  timer <- reactiveTimer(5000) # milliseconds
+  timer <- reactiveTimer(6000) # milliseconds
 
   ## Triggered reaction
   observeEvent(timer(),
-               message("The app has been working for the past 5 seconds"))
-
+               notify("Monitoring ..............", duration = 1))
 }
 
 shinyApp(ui, server)
