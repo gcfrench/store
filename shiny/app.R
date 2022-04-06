@@ -1,7 +1,8 @@
 library(shiny)
 library(shinydashboard)
 library(shinyvalidate)
-library(waiter)
+library(shinycssloaders)
+#library(waiter)
 library(thematic)
 library(ggplot2)
 library(dplyr)
@@ -20,6 +21,15 @@ species_images <- tribble(
   "Gentoo", "LAQ2QfYTpTY", "tamwarnerminton",
   "Adelie", "9k9tNQTwMEA", "dylanshaw"
 )
+
+# Dialog box ---------------------------------------------------------------
+modal_confirm <- modalDialog(
+  "Do you wish to download penguin measurements?",
+  title = "Download measurements",
+  footer = tagList(
+    actionButton("cancel", "Cancel"),
+    actionButton("ok", "Download" , class = "btn-sm btn-primary")
+  ))
 
 ### Shiny cheatsheet https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
 ### Shiny community: https://community.rstudio.com/c/shiny/8
@@ -42,9 +52,6 @@ ui <- dashboardPage(
 
   dashboardHeader(title = "Example Shiny App"),
   dashboardSidebar(
-
-    # Progress bar ---------------------------------------------------------------
-    use_waitress(),
 
     ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
     ### shinywidgets https://github.com/dreamRs/shinyWidgets
@@ -74,7 +81,8 @@ ui <- dashboardPage(
     fluidRow(
       column(1),
       column(11,
-             ## Delayed reactivity inputs --------------------
+
+             ## Delayed reactivity inputs --------------------------------------
              actionButton("display_button", "Display species measurements",
                           class = "btn-sm btn-primary"),
       )
@@ -82,7 +90,7 @@ ui <- dashboardPage(
     fluidRow(
       column(1),
       column(11,
-             ## Delayed reactivity inputs --------------------
+             ## Delayed reactivity inputs --------------------------------------
              actionButton("download_button", "Download species measurements",
                           class = "btn-sm btn-primary"),
       )
@@ -99,11 +107,16 @@ ui <- dashboardPage(
              #### dblclick = dblClickOpts(id = "plot_dblclick", ...)
              #### hover = hoverOpts(id = "plot_hover", ...)
              #### brush = brushOpts(id = "plot_brush", ...)
-             plotOutput("species_plot",
+
+             # Progress and spinner bar
+             ## shiny withProgress: https://shiny.rstudio.com/articles/progress.html
+             ## waiter: https://github.com/JohnCoene/waiter
+             ## shinycssLoaders: https://github.com/daattali/shinycssloaders
+             withSpinner(plotOutput("species_plot",
                         brush = brushOpts(id = "plot_brush",
                                           fill = "gold", stroke = "black",
                                           resetOnNew = TRUE),
-                        height = "550px"),
+                        height = "550px")),
       ),
       column(6,
              tableOutput("species_plot_selected"),
@@ -120,7 +133,6 @@ ui <- dashboardPage(
   )
 
 )
-
 
 server <- function(input, output, session) {
 
@@ -222,16 +234,6 @@ server <- function(input, output, session) {
   ## eventReactive
   species_data_table <- eventReactive(input$display_button, {
 
-    # Progress bar
-    ## shiny withProgress: https://shiny.rstudio.com/articles/progress.html
-    ## waiter: https://waiter.john-coene.com/
-    waitress <- Waitress$new(max = 10)
-    on.exit(waitress$close())
-    for (i in seq_len(10)) {
-      Sys.sleep(0.5)
-      waitress$inc(1)
-    }
-
     species_data_plot()
 
   })
@@ -243,6 +245,7 @@ server <- function(input, output, session) {
   # Side effect reactivity -----------------------------------------------------
 
   ## observeEvent
+  ### Notifications
   observeEvent(input$species_selected, {
     id <- notify(str_glue("Getting {input$species_selected} penguin data"))
     on.exit(removeNotification(id), add = TRUE)
@@ -258,10 +261,20 @@ server <- function(input, output, session) {
     Sys.sleep(1)
   })
 
-  observeEvent(input$species_year, {
-    id <- notify(str_glue("Extracting measurements for {input$species_year}"))
+  ### Dialog Box
+  observeEvent(input$download_button, {
+    showModal(modal_confirm)
+  })
+
+  observeEvent(input$ok, {
+    id <- notify("Downloading measurements ...")
     on.exit(removeNotification(id), add = TRUE)
-    Sys.sleep(1)
+    Sys.sleep(2)
+    removeModal()
+  })
+
+  observeEvent(input$cancel, {
+    removeModal()
   })
 
   # Timed reactivity -----------------------------------------------------------
