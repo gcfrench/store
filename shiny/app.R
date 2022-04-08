@@ -2,17 +2,17 @@ library(shiny)
 library(shinydashboard)
 library(shinyvalidate)
 library(shinycssloaders)
-#library(waiter)
 library(thematic)
 library(ggplot2)
 library(dplyr)
 library(stringr)
 library(tibble)
 library(fs)
-library(palmerpenguins)
+library(readr)
 
 # TO DO
 ## Colour selected plot points: pg 113
+## Download a parameterized report: pg 146
 
 # royalty-free stock photographs https://unsplash.com/
 species_images <- tribble(
@@ -24,11 +24,11 @@ species_images <- tribble(
 
 # Dialog box ---------------------------------------------------------------
 modal_confirm <- modalDialog(
-  "Do you wish to download penguin measurements?",
-  title = "Download measurements",
+  "Do you wish to display penguin measurements?",
+  title = "Display measurements",
   footer = tagList(
     actionButton("cancel", "Cancel"),
-    actionButton("ok", "Download" , class = "btn-sm btn-primary")
+    actionButton("ok", "Display" , class = "btn-sm btn-primary")
   ))
 
 ### Shiny cheatsheet https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
@@ -51,13 +51,21 @@ modal_confirm <- modalDialog(
 ui <- dashboardPage(
 
   dashboardHeader(title = "Example Shiny App"),
-  dashboardSidebar(
+  dashboardSidebar(width = "250px",
 
     ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
     ### shinywidgets https://github.com/dreamRs/shinyWidgets
     ### colourpicker https://github.com/daattali/colourpicker
     ### sortable https://rstudio.github.io/sortable
+    fluidRow(
+      column(1),
+      column(11,
 
+             ## Upload data ----------------------------------------------------
+             ### https://shiny.rstudio.com/articles/upload.html
+             fileInput("penguins_upload", "Upload penguin data", accept = ".csv")
+      )
+    ),
     fluidRow(
       column(1),
       column(11,
@@ -81,18 +89,13 @@ ui <- dashboardPage(
     fluidRow(
       column(1),
       column(11,
-
              ## Delayed reactivity inputs --------------------------------------
              actionButton("display_button", "Display species measurements",
                           class = "btn-sm btn-primary"),
-      )
-    ),
-    fluidRow(
-      column(1),
-      column(11,
-             ## Delayed reactivity inputs --------------------------------------
-             actionButton("download_button", "Download species measurements",
-                          class = "btn-sm btn-primary"),
+
+             ## Download data --------------------------------------------------
+             downloadButton("download_button", "Download species measurements",
+                            class = "btn-sm btn-primary")
       )
     )
   ),
@@ -144,7 +147,7 @@ server <- function(input, output, session) {
   check_input <- InputValidator$new()
 
   ## Validation rules
-  check_input$add_rule("species_selected", sv_required())
+  check_input$add_rule("species_selected", sv_optional())
   check_input$add_rule("species_year", sv_required())
   check_input$add_rule("species_year", sv_between(
                     left = 2007,
@@ -161,10 +164,25 @@ server <- function(input, output, session) {
                      closeButton = FALSE, type = "message")
   }
 
-  # Immediate Shiny reactivity -------------------------------------------------
+  # Upload data ----------------------------------------------------------------
 
   ## Reactive expressions
+  penguins_data <- reactive({
+
+    # Only proceed if penguin data is uploaded
+    req(input$penguins_upload)
+
+    # upload data
+    read_csv(input$penguins_upload$datapath)
+  })
+
+
+  # Immediate Shiny reactivity -------------------------------------------------
+
   species_data_plot <- reactive({
+
+    # Only proceed if penguin data loaded
+    req(penguins_data())
 
     # Only proceed if input values are valid else pause reactivity
     req(check_input$is_valid())
@@ -175,7 +193,7 @@ server <- function(input, output, session) {
       validate("Gentoo measurements for 2008 are not available")
     }
 
-    penguins %>%
+    penguins_data() %>%
       filter(species == input$species_selected, year == input$species_year) %>%
       select(-starts_with("bill"))
 
@@ -185,6 +203,9 @@ server <- function(input, output, session) {
   ### https://shiny.rstudio.com/articles/images.html
   output$species_image <- renderImage({
 
+    # Only proceed if penguin data loaded
+    req(penguins_data())
+
     list(
       src = path("images", str_glue("{input$species_selected}.jpg")),
       width = 211,
@@ -193,6 +214,9 @@ server <- function(input, output, session) {
   }, deleteFile = FALSE)
 
   output$species_image_source <- renderUI({
+
+    # Only proceed if penguin data loaded
+    req(penguins_data())
 
     info <- species_images %>%
       filter(species == input$species_selected)
@@ -204,14 +228,18 @@ server <- function(input, output, session) {
 
   output$species_text <- renderText({
 
-    # Only proceed if input values are valid else pause reactivity
-    req(check_input$is_valid())
-    input$species_selected})
+    # Only proceed if penguin data loaded
+    req(penguins_data())
 
+    # Only proceed if input values are valid
+    req(check_input$is_valid())
+
+    input$species_selected
+    })
 
   ### https://plotly-r.com/
   output$species_plot <- renderPlot({
-    ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+    ggplot(data = penguins_data(), aes(x = flipper_length_mm, y = body_mass_g)) +
       geom_point(size = 2, colour = "grey", alpha = 0.6) +
       geom_point(data = species_data_plot(),
                  aes(x = flipper_length_mm, y = body_mass_g),
@@ -240,13 +268,19 @@ server <- function(input, output, session) {
 
   ## Outputs
   ### DataTables options https://datatables.net/reference/option/
-  output$species_table <- renderDataTable(species_data_table(), options= list(pageLength = 6))
+  output$species_table <- renderDataTable(
+    species_data_table(), options= list(pageLength = 6)
+  )
 
   # Side effect reactivity -----------------------------------------------------
 
   ## observeEvent
   ### Notifications
   observeEvent(input$species_selected, {
+
+    # Only proceed if penguin data loaded
+    req(penguins_data())
+
     id <- notify(str_glue("Getting {input$species_selected} penguin data"))
     on.exit(removeNotification(id), add = TRUE)
     Sys.sleep(1)
@@ -262,12 +296,12 @@ server <- function(input, output, session) {
   })
 
   ### Dialog Box
-  observeEvent(input$download_button, {
+  observeEvent(input$display_button, {
     showModal(modal_confirm)
   })
 
   observeEvent(input$ok, {
-    id <- notify("Downloading measurements ...")
+    id <- notify("Displaying measurements ...")
     on.exit(removeNotification(id), add = TRUE)
     Sys.sleep(2)
     removeModal()
@@ -276,6 +310,18 @@ server <- function(input, output, session) {
   observeEvent(input$cancel, {
     removeModal()
   })
+
+  ### Download data
+  #### Parameterized reports https://shiny.rstudio.com/articles/generating-reports.html
+  output$download_button <- downloadHandler(
+
+    filename = function() {
+      str_glue("{input$species_selected}_{input$species_year}.csv")
+    },
+    content = function(file){
+      write_csv(species_data_plot(), file)
+    }
+  )
 
   # Timed reactivity -----------------------------------------------------------
 
