@@ -1,5 +1,4 @@
 library(shiny)
-library(shinydashboard)
 library(shinyvalidate)
 library(shinycssloaders)
 library(thematic)
@@ -22,7 +21,7 @@ species_images <- tribble(
   "Adelie", "9k9tNQTwMEA", "dylanshaw"
 )
 
-# Dialog box ---------------------------------------------------------------
+# Dialog box
 modal_confirm <- modalDialog(
   "Do you wish to display penguin measurements?",
   title = "Display measurements",
@@ -48,123 +47,104 @@ modal_confirm <- modalDialog(
 ### Shinydashboard: http://rstudio.github.io/shinydashboard/index.html
 ### Shiny layout: https://shiny.rstudio.com/articles/layout-guide.html
 
-ui <- dashboardPage(
+# Upload data ------------------------------------------------------------------
+ui_upload <- sidebarLayout(
+  sidebarPanel(width = 3,
 
-  dashboardHeader(title = "Example Shiny App"),
-  dashboardSidebar(width = "250px",
+    h3("Upload data"),
+    ### https://shiny.rstudio.com/articles/upload.html
+    fileInput("penguins_upload", "Upload penguin data", accept = ".csv")
+  ),
+  mainPanel()
+)
 
+# Immediate reactivity inputs --------------------------------------------------
+ui_immediate_reactivity <- sidebarLayout(
+  sidebarPanel(width = 3,
+
+    h3("Immediate reactivity"),
     ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
     ### shinywidgets https://github.com/dreamRs/shinyWidgets
     ### colourpicker https://github.com/daattali/colourpicker
     ### sortable https://rstudio.github.io/sortable
-    fluidRow(
-      column(1),
-      column(11,
 
-             ## Upload data ----------------------------------------------------
-             ### https://shiny.rstudio.com/articles/upload.html
-             fileInput("penguins_upload", "Upload penguin data", accept = ".csv")
-      )
-    ),
-    fluidRow(
-      column(1),
-      column(11,
-
-             ## Immediate reactivity inputs ------------------
-             radioButtons("species_selected", "Select a penguin species",
-                          choices = c("Adelie", "Gentoo", "Chinstrap")),
-             ### Using sliders https://shiny.rstudio.com/articles/sliders.html
-             sliderInput("species_year", "Select year",
-                         value = c(2007), min = 2006, max = 2010,
-                         sep = "")
-      )
-    ),
-    fluidRow(
-      column(1),
-      column(11,
-             htmlOutput("species_image_source"),
-             imageOutput("species_image"),
-      )
-    ),
-    fluidRow(
-      column(1),
-      column(11,
-             ## Delayed reactivity inputs --------------------------------------
-             actionButton("display_button", "Display species measurements",
-                          class = "btn-sm btn-primary"),
-
-             ## Download data --------------------------------------------------
-             downloadButton("download_button", "Download species measurements",
-                            class = "btn-sm btn-primary")
-      )
-    )
+    radioButtons("species_selected", "Select a penguin species",
+                 choices = c("Adelie", "Gentoo", "Chinstrap")),
+    ### Using sliders https://shiny.rstudio.com/articles/sliders.html
+    sliderInput("species_year", "Select year",
+                value = c(2007), min = 2006, max = 2010,
+                sep = "")
   ),
-  dashboardBody(
-    fluidRow(
-      column(6,
-             ## Immediate reactivity outputs -----------------------------------
-             textOutput("species_text"),
-
-             ### plot input https://gallery.shinyapps.io/095-plot-interaction-advanced/
-             #### click = clickOpts(id = "plot_click", ...)
-             #### dblclick = dblClickOpts(id = "plot_dblclick", ...)
-             #### hover = hoverOpts(id = "plot_hover", ...)
-             #### brush = brushOpts(id = "plot_brush", ...)
-
-             # Progress and spinner bar
-             ## shiny withProgress: https://shiny.rstudio.com/articles/progress.html
-             ## waiter: https://github.com/JohnCoene/waiter
-             ## shinycssLoaders: https://github.com/daattali/shinycssloaders
-             withSpinner(plotOutput("species_plot",
-                        brush = brushOpts(id = "plot_brush",
-                                          fill = "gold", stroke = "black",
-                                          resetOnNew = TRUE),
-                        height = "550px")),
-      ),
-      column(6,
-             tableOutput("species_plot_selected"),
-      )
+  mainPanel(
+    column(2,
+           htmlOutput("species_image_source"),
+           imageOutput("species_image")
     ),
-    fluidRow(
-      ## Delayed reactivity outputs --------------------------------------------
-      column(12,
-             ### reactable tables https://glin.github.io/reactable/
-             dataTableOutput("species_table"),
-      )
+    column(5,
+           textOutput("species_text"),
 
+
+           ### plot input https://gallery.shinyapps.io/095-plot-interaction-advanced/
+           #### click = clickOpts(id = "plot_click", ...)
+           #### dblclick = dblClickOpts(id = "plot_dblclick", ...)
+           #### hover = hoverOpts(id = "plot_hover", ...)
+           #### brush = brushOpts(id = "plot_brush", ...)
+
+           # Progress and spinner bar
+           ## shiny withProgress: https://shiny.rstudio.com/articles/progress.html
+           ## waiter: https://github.com/JohnCoene/waiter
+           ## shinycssLoaders: https://github.com/daattali/shinycssloaders
+           withSpinner(plotOutput("species_plot",
+                                  brush = brushOpts(id = "plot_brush",
+                                                    fill = "gold", stroke = "black",
+                                                    resetOnNew = TRUE),
+                                  height = "317px"))
+    ),
+    column(5,
+
+           tableOutput("species_plot_selected")
     )
   )
+)
 
+# Delayed reactivity -----------------------------------------------------------
+ui_delayed_reactivity <- sidebarLayout(
+  sidebarPanel(width = 3,
+
+    h3("Delayed reactivity"),
+    actionButton("display_button", "Display species measurements",
+                 class = "btn-sm btn-primary"),
+  ),
+  mainPanel(
+
+    ### reactable tables https://glin.github.io/reactable/
+    dataTableOutput("species_table")
+  )
+)
+
+# Download data ----------------------------------------------------------------
+ui_download <- sidebarLayout(
+  sidebarPanel(width = 3,
+
+    h3("Download data"),
+    downloadButton("download_button", "Download species measurements",
+                   class = "btn-sm btn-primary")
+  ),
+  mainPanel()
+)
+
+# UI layout
+ui <- fluidPage(
+  h1("Example shiny app"),
+  ui_upload,
+  ui_immediate_reactivity,
+  ui_delayed_reactivity,
+  ui_download
 )
 
 server <- function(input, output, session) {
 
-  # Validate input values ------------------------------------------------------
-  ### shinyValidate: https://rstudio.github.io/shinyvalidate/
-  ### shinyFeedback: https://github.com/merlinoa/shinyFeedback
-
-  ## initiate validation
-  check_input <- InputValidator$new()
-
-  ## Validation rules
-  check_input$add_rule("species_selected", sv_optional())
-  check_input$add_rule("species_year", sv_required())
-  check_input$add_rule("species_year", sv_between(
-                    left = 2007,
-                    right = 2009,
-                    inclusive = c(TRUE, TRUE),
-                    message_fmt = "measurements not available"))
-
-  ## turn on validation
-  check_input$enable()
-
-  # Notification ---------------------------------------------------------------
-  notify <- function(msg, id = NULL, duration = NULL) {
-    showNotification(msg, id = id, duration = duration,
-                     closeButton = FALSE, type = "message")
-  }
-
-  # Upload data ----------------------------------------------------------------
+# Upload data ----------------------------------------------------------------
 
   ## Reactive expressions
   penguins_data <- reactive({
@@ -176,19 +156,44 @@ server <- function(input, output, session) {
     read_csv(input$penguins_upload$datapath)
   })
 
+# Immediate reactivity ---------------------------------------------------------
 
-  # Immediate Shiny reactivity -------------------------------------------------
+  ## Validate input values
+  ### shinyValidate: https://rstudio.github.io/shinyvalidate/
+  ### shinyFeedback: https://github.com/merlinoa/shinyFeedback
 
+  ## initiate validation
+  check_input <- InputValidator$new()
+
+  ## Validation rules
+  check_input$add_rule("species_selected", sv_optional())
+  check_input$add_rule("species_year", sv_required())
+  check_input$add_rule("species_year", sv_between(
+    left = 2007,
+    right = 2009,
+    inclusive = c(TRUE, TRUE),
+    message_fmt = "measurements not available"))
+
+  ## turn on validation
+  check_input$enable()
+
+  ## Notification
+  notify <- function(msg, id = NULL, duration = NULL) {
+    showNotification(msg, id = id, duration = duration,
+                     closeButton = FALSE, type = "message")
+  }
+
+  ## reactivity
   species_data_plot <- reactive({
 
-    # Only proceed if penguin data loaded
+    ### Only proceed if penguin data loaded
     req(penguins_data())
 
-    # Only proceed if input values are valid else pause reactivity
+    ### Only proceed if input values are valid else pause reactivity
     req(check_input$is_valid())
 
-    # Check combination of input values using shiny::validate
-    ## https://shiny.rstudio.com/reference/shiny/0.14/validate.html
+    ### Check combination of input values using shiny::validate
+    #### https://shiny.rstudio.com/reference/shiny/0.14/validate.html
     if(input$species_selected == "Gentoo" && input$species_year == 2008) {
       validate("Gentoo measurements for 2008 are not available")
     }
@@ -199,23 +204,30 @@ server <- function(input, output, session) {
 
   })
 
-  ## Outputs
-  ### https://shiny.rstudio.com/articles/images.html
-  output$species_image <- renderImage({
+  ## side effects reactivity: Notifications
+  observeEvent(input$species_selected, {
 
     # Only proceed if penguin data loaded
     req(penguins_data())
 
-    list(
-      src = path("images", str_glue("{input$species_selected}.jpg")),
-      width = 211,
-      height = 317
-    )
-  }, deleteFile = FALSE)
+    id <- notify(str_glue("Getting {input$species_selected} penguin data"))
+    on.exit(removeNotification(id), add = TRUE)
+    Sys.sleep(1)
 
+    notify(str_glue("Getting {input$species_selected} penguin image"), id = id)
+    Sys.sleep(1)
+
+    notify(str_glue("Extracting measurements for {input$species_year}"), id = id)
+    Sys.sleep(1)
+
+    notify(str_glue("Creating {input$species_selected} penguin plot"), id = id)
+    Sys.sleep(1)
+  })
+
+     ## Outputs
   output$species_image_source <- renderUI({
 
-    # Only proceed if penguin data loaded
+    ### Only proceed if penguin data loaded
     req(penguins_data())
 
     info <- species_images %>%
@@ -226,16 +238,29 @@ server <- function(input, output, session) {
                               </p>"))
   })
 
-  output$species_text <- renderText({
+  ### https://shiny.rstudio.com/articles/images.html
+  output$species_image <- renderImage({
 
-    # Only proceed if penguin data loaded
+    ### Only proceed if penguin data loaded
     req(penguins_data())
 
-    # Only proceed if input values are valid
+    list(
+      src = path("images", str_glue("{input$species_selected}.jpg")),
+      width = 211,
+      height = 317
+    )
+  }, deleteFile = FALSE)
+
+  output$species_text <- renderText({
+
+    ### Only proceed if penguin data loaded
+    req(penguins_data())
+
+    ### Only proceed if input values are valid
     req(check_input$is_valid())
 
     input$species_selected
-    })
+  })
 
   ### https://plotly-r.com/
   output$species_plot <- renderPlot({
@@ -256,46 +281,15 @@ server <- function(input, output, session) {
     brushedPoints(species_data_plot(), input$plot_brush)
   })
 
-
-  # Delayed Shiny reactivity ---------------------------------------------------
+  # Delayed reactivity ---------------------------------------------------------
 
   ## eventReactive
   species_data_table <- eventReactive(input$display_button, {
 
     species_data_plot()
-
   })
 
-  ## Outputs
-  ### DataTables options https://datatables.net/reference/option/
-  output$species_table <- renderDataTable(
-    species_data_table(), options= list(pageLength = 6)
-  )
-
-  # Side effect reactivity -----------------------------------------------------
-
-  ## observeEvent
-  ### Notifications
-  observeEvent(input$species_selected, {
-
-    # Only proceed if penguin data loaded
-    req(penguins_data())
-
-    id <- notify(str_glue("Getting {input$species_selected} penguin data"))
-    on.exit(removeNotification(id), add = TRUE)
-    Sys.sleep(1)
-
-    notify(str_glue("Getting {input$species_selected} penguin image"), id = id)
-    Sys.sleep(1)
-
-    notify(str_glue("Extracting measurements for {input$species_year}"), id = id)
-    Sys.sleep(1)
-
-    notify(str_glue("Creating {input$species_selected} penguin plot"), id = id)
-    Sys.sleep(1)
-  })
-
-  ### Dialog Box
+  ### side effect reactivity: Dialog Box
   observeEvent(input$display_button, {
     showModal(modal_confirm)
   })
@@ -311,7 +305,13 @@ server <- function(input, output, session) {
     removeModal()
   })
 
-  ### Download data
+  ## Outputs
+  ### DataTables options https://datatables.net/reference/option/
+  output$species_table <- renderDataTable(
+    species_data_table(), options= list(pageLength = 6)
+  )
+
+# Download data ----------------------------------------------------------------
   #### Parameterized reports https://shiny.rstudio.com/articles/generating-reports.html
   output$download_button <- downloadHandler(
 
@@ -323,7 +323,7 @@ server <- function(input, output, session) {
     }
   )
 
-  # Timed reactivity -----------------------------------------------------------
+# Timed reactivity -------------------------------------------------------------
 
   ## reactiveTimer
   timer <- reactiveTimer(6000) # milliseconds
