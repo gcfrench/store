@@ -14,6 +14,7 @@ library(readr)
 ## Colour selected plot points: pg 113
 ## Download a parameterized report: pg 146
 ## Add reset button: pg 155
+## Update donwload button label using isolate: pg 168
 
 # royalty-free stock photographs https://unsplash.com/
 species_images <- tribble(
@@ -64,20 +65,19 @@ ui_page_1 <- sidebarLayout(
 ui_page_2 <- sidebarLayout(
   sidebarPanel(width = 3,
 
-               h3("Immediate reactivity"),
-               ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
-               ### shinywidgets https://github.com/dreamRs/shinyWidgets
-               ### colourpicker https://github.com/daattali/colourpicker
-               ### sortable https://rstudio.github.io/sortable
+                 h3("Immediate reactivity"),
+                 ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
+                 ### shinywidgets https://github.com/dreamRs/shinyWidgets
+                 ### colourpicker https://github.com/daattali/colourpicker
+                 ### sortable https://rstudio.github.io/sortable
 
-               selectInput("species_selected", "Select a penguin species", choices = NULL),
-               ### Using sliders https://shiny.rstudio.com/articles/sliders.html
-               numericInput("species_year", "Select year", value = NULL, min = 0, max = 0),
+                 selectInput("species_selected", "Select a penguin species", choices = NULL),
+                 ### Using sliders https://shiny.rstudio.com/articles/sliders.html
+                 numericInput("species_year", "Select year", value = NULL, min = 0, max = 0),
 
-               h3("Delayed reactivity"),
-               actionButton("display_button", "Display species measurements",
-                            class = "btn-sm btn-primary")
-
+                 h3("Delayed reactivity"),
+                 actionButton("display_button", "Display species measurements",
+                              class = "btn-sm btn-primary")
   ),
   mainPanel(
     fluidRow(
@@ -116,46 +116,35 @@ ui_page_2 <- sidebarLayout(
   )
 )
 
-
-# Download data ----------------------------------------------------------------
-ui_page_3 <- sidebarLayout(
-  sidebarPanel(width = 3,
-
-    h3("Download data"),
-    downloadButton("download_button", "Download species measurements",
-                   class = "btn-sm btn-primary")
-  ),
-  mainPanel()
-)
-
 # UI layout
 ui <- fluidPage(
   h1("Example shiny app"),
   tabsetPanel(
     id = "wizard",
     type = "hidden",
+    # Upload page
     tabPanel("page_1",
              ui_page_1
     ),
+    # Diaplay page
     tabPanel("page_2",
              ui_page_2
-    ),
-    tabPanel("page_3",
-             ui_page_3
     )
-  )
+  ),
+  # Download page
+  uiOutput("download")
 )
 
 server <- function(input, output, session) {
 
-# update UI page ---------------------------------------------------------------
-switch_page <- function(i) {
-  updateTabsetPanel(inputId = "wizard", selected = paste0("page_", i))
-}
+  # update UI page ---------------------------------------------------------------
+  switch_page <- function(i) {
+    updateTabsetPanel(inputId = "wizard", selected = paste0("page_", i))
+  }
 
-observeEvent(input$penguins_upload, switch_page(2))
+  observeEvent(input$penguins_upload, switch_page(2))
 
-# Upload data ------------------------------------------------------------------
+  # Upload data ------------------------------------------------------------------
 
   ## Reactive expressions
   penguins_data <- reactive({
@@ -167,7 +156,7 @@ observeEvent(input$penguins_upload, switch_page(2))
     read_csv(input$penguins_upload$datapath)
   })
 
-# Immediate reactivity ---------------------------------------------------------
+  # Immediate reactivity ---------------------------------------------------------
 
   ## Validate input values
   ### shinyValidate: https://rstudio.github.io/shinyvalidate/
@@ -260,11 +249,8 @@ observeEvent(input$penguins_upload, switch_page(2))
     Sys.sleep(1)
   })
 
-     ## Outputs
+  ## Outputs
   output$species_image_source <- renderUI({
-
-    ### Only proceed if penguin data loaded
-    req(penguins_data())
 
     info <- species_images %>%
       filter(species == input$species_selected)
@@ -277,9 +263,6 @@ observeEvent(input$penguins_upload, switch_page(2))
   ### https://shiny.rstudio.com/articles/images.html
   output$species_image <- renderImage({
 
-    ### Only proceed if penguin data loaded
-    req(penguins_data())
-
     list(
       src = path("images", str_glue("{input$species_selected}.jpg")),
       width = 211,
@@ -288,9 +271,6 @@ observeEvent(input$penguins_upload, switch_page(2))
   }, deleteFile = FALSE)
 
   output$species_text <- renderText({
-
-    ### Only proceed if penguin data loaded
-    req(penguins_data())
 
     ### Only proceed if input values are valid
     req(check_input$is_valid())
@@ -347,8 +327,21 @@ observeEvent(input$penguins_upload, switch_page(2))
     removeModal()
   })
 
-# Download data ----------------------------------------------------------------
+  # Download data ----------------------------------------------------------------
   #### Parameterized reports https://shiny.rstudio.com/articles/generating-reports.html
+
+  ## Dynamically add download sidebarPanel to UI
+  observeEvent(input$display_button, {
+    output$download <- renderUI({
+
+      sidebarPanel(width = 3,
+                   h3("Download data"),
+                   downloadButton("download_button", "Download species measurements",
+                                  class = "btn-sm btn-primary")
+      )
+    })
+  })
+
   output$download_button <- downloadHandler(
 
     filename = function() {
@@ -359,7 +352,7 @@ observeEvent(input$penguins_upload, switch_page(2))
     }
   )
 
-# Timed reactivity -------------------------------------------------------------
+  # Timed reactivity -------------------------------------------------------------
 
   ## reactiveTimer
   timer <- reactiveTimer(6000) # milliseconds
