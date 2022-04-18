@@ -26,11 +26,11 @@ species_images <- tribble(
 
 # Dialog box
 modal_confirm <- modalDialog(
-  "Do you wish to display penguin measurements?",
-  title = "Display measurements",
+  "Clear species measurements functionality required",
+  title = "Clear species measurements",
   footer = tagList(
     actionButton("cancel", "Cancel"),
-    actionButton("ok", "Display" , class = "btn-sm btn-primary")
+    actionButton("ok", "Clear" , class = "btn-sm btn-primary")
   ))
 
 ### Shiny cheatsheet https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
@@ -126,13 +126,13 @@ ui <- fluidPage(
     tabPanel("page_1",
              ui_page_1
     ),
-    # Diaplay page
+    # Display page
     tabPanel("page_2",
              ui_page_2
     )
   ),
-  # Download page
-  uiOutput("download")
+  uiOutput("download"),
+  uiOutput("clear")
 )
 
 server <- function(input, output, session) {
@@ -206,10 +206,19 @@ server <- function(input, output, session) {
   })
 
   observeEvent(year_list(), {
-    ### prevent ficker: freezeReactiveValue
+    ### prevent flicker: freezeReactiveValue
     updateNumericInput(inputId = "species_year",
                        value = min(year_list()),
                        min = min(year_list() - 1), max = max(year_list() + 1))
+  })
+
+  ## update action button label
+  button_label <- reactive({
+    str_glue("{input$species_year} {input$species_selected}")
+  })
+
+  observeEvent(button_label(), {
+    updateActionButton(inputId = "display_button", label = str_glue("Display {button_label()} measurements"))
   })
 
   species_data_plot <- reactive({
@@ -307,24 +316,11 @@ server <- function(input, output, session) {
 
   ### side effect reactivity: Dialog Box
   observeEvent(input$display_button, {
-    showModal(modal_confirm)
-  })
-
-  observeEvent(input$ok, {
-    id <- notify("Displaying measurements ...")
-    on.exit(removeNotification(id), add = TRUE)
-    Sys.sleep(1)
 
     ### DataTables options https://datatables.net/reference/option/
     output$species_table <- renderDataTable(
       species_data_table(), options= list(pageLength = 6)
     )
-
-    removeModal()
-  })
-
-  observeEvent(input$cancel, {
-    removeModal()
   })
 
   # Download data ----------------------------------------------------------------
@@ -333,11 +329,15 @@ server <- function(input, output, session) {
   ## Dynamically add download sidebarPanel to UI
   observeEvent(input$display_button, {
     output$download <- renderUI({
+      label_text <- isolate(str_glue("Download {button_label()} measurements"))
+      sidebarLayout(
+        sidebarPanel(width = 3,
 
-      sidebarPanel(width = 3,
-                   h3("Download data"),
-                   downloadButton("download_button", "Download species measurements",
-                                  class = "btn-sm btn-primary")
+                     h3("Download data"),
+                     downloadButton("download_button", label_text,
+                                    class = "btn-sm btn-primary")
+        ),
+        mainPanel()
       )
     })
   })
@@ -351,6 +351,34 @@ server <- function(input, output, session) {
       write_csv(species_data_plot(), file)
     }
   )
+
+  ## Clear app -----------------------------------------------------------------
+  observeEvent(input$display_button, {
+    output$clear <- renderUI({
+        label_text <- isolate(str_glue("Clear {button_label()} measurements"))
+        sidebarLayout(
+          sidebarPanel(width = 3,
+                       h3("Clear data"),
+                       actionButton("clear_button", label_text,
+                                    class = "btn-sm btn-primary")
+          ),
+          mainPanel()
+        )
+      })
+
+    ### side effect reactivity: Dialog Box
+    observeEvent(input$clear_button, {
+      showModal(modal_confirm)
+    })
+
+    observeEvent(input$ok, {
+      removeModal()
+    })
+
+    observeEvent(input$cancel, {
+      removeModal()
+    })
+  })
 
   # Timed reactivity -------------------------------------------------------------
 
