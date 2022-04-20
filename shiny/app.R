@@ -1,6 +1,7 @@
 library(shiny)
 library(shinyvalidate)
 library(shinycssloaders)
+library(reactlog)
 library(thematic)
 library(ggplot2)
 library(dplyr, warn.conflicts = FALSE)
@@ -14,7 +15,11 @@ library(readr)
 ## Colour selected plot points: pg 113
 ## Download a parameterized report: pg 146
 ## Add reset button: pg 155
-## Update donwload button label using isolate: pg 168
+## Add bookmark button: pg 180
+## https://shanghai.hosting.nyu.edu/data/r/case-4-database-management-shiny.html
+
+### https://shiny.rstudio.com/articles/sanitize-errors.html
+options(shiny.sanitize.errors = TRUE)
 
 # royalty-free stock photographs https://unsplash.com/
 species_images <- tribble(
@@ -26,12 +31,17 @@ species_images <- tribble(
 
 # Dialog box
 modal_confirm <- modalDialog(
-  "Clear species measurements functionality required",
-  title = "Clear species measurements",
+  "Clear measurements functionality required",
+  title = str_glue("Clear measurements"),
   footer = tagList(
     actionButton("cancel", "Cancel"),
     actionButton("ok", "Clear" , class = "btn-sm btn-primary")
   ))
+
+# reactlog
+### https://rstudio.github.io/reactlog/
+### Ctrl-F3 or shiny::reactlogShow()
+reactlog_enable()
 
 ### Shiny cheatsheet https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
 ### Shiny community: https://community.rstudio.com/c/shiny/8
@@ -117,23 +127,25 @@ ui_page_2 <- sidebarLayout(
 )
 
 # UI layout
-ui <- fluidPage(
-  h1("Example shiny app"),
-  tabsetPanel(
-    id = "wizard",
-    type = "hidden",
-    # Upload page
-    tabPanel("page_1",
-             ui_page_1
+ui <- function(request) {
+  fluidPage(
+    h1("Example shiny app"),
+    tabsetPanel(
+      id = "wizard",
+      type = "hidden",
+      # Upload page
+      tabPanel("page_1",
+               ui_page_1
+      ),
+      # Display page
+      tabPanel("page_2",
+               ui_page_2
+      )
     ),
-    # Display page
-    tabPanel("page_2",
-             ui_page_2
-    )
-  ),
-  uiOutput("download"),
-  uiOutput("clear")
-)
+    uiOutput("download"),
+    uiOutput("clear")
+  )
+}
 
 server <- function(input, output, session) {
 
@@ -144,6 +156,15 @@ server <- function(input, output, session) {
 
   observeEvent(input$penguins_upload, switch_page(2))
 
+  # Bookmark ---------------------------------------------------------------------
+  ### https://shiny.rstudio.com/articles/bookmarking-state.html
+  ### https://shiny.rstudio.com/articles/advanced-bookmarking.html
+  observe({
+    reactiveValuesToList(input)
+    session$doBookmark()
+  })
+  onBookmarked(updateQueryString)
+
   # Upload data ------------------------------------------------------------------
 
   ## Reactive expressions
@@ -153,6 +174,8 @@ server <- function(input, output, session) {
     req(input$penguins_upload)
 
     # upload data
+    ### https://shiny.rstudio.com/reference/shiny/latest/reactivePoll.html
+    ### https://shiny.rstudio.com/reference/shiny/latest/reactiveFileReader.html
     read_csv(input$penguins_upload$datapath)
   })
 
@@ -246,16 +269,16 @@ server <- function(input, output, session) {
 
     id <- notify(str_glue("Getting {input$species_selected} penguin data"))
     on.exit(removeNotification(id), add = TRUE)
-    Sys.sleep(1)
+    Sys.sleep(0.5)
 
     notify(str_glue("Getting {input$species_selected} penguin image"), id = id)
-    Sys.sleep(1)
+    Sys.sleep(0.5)
 
     notify(str_glue("Extracting measurements for {input$species_year}"), id = id)
-    Sys.sleep(1)
+    Sys.sleep(0.5)
 
     notify(str_glue("Creating {input$species_selected} penguin plot"), id = id)
-    Sys.sleep(1)
+    Sys.sleep(0.5)
   })
 
   ## Outputs
@@ -386,8 +409,10 @@ server <- function(input, output, session) {
   timer <- reactiveTimer(6000) # milliseconds
 
   ## Triggered reaction
+  ### https://shiny.rstudio.com/reference/shiny/0.14/invalidateLater.html
   observeEvent(timer(),
                notify("Monitoring ..............", duration = 1))
 }
 
-shinyApp(ui, server)
+## Bookmark: url or server
+shinyApp(ui, server, enableBookmarking = "url")
