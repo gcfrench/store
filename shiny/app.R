@@ -2,6 +2,7 @@ library(shiny)
 library(shinyvalidate)
 library(shinycssloaders)
 library(reactlog)
+library(config)
 library(thematic)
 library(ggplot2)
 library(dplyr, warn.conflicts = FALSE)
@@ -17,6 +18,8 @@ library(readr)
 ## Add reset button: pg 155
 ## Add bookmark button: pg 180
 ## https://shanghai.hosting.nyu.edu/data/r/case-4-database-management-shiny.html
+## Engineering production grade shiny apps: https://engineering-shiny.org/
+## Golem: https://thinkr-open.github.io/golem/
 
 ### https://shiny.rstudio.com/articles/sanitize-errors.html
 options(shiny.sanitize.errors = TRUE)
@@ -42,6 +45,11 @@ modal_confirm <- modalDialog(
 ### https://rstudio.github.io/reactlog/
 ### Ctrl-F3 or shiny::reactlogShow()
 reactlog_enable()
+
+# read config file
+### https://github.com/rstudio/config
+Sys.setenv(R_CONFIG_ACTIVE = "testing")
+config <- config::get()
 
 ### Shiny cheatsheet https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
 ### Shiny community: https://community.rstudio.com/c/shiny/8
@@ -404,14 +412,19 @@ server <- function(input, output, session) {
   })
 
   # Timed reactivity -------------------------------------------------------------
-
-  ## reactiveTimer
-  timer <- reactiveTimer(6000) # milliseconds
+  ### https://mastering-shiny.org/reactivity-objects.html
+  secs <- reactiveVal(0)
 
   ## Triggered reaction
   ### https://shiny.rstudio.com/reference/shiny/0.14/invalidateLater.html
-  observeEvent(timer(),
-               notify("Monitoring ..............", duration = 1))
+  ### https://shiny.rstudio.com/reference/shiny/0.14/reactiveTimer.html
+  observe({
+    secs(isolate(secs()) + config$timer_seconds)
+    invalidateLater(config$timer_seconds * 1000) # milliseconds
+  })
+
+  observeEvent(secs(),
+               notify(str_glue("Running for {secs()} seconds ..."), duration = 1))
 }
 
 ## Bookmark: url or server
