@@ -66,6 +66,16 @@ usethis::use_cc0_license()
 usethis::use_readme_rmd()
 ```
 
+```{}
+## Overview
+
+## Installation
+
+## Usage
+
+## Publication
+```
+
 **usethis::use_news_md** add a news file, removing the default text from the file. This file will contain the news on each version release
 ```{r}
 usethis::use_news_md()
@@ -95,12 +105,37 @@ usethis::use_testthat()
 devtools::document()
 ```
 
+**usethis::use_vignette** add tasks vignette
+```{r}
+usethis::use_vignette("tasks")
+```
+
+```{}
+This **tasks** section contains a list of tasks and questions, with
+their current status
+
+-   ✔️ completed
+-   ❗ awaiting completion
+-   ✖️no longer needed
+-   ❓question to be answered
+
+## Tasks and questions
+
+### YYYY-MM-DD
+```
+
 **usethis::use_pgkdown** add the _pkgdown.yml file used to create the menu structure for the package website
 ```{r}
 usethis::use_pkgdown()
+pkgdown::init_site()
 ```
 
-pkgdown.yml template
+**pkgdown::build_article** create tasks html report
+```{r}
+pkgdown::build_article("tasks")
+```
+
+**create yaml template** pkgdown.yml template
 ```{}
 template:
   params:
@@ -125,25 +160,6 @@ usethis::use_lifecycle()
 **usethis::use_lifecycle_badge** add lifecycle badge to home page
 ```{r}
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
-```
-
-**usethis::use_vignette** add tasks vignette
-```{r}
-usethis::use_vignette("tasks")
-```
-
-```{}
-This **tasks** section contains a list of tasks and questions, with
-their current status
-
--   ✔️ completed
--   ❗ awaiting completion
--   ✖️no longer needed
--   ❓question to be answered
-
-## Tasks and questions
-
-### YYYY-MM-DD
 ```
 
 **usethis::use_logo** add a hex logo to home page
@@ -173,6 +189,22 @@ usethis::use_github()
 **usethis::use_github_action** configures files to use github to host package website
 ```{r}
 usethis::use_github_action("pkgdown")
+```
+
+### Add config file --------------------------------------------
+
+**usethis::edit_file** add a config file and package to descriptions
+```{r}
+usethis::edit_file("config.yml")
+usethis::use_package("config")
+```
+
+```{}
+default:
+
+testing:
+
+production:
 ```
 
 ### Add package versioning --------------------------------------------

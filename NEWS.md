@@ -1,5 +1,6 @@
 ## store 1.2.0
 
+-   Updated **Create and update package** notes
 -   Updated **Git and GitHub notes** with alternate instructions and stack overflow link for committing large number of files when RStudio GIT panel freezes.
 -   Extended **S3 class of grid reference functions** and REST API endpoints to include conversion to ten metre grid references.
 -   Added functions to use the **keyring** package to list and remove keyrings, and view keys.
