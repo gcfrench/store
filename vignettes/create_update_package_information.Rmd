@@ -137,16 +137,29 @@ pkgdown::build_article("tasks")
 
 **create yaml template** pkgdown.yml template
 ```{}
+title: TITLE_HERE
 template:
-  params:
-    bootswatch: flatly
+  bootstrap: 5
+  bootswatch: flatly
 
 navbar:
-  title: TITLE_HERE
   left:
     - icon: fa-home fa-lg
+      href: index.html
+    - text: information
+      menu:
+      - text:
+        href:
+    - text: "lookups and functions"
+      href: reference/index.html
+    - text: "archive"
+      menu:
+      - text:
+        href:
     - text: "tasks"
       href: articles/tasks.html
+    - text: "versions"
+      href: news/index.html
   right:
     - icon: "fab fa-github fa-lg"
       href: https://github.com/URL_HERE
