@@ -72,7 +72,6 @@ config <- config::get()
 ui_page_1 <- sidebarLayout(
   sidebarPanel(width = 3,
 
-               h3("Upload data"),
                ### https://shiny.rstudio.com/articles/upload.html
                fileInput("penguins_upload", "Upload penguin data", accept = ".csv")
   ),
@@ -83,29 +82,24 @@ ui_page_1 <- sidebarLayout(
 ui_page_2 <- sidebarLayout(
   sidebarPanel(width = 3,
 
-                 h3("Immediate reactivity"),
-                 ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
-                 ### shinywidgets https://github.com/dreamRs/shinyWidgets
-                 ### colourpicker https://github.com/daattali/colourpicker
-                 ### sortable https://rstudio.github.io/sortable
+               ### Dynamic selectInput https://shiny.rstudio.com/articles/selectize.html#server-side-selectize
+               ### shinywidgets https://github.com/dreamRs/shinyWidgets
+               ### colourpicker https://github.com/daattali/colourpicker
+               ### sortable https://rstudio.github.io/sortable
 
-                 selectInput("species_selected", "Select a penguin species", choices = NULL),
-                 ### Using sliders https://shiny.rstudio.com/articles/sliders.html
-                 numericInput("species_year", "Select year", value = NULL, min = 0, max = 0),
+               selectInput("species_selected", "Select a penguin species", choices = NULL),
+               ### Using sliders https://shiny.rstudio.com/articles/sliders.html
+               numericInput("species_year", "Select year", value = NULL, min = 0, max = 0),
 
-                 h3("Delayed reactivity"),
-                 actionButton("display_button", "Display species measurements",
-                              class = "btn-sm btn-primary")
+               htmlOutput("species_image_source"),
+               imageOutput("species_image", height = "350px"),
+
+               actionButton("display_button", "Display species measurements",
+                            class = "btn-sm btn-primary")
   ),
   mainPanel(
     fluidRow(
-      column(2,
-             htmlOutput("species_image_source"),
-             imageOutput("species_image")
-      ),
       column(5,
-             textOutput("species_text"),
-
 
              ### plot input https://gallery.shinyapps.io/095-plot-interaction-advanced/
              #### click = clickOpts(id = "plot_click", ...)
@@ -121,11 +115,13 @@ ui_page_2 <- sidebarLayout(
                                     brush = brushOpts(id = "plot_brush",
                                                       fill = "gold", stroke = "black",
                                                       resetOnNew = TRUE),
-                                    height = "317px"))
+                                    height = "350px"))
       ),
-      column(5,
+      column(7,
              tableOutput("species_plot_selected")
-      ),
+      )
+    ),
+    fluidRow(
       column(12,
              ### reactable tables https://glin.github.io/reactable/
              dataTableOutput("species_table")
@@ -137,7 +133,7 @@ ui_page_2 <- sidebarLayout(
 # UI layout
 ui <- function(request) {
   fluidPage(
-    h1("Example shiny app"),
+    h1(""),
     tabsetPanel(
       id = "wizard",
       type = "hidden",
@@ -184,7 +180,10 @@ server <- function(input, output, session) {
     # upload data
     ### https://shiny.rstudio.com/reference/shiny/latest/reactivePoll.html
     ### https://shiny.rstudio.com/reference/shiny/latest/reactiveFileReader.html
-    read_csv(input$penguins_upload$datapath)
+    read_csv(input$penguins_upload$datapath,
+             col_types = cols(body_mass_g = col_integer(),
+                              flipper_length_mm = col_integer(),
+                              year = col_integer()))
   })
 
   # Immediate reactivity ---------------------------------------------------------
@@ -350,7 +349,7 @@ server <- function(input, output, session) {
 
     ### DataTables options https://datatables.net/reference/option/
     output$species_table <- renderDataTable(
-      species_data_table(), options= list(pageLength = 6)
+      species_data_table(), options= list(pageLength = 5)
     )
   })
 
@@ -363,8 +362,6 @@ server <- function(input, output, session) {
       label_text <- isolate(str_glue("Download {button_label()} measurements"))
       sidebarLayout(
         sidebarPanel(width = 3,
-
-                     h3("Download data"),
                      downloadButton("download_button", label_text,
                                     class = "btn-sm btn-primary")
         ),
@@ -389,7 +386,6 @@ server <- function(input, output, session) {
         label_text <- isolate(str_glue("Clear {button_label()} measurements"))
         sidebarLayout(
           sidebarPanel(width = 3,
-                       h3("Clear data"),
                        actionButton("clear_button", label_text,
                                     class = "btn-sm btn-primary")
           ),

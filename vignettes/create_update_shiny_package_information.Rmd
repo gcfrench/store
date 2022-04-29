@@ -1,0 +1,64 @@
+---
+title: "Create and update a shiny package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create and update a shiny package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This documents the functions to run to help create and update a R shiny package. Further information can be found at
+
+-   [golem documentation](https://thinkr-open.github.io/golem/)
+
+## Create the skeleton package
+
+**golem::create_golem** create the skeleton shiny package directory structure, opening the package in a new R Studio session as a new project.
+
+```{r}
+golem::create_golem("C:/Files/packages/shinystore")
+```
+
+**golem::fill_desc** update the title, author and description details in the description file
+```{r}
+golem::fill_desc(
+  pkg_name = "shinystore", # The Name of the package containing the App
+  pkg_title = "Stores a shiny example app using modules", # The Title of the package containing the App
+  pkg_description = "This shiny package is an example shiny app created using the 
+  golem package and using shiny modules. It demonstrates many of the shiny techniques 
+  described in Hadley Wickham's Mastering Shiny book", # The Description of the package containing the App
+  author_first_name = "Graham", # Your First Name
+  author_last_name = "French", # Your Last Name
+  author_email = "gcfrench@googlemail.com", # Your Email
+  repo_url = "https://gcfrench.github.io/shinystore" # The URL of the GitHub Repo (optional)
+)
+```
+
+**usethis::use_cc0_license** add one of the license options for the package
+```{r}
+usethis::use_cc0_license()
+```
+
+**usethis::use_readme_rmd** add a readme file, removing the default text from the file. This file is displayed as the front home page in the pkgdown website
+```{r}
+usethis::use_readme_rmd()
+```
+
+```{}
+## Overview
+
+## Installation
+
+## Usage
+
+## Publication
+```
+
