@@ -124,7 +124,7 @@ their current status
 ### YYYY-MM-DD
 ```
 
-**usethis::use_pgkdown** add the _pkgdown.yml file used to create the menu structure for the package website
+**usethis::use_pkgdown** add the _pkgdown.yml file used to create the menu structure for the package website
 ```{r}
 usethis::use_pkgdown()
 pkgdown::init_site()
