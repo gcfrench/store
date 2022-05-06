@@ -25,8 +25,9 @@ This documents the functions to run to help create and update a R package. Furth
 * [usethis documentation](https://usethis.r-lib.org/)
 * [pkgdown documentation](https://pkgdown.r-lib.org/)
 * [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
+* [golem documentation](https://thinkr-open.github.io/golem/)
 
-## Set environment 
+## Set environment ---------------
 
 **usethis::use_blank_slate** turn off saving and restoring workspace between sessions
 
@@ -34,14 +35,16 @@ This documents the functions to run to help create and update a R package. Furth
 usethis::use_blank_slate(scope = "project")
 ```
 
-## Create the skeleton package
+## Create the skeleton package ---------------
 
-**usethis::create_package** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
+**usethis::create_package** or **golem::create_golem** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
 ```{r}
 usethis::create_package("C:/Files/packages/store")
+golem::create_golem("C:/Files/packages/shinystore")
 ```
 
-**usethis::use_description** update the title, author and description details in the description file
+
+**usethis::use_description** or **golem::fill_desc** update the title, author and description details in the description file
 ```{r}
 usethis::use_description(fields = list(Title = "Store commonly used functions and lookups",
                                        `Authors@R` = person("Graham", "French", 
@@ -54,6 +57,18 @@ usethis::use_description(fields = list(Title = "Store commonly used functions an
                                        associated test scripts into the new package, as well as
                                        updating the pkgdown file",
                                        URL = "https://gcfrench.github.io/store"))
+
+golem::fill_desc(
+  pkg_name = "shinystore", # The Name of the package containing the App
+  pkg_title = "Stores a shiny example app using modules", # The Title of the package containing the App
+  pkg_description = "This shiny package is an example shiny app created using the 
+  golem package and using shiny modules. It demonstrates many of the shiny techniques 
+  described in Hadley Wickham's Mastering Shiny book", # The Description of the package containing the App
+  author_first_name = "Graham", # Your First Name
+  author_last_name = "French", # Your Last Name
+  author_email = "gcfrench@googlemail.com", # Your Email
+  repo_url = "https://gcfrench.github.io/shinystore" # The URL of the GitHub Repo (optional)
+)
 ```
 
 **usethis::use_cc0_license** add one of the license options for the package
@@ -98,6 +113,18 @@ usethis::use_data_raw("lookup_raw")
 **usethis::use_testthat** add the testthat directory used to contain the test scripts and testthat package to suggests field in the description file
 ```{r}
 usethis::use_testthat()
+```
+
+**golem::use_recommended_tests** add the test folder and golem tests
+```{r}
+golem::use_recommended_tests()
+```
+
+**usethis::use_coverage** or **covr::package_coverage** - adds test coverage using 
+either Codecov or Coveralls webservice
+```{r}
+usethis::use_coverage(type = "codecov")
+usethis::use_coverage(type = "coveralls")
 ```
 
 **devtools::document** add the man directory containing the document .Rd files. Documents can also be updated using Ctlr-shift-D or through the Build:Document menu
@@ -175,10 +202,14 @@ usethis::use_lifecycle()
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
 ```
 
-**usethis::use_logo** add a hex logo to home page
+**usethis::use_logo** or **golem::use_favicon** add a hex logo to home page
 ```{r}
 # create hex logo using hexmake https://connect.thinkr.fr/hexmake
 usethis::use_logo("image_path")
+
+# add favicon
+golem::use_favicon( path = "path/to/favicon")
+# golem::remove_favicon()
 ```
 
 **pkgdown::build_site** build documentation
@@ -186,7 +217,7 @@ usethis::use_logo("image_path")
 pkgdown::build_site()
 ```
 
-### Add to github --------------------------------------------
+### Add to github ---------------
 
 **usethis::use_git** initiates a Git repository, making the initial commits
 ```{r}
@@ -204,7 +235,7 @@ usethis::use_github()
 usethis::use_github_action("pkgdown")
 ```
 
-### Add config file --------------------------------------------
+### Add config file ---------------
 
 **usethis::edit_file** add a config file and package to descriptions
 ```{r}
@@ -220,7 +251,13 @@ testing:
 production:
 ```
 
-### Add package versioning --------------------------------------------
+**golem::set_golem_options** update golem-config file with description information
+and set here path
+```{r}
+golem::set_golem_options()
+```
+
+### Add package versioning ---------------
 
 Navigate to the home project directory first
 
@@ -255,13 +292,13 @@ renv::restore()
 
 ## Add and edit script files
 
-### Add documentation folders --------------------------------------------
+### Add documentation folders ---------------
 ```{r}
 fs::dir_create("man/figures")
 fs::dir_create("man/examples")
 ```
 
-### Add new script --------------------------------------------
+### Add new script ---------------
 
 **usethis::use_vignette**("vignette_name"): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.
 ```{r}
@@ -275,16 +312,27 @@ pkgdown::build_article("script_name")
 pkgdown::build_articles_index()
 ```
 
-### Add new function --------------------------------------------
+### Add new function ---------------
 
-**usethis::use_r** add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
+**usethis::use_r** or **golem::add_fct** or **golem::add_utils**  add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
 ```{r}
 usethis::use_r("function_script_name")
+
+# files containing small functions used several times in the application
+golem::add_utils("function_script_name")
+
+# files containing larger functions that are more central to the application
+golem::add_fct("function_script_name") 
 ```
 
 **usethis::use_package** add packages to the imports section of the description file
 ```{r}
 usethis::use_package("package_name")
+```
+
+**golem::use_recommended_deps** add recommended package dependencies
+```{r}
+golem::use_recommended_deps()
 ```
 
 **devtools::document** update documentation, can also use Ctlr-shift-D or through the Build:Document menu
@@ -298,7 +346,22 @@ pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-### Add new test script --------------------------------------------
+### Add utility functions ---------------
+
+**golem::use_utils_ui** and **golem::use_utils_server** adds golem utility functions
+```{r}
+golem::use_utils_ui()
+golem::use_utils_server()
+```
+
+### Add new module ---------------
+
+**golem::add_module** add module in R folder
+```{r}
+golem::add_module(name = "MODULE_NAME")
+```
+
+### Add new test script ---------------
 
 **usethis::use_test** add unit tests for function
 ```{r}
@@ -310,7 +373,12 @@ usethis::use_test("test_script_name")
 devtools::test()
 ```
 
-### Add new data script --------------------------------------------
+**covr::package_coverage** - returns test coverage of R scripts
+```{r}
+covr::package_coverage()
+```
+
+### Add new data script ---------------
 
 **usethis::use_data_raw** add a new data_raw script
 ```{r}
@@ -347,11 +415,25 @@ pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-### Edit news file --------------------------------------------
+### Add new external files
 
-**usethis::use_version** update the package version
+**golem::add_js_file** add javascript file to inst/app/www folder
+```{r}
+golem::add_js_file("script")
+golem::add_js_handler("handlers")
+```
+
+**golem::add_css_file** add blank css file to inst/app/www folder
+```{r}
+golem::add_css_file("custom")
+```
+
+### Edit news file ---------------
+
+**usethis::use_version** or **golem::set_golem_version** update the package version
 ```{r}
 usethis::use_version()
+golem::set_golem_version()
 ```
 
 **usethis::edit_file** edit the news file with the new package version
@@ -364,7 +446,7 @@ usethis::edit_file("News.md")
 pkgdown::build_news()
 ```
 
-### Edit the README file --------------------------------------------
+### Edit the README file ---------------
 
 **usethis::edit_file** edit the README.Rmd file
 ```{r}
@@ -376,16 +458,18 @@ usethis::edit_file("README.Rmd")
 pkgdown::build_home()
 ```
 
-## Install package
+## Install package ---------------
 
-Build documentation and test functions, then run **Install and Restart** to build and install package
+Build documentation and test functions, then run either **Install and Restart** 
+or **remotes::install_local** to build and install package
 
 ```{r}
 devtools::document()
 devtools::test()
+remotes::install_local()
 ```
 
-## Publish on GitHub
+## Publish on GitHub ---------------
 
 **pkgdown::build_site** run **pkgdown::clean_site** first to delete files in docs
 sub-directory
@@ -407,6 +491,32 @@ pkgdown::deploy_to_branch()
 usethis::edit_file("DESCRIPTION")
 usethis::edit_file("README.Rmd")
 ```
+
+## Send to another machine ---------------
+
+
+**pkgbuild::build** create a tar.gz file to send to other machine
+```{r}
+pkgbuild::build()
+remotes::install_local("path/to/tar.gz")
+```
+
+## Deploy on shinyapp.io ---------------
+
+**golem::add_shinyappsio_file** adds an app.R file
+```{r}
+golem::add_shinyappsio_file()
+```
+
+## Create a docker file ---------------
+
+**golem::add_dockerfile** creates a Dockerfile
+```{r}
+golem::add_dockerfile()
+```
+
+
+
 
 
 

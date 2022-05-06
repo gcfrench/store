@@ -9,7 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  eval=FALSE,
+  eval = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -88,7 +88,7 @@ gitcreds::gitcreds_set()
 **usethis::create_from_github** Clones a remote repository from GitHub, creating a local project and Git repository.
 
 ```{r}
-usethis::create_from_github(repo_spec = HTTPS URL,
+usethis::create_from_github(repo_spec = "HTTPS URL",
                             destdir = "DESTINATION DIRECTORY PATH"
                             fork = FALSE)
 ```
@@ -267,7 +267,7 @@ git remote add upstream OTHERS REMOTE HTTPS URL
 
 ```{r}
 usethis::create_from_github(repo_spec = "HTTPS URL",
-                            destdir = "DESTINATION DIRECTORY PATH",
+                            destdir = "DESTINATION DIRECTORY PATH", 
                             fork = TRUE)
 ```
 

@@ -103,8 +103,6 @@ navbar:
       menu:
       - text: "Create and update a package"
         href: articles/create_update_package_information.html
-      - text: "Create and update a shiny package"
-        href: articles/create_update_shiny_package_information.html
       - text: "Raster package tutorial notes"
         href: articles/raster_package_tutorial_notes.html
       - text: "PostgreSQL database notes"

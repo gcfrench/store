@@ -3,12 +3,15 @@
 
 <br />
 
-<img src='man/figures/logo.png' align="right" height="139" />
+<img src="man/figures/logo.png" align="right" height="139"/>
 
 <!-- badges: start -->
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Codecov test
+coverage](https://codecov.io/gh/gcfrench/store/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gcfrench/store?branch=master)
+
 <!-- badges: end -->
 
 ## Overview
@@ -27,9 +30,12 @@ the production of a number of packages from
 [devtools](https://devtools.r-lib.org/),
 [usethis](https://usethis.r-lib.org/) and
 [pkgdown](https://pkgdown.r-lib.org/) and I have used these packages in
-developing this personal package. A summary of the use of functions
-within these packages is provided in **Create and update a package**
-document in the information section.
+developing this personal package. In addition
+[Thinkr](https://rtask.thinkr.fr/) created the
+[golem](https://thinkr-open.github.io/golem/) package as a aid for
+creating shiny packages. A summary of the use of functions within these
+packages is provided in **Create and update a package** document in the
+information section.
 
 ## Installation
 

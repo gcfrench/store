@@ -21,7 +21,7 @@ and the database connections string is added as a json string in the password di
 \itemize{
 \item SQL Server windows authentication: \{"server":"SERVER_NAME", "database":"DATABASE_NAME"\}.
 \item PostGresSQL database: \{"server":"SERVER_NAME", "database":"DATABASE_NAME", "username":"USERNAME", "password":"PASSWORD"\}.
-\item For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS".
+\item For SQLEXPRESS on the local machine the server name is "localhost\\SQLEXPRESS". (need to escape back slash with double back slashes)
 }
 }
 \seealso{

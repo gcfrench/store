@@ -61,7 +61,8 @@ Suggests:
     forcats (>= 0.5.1),
     waldo (>= 0.4.0),
     readr (>= 2.1.2),
-    pagedown (>= 0.17)
+    pagedown (>= 0.17),
+    covr
 Config/testthat/edition: 3
 BugReports: https://github.com/gcfrench/store/issues
 VignetteBuilder: knitr
