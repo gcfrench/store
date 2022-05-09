@@ -159,6 +159,62 @@ create_bounding_box <- function(xmin, ymin, xmax, ymax, epsg_number) {
 }
 
 #' @title
+#' Get multipolygon spatial dimensions
+#'
+#' @description
+#' This functions returns the co-ordinate reference system, area, perimeter length
+#' and x and y centroid co-ordinates of a spatial data frame containing multipolygons.
+#' It may be used to compare difference versions of a spatial dataset.
+#'
+#' @param .data spatial data frame containing a feature_code and feature_name columns,
+#'  along with a sf geometry column and co-ordinate reference system
+#'
+#' @return data frame containing original feature_code and feature_name fields, along with
+#' calculated EPSG code, area, length and x and y centroid co-ordinates.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' get_multipolygon_spatial_dimensions(sf_data_frame)
+#' }
+get_multipolygon_spatial_dimensions <- function(.data) {
+
+  # Check all features are multipolygons
+  assertthat::assert_that(sf::st_geometry_type(.data, by_geometry = FALSE) == "MULTIPOLYGON",
+                          msg = "All features need to be multipolygons")
+
+  # Check feature_code column exists
+  assertthat::assert_that(any(names(.data) == 'feature_code'),
+                          msg = "feature_code column containing feature ids needs to be present")
+
+  # Check feature_name column exists
+  assertthat::assert_that(any(names(.data) == 'feature_name'),
+                          msg = "feature_name column containing feature name needs to be present")
+
+  # Check CRS present
+  assertthat::assert_that(!is.na(st_crs(.data)$epsg),
+                          msg = "Co-ordinate Reference System needs to be present")
+
+  # Get feature spatial dimensions
+  .data %>%
+    dplyr::mutate(crs = sf::st_crs(.)$epsg) %>%
+    dplyr::mutate(area = sf::st_area(.) %>%
+                    round()) %>%
+    dplyr::mutate(centroid = sf::st_centroid(.)$geometry,
+                  x = sf::st_coordinates(centroid)[, 1] %>%
+                    round(),
+                  y = sf::st_coordinates(centroid)[, 2] %>%
+                    round()) %>%
+    dplyr::mutate(length = sf::st_cast(., "MULTILINESTRING") %>%
+                    sf::st_length() %>%
+                    round()) %>%
+    units::drop_units() %>%
+    sf::st_drop_geometry() %>%
+    dplyr::select(feature_code, feature_name, crs, area, length, x, y) %>%
+    dplyr::arrange(feature_code)
+}
+
+#' @title
 #' UK Ireland Base Map derived from the Oil and Gas Authority's OGA and Lloyd's Register
 #' SNS Regional Geological Maps (Open Source) layer
 #'

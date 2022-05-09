@@ -42,6 +42,7 @@ reference:
   - tidy_spatial_data
   - extract_polygons
   - create_bounding_box
+  - get_multipolygon_spatial_dimensions
   - uk_ireland_base_map
 - title: "Grid Reference"
   desc: "Extract and format grid reference information, including REST API endpoints."

@@ -191,6 +191,7 @@ server <- function(input, output, session) {
   ## Validate input values
   ### shinyValidate: https://rstudio.github.io/shinyvalidate/
   ### shinyFeedback: https://github.com/merlinoa/shinyFeedback
+  ### shinyAlert: https://github.com/daattali/shinyalert
 
   ## initiate validation
   check_input <- InputValidator$new()

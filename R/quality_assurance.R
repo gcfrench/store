@@ -80,8 +80,8 @@ compare_dataset_versions <- function(old_version, new_version) {
 
    # format differences file
    difference_version <- readr::read_csv(temp_file,
-                                         col_types = readr::cols(X1 = readr::col_skip()),
-                                         skip = column_name_row_number - 1L) %>%
+                                         skip = column_name_row_number - 1L,
+                                         show_col_types = FALSE) %>%
      dplyr::mutate(differences = dplyr::case_when(
        `@@` == "->" ~ "# row changed",
        `@@` == "+++" ~ "# row added",
@@ -96,6 +96,9 @@ compare_dataset_versions <- function(old_version, new_version) {
 
    # delete temporary file
    fs::file_delete(temp_file)
+
+   # save to clipboard
+   clipr::write_clip(difference_version)
 
    # return
    return(difference_version)
