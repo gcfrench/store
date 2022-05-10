@@ -1,8 +1,0 @@
-default:
-   timer_seconds: 4
-
-testing:
-   timer_seconds: 2
-
-production:
-   timer_seconds: 6

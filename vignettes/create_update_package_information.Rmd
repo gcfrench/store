@@ -192,6 +192,11 @@ navbar:
       href: https://github.com/URL_HERE
 ```
 
+**usethis::use_roxygen_md** uses roxygen2 with markdown
+```{r}
+usethis::use_roxygen_md()
+```
+
 **usethis::use_lifecycle** add the lifecycle badges in the man directory
 ```{r}
 usethis::use_lifecycle()
@@ -211,6 +216,8 @@ usethis::use_logo("image_path")
 golem::use_favicon( path = "path/to/favicon")
 # golem::remove_favicon()
 ```
+
+**RStudio: Build - Install and Restart**
 
 **pkgdown::build_site** build documentation
 ```{r}
