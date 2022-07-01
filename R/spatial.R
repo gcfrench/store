@@ -55,7 +55,7 @@ tidy_spatial_data <- function(sf_data, epsg_number, check_valid = FALSE) {
     feature_invalid <- sf_data[!sf::st_is_valid(sf_data), ]
     sf::st_geometry(feature_invalid) = NULL
     if (assertthat::not_empty(feature_invalid)) {
-      stingr::str_glue("Invalid feature: {unlist(feature_invalid)}")
+      stringr::str_glue("Invalid feature: {unlist(feature_invalid)}")
     }
   }
 

@@ -2,69 +2,85 @@ Package: store
 Title: Store commonly used functions and lookups
 Version: 1.2.0
 Authors@R: 
-    person(given = "Graham",
-           family = "French",
-           role = c("aut", "cre"),
-           email = "gcfrench@googlemail.com")
-Description: This package stores the commonly used
-    functions and lookups, along with function tests and documentation.
-    These can be then used when creating new packages by copy and pasting
-    the relevant R scripts and associated test scripts into the new
-    package, as well as updating the pkgdown file.
+    person("Graham", "French", , "gcfrench@googlemail.com", role = c("aut", "cre"))
+Description: This package stores the commonly used functions and lookups,
+    along with function tests and documentation.  These can be then used
+    when creating new packages by copy and pasting the relevant R scripts
+    and associated test scripts into the new package, as well as updating
+    the pkgdown file.
 License: CC0
 URL: https://gcfrench.github.io/store
+BugReports: https://github.com/gcfrench/store/issues
+Depends: 
+    R (>= 2.10)
+Imports: 
+    assertthat (>= 0.2.1),
+    clipr,
+    connections (>= 0.1.1),
+    corrplot (>= 0.92),
+    daff (>= 0.3.5),
+    DBI (>= 1.1.2),
+    dlookr (>= 0.5.6),
+    dplyr (>= 1.0.8),
+    forcats,
+    fs (>= 1.5.2),
+    ggplot2 (>= 3.3.5),
+    glue (>= 1.6.2),
+    gridExtra (>= 2.3),
+    httr (>= 1.4.2),
+    inspectdf (>= 0.0.11),
+    ISOcodes,
+    janitor,
+    jsonlite (>= 1.8.0),
+    keyring (>= 1.3.0),
+    magick (>= 2.7.3),
+    magrittr (>= 2.0.3),
+    odbc (>= 1.3.3),
+    openxlsx (>= 4.2.5),
+    pagedown,
+    patchwork,
+    plumber,
+    purrr (>= 0.3.4),
+    R6 (>= 2.5.1),
+    ragg (>= 1.2.2),
+    reactable (>= 0.2.3),
+    readr (>= 2.1.2),
+    rlang (>= 1.0.2),
+    RMariaDB (>= 1.2.1),
+    RPostgres (>= 1.4.3),
+    sf (>= 1.0.7),
+    stringr (>= 1.4.0),
+    tibble,
+    tidyr (>= 1.2.0),
+    tidyselect,
+    units,
+    vctrs (>= 0.4.1),
+    vroom,
+    waldo
+Suggests: 
+    assertive,
+    assertr,
+    attachment,
+    broom,
+    covr,
+    devtools,
+    gitcreds,
+    golem,
+    gt (>= 0.4.0),
+    knitr (>= 1.38),
+    palmerpenguins (>= 0.1.0),
+    pkgbuild,
+    pkgdown,
+    raster,
+    remotes,
+    renv,
+    rmarkdown (>= 2.13),
+    testthat (>= 3.0.0),
+    usethis
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Imports: 
-    magrittr (>= 2.0.3),
-    dplyr (>= 1.0.8),
-    purrr (>= 0.3.4),
-    keyring (>= 1.3.0),
-    stringr (>= 1.4.0),
-    jsonlite (>= 1.8.0),
-    odbc (>= 1.3.3),
-    DBI (>= 1.1.2),
-    connections (>= 0.1.1),
-    RMariaDB (>= 1.2.1),
-    openxlsx (>= 4.2.5),
-    ISOcodes (>= 2022.1.10),
-    vroom (>= 1.5.7),
-    reactable (>= 0.2.3),
-    RPostgres (>= 1.4.3),
-    magick (>= 2.7.3),
-    fs (>= 1.5.2),
-    dlookr (>= 0.5.6),
-    gridExtra (>= 2.3),
-    inspectdf (>= 0.0.11),
-    patchwork (>= 1.1.1),
-    ggplot2 (>= 3.3.5),
-    tidyr (>= 1.2.0),
-    corrplot (>= 0.92),
-    sf (>= 1.0.7),
-    assertthat (>= 0.2.1),
-    glue (>= 1.6.2),
-    vctrs (>= 0.4.1),
-    rlang (>= 1.0.2),
-    daff (>= 0.3.5),
-    R6 (>= 2.5.1),
-    gt (>= 0.4.0),
-    ragg (>= 1.2.2),
-    httr (>= 1.4.2),
-    plumber (>= 1.1.0)
-Suggests: 
-    testthat (>= 3.0.0),
-    knitr (>= 1.38),
-    rmarkdown (>= 2.13),
-    palmerpenguins (>= 0.1.0),
-    forcats (>= 0.5.1),
-    waldo (>= 0.4.0),
-    readr (>= 2.1.2),
-    pagedown (>= 0.17),
-    covr
-Config/testthat/edition: 3
-BugReports: https://github.com/gcfrench/store/issues
-VignetteBuilder: knitr
-Depends: 
-    R (>= 2.10)

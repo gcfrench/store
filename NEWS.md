@@ -1,5 +1,6 @@
 ## store 1.2.0
 
+-   Updated PostgreSQL Database notes to include adding [postgis extensions](https://postgis.net/install/).
 -   Added **get_multipolygon_spatial_dimensions** function calculating the area, length and x and y centroid co-ordinates of a [sf](https://r-spatial.github.io/sf/) data frame, containing multipolygons, to allow comparison between sf datasets.
 -   Updated **Create and update package** notes to create a shiny package using [golem](https://thinkr-open.github.io/golem/), taken from [Engineering Production-grade Shiny Apps](https://engineering-shiny.org/) written by Colin Fay, Sébastien Rochette, Vincent Guyader and Cervan Girad from [Thinkr](https://rtask.thinkr.fr/).
 -   Updated **Git and GitHub notes** with alternate instructions and stack overflow link for committing large number of files when RStudio GIT panel freezes.

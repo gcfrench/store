@@ -43,6 +43,12 @@ SELECT * FROM pg_roles;
 CREATE DATABASE DATABASE_NAME OWNER DATABASE_NAME_admin;
 ```
 
+- Add [postgis extensions](https://postgis.net/install/) for a spatial database
+
+```{.sql}
+CREATE EXTENSION postgis;
+```
+
 -   Create read only access role and access user role on database
 
 ``` {.sql}

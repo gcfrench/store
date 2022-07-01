@@ -89,7 +89,7 @@ gitcreds::gitcreds_set()
 
 ```{r}
 usethis::create_from_github(repo_spec = "HTTPS URL",
-                            destdir = "DESTINATION DIRECTORY PATH"
+                            destdir = "DESTINATION DIRECTORY PATH",
                             fork = FALSE)
 ```
 

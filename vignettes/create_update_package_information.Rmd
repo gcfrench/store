@@ -27,14 +27,6 @@ This documents the functions to run to help create and update a R package. Furth
 * [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
 * [golem documentation](https://thinkr-open.github.io/golem/)
 
-## Set environment ---------------
-
-**usethis::use_blank_slate** turn off saving and restoring workspace between sessions
-
-```{r}
-usethis::use_blank_slate(scope = "project")
-```
-
 ## Create the skeleton package ---------------
 
 **usethis::create_package** or **golem::create_golem** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
@@ -42,7 +34,6 @@ usethis::use_blank_slate(scope = "project")
 usethis::create_package("C:/Files/packages/store")
 golem::create_golem("C:/Files/packages/shinystore")
 ```
-
 
 **usethis::use_description** or **golem::fill_desc** update the title, author and description details in the description file
 ```{r}
@@ -224,6 +215,14 @@ golem::use_favicon( path = "path/to/favicon")
 pkgdown::build_site()
 ```
 
+## Set environment ---------------
+
+**usethis::use_blank_slate** turn off saving and restoring workspace between sessions
+
+```{r}
+usethis::use_blank_slate(scope = "project")
+```
+
 ### Add to github ---------------
 
 **usethis::use_git** initiates a Git repository, making the initial commits
@@ -253,7 +252,7 @@ usethis::use_package("config")
 ```{}
 default:
 
-testing:
+development:
 
 production:
 ```
@@ -380,9 +379,11 @@ usethis::use_test("test_script_name")
 devtools::test()
 ```
 
-**covr::package_coverage** - returns test coverage of R scripts
+**devtools::test_coverage()** - returns test coverage of R scripts or **devtools::test_coverage_active_file()**
+highlights lines in single script 
 ```{r}
-covr::package_coverage()
+devtools::test_coverage()
+devtools::test_coverage_active_file()
 ```
 
 ### Add new data script ---------------
@@ -463,6 +464,15 @@ usethis::edit_file("README.Rmd")
 **pkgdown::build_home** builds the index.html file in the docs directory
 ```{r}
 pkgdown::build_home()
+```
+
+### Edit DESCRIPTION file ---------------
+
+**attachment::att_amend_desc** looks through package scripts and adds missing package
+dependencies to DESCRIPTION file
+
+```{r}
+attachment::att_amend_desc()
 ```
 
 ## Install package ---------------
