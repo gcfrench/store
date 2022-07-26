@@ -24,6 +24,8 @@ These notes were made whilst creating a postgreSQL database and importing record
 
 # Database administration
 
+[Setting user privileges in schema within a database](https://tableplus.com/blog/2018/04/postgresql-how-to-grant-access-to-users.html)
+
 -   Login to server as superuser creating database admin user and creating new server connection for database admin user in pgadmin4
 
 ``` {.sql}
