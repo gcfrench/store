@@ -1,3 +1,5 @@
+# store 1.3.0
+
 ## store 1.2.0
 
 -   Updated PostgreSQL Database notes to include adding [postgis extensions](https://postgis.net/install/) and link to setting user privileges.
