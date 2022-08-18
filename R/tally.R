@@ -2,34 +2,34 @@
 ## penguin_body_mass.R example
 
 # Parent class -----------------------------------------------------------------
+# Parent R6 class representing a counter
 
-#' Parent R6 class representing a counter
+#' @noRd
 counter <- R6::R6Class("counter",
   private = list(
 
-    #' start The starting count number.
+    # start The starting count number.
     ..start = NULL,
 
-    #' end The end count number.
+    # end The end count number.
     ..end = NULL,
 
-    #' count The current count number.
+    # count The current count number.
     ..count = NULL,
 
-    #' increment Whether to increase (add) or decrease (subtract) count number.
+    # increment Whether to increase (add) or decrease (subtract) count number.
     ..increment = NULL,
 
-    #' pad The number of digits for count number.
+    # pad The number of digits for count number.
     ..pad = NULL,
 
-    #' @field status Whether the counter is active (ON) or inactive (OFF).
+    # @field status Whether the counter is active (ON) or inactive (OFF).
     ..status = "ON"
   ),
   public = list(
 
-    #' @description
-    #' Increments count number depending on increment value (add or subtract). Changes
-    #' status to OFF if count number has reached the end count number.
+    # Increments count number depending on increment value (add or subtract). Changes
+    # status to OFF if count number has reached the end count number.
     counter = function() {
       if (private$..increment == "add") {
         private$..count <- private$..count + 1
@@ -40,13 +40,13 @@ counter <- R6::R6Class("counter",
         private$..status <- "OFF"
       }
     },
-    #' @description
-    #' Displays count number padded with zeros.
+
+    # Displays count number padded with zeros.
     display = function() {
        stringr::str_c(stringr::str_pad(private$..count, private$..pad, pad = "0"))
     },
-    #' @description
-    #' Empty function not used on finalizing counter.
+
+    # Empty function not used on finalizing counter.
     finalize = function() {
     }
   ),
@@ -58,18 +58,14 @@ counter <- R6::R6Class("counter",
 )
 
 # Children classes ----------------------------------------------------------------
+# Child R6 class representing incrementing counter by adding count number.
 
-#' Child R6 class representing incrementing counter by adding count number.
+#' @noRd
 counter_add <- R6::R6Class("counter_add",
   inherit = counter,
   public = list(
-    #' @description
-    #' Increments the counter by adding count number, defining maximum count.
-    #'
-    #' @param limit Maximum count as an integer.
-    #'
-    #' @return
-    #' Create a new counter object.
+
+    # Increments the counter by adding count number, defining maximum count.
     initialize = function(limit) {
       private$..end <- limit
       private$..start <- 0L
@@ -85,17 +81,14 @@ counter_add <- R6::R6Class("counter_add",
   )
 )
 
-#' Child R6 class representing incrementing counter by subtracting count number.
+# Child R6 class representing incrementing counter by subtracting count number.
+
+#' @noRd
 counter_subtract <- R6::R6Class("counter_subtract",
    inherit = counter,
    public = list(
-     #' @description
-     #' Increments the counter by subtracting count number, defining maximum count.
-     #'
-     #' @param limit Maximum count as an integer.
-     #'
-     #' @return
-     #' Create a new counter object.
+
+     # Increments the counter by subtracting count number, defining maximum count.
      initialize = function(limit) {
        private$..end <- 0L
        private$..start <- limit

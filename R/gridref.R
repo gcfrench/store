@@ -66,6 +66,7 @@ as_gridref <- function(grid_reference = character()) {
 #' @inheritParams as_gridref
 #'
 #' @return A validated grid reference character string.
+#' @keywords internal
 validate_gridref <- function(grid_reference) {
 
   gr <- toupper(gsub(" ", "", grid_reference))
@@ -109,6 +110,7 @@ validate_gridref <- function(grid_reference) {
 #' * y: the northing coordinate in requested units.
 #' * units: the requested units either metres (m) or kilometres (km).
 #' * precision: the precision of the original grid reference in metres
+#' @keywords internal
 gridCoords <- function(x, ...) {
   UseMethod("gridCoords", x)
 }
@@ -140,6 +142,7 @@ gridCoords <- function(x, ...) {
 #' sq1km, sq100m or sq10m.
 #'
 #' @return The grid reference string formatted as requested.
+#' @keywords internal
 gridRef <- function(x) {
   UseMethod("gridRef", x)
 }
@@ -871,49 +874,59 @@ gridref_api <- function(gridref_method) {
 #' @title precision_api
 #' @inherit precision
 #' @export
+#' @keywords internal
 precision_api <- gridref_api(gridref_method = "precision")
 
 #' @title projection_api
 #' @inherit projection
 #' @export
+#' @keywords internal
 projection_api <- gridref_api(gridref_method = "projection")
 
 #' @title easting_api
 #' @inherit easting
 #' @export
+#' @keywords internal
 easting_api <- gridref_api(gridref_method = "easting")
 
 #' @title northing_api
 #' @inherit northing
 #' @export
+#' @keywords internal
 northing_api <- gridref_api(gridref_method = "northing")
 
 #' @title hectad_api
 #' @inherit hectad
 #' @export
+#' @keywords internal
 hectad_api <- gridref_api(gridref_method = "hectad")
 
 #' @title pentad_api
 #' @inherit pentad
 #' @export
+#' @keywords internal
 pentad_api <- gridref_api(gridref_method = "pentad")
 
 #' @title tetrad_api
 #' @inherit tetrad
 #' @export
+#' @keywords internal
 tetrad_api <- gridref_api(gridref_method = "tetrad")
 
 #' @title monad_api
 #' @inherit monad
 #' @export
+#' @keywords internal
 monad_api <- gridref_api(gridref_method = "monad")
 
 #' @title hectare_api
 #' @inherit hectare
 #' @export
+#' @keywords internal
 hectare_api <- gridref_api(gridref_method = "hectare")
 
 #' @title ten_metre_api
 #' @inherit ten_metre
 #' @export
+#' @keywords internal
 ten_metre_api <- gridref_api(gridref_method = "ten_metre")

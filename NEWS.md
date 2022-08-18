@@ -1,6 +1,8 @@
-# store 1.3.0
+## store 1.3.0
 
-## store 1.2.0
+-   Added **check_parquet_file_compression** function to compare file size of a dataset exported using the [Apache parquet file format](https://www.jumpingrivers.com/blog/parquet-file-format-big-data-r/), using the [arrow package](https://arrow.apache.org/docs/r/), with the equivalent file size when the dataset is exported as a csv file.
+
+## store 1.2.0 <font size="4">2022-08-17</font>
 
 -   Updated PostgreSQL Database notes to include adding [postgis extensions](https://postgis.net/install/) and link to setting user privileges.
 -   Added **get_multipolygon_spatial_dimensions** function calculating the area, length and x and y centroid co-ordinates of a [sf](https://r-spatial.github.io/sf/) data frame, containing multipolygons, to allow comparison between sf datasets.

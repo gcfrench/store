@@ -86,3 +86,64 @@ add_new_spreadsheet <- function(spreadsheet_name, data, image_path = NA_characte
   }
   invisible(data)
 }
+
+
+#' @title
+#' Check parquet file compression
+#'
+#' @description
+#' This function checks the amount of compression attained when exporting a dataset using
+#' the Apache parquet file format, by the [arrow package](https://arrow.apache.org/docs/r/).
+#' It compares parquet file sizes for a dataset, exported uncompressed and compressed using different available
+#' compression types, with the equivalent dataset's file size exported as a csv file.
+#'
+#' @param .data dataset to be checked for amount of compression using parquet format.
+#' @param compression_type parquet compression types to check, defaults to all compression
+#' types ("snappy", "gzip", "brotli", "zstd", "lz4", "lzo") unless one or more specific
+#' compression types are supplied as a vector.
+#'
+#' @return message giving each file size and compression percentage
+#' @export
+#'
+#' @examples
+#' data(penguins, package = "palmerpenguins")
+#' check_parquet_file_compression(penguins)
+check_parquet_file_compression <- function(.data,
+                                           compression_type =  c("snappy", "gzip", "brotli", "zstd", "lz4", "lzo")) {
+
+  # create parquet file function
+  create_parquet_file <- function(compression_type) {
+
+    path_parquet <- fs::path(tempdir(),
+                             glue::glue("{dataset_name}_{compression_type}.parquet"))
+
+    if(arrow::codec_is_available(compression_type)) {
+      arrow::write_parquet(.data, path_parquet, compression = compression_type)
+      file_size_parquet <- as.numeric(fs::file_info(path_parquet)[, "size"])
+      file_size_compression <- as.numeric((file_size_csv - file_size_parquet) / file_size_csv)
+      message(glue::glue("{compression_type} compressed parquet file: {scales::percent(file_size_compression, accuracy = 0.01)} ({scales::comma(file_size_parquet, accuracy = NULL)} bytes)"))
+    } else {
+      message(glue::glue("{compression_type} compressed parquet file is not available on this machine"))
+    }
+
+  }
+
+  # dataset name
+  dataset_name <- deparse(substitute(.data))
+
+  # csv file
+  path_csv <- fs::path(tempdir(), glue::glue("{dataset_name}_csv.csv"))
+  readr::write_csv(.data, path_csv)
+  file_size_csv <- as.numeric(fs::file_info(path_csv)[, "size"])
+  message(glue::glue("csv file size = {scales::comma(file_size_csv, accuracy = NULL)} bytes"))
+
+  # uncompressed parquet file
+  path_parquet <- fs::path(tempdir(), glue::glue("{dataset_name}_uncompressed.parquet"))
+  arrow::write_parquet(.data, path_parquet, compression = "uncompressed")
+  file_size_parquet <- as.numeric(fs::file_info(path_parquet)[, "size"])
+  file_size_compression <- as.numeric((file_size_csv - file_size_parquet) / file_size_csv)
+  message(glue::glue("uncompressed parquet file: {scales::percent(file_size_compression, accuracy = 0.01)} ({scales::comma(file_size_parquet, accuracy = NULL)} bytes)"))
+
+  # compressed parquet files
+  purrr::walk(compression_type, create_parquet_file)
+}

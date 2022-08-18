@@ -22,3 +22,4 @@ Taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{archived rn
 \author{
 Stuart Ball.
 }
+\keyword{internal}

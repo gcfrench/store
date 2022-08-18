@@ -91,9 +91,10 @@ reference:
 - contents:
   - compare_dataset_versions
 - title: "Export data and analyses"
-  desc: "Export data to Excel spreadsheets"
+  desc: "Export data to Excel spreadsheets and text files"
   contents:
   - add_new_spreadsheet
+  - check_parquet_file_compression
 
 navbar:
   title: score
@@ -104,18 +105,23 @@ navbar:
       menu:
       - text: "Create and update a package"
         href: articles/create_update_package_information.html
-      - text: "Raster package tutorial notes"
-        href: articles/raster_package_tutorial_notes.html
-      - text: "PostgreSQL database notes"
-        href: articles/postgres_database_notes.html
-      - text: "Run validation checks"
-        href: articles/validation_checks.html
-      - text: "GDAL commands"
-        href: articles/gdal_commands.html
-      - text: "Docker notes"
-        href: articles/docker_notes.html
+      - text: -----
       - text: "Git and GitHub notes"
         href: articles/git_notes.html
+      - text: "Docker notes"
+        href: articles/docker_notes.html
+      - text: -----
+      - text: "PostgreSQL database notes"
+        href: articles/postgres_database_notes.html
+      - text: -----
+      - text: "Raster package tutorial notes"
+        href: articles/raster_package_tutorial_notes.html
+      - text: "GDAL commands"
+        href: articles/gdal_commands.html
+      - text: -----
+      - text: "Run validation checks"
+        href: articles/validation_checks.html
+      - text: -----
     - text: "reporting"
       menu:
       - text: "Create multiple reports and sections"

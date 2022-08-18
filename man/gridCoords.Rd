@@ -34,3 +34,4 @@ Function taken from \href{https://github.com/ropensci-archive/rnbn/issues/37}{ar
 \author{
 Stuart Ball.
 }
+\keyword{internal}

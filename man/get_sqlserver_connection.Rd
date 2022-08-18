@@ -23,20 +23,24 @@ requesting database credentials in the console. The SQL Server tables are added
 to the connection pane.
 }
 \section{Connect}{
-\preformatted{library(DBI)
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{library(DBI)
 library(odbc)
 
 # connect to database, using keyring stored credentials
 con <- get_sqlserver_connection(keyring_name = "keyring_name",
                                 service_name = "database_name",
                                 keyring = TRUE)
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Query}{
 
 More information on working with databases using R can be found in RStudio's
-\href{https://db.rstudio.com/}{Databases using R} webpages.\preformatted{# list tables
+\href{https://db.rstudio.com/}{Databases using R} webpages.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# list tables
 dbListTables(con)
 
 # get table
@@ -45,12 +49,14 @@ database_table <- tbl(con, "table_name") \%>\% collect()
 # get query
 database_query <- dbGetQuery(con, "sql_statement")
 database_query <- tbl(con, sql("sql_statement")) \%>\% collect()
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Disconnect}{
-\preformatted{dbDisconnect(con)
-}
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{dbDisconnect(con)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
