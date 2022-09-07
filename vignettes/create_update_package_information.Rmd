@@ -257,6 +257,11 @@ development:
 production:
 ```
 
+**usethis::edit_r_environ** set config system environment on package startup
+```{r}
+usethis::edit_r_environ("development")
+```
+
 **golem::set_golem_options** update golem-config file with description information
 and set here path
 ```{r}
