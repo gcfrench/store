@@ -95,6 +95,10 @@ reference:
   contents:
   - add_new_spreadsheet
   - check_parquet_file_compression
+- title: "PDF document management"
+  desc: "Functions used to format and management PDF documents"
+  contents:
+  - merge_pdf_documents
 
 navbar:
   title: score

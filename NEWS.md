@@ -1,5 +1,6 @@
 ## store 1.3.0
 
+-   Added **merge_pdf_documents** function to merge pdf documents into a single pdf document using the [pdftools](https://docs.ropensci.org/pdftools/) package.
 -   Updated **Create and update a package document** to include adding config environment to project .Renviron file on opening the project.
 -   Added **check_parquet_file_compression** function to compare file size of a dataset exported using the [Apache parquet file format](https://www.jumpingrivers.com/blog/parquet-file-format-big-data-r/), using the [arrow package](https://arrow.apache.org/docs/r/), with the equivalent file size when the dataset is exported as a csv file.
 
