@@ -99,6 +99,8 @@ reference:
   desc: "Functions used to format and management PDF documents"
   contents:
   - merge_pdf_documents
+  - count_pdf_document_pages
+  - remove_pdf_document_pages
 
 navbar:
   title: score

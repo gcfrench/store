@@ -20,3 +20,9 @@ vector of pdf document paths to merge
 This function merges one or more pdf documents, saving the resulting merged
 pdf document either to a provided path or default merged pdf name.
 }
+\seealso{
+Other pdf: 
+\code{\link{count_pdf_document_pages}()},
+\code{\link{remove_pdf_document_pages}()}
+}
+\concept{pdf}

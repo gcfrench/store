@@ -5,6 +5,8 @@
 #' This function merges one or more pdf documents, saving the resulting merged
 #' pdf document either to a provided path or default merged pdf name.
 #'
+#' @family pdf
+#'
 #' @param pdf_paths vector of pdf document paths in the order they are to be to merged,
 #' default NULL to select the order of the pdf document paths.
 #' @param saved_merged_pdf_path character string of merged pdf document path, default
@@ -63,3 +65,88 @@ Select pdf documents to merge in order
   # return pdf paths invisibly
   invisible(pdf_paths)
 }
+
+#' @title
+#' Count pdf document pages
+#'
+#' @description
+#' This function counts the number of pages in the pdf document
+#'
+#' @family pdf
+#'
+#' @param pdf_path path character string of pdf document
+#'
+#' @return integer of number of pages in pdf document
+#' @export
+count_pdf_document_pages <- function(pdf_path) {
+
+  # check file exists
+  if(!fs::file_exists(pdf_path)) {
+    message(glue::glue("{pdf_path} does not exist"))
+    return(NA_integer_)
+  }
+
+  # check file has a pdf extension
+  if(fs::path_ext(pdf_path) != "pdf") {
+    message(glue::glue("{pdf_path} is not a pdf document"))
+    return(NA_integer_)
+  }
+
+  # count number of pages in pdf document
+  pdftools::pdf_info(pdf_path)$pages
+}
+
+#' @title
+#' Remove pdf document pages
+#'
+#' @description
+#' This function removes one or more pages from a pdf document, saving the original
+#' updated document (adding original_updated to the document name) and saving
+#' the removed pages as a separate pdf document (adding removed_pages to the document name).
+#' The path to the pdf document is requested if not provided.
+#'
+#' @family pdf
+#'
+#' @param pdf_path path character string of pdf document.
+#' @param pages_to_remove numeric vector of page numbers to extract.
+#'
+#' @return path character string of pdf document.
+#' @export
+remove_pdf_document_pages <- function(pdf_path = NULL, pages_to_remove) {
+
+  # select pdf document if not provided
+  if(is.null(pdf_path)) {
+    pdf_path <- choose.files(caption = "Please select pdf document",
+                             multi = FALSE, filters = Filters[c("pdf"), ])
+  }
+
+  # check file exists
+  if(!fs::file_exists(pdf_path)) {
+    message(glue::glue("{pdf_path} does not exist"))
+    return(NA_integer_)
+  }
+
+  # check file has a pdf extension
+  if(fs::path_ext(pdf_path) != "pdf") {
+    message(glue::glue("{pdf_path} is not a pdf document"))
+    return(NA_integer_)
+  }
+
+  # get path of updated pdf document outputs
+  pdf_path_output <- fs::path(fs::path_dir(pdf_path),
+                              glue::glue("{fs::path_ext_remove(fs::path_file(pdf_path ))}"))
+
+  # remove pdf pages from document and save original document
+  pdftools::pdf_subset(input = pdf_path,
+                       pages = dplyr::setdiff(1:count_pdf_document_pages(pdf_path), pages_to_remove),
+                       output = glue::glue("{pdf_path_output}_original_updated.pdf"))
+
+  # extract pdf pages from original document
+  pdftools::pdf_subset(input = pdf_path,
+                       pages = dplyr::intersect(1:count_pdf_document_pages(pdf_path), pages_to_remove),
+                       output = glue::glue("{pdf_path_output}_removed_pages.pdf"))
+
+  # return pdf path invisibly
+  invisible(pdf_path)
+}
+
