@@ -95,6 +95,10 @@ reference:
   contents:
   - add_new_spreadsheet
   - check_parquet_file_compression
+- title: "File system management"
+  desc: "Functions used to manage and extract information from the file system"
+  contents:
+  - filenames_to_clipboard
 - title: "PDF document management"
   desc: "Functions used to format and management PDF documents"
   contents:
