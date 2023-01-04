@@ -111,13 +111,6 @@ usethis::use_testthat()
 golem::use_recommended_tests()
 ```
 
-**usethis::use_coverage** or **covr::package_coverage** - adds test coverage using 
-either Codecov or Coveralls webservice
-```{r}
-usethis::use_coverage(type = "codecov")
-usethis::use_coverage(type = "coveralls")
-```
-
 **devtools::document** add the man directory containing the document .Rd files. Documents can also be updated using Ctlr-shift-D or through the Build:Document menu
 ```{r}
 devtools::document()
@@ -150,10 +143,11 @@ pkgdown::init_site()
 
 **pkgdown::build_article** create tasks html report
 ```{r}
+# Build - Install and Restart first
 pkgdown::build_article("tasks")
 ```
 
-**create yaml template** pkgdown.yml template
+**create yaml template** _pkgdown.yml template
 ```{}
 title: TITLE_HERE
 template:
@@ -196,6 +190,7 @@ usethis::use_lifecycle()
 **usethis::use_lifecycle_badge** add lifecycle badge to home page
 ```{r}
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
+devtools::build_readme()
 ```
 
 **usethis::use_logo** or **golem::use_favicon** add a hex logo to home page
@@ -208,10 +203,9 @@ golem::use_favicon( path = "path/to/favicon")
 # golem::remove_favicon()
 ```
 
-**RStudio: Build - Install and Restart**
-
 **pkgdown::build_site** build documentation
 ```{r}
+# RStudio: Build - Install and Restart first
 pkgdown::build_site()
 ```
 
@@ -241,6 +235,15 @@ usethis::use_github()
 usethis::use_github_action("pkgdown")
 ```
 
+### Add coverage
+
+**usethis::use_coverage** or **covr::package_coverage** - adds test coverage using 
+either Codecov or Coveralls webservice
+```{r}
+usethis::use_coverage(type = "codecov")
+usethis::use_coverage(type = "coveralls")
+```
+
 ### Add config file ---------------
 
 **usethis::edit_file** add a config file and package to descriptions
@@ -259,7 +262,11 @@ production:
 
 **usethis::edit_r_environ** set config system environment on package startup
 ```{r}
-usethis::edit_r_environ("development")
+usethis::edit_r_environ()
+```
+
+```{}
+R_CONFIG_ACTIVE = "development"
 ```
 
 **golem::set_golem_options** update golem-config file with description information
@@ -515,7 +522,6 @@ usethis::edit_file("README.Rmd")
 ```
 
 ## Send to another machine ---------------
-
 
 **pkgbuild::build** create a tar.gz file to send to other machine
 ```{r}
