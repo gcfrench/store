@@ -46,7 +46,8 @@ as_gridref <- function(grid_reference = character()) {
   validate_gridref(grid_reference)
 
   # convert to gridref class
-  structure(grid_reference, class = "gridref")
+  class(grid_reference) <- class(grid_reference) %>%
+    purrr::append("gridref", after - 0)
 }
 
 # S3 Validator function --------------------------------------------------------
