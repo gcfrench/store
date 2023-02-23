@@ -129,6 +129,9 @@ navbar:
       - text: "GDAL commands"
         href: articles/gdal_commands.html
       - text: -----
+      - text: "Tidy evaluation notes"
+        href: articles/tidy_evaluation_notes.html
+      - text: -----
       - text: "Run validation checks"
         href: articles/validation_checks.html
       - text: -----

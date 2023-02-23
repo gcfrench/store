@@ -1,0 +1,148 @@
+---
+title: "Tidy evalulation notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tidy evalulation notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+suppressWarnings({
+  library(rlang)
+  library(lobstr)
+  library(tibble)
+})
+```
+
+These notes were made whilst reading the metaprogramming chapters 17 - 20 in Hadley Wickham's [Advanced R](https://adv-r.hadley.nz/index.html) book.
+
+## environment
+
+```{r}
+# symbol assigned with a constant in the global environment
+species_name <- "Gentoo"
+gender <- "male"
+
+# symbol assigned with a constant in a tibble in the global environment
+data_tibble <- tibble(species_name = "Chinstrap",
+                      gender = "female")
+
+# create a new data environment
+penguin_environment <- env()
+
+# symbol assigned with a constant in the data environment
+assign("species_name", "Adelie", envir = penguin_environment)
+assign("gender", "unknown", envir = penguin_environment)
+```
+
+## view expression
+
+```{r}
+# view expression as abstract syntax tree
+ast(function_name <- function(parameter = "Gentoo"){
+  return(parameter_value)
+  })
+```
+
+## quasiquotation
+
+Ability to both capture an expression without evaluation using quotation and selectively evaluating part of this quoted expression using unquotation
+
+### quotation (parsing): capturing an expression without evaluating it
+
+```{r}
+# parse constant string as an expression
+parse_expr('species_name <- "Gentoo"')
+
+# parse symbol name as an expression
+expr(species_name) # base equivalent = quote(species_name)
+
+# parse multiple symbols names as a list of expressions
+exprs(species_name, gender) # base equivalent = alist(species_name, gender)
+
+# parse symbol's assigned constant as an expression 
+enexpr(species_name) # base equivalent = substitute(species_name)
+
+# parse multiple symbol's assigned constants as an expression
+enexprs(species_name, gender)
+
+# parse multiple constant arguments in function passed using ...
+data <- function(...) {
+  enexprs(...) # base equivalent = as.list(substitute(...()))
+}
+data(species_name = "Gentoo", gender = "male")
+
+# quosure - capture an expression along with its environment
+enquo(species_name)
+
+# quosures - capture a list of expressions along its their environment
+enquos(species_name, gender)
+```
+
+### quotation (parsing): capturing a symbol without evaluating it
+
+```{r}
+# convert a string constant into a symbol
+sym("species_name")
+
+# parse symbols assigned symbol as an expression
+ensym(species_name)
+
+# parse multiple symbols assigned symbols as an expression
+ensyms(species_name, gender)
+
+# parse multiple symbol arguments in function passed using ...
+data <- function(...) {
+  ensyms(...)
+}
+data(species_name = Gentoo, gender = male)
+```
+
+### unquoting: selectively evaluating part of a quoted expression
+
+```{r}
+# evaluate part of the expression using the unquote operator !!
+expr(!!expr(species_name) <- !!enexpr(species_name))
+expr(!!sym("gender") <- !!enexpr(gender))
+
+# evaluate multiple symbols names stored as a list of expressions
+expr(f(!!!exprs(species_name, gender)))
+```
+
+### deparsing: construct a string from an expression
+
+```{r}
+# convert a symbol into a string constant
+expr_text(expr(species_name)) # base equivalent = deparse(quote(species_name))
+```
+
+## evaluation
+
+### evaluation of an expression
+
+```{r}
+# evaluate a symbol expression assigned to a constant within a specified environment
+eval(expr = expr(species_name))
+eval(expr = expr(species_name), envir = penguin_environment)
+```
+
+### evaluation of a quosure
+
+```{r}
+eval_tidy(expr = enquo(species_name))
+```
+
+### evaluation of an expression in the context of a data frame (data mask)
+
+```{r}
+eval_tidy(expr = expr(species_name), data = data_tibble)
+```
