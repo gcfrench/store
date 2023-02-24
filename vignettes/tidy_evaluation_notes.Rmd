@@ -9,7 +9,7 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  eval = FALSE,
+  eval = TRUE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -20,10 +20,18 @@ suppressWarnings({
   library(rlang)
   library(lobstr)
   library(tibble)
+  library(dplyr, warn.conflicts = FALSE)
+  library(palmerpenguins)
 })
 ```
 
 These notes were made whilst reading the metaprogramming chapters 17 - 20 in Hadley Wickham's [Advanced R](https://adv-r.hadley.nz/index.html) book.
+
+Additional resources
+
+-   [rlang package documentation](https://rlang.r-lib.org/index.html)
+
+-   [Tidy eval helpers](https://ggplot2.tidyverse.org/reference/tidyeval.html)
 
 ## environment
 
@@ -44,7 +52,7 @@ assign("species_name", "Adelie", envir = penguin_environment)
 assign("gender", "unknown", envir = penguin_environment)
 ```
 
-## view expression
+## expression
 
 ```{r}
 # view expression as abstract syntax tree
@@ -81,10 +89,16 @@ data <- function(...) {
 }
 data(species_name = "Gentoo", gender = "male")
 
-# quosure - capture an expression along with its environment
+# quosure - capture symbol name as expression along with its environment
+quo(species_name)
+
+# quosures - capture list of symbol names as expression along with its environment
+quos(species_name, gender)
+
+# quosure - capture symbol's assigned constant  as an expression along with its environment
 enquo(species_name)
 
-# quosures - capture a list of expressions along its their environment
+# quosures - capture a list of symbol's assigned constants as expressions along its their environment
 enquos(species_name, gender)
 ```
 
@@ -145,4 +159,104 @@ eval_tidy(expr = enquo(species_name))
 
 ```{r}
 eval_tidy(expr = expr(species_name), data = data_tibble)
+```
+
+### examples
+
+-   quote symbol parameters using **enquo** and unquote using **!!**
+
+```{r}
+get_maximum_value <- function(data, category, variable) {
+  
+  # quosure containing parameter's value as an expression and its environment
+  category <- enquo(category) # species
+  variable <- enquo(variable) # body_mass_g
+
+  # evaluate quosure using the unquote operator
+  data |>
+    group_by(!!category) |>
+    summarise(maximum = max(!!variable, na.rm = TRUE))
+}
+penguins |> 
+  get_maximum_value(category = species, 
+                    variable = body_mass_g)
+```
+
+-   quote symbol parameters and unquote using **{{ }}**
+
+```{r}
+# {{ }} is a short hand replacement for !!(enquo(x))
+get_maximum_value <- function(data, category, variable) {
+  
+  # create and unquote quosure containing parameter's value as an expression and its environment using {{ }}
+  data |> 
+    group_by({{category}}) |> 
+    summarise(maximum = max({{variable}}, na.rm = TRUE))
+}
+penguins |> 
+  get_maximum_value(category = species, 
+                    variable = body_mass_g)
+```
+
+-   quote and unquote multiple symbol parameters using ...
+
+```{r}
+get_maximum_value <- function(data, category, ...) {
+  
+  # create and unquote multiple quosures using ...
+  data |> 
+    group_by({{category}}) |> 
+    summarise(...)
+}
+penguins |> 
+  get_maximum_value(category = species, 
+                    average = mean(body_mass_g, na.rm = TRUE),
+                    maximum = max(body_mass_g, na.rm = TRUE))
+```
+
+-   quote symbol parameters and unquote using {{ }} on left hand side using **:=**
+
+```{r}
+get_maximum_value <- function(data, category, variable) {
+  
+  # use := to quote and unquote on left hand side of =
+  data |>
+    group_by({{category}}) |>
+    summarise("{{category}}_maximum" := max({{variable}}, na.rm = TRUE))
+}
+penguins |> 
+  get_maximum_value(category = species, 
+                    variable = body_mass_g)
+```
+
+-   use **{ }** to add string constant
+
+```{r}
+get_maximum_value <- function(data, category, variable, unit) {
+  
+  # use {} to add string and := to quote and unquote on left hand side of =
+  data |>
+    group_by({{category}}) |>
+    summarise("maximum_{unit}" := max({{variable}}, na.rm = TRUE))
+}
+penguins |> 
+  get_maximum_value(category = species, 
+                    variable = body_mass_g,
+                    unit = "gram")
+```
+
+-   quote constant parameters and unquote using **.data[[ ]]**
+
+```{r}
+# .data[[ ]] pronoun is used when parameter values are strings, to distinguish from using enviroment constant values identified by the .env pronoun 
+get_maximum_value <- function(data, category, variable) {
+  
+  # create and unquote quosure containing parameter's value as an expression and its environment using {{ }}
+  data |> 
+    group_by(.data[[category]]) |> 
+    summarise(maximum = max(.data[[variable]], na.rm = TRUE))
+}
+penguins |> 
+  get_maximum_value(category = "species", 
+                    variable = "body_mass_g")
 ```
