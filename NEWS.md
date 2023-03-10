@@ -1,5 +1,6 @@
 ## store 1.3.0
 
+-   Added **example spatial objects** consisting of example polygons, lines and points that may be used to test spatial functionality. These were created after reading **Geocomputation with R** **book** by Robin Lovelace, Jakub Nowosad and Jannes Muenchow.
 -   Added **tidy evaluation notes** made whilst reading the metaprogramming chapters in Hadley Wickham's [Advanced R](https://adv-r.hadley.nz/) book, using [rlang](https://rlang.r-lib.org/index.html) functions.
 -   Added **filenames_to_clipboard** function to extract and copy a list fo file names from a directory and it's child directores.
 -   Added **pdf_documents** functions to merge pdf documents into a single pdf document and count number of pdf pages and remove pages from a pdf document using the [pdftools](https://docs.ropensci.org/pdftools/) package.

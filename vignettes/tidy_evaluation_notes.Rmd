@@ -248,7 +248,7 @@ penguins |>
 -   quote constant parameters and unquote using **.data[[ ]]**
 
 ```{r}
-# .data[[ ]] pronoun is used when parameter values are strings, to distinguish from using enviroment constant values identified by the .env pronoun 
+# .data[[ ]] pronoun is used when parameter values are strings, to distinguish from using environment constant values identified by the .env pronoun 
 get_maximum_value <- function(data, category, variable) {
   
   # create and unquote quosure containing parameter's value as an expression and its environment using {{ }}

@@ -32,10 +32,20 @@ reference:
   - country_codes
   - uk_ireland_tenkm_grid_squares
   - vc_grid_square_intersects
-- title: "Example tables"
-  desc: "Dataframes containing example data"
+- title: "Example data"
+  desc: "Dataframes containing example table"
   contents:
   - nbn_demonstration_dataset
+- title: "Example spatial data"
+  desc: "Example spatial vector objects"
+  contents:
+  - example_main_polygon
+  - example_points
+  - example_multipoint
+  - example_lines
+  - example_multiline
+  - example_polygons
+  - example_multipolygon
 - title: "Spatial data"
   desc: "Explore spatial datasets"
   contents:
