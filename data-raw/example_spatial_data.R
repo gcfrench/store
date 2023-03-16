@@ -227,10 +227,10 @@ example_multiline |>
 # example_raster ---------------------------------------------------------------
 ## 1 raster with 30 rows and 45 columns, with resolution of 50m.
 example_raster <- terra::rast(nrows = 30, ncols = 45,
-                           xmin = 0, xmax = 2250, ymin = 0, ymax = 1500,
-                           crs = "EPSG:27700",
-                           vals = 1:1350,
-                           nlyrs = 1, names = c("layer_1"))
+                              xmin = 0, xmax = 2250, ymin = 0, ymax = 1500,
+                              crs = "EPSG:27700",
+                              vals = 1:1350,
+                              nlyrs = 1, names = c("layer_1"))
 
 ## save example raster layer
 example_raster |>

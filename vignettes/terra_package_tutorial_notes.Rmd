@@ -1,0 +1,37 @@
+---
+title: "Terra package resources notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Terra package resources notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**Notes on rasters taken whilst reading the [Spatial Data Science with R and terra](<https://rspatial.org/index.html>) online resources**
+
+```{r}
+suppressPackageStartupMessages(
+  suppressWarnings(
+    library(terra),
+    library(tmap)
+  )
+)
+```
+
+## Raster layer
+
+### Load raster
+
+```{r}
+example_raster <- rast(system.file("extdata/tif_files/example_raster.tif", 
+                                   package = "store"))
+tm_shape(example_raster) +
+  tm_raster(palette = "Blues", style = "cont", legend.show = FALSE)
+```
