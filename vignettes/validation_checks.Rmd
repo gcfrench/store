@@ -3,8 +3,11 @@ title: "Validation checks"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Validation checks}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, include = FALSE}
@@ -23,38 +26,51 @@ suppressPackageStartupMessages({
     library(assertthat)
     library(palmerpenguins)
     library(janitor)
+    library(data.validator)
   })
 })
 ```
 
 ## Validation checks
 
-Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) 
-package, with extra checks provided by the [assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html)
-package. The [assertthat](https://github.com/hadley/assertthat) package can also be used 
-as an alternative to stopifnot(). All examples perform checks on the [palmerpenguins dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) and return 
-TRUE if validation check passes and stops with an error if the validation check fails
+Data validation is performed using the
+[assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html)
+package, with extra checks provided by the
+[assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html)
+package. The [assertthat](https://github.com/hadley/assertthat) package
+can also be used as an alternative to stopifnot().
+
+All examples perform checks on the [palmerpenguins
+dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html)
+and return TRUE if validation check passes and stops with an error if
+the validation check fails.
 
 The file path to the validation checks markdown document exists
+
 ```{r}
 assert_that(file.exists("validation_checks.Rmd"), 
             msg = "Path to validation check markdown document is UNSUCCESSFUL")
 ```
 
 The penguin dataset is not empty
+
 ```{r}
 see_if(not_empty(penguins), 
        msg = "Penguins dataset is EMPTY")
 ```
 
 The penguins dataset contains 344 rows
+
 ```{r}
 penguins %>% 
   verify(nrow(.) == 344,
          success_fun = success_logical, error_fun = error_stop)
 ```
 
-The penguins dataset contains eight named columns. This uses a functional sequence to store verify functions for each column name and number of columns.
+The penguins dataset contains eight named columns. This uses a
+functional sequence to store verify functions for each column name and
+number of columns.
+
 ```{r}
 check_penguins_column_names <- . %>% 
   chain_start() %>% 
@@ -74,6 +90,7 @@ penguins %>%
 ```
 
 Penguins raw dataset date_egg column is a date type
+
 ```{r}
 penguins_raw %>% 
   clean_names() %>% 
@@ -81,7 +98,9 @@ penguins_raw %>%
          success_fun = success_logical, error_fun = error_stop)
 ```
 
-Combination of sample number and species name in penguins raw dataset are unique
+Combination of sample number and species name in penguins raw dataset
+are unique
+
 ```{r}
 penguins_raw %>% 
   clean_names() %>%  
@@ -89,16 +108,19 @@ penguins_raw %>%
               success_fun = success_logical, error_fun = error_stop)
 ```
 
-All penguins are assigned to a species and an island (they is no missing data in 
-the species or island columns)
+All penguins are assigned to a species and an island (they is no missing
+data in the species or island columns)
+
 ```{r}
 penguins %>% 
   assert(not_na, species, island,  
          success_fun = success_logical, error_fun = error_stop)
 ```
 
-All penguins are either male or female (set parameters allow.na = TRUE to exclude 
-NAs and inverse = TRUE to check if all penguins do not contain either male or female)
+All penguins are either male or female (set parameters allow.na = TRUE
+to exclude NAs and inverse = TRUE to check if all penguins do not
+contain either male or female)
+
 ```{r}
 penguins %>% 
   assert(in_set("male", "female"), sex,
@@ -106,6 +128,7 @@ penguins %>%
 ```
 
 All penguins weight are positive values
+
 ```{r}
 penguins %>% 
   dplyr::filter(!is.na(body_mass_g)) %>% 
@@ -114,6 +137,7 @@ penguins %>%
 ```
 
 All penguins weigh between 2700 and 6300 grams, inclusively
+
 ```{r}
 penguins %>% 
   assert(within_bounds(2700, 6300), body_mass_g,
@@ -122,8 +146,10 @@ penguins %>%
 
 ## Data exploration
 
-Find the rows in the penguins dataset that are missing all the four bill, flipper
-and body mass measurements. Row numbers are displayed in the index column
+Find the rows in the penguins dataset that are missing all the four
+bill, flipper and body mass measurements. Row numbers are displayed in
+the index column
+
 ```{r}
 penguins %>% 
   assert_rows(num_row_NAs, function(.x){.x != 4}, bill_length_mm:body_mass_g,
@@ -131,6 +157,43 @@ penguins %>%
 
 ```
 
+## Validation report
 
+A validation report can be printed or saved using appsilon's
+[data.validator](https://appsilon.github.io/data.validator/index.html)
+package.
 
+```{r}
+report <- data_validation_report()
+```
 
+```{r}
+penguins_raw |> 
+  clean_names() |> 
+  validate(name = "Validation report for raw penguins dataset")  |> 
+  validate_cols(is_date, date_egg, 
+                description = 'Penguins raw dataset date_egg column is a date type')  |> 
+  validate_rows(col_concat, is_uniq, sample_number, species, 
+                description = "Combination of sample number and species name in penguins raw dataset are unique") |> 
+  validate_cols(not_na, species, island, 
+                description = "All penguins are assigned to a species and an island (they is no missing data in the species or island columns)") |> 
+  validate_cols(in_set("MALE", "FEMALE"),  sex,
+                description = "All penguins are either male or female") |> 
+  validate_if(body_mass_g > 0,
+              description = "All penguins weight are positive values") |>
+  validate_cols(within_bounds(2700, 3600),  body_mass_g,
+                description = "All penguins weigh between 2700 and 6300 grams inclusively") |> 
+  add_results(report)
+
+penguins |> 
+  clean_names() |> 
+  validate(name = "Validation for penguins dataset") |> 
+  validate_rows(num_row_NAs, function(.x){.x != 4}, bill_length_mm:body_mass_g,
+                description = "Each penguin has at least one out of the four bill, flipper and body mass measurements") |> 
+  add_results(report)
+```
+
+```{r}
+save_report(report)
+browseURL("validation_report.html")
+```
