@@ -45,9 +45,21 @@ dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html)
 and return TRUE if validation check passes and stops with an error if
 the validation check fails.
 
+Validation results can also be added to a validation report, using
+appsilon's
+[data.validator](https://appsilon.github.io/data.validator/index.html)
+package. This report can then be saved and displayed at the end of the
+script.
+
+```{r}
+# create empty report
+report <- data_validation_report()
+```
+
 The file path to the validation checks markdown document exists
 
 ```{r}
+# print to console
 assert_that(file.exists("validation_checks.Rmd"), 
             msg = "Path to validation check markdown document is UNSUCCESSFUL")
 ```
@@ -55,6 +67,7 @@ assert_that(file.exists("validation_checks.Rmd"),
 The penguin dataset is not empty
 
 ```{r}
+# print to console
 see_if(not_empty(penguins), 
        msg = "Penguins dataset is EMPTY")
 ```
@@ -62,7 +75,8 @@ see_if(not_empty(penguins),
 The penguins dataset contains 344 rows
 
 ```{r}
-penguins %>% 
+# print to console
+penguins %>%  
   verify(nrow(.) == 344,
          success_fun = success_logical, error_fun = error_stop)
 ```
@@ -72,6 +86,7 @@ functional sequence to store verify functions for each column name and
 number of columns.
 
 ```{r}
+# print to console
 check_penguins_column_names <- . %>% 
   chain_start() %>% 
   verify(has_all_names("species")) %>%
@@ -92,29 +107,55 @@ penguins %>%
 Penguins raw dataset date_egg column is a date type
 
 ```{r}
-penguins_raw %>% 
-  clean_names() %>% 
+# print to console
+penguins_raw |>  
+  clean_names() |>  
   assert(assertive::is_date, date_egg,
          success_fun = success_logical, error_fun = error_stop)
+
+# display as report
+penguins_raw |> 
+  clean_names() |> 
+  validate(name = "Validation report for raw penguins dataset")  |> 
+  validate_cols(is_date, date_egg, 
+                description = 'Penguins raw dataset date_egg column is a date type') |> 
+  add_results(report)
 ```
 
 Combination of sample number and species name in penguins raw dataset
 are unique
 
 ```{r}
-penguins_raw %>% 
-  clean_names() %>%  
+# print to console
+penguins_raw  |>  
+  clean_names() |> 
   assert_rows(col_concat, is_uniq, sample_number, species,
               success_fun = success_logical, error_fun = error_stop)
+
+# display as report
+penguins_raw |> 
+  clean_names() |> 
+  validate(name = "Validation report for raw penguins dataset") |> 
+  validate_rows(col_concat, is_uniq, sample_number, species, 
+                description = "Combination of sample number and species name in penguins raw dataset are unique") |> 
+  add_results(report)
 ```
 
 All penguins are assigned to a species and an island (they is no missing
 data in the species or island columns)
 
 ```{r}
-penguins %>% 
+# print to console
+penguins |> 
   assert(not_na, species, island,  
          success_fun = success_logical, error_fun = error_stop)
+
+# display as report
+penguins|> 
+  validate(name = "Validation for penguins dataset") |> 
+  validate_cols(not_na, species, island, 
+                description = "All penguins are assigned to a species and an island (they is no missing data in the species or island columns)") |> 
+  add_results(report)
 ```
 
 All penguins are either male or female (set parameters allow.na = TRUE
@@ -122,26 +163,51 @@ to exclude NAs and inverse = TRUE to check if all penguins do not
 contain either male or female)
 
 ```{r}
-penguins %>% 
+# print to console
+penguins |>  
   assert(in_set("male", "female"), sex,
          success_fun = success_logical, error_fun = error_stop)
+
+# display as report
+penguins|> 
+  validate(name = "Validation for penguins dataset") |> 
+  validate_cols(in_set("male", "female"),  sex,
+                description = "All penguins are either male or female") |> 
+  add_results(report)
 ```
 
 All penguins weight are positive values
 
 ```{r}
-penguins %>% 
+# print to console
+penguins |> 
   dplyr::filter(!is.na(body_mass_g)) %>% 
   assert(assertive::assert_all_are_positive, body_mass_g,
          success_fun = success_logical, error_fun = error_stop)
+
+# display as report
+penguins|> 
+  validate(name = "Validation for penguins dataset") |> 
+  validate_if(body_mass_g > 0,
+              description = "All penguins weight are positive values") |>
+  add_results(report)
 ```
 
 All penguins weigh between 2700 and 6300 grams, inclusively
 
 ```{r}
-penguins %>% 
+# print to console
+penguins |> 
   assert(within_bounds(2700, 6300), body_mass_g,
          success_fun = success_logical, error_fun = error_stop)
+
+# display as report as warning
+penguins|> 
+  validate(name = "Validation for penguins dataset") |> 
+  validate_cols(skip_chain_opts = TRUE,
+                error_fun = warning_append, within_bounds(2700, 3600), body_mass_g,
+                description = "All penguins weigh between 2700 and 3600 grams inclusively") |> 
+  add_results(report)
 ```
 
 ## Data exploration
@@ -151,49 +217,26 @@ bill, flipper and body mass measurements. Row numbers are displayed in
 the index column
 
 ```{r}
+# print to console
 penguins %>% 
   assert_rows(num_row_NAs, function(.x){.x != 4}, bill_length_mm:body_mass_g,
                success_fun = success_continue, error_fun = just_warn)
 
-```
-
-## Validation report
-
-A validation report can be printed or saved using appsilon's
-[data.validator](https://appsilon.github.io/data.validator/index.html)
-package.
-
-```{r}
-report <- data_validation_report()
-```
-
-```{r}
-penguins_raw |> 
-  clean_names() |> 
-  validate(name = "Validation report for raw penguins dataset")  |> 
-  validate_cols(is_date, date_egg, 
-                description = 'Penguins raw dataset date_egg column is a date type')  |> 
-  validate_rows(col_concat, is_uniq, sample_number, species, 
-                description = "Combination of sample number and species name in penguins raw dataset are unique") |> 
-  validate_cols(not_na, species, island, 
-                description = "All penguins are assigned to a species and an island (they is no missing data in the species or island columns)") |> 
-  validate_cols(in_set("MALE", "FEMALE"),  sex,
-                description = "All penguins are either male or female") |> 
-  validate_if(body_mass_g > 0,
-              description = "All penguins weight are positive values") |>
-  validate_cols(within_bounds(2700, 3600),  body_mass_g,
-                description = "All penguins weigh between 2700 and 6300 grams inclusively") |> 
-  add_results(report)
-
+# display as report
 penguins |> 
-  clean_names() |> 
   validate(name = "Validation for penguins dataset") |> 
   validate_rows(num_row_NAs, function(.x){.x != 4}, bill_length_mm:body_mass_g,
                 description = "Each penguin has at least one out of the four bill, flipper and body mass measurements") |> 
   add_results(report)
 ```
 
+## Validation report
+
 ```{r}
+print(report)
+```
+
+```{r eval = FALSE}
 save_report(report)
 browseURL("validation_report.html")
 ```

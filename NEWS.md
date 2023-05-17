@@ -1,5 +1,6 @@
 ## store 1.3.0
 
+-   Updated **run validation checks** outputting validation checks as a html report using appsilon's [data.validator](https://appsilon.github.io/data.validator/index.html) package.
 -   Added **example spatial objects** consisting of example polygons, lines and points that may be used to test spatial functionality. These were created after reading **Geocomputation with R** **book** by Robin Lovelace, Jakub Nowosad and Jannes Muenchow.
 -   Added **tidy evaluation notes** made whilst reading the metaprogramming chapters in Hadley Wickham's [Advanced R](https://adv-r.hadley.nz/) book, using [rlang](https://rlang.r-lib.org/index.html) functions.
 -   Added **filenames_to_clipboard** function to extract and copy a list fo file names from a directory and it's child directores.
