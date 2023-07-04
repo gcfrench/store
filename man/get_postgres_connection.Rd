@@ -16,7 +16,7 @@ A PostgreSQL database connection object.
 }
 \description{
 This function initiates a PostgreSQL connection using stored database credentials
-through the keyring package. The PostgreSQL tables are added to the connection pane.
+through the keyring package.
 }
 \section{Connect}{
 

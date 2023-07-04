@@ -1,11 +1,19 @@
 ## store 1.3.0
 
+-   Removed **connections** package function from database functions as this package has been removed from the [CRAN repository](https://cran.r-project.org/web/packages/connections/index.html)
+
 -   Updated **run validation checks** outputting validation checks as a html report using appsilon's [data.validator](https://appsilon.github.io/data.validator/index.html) package.
+
 -   Added **example spatial objects** consisting of example polygons, lines and points that may be used to test spatial functionality. These were created after reading **Geocomputation with R** **book** by Robin Lovelace, Jakub Nowosad and Jannes Muenchow.
+
 -   Added **tidy evaluation notes** made whilst reading the metaprogramming chapters in Hadley Wickham's [Advanced R](https://adv-r.hadley.nz/) book, using [rlang](https://rlang.r-lib.org/index.html) functions.
+
 -   Added **filenames_to_clipboard** function to extract and copy a list fo file names from a directory and it's child directores.
+
 -   Added **pdf_documents** functions to merge pdf documents into a single pdf document and count number of pdf pages and remove pages from a pdf document using the [pdftools](https://docs.ropensci.org/pdftools/) package.
+
 -   Updated **Create and update a package document** to include adding config environment to project .Renviron file on opening the project.
+
 -   Added **check_parquet_file_compression** function to compare file size of a dataset exported using the [Apache parquet file format](https://www.jumpingrivers.com/blog/parquet-file-format-big-data-r/), using the [arrow package](https://arrow.apache.org/docs/r/), with the equivalent file size when the dataset is exported as a csv file.
 
 ## store 1.2.0 <font size="4">2022-08-17</font>

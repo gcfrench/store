@@ -210,8 +210,7 @@ delete_key <- function(keyring_name, service_name) {
 #' @description
 #' This function initiates a SQL Server connection using windows authentication,
 #' either using stored database credentials through the keyring package or else
-#' requesting database credentials in the console. The SQL Server tables are added
-#' to the connection pane.
+#' requesting database credentials in the console.
 #'
 #' @section Connect:
 #' ```
@@ -282,9 +281,6 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
   # connect to SQL Server database
   con <- get_connection(DBI::dbConnect)
 
-  # add connection to connection pane
-  get_connection(connections::connection_open)
-
   return(con)
 }
 
@@ -293,7 +289,7 @@ get_sqlserver_connection <- function(keyring_name, service_name, keyring = TRUE)
 #'
 #' @description
 #' This function initiates a MySQL connection using stored database credentials
-#' through the keyring package. The MySQL tables are added to the connection pane.
+#' through the keyring package.
 #'
 #' @section Connect:
 #' ```
@@ -339,9 +335,6 @@ get_mysql_connection <- function(keyring_name, service_name) {
   # connect to MySQL database
   con <- get_connection(DBI::dbConnect)
 
-  # add connection to connection pane
-  get_connection(connections::connection_open)
-
   # lock keyring
   keyring::keyring_lock(keyring_name)
 
@@ -353,7 +346,7 @@ get_mysql_connection <- function(keyring_name, service_name) {
 #'
 #' @description
 #' This function initiates a PostgreSQL connection using stored database credentials
-#' through the keyring package. The PostgreSQL tables are added to the connection pane.
+#' through the keyring package.
 #'
 #' @section Connect:
 #' ```
@@ -399,9 +392,6 @@ get_postgres_connection <- function(keyring_name, service_name) {
 
   # Connect to PostGreSQL database
   con <- get_connection(DBI::dbConnect)
-
-  # Add connection to connection pane
-  get_connection(connections::connection_open)
 
   # lock keyring
   keyring::keyring_lock(keyring_name)

@@ -16,7 +16,7 @@ A MySQL database connection object.
 }
 \description{
 This function initiates a MySQL connection using stored database credentials
-through the keyring package. The MySQL tables are added to the connection pane.
+through the keyring package.
 }
 \section{Connect}{
 
