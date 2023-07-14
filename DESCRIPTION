@@ -36,6 +36,7 @@ Imports:
     openxlsx (>= 4.2.5),
     pdftools,
     purrr (>= 0.3.4),
+    quarto,
     R6 (>= 2.5.1),
     ragg (>= 1.2.2),
     reactable (>= 0.2.3),

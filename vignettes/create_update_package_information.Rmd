@@ -116,19 +116,42 @@ golem::use_recommended_tests()
 devtools::document()
 ```
 
-**usethis::use_vignette** add tasks vignette
-```{r}
-usethis::use_vignette("tasks")
-```
+**File - New File - Quarto Document**:  add tasks quarto document to vignette folder.
 
 ```{}
-This **tasks** section contains a list of tasks and questions, with
-their current status
+---
+title: "Tasks"
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
+---
 
--   ✔️ completed
+::: callout-tip
+## Icons
+
+This **tasks** section contains a list of tasks and questions, with their current status
+
+-   ✔️completed
 -   ❗ awaiting completion
--   ✖️no longer needed
+-   ✖️no action
 -   ❓question to be answered
+:::
 
 ## Tasks and questions
 
@@ -141,10 +164,10 @@ usethis::use_pkgdown()
 pkgdown::init_site()
 ```
 
-**pkgdown::build_article** create tasks html report
+**store::build_single_quarto_article** create tasks html report
 ```{r}
 # Build - Install and Restart first
-pkgdown::build_article("tasks")
+store::build_single_quarto_article()
 ```
 
 **create yaml template** _pkgdown.yml template
@@ -207,6 +230,9 @@ golem::use_favicon( path = "path/to/favicon")
 ```{r}
 # RStudio: Build - Install and Restart first
 pkgdown::build_site()
+
+# build quarto html documents
+store::build_all_quarto_articles()
 ```
 
 ## Set environment ---------------
@@ -318,16 +344,38 @@ fs::dir_create("man/examples")
 
 ### Add new script ---------------
 
-**usethis::use_vignette**("vignette_name"): adds the vignette directory, containing a new vignette. This directory contains the script files. Add eval=False to the knitr::opts_chunk to turn off running the code.
+**File - New File - Quarto Document**: add a new quarto document to the vignette directory. Update YAML section
+
 ```{r}
-usethis::use_vignette("script_name")
+---
+title: "DOCUMENT NAME"
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true
+  jira: default
+  gfm: default
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
+---
 ```
 
-**pkgdown::build_articles** builds the html files in the articles sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+**store::build_single_quarto_article** builds the html files in the articles sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
 ```{r}
-pkgdown::build_article("script_name")
-# pkgdown::build_articles()
-pkgdown::build_articles_index()
+store::build_single_quarto_article()
 ```
 
 ### Add new function ---------------
@@ -505,6 +553,7 @@ sub-directory
 ```{r}
 pkgdown::clean_site()
 pkgdown::build_site()
+store::build_all_quarto_articles()
 ```
 
 **pkgdown::deploy_to_branch** pushes docs folder to GitHub branch gh-pages. 

@@ -115,6 +115,13 @@ reference:
   - merge_pdf_documents
   - count_pdf_document_pages
   - remove_pdf_document_pages
+- title: "Documentation"
+  desc: "Functions used to create the package's documentation"
+  contents:
+  - build_single_markdown_article
+  - build_all_markdown_articles
+  - build_single_quarto_article
+  - build_all_quarto_articles
 
 navbar:
   title: score
