@@ -146,7 +146,10 @@ unnest_failed_validation_results <- function(report) {
                                          index = NA_character_,
                                          description = NA_character_,
                                          type= NA_character_,
-                                         violations= NA_character_)
+                                         violations= NA_character_) |>
+      dplyr::mutate(dplyr::across(everything(), function (.x) {
+        tidyr::replace_na(.x, "")
+      }))
   }
 }
 
