@@ -120,7 +120,6 @@ devtools::document()
 
 ```{}
 ---
-title: "Tasks"
 author: "Graham French"
 date-modified: "`r lubridate::today()`"
 format: 
@@ -142,6 +141,8 @@ knitr:
 editor: visual
 ---
 
+## Tasks and questions
+
 ::: callout-tip
 ## Icons
 
@@ -152,8 +153,6 @@ This **tasks** section contains a list of tasks and questions, with their curren
 -   ✖️no action
 -   ❓question to be answered
 :::
-
-## Tasks and questions
 
 ### YYYY-MM-DD
 ```
@@ -591,9 +590,3 @@ golem::add_shinyappsio_file()
 ```{r}
 golem::add_dockerfile()
 ```
-
-
-
-
-
-

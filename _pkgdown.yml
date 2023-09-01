@@ -99,6 +99,7 @@ reference:
 - title: "Quality assurance"
   desc: "Functions and tables used in quality assurance"
 - contents:
+  - unnest_failed_validation_results
   - compare_dataset_versions
 - title: "Export data and analyses"
   desc: "Export data to Excel spreadsheets and text files"

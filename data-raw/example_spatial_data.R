@@ -238,7 +238,6 @@ example_raster |>
 # ------------------------------------------------------------------------------
 
 # save rda files as parquet and shape files ------------------------------------
-library(spatialstore)
 
 ## create directories
 fs::dir_create(fs::path("inst", "extdata", "parquet_files"))
@@ -266,7 +265,6 @@ fs::dir_ls(fs::path("data"), glob = "*.rda") |>
 # ------------------------------------------------------------------------------
 
 # plot example spatial objects -------------------------------------------------
-library(spatialstore)
 example_raster <- terra::rast(fs::path("inst", "extdata", "tif_files", "example_raster.tif"))
 
 tmap::tm_shape(example_raster) +

@@ -1,0 +1,158 @@
+---
+title: "Validation checks"
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true
+  jira: default
+  gfm: default
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
+---
+
+```{r setup}
+suppressPackageStartupMessages({
+  suppressWarnings({
+    library(dplyr)
+    library(assertr)
+    library(assertive)
+    library(assertthat)
+    library(palmerpenguins)
+    library(data.validator)
+  })
+})
+```
+
+## Validation checks
+
+Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) package, with extra checks provided by the [assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html) package.
+
+Appsilon's [data.validator](https://appsilon.github.io/data.validator/index.html) package is used to create a validation report or export the validation results in a spreadsheet.
+
+The [assertthat](https://github.com/hadley/assertthat) package can also be used as an alternative to stopifnot().
+
+## Directory
+
+```{r}
+assert_that(file.exists("validation_checks.qmd"), 
+            msg = "Path to validation check document is UNSUCCESSFUL")
+```
+
+## Dataset
+
+```{r}
+adelie <- penguins |> 
+  filter(species == "Adelie", !is.na(bill_length_mm)) |> 
+  mutate(id = row_number(), .before = everything()) |> 
+  mutate(across(where(is.factor), as.character))
+```
+
+```{r}
+see_if(not_empty(adelie), 
+       msg = "Adelie dataset is EMPTY")
+```
+
+```{r}
+report <- data_validation_report()
+```
+
+```{r}
+adelie |> 
+  validate(name = "Dataset") |> 
+  validate_if(description = "Check dataset contains a specific number of rows",
+              expr = has_elements(id, 151)) |> 
+  validate_if(description = "Check for column names in dataset",
+              expr = has_only_names(c("id", "species", "island", "bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g", "sex", "year"))) |>
+  validate_cols(description = "Check for data type of one or more columns",
+              predicate = is_an_integer,
+              body_mass_g) |> 
+  add_results(report)
+```
+
+## Values
+
+### Unique values
+
+```{r}
+adelie |> 
+  validate(name = "Unique values") |>
+  validate_if(description = "Check for unique values in a single column",
+              expr = is_uniq(id)) |>
+  validate_rows(description = "Check for unique values across multiple columns",
+                row_reduction_fn = col_concat,
+                predicate = is_uniq,
+                everything()) |>
+  add_results(report)
+```
+
+### Missing values
+
+```{r}
+#| column: page-inset-right
+
+adelie |> 
+  validate(name = "Missing values") |>
+  validate_if(description = "Check for missing values in a single column",
+              expr = not_na(species)) |> 
+  validate_cols(description = "Check for any missing values in multiple columns",
+                predicate = not_na,
+                species, island) |> 
+  validate_rows(description = "Check for all missing values in multiple columns",
+                row_reduction_fn = num_row_NAs,
+                predicate = within_bounds(lower.bound = 0, upper.bound = 4, include.upper = FALSE),
+                bill_length_mm:body_mass_g) |> 
+  validate_rows(description = "Check for number of missing values across multiple columns",
+                row_reduction_fn = num_row_NAs,
+                predicate = in_set(0),
+                bill_length_mm:body_mass_g) |>
+  add_results(report)
+```
+
+### Restricted values
+
+```{r}
+#| column: page-inset-right
+
+adelie |> 
+  validate(name = "Restricted values") |> 
+  validate_if(description = "Warn if values in a single column are above a defined value or are missing",
+              skip_chain_opts = TRUE, error_fun = warning_append,
+              expr = bill_length_mm < 50) |> 
+  validate_cols(description = "Warn if values in one or more columns are outside a given range",
+                skip_chain_opts = TRUE, error_fun = warning_append,
+                predicate = within_bounds(lower.bound = 30, upper.bound = 50),
+                bill_length_mm) |>
+  validate_if(description = "Check for compulsory value in a single column",
+              expr = is_matching_fixed(species, "Adelie")) |>
+  validate_if(description = "Check for compulsory substring value a single column",
+              expr = is_matching_regex(sex, "male") | is.na(sex)) |>
+  validate_cols(description = "Check for compulsory restricted values in one or more columns",
+                predicate = in_set("male", "female", allow.na = TRUE),
+                sex) |>
+  validate_cols(description = "Check for compulsory restricted values not in one or more columns",
+                predicate = in_set("TBC", allow.na = FALSE, inverse = TRUE),
+                sex) |>
+  add_results(report)
+```
+
+## Validation report
+
+```{r eval = FALSE}
+unnest_failed_validation_results(report)
+save_report(report)
+save_report(report) # remove Registered S3 method message at top of report
+browseURL("validation_report.html")
+```

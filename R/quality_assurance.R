@@ -102,5 +102,51 @@ compare_dataset_versions <- function(old_version, new_version) {
 
    # return
    return(difference_version)
- }
+}
+
+#' @title
+#' Unnest failed validation results
+#'
+#' @description
+#' This function unnests the validation report, created by the data.validator package,
+#' for validation tests resulting in errors or warnings. A tibble containing the
+#' failed information is exported.
+#'
+#' @param report validation report created by the data.validator package
+#'
+#' @return tibble containing the failed validation information
+#' @export
+unnest_failed_validation_results <- function(report) {
+
+  # unnest failed validation results from report
+  validation_results <- report |>
+    data.validator::get_results(unnest = TRUE) |>
+    dplyr::filter(type != "success")
+
+  # format failed validation results
+  if(nrow(validation_results != 0)) {
+    validation_results <- validation_results |>
+      dplyr::select(table_name,
+                    column,
+                    index,
+                    description,
+                    type,
+                    num.violations,
+                    description) |>
+      dplyr::rename(violations = num.violations) |>
+      dplyr::mutate(dplyr::across(where(is.integer), as.character)) |>
+      dplyr::mutate(dplyr::across(everything(), function (.x) {
+        tidyr::replace_na(.x, "")
+      })) |>
+      tibble::as_tibble()
+  } else {
+    # return empty tibble when there are no failed validations
+    validation_results <- tibble::tibble(table_name = NA_character_,
+                                         column = NA_character_,
+                                         index = NA_character_,
+                                         description = NA_character_,
+                                         type= NA_character_,
+                                         violations= NA_character_)
+  }
+}
 
