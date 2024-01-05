@@ -168,8 +168,10 @@ git merge BRANCH_NAME
 
 -   Resolve merge conflicts, edit file either keeping contents of branch or master or modified version of both. Stage edited file and commit to master.
 
-        <<<<<<< branch contents =======
-        ======= master contents >>>>>>>
+    ```         
+    <<<<<<< branch contents =======
+    ======= master contents >>>>>>>
+    ```
 
 **Git commands**
 

@@ -1,15 +1,24 @@
 ---
 title: "Create and update a package"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Create and update a package}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    embed-resources: true
+  jira: default
+  gfm: default
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
-  eval=FALSE,
+  eval = TRUE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -21,21 +30,36 @@ library(store)
 
 This documents the functions to run to help create and update a R package. Further information can be found at
 
-* [devtools documentation](https://devtools.r-lib.org/)
-* [usethis documentation](https://usethis.r-lib.org/)
-* [pkgdown documentation](https://pkgdown.r-lib.org/)
-* [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
-* [golem documentation](https://thinkr-open.github.io/golem/)
+-   [R Packages 2nd edition](https://r-pkgs.org/) written by Hadley Wickham and Jennifer Bryan
+-   [devtools documentation](https://devtools.r-lib.org/)
+-   [usethis documentation](https://usethis.r-lib.org/)
+-   [pkgdown documentation](https://pkgdown.r-lib.org/)
+-   [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
+-   [golem documentation](https://thinkr-open.github.io/golem/)
 
-## Create the skeleton package ---------------
+## Create the skeleton package
 
 **usethis::create_package** or **golem::create_golem** create the skeleton package directory structure, opening the package in a new R Studio session as a new project
+
 ```{r}
 usethis::create_package("C:/Files/packages/store")
 golem::create_golem("C:/Files/packages/shinystore")
 ```
 
+**usethis::use_devtools** adds devtools package to.Rprofile so loads on opening package ina an interactive session
+
+```{r}
+usethis::use_devtools()
+```
+
+**devtools::dev_sitrep** check package development environment is up-to-date
+
+```{r}
+devtools::dev_sitrep
+```
+
 **usethis::use_description** or **golem::fill_desc** update the title, author and description details in the description file
+
 ```{r}
 usethis::use_description(fields = list(Title = "Store commonly used functions and lookups",
                                        `Authors@R` = person("Graham", "French", 
@@ -63,16 +87,19 @@ golem::fill_desc(
 ```
 
 **usethis::use_cc0_license** add one of the license options for the package
+
 ```{r}
 usethis::use_cc0_license()
 ```
 
 **usethis::use_readme_rmd** add a readme file, removing the default text from the file. This file is displayed as the front home page in the pkgdown website
+
 ```{r}
 usethis::use_readme_rmd()
+devtools::build_readme()
 ```
 
-```{}
+```         
 ## Overview
 
 ## Installation
@@ -83,42 +110,48 @@ usethis::use_readme_rmd()
 ```
 
 **usethis::use_news_md** add a news file, removing the default text from the file. This file will contain the news on each version release
+
 ```{r}
 usethis::use_news_md()
 ```
 
-```{}
+```         
 ## package_name 0.0.0.9000 <font size="4">yyyy-mm-dd</font>
 ```
 
-**usethis::use_pipe** add the %>% pipe operator with the addition of the utils-pipe.R file and magrittr package to the imports field in the description file
+**usethis::use_pipe** add the %\>% pipe operator with the addition of the utils-pipe.R file and magrittr package to the imports field in the description file
+
 ```{r}
 usethis::use_pipe()
 ```
 
 **usethis::use_data_raw** add the data-raw directory and empty lookup_raw containing the scripts used to format and add lookup datasets
+
 ```{r}
 usethis::use_data_raw("lookup_raw")
 ```
 
 **usethis::use_testthat** add the testthat directory used to contain the test scripts and testthat package to suggests field in the description file
+
 ```{r}
 usethis::use_testthat()
 ```
 
 **golem::use_recommended_tests** add the test folder and golem tests
+
 ```{r}
 golem::use_recommended_tests()
 ```
 
 **devtools::document** add the man directory containing the document .Rd files. Documents can also be updated using Ctlr-shift-D or through the Build:Document menu
+
 ```{r}
 devtools::document()
 ```
 
-**File - New File - Quarto Document**:  add tasks quarto document to vignette folder.
+**File - New File - Quarto Document**: add tasks quarto document to vignette folder.
 
-```{}
+```         
 ---
 author: "Graham French"
 date-modified: "`r lubridate::today()`"
@@ -157,20 +190,23 @@ This **tasks** section contains a list of tasks and questions, with their curren
 ### YYYY-MM-DD
 ```
 
-**usethis::use_pkgdown** add the _pkgdown.yml file used to create the menu structure for the package website
+**usethis::use_pkgdown** add the \_pkgdown.yml file used to create the menu structure for the package website
+
 ```{r}
 usethis::use_pkgdown()
 pkgdown::init_site()
 ```
 
 **store::build_single_quarto_article** create tasks html report
+
 ```{r}
 # Build - Install and Restart first
 store::build_single_quarto_article()
 ```
 
-**create yaml template** _pkgdown.yml template
-```{}
+**create yaml template** \_pkgdown.yml template
+
+```         
 title: TITLE_HERE
 template:
   bootstrap: 5
@@ -200,22 +236,26 @@ navbar:
 ```
 
 **usethis::use_roxygen_md** uses roxygen2 with markdown
+
 ```{r}
 usethis::use_roxygen_md()
 ```
 
 **usethis::use_lifecycle** add the lifecycle badges in the man directory
+
 ```{r}
 usethis::use_lifecycle()
 ```
 
 **usethis::use_lifecycle_badge** add lifecycle badge to home page
+
 ```{r}
 usethis::use_lifecycle_badge("experimental") # "experimental", "stable". "superseded", "deprecated"
 devtools::build_readme()
 ```
 
 **usethis::use_logo** or **golem::use_favicon** add a hex logo to home page
+
 ```{r}
 # create hex logo using hexmake https://connect.thinkr.fr/hexmake
 usethis::use_logo("image_path")
@@ -226,6 +266,7 @@ golem::use_favicon( path = "path/to/favicon")
 ```
 
 **pkgdown::build_site** build documentation
+
 ```{r}
 # RStudio: Build - Install and Restart first
 pkgdown::build_site()
@@ -234,7 +275,23 @@ pkgdown::build_site()
 store::build_all_quarto_articles()
 ```
 
-## Set environment ---------------
+**devtools::check** Runs R CMD checks
+
+```{r}
+# RStudio: Check
+devtools::check()
+```
+
+**devtools::load_all** Loads the package
+
+```{r}
+# RStudio: More - Load All
+devtools::load_all()
+```
+
+------------------------------------------------------------------------
+
+## Set environment
 
 **usethis::use_blank_slate** turn off saving and restoring workspace between sessions
 
@@ -242,42 +299,46 @@ store::build_all_quarto_articles()
 usethis::use_blank_slate(scope = "project")
 ```
 
-### Add to github ---------------
+### Add to github
 
 **usethis::use_git** initiates a Git repository, making the initial commits
+
 ```{r}
 usethis::use_git()
 ```
 
 **usethis::use_github** creates the repository on Github and pushes the initial commits. This needs a Github Personal Access Token (PAT) which can be created using **usethis::create_github_token**. Information on how to do this can be found in [Happy Git and Github for the useR](https://happygitwithr.com/credential-caching.html)
+
 ```{r}
 usethis::use_github()
 # usethis::create_github_token()
 ```
 
 **usethis::use_github_action** configures files to use github to host package website
+
 ```{r}
 usethis::use_github_action("pkgdown")
 ```
 
 ### Add coverage
 
-**usethis::use_coverage** or **covr::package_coverage** - adds test coverage using 
-either Codecov or Coveralls webservice
+**usethis::use_coverage** or **covr::package_coverage** - adds test coverage using either Codecov or Coveralls webservice
+
 ```{r}
 usethis::use_coverage(type = "codecov")
 usethis::use_coverage(type = "coveralls")
 ```
 
-### Add config file ---------------
+### Add config file
 
 **usethis::edit_file** add a config file and package to descriptions
+
 ```{r}
 usethis::edit_file("config.yml")
 usethis::use_package("config")
 ```
 
-```{}
+```         
 default:
 
 development:
@@ -286,25 +347,27 @@ production:
 ```
 
 **usethis::edit_r_environ** set config system environment on package startup
+
 ```{r}
 usethis::edit_r_environ()
 ```
 
-```{}
+```         
 R_CONFIG_ACTIVE = "development"
 ```
 
-**golem::set_golem_options** update golem-config file with description information
-and set here path
+**golem::set_golem_options** update golem-config file with description information and set here path
+
 ```{r}
 golem::set_golem_options()
 ```
 
-### Add package versioning ---------------
+### Add package versioning
 
 Navigate to the home project directory first
 
 **renv::init** initiates the renv environment, creating the renv folder and adding the renv.lock file, linking the relevant packages from the renv cache
+
 ```{r}
 renv::init()
 ```
@@ -317,6 +380,7 @@ renv::snapshot()
 ```
 
 **renv::deactivate** turn off the renv environment, then manually delete the renv folder and .Rprofile file
+
 ```{r}
 renv::deactivate()
 ```
@@ -324,24 +388,29 @@ renv::deactivate()
 Navigate to the home project directory first
 
 **renv::activate** turn on the renv environment
+
 ```{r}
 renv::activate()
 ```
 
 **renv::restore** restore the package versions contained within the renv lock file
+
 ```{r}
 renv::restore()
 ```
 
+------------------------------------------------------------------------
+
 ## Add and edit script files
 
-### Add documentation folders ---------------
+### Add documentation folders
+
 ```{r}
 fs::dir_create("man/figures")
 fs::dir_create("man/examples")
 ```
 
-### Add new script ---------------
+### Add new script
 
 **File - New File - Quarto Document**: add a new quarto document to the vignette directory. Update YAML section
 
@@ -372,14 +441,16 @@ editor: visual
 ---
 ```
 
-**store::build_single_quarto_article** builds the html files in the articles sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+**store::build_single_quarto_article** builds the html files in the articles sub-directory of the docs directory. Update the \_pkgdown.yml to contain the link to the html file
+
 ```{r}
 store::build_single_quarto_article()
 ```
 
-### Add new function ---------------
+### Add new function
 
-**usethis::use_r** or **golem::add_fct** or **golem::add_utils**  add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
+**usethis::use_r** or **golem::add_fct** or **golem::add_utils** add new r script in the R directory containing functions. Run and edit Roxygen comments using Code:Insert Roxygen skeleton, or Ctlr-Alt-Shift-R. update documentation by runing **devtools::document**, Ctlr-shift-D or through the Build:Document menu
+
 ```{r}
 usethis::use_r("function_script_name")
 
@@ -391,79 +462,91 @@ golem::add_fct("function_script_name")
 ```
 
 **usethis::use_package** add packages to the imports section of the description file
+
 ```{r}
 usethis::use_package("package_name")
 ```
 
 **golem::use_recommended_deps** add recommended package dependencies
+
 ```{r}
 golem::use_recommended_deps()
 ```
 
 **devtools::document** update documentation, can also use Ctlr-shift-D or through the Build:Document menu
+
 ```{r}
 devtools::document()
 ```
 
-**pkgdown::build_reference** builds the html files in the reference sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+**pkgdown::build_reference** builds the html files in the reference sub-directory of the docs directory. Update the \_pkgdown.yml to contain the link to the html file
+
 ```{r}
 pkgdown::build_reference
 pkgdown::build_reference_index()
 ```
 
-### Add utility functions ---------------
+### Add utility functions
 
 **golem::use_utils_ui** and **golem::use_utils_server** adds golem utility functions
+
 ```{r}
 golem::use_utils_ui()
 golem::use_utils_server()
 ```
 
-### Add new module ---------------
+### Add new module
 
 **golem::add_module** add module in R folder
+
 ```{r}
 golem::add_module(name = "MODULE_NAME")
 ```
 
-### Add new test script ---------------
+### Add new test script
 
 **usethis::use_test** add unit tests for function
+
 ```{r}
 usethis::use_test("test_script_name")
 ```
 
 **devtools::test** run all tests, can also use Ctrl-Shift_T or Build-Test Package
+
 ```{r}
 devtools::test()
 ```
 
-**devtools::test_coverage()** - returns test coverage of R scripts or **devtools::test_coverage_active_file()**
-highlights lines in single script 
+**devtools::test_coverage()** - returns test coverage of R scripts or **devtools::test_coverage_active_file()** highlights lines in single script
+
 ```{r}
 devtools::test_coverage()
 devtools::test_coverage_active_file()
 ```
 
-### Add new data script ---------------
+### Add new data script
 
 **usethis::use_data_raw** add a new data_raw script
+
 ```{r}
 usethis::use_data_raw("data_raw_script_name")
 ```
 
 **usethis::use_data** add the .rda data file in the data directory, after running the data raw script so that the data frame is stored in the global environment
+
 ```{r}
 usethis::use_data(data_frame_name)
 ```
 
 **usethis::use_r** document the data frame in a R script. Running **devtools::document** afterwards
+
 ```{r}
 usethis::use_r("lookup")
 ```
 
 Data frame documentation template
-```
+
+```         
 #' Data frame name
 #'
 #' Data frame description
@@ -476,7 +559,8 @@ Data frame documentation template
 "data_frame_name"
 ```
 
-**pkgdown::build_reference** builds the html files in the reference sub-directory of the docs directory. Update the _pkgdown.yml to contain the link to the html file
+**pkgdown::build_reference** builds the html files in the reference sub-directory of the docs directory. Update the \_pkgdown.yml to contain the link to the html file
+
 ```{r}
 pkgdown::build_reference
 pkgdown::build_reference_index()
@@ -485,108 +569,138 @@ pkgdown::build_reference_index()
 ### Add new external files
 
 **golem::add_js_file** add javascript file to inst/app/www folder
+
 ```{r}
 golem::add_js_file("script")
 golem::add_js_handler("handlers")
 ```
 
 **golem::add_css_file** add blank css file to inst/app/www folder
+
 ```{r}
 golem::add_css_file("custom")
 ```
 
-### Edit news file ---------------
+### Edit news file
 
 **usethis::use_version** or **golem::set_golem_version** update the package version
+
 ```{r}
 usethis::use_version()
 golem::set_golem_version()
 ```
 
 **usethis::edit_file** edit the news file with the new package version
+
 ```{r}
 usethis::edit_file("News.md")
 ```
 
 **pkgdown::build_news** builds the index.html file in the news sub-directory of the docs directory
+
 ```{r}
 pkgdown::build_news()
 ```
 
-### Edit the README file ---------------
+### Edit the README file
 
 **usethis::edit_file** edit the README.Rmd file
+
 ```{r}
 usethis::edit_file("README.Rmd")
+devtools::build_readme()
 ```
 
 **pkgdown::build_home** builds the index.html file in the docs directory
+
 ```{r}
 pkgdown::build_home()
 ```
 
-### Edit DESCRIPTION file ---------------
+### Edit DESCRIPTION file
 
-**attachment::att_amend_desc** looks through package scripts and adds missing package
-dependencies to DESCRIPTION file
+[**attachment::att_amend_desc**](attachment::att_amend_desc){.uri} looks through package scripts and adds missing package dependencies to DESCRIPTION file
 
 ```{r}
 attachment::att_amend_desc()
 ```
 
-## Install package ---------------
+------------------------------------------------------------------------
 
-Build documentation and test functions, then run either **Install and Restart** 
-or **remotes::install_local** to build and install package
+## Install package
+
+Build documentation and test functions, then run either **devtools::install** (**Install and Restart)** or **remotes::install_local** to build and install package
 
 ```{r}
 devtools::document()
 devtools::test()
+devtoold::load_all()
+devtools::install()
 remotes::install_local()
 ```
 
-## Publish on GitHub ---------------
+------------------------------------------------------------------------
 
-**pkgdown::build_site** run **pkgdown::clean_site** first to delete files in docs
-sub-directory
+## Publish on GitHub
+
+**pkgdown::build_site** run **pkgdown::clean_site** first to delete files in docs sub-directory
+
 ```{r}
 pkgdown::clean_site()
 pkgdown::build_site()
 store::build_all_quarto_articles()
 ```
 
-**pkgdown::deploy_to_branch** pushes docs folder to GitHub branch gh-pages. 
+**pkgdown::deploy_to_branch** pushes docs folder to GitHub branch gh-pages.
 
-Need to change repository settings GitHub Pages Source to Branch gh-pages/root. 
-Site published to **https://github_name.github.io/package_name**
+Need to change repository settings GitHub Pages Source to Branch gh-pages/root. Site published to [**https://github_name.github.io/package_name**](https://github_name.github.io/package_name){.uri}
+
 ```{r}
 pkgdown::deploy_to_branch()
 ```
 
 **usethis::edit_file** Add URL to description and README files
+
 ```{r}
 usethis::edit_file("DESCRIPTION")
 usethis::edit_file("README.Rmd")
+devtools::build_readme()
 ```
 
-## Send to another machine ---------------
+------------------------------------------------------------------------
 
-**pkgbuild::build** create a tar.gz file to send to other machine
+## Send to another machine
+
+**pkgbuild::build** creates a bundled package (tar.gz file) from the source package to send to other machine
+**pkgbuild::build(binary = TRUE)** creates a binary package (.zip)
+
 ```{r}
+# bundaled package
+## add files to .Rbuildignore so that they are not added to the bundled package
+usethis::use_build_ignore() #
 pkgbuild::build()
 remotes::install_local("path/to/tar.gz")
+
+## binary package
+pkgbuild::build(binary = TRUE)
 ```
 
-## Deploy on shinyapp.io ---------------
+------------------------------------------------------------------------
+
+## Deploy on shinyapp.io
 
 **golem::add_shinyappsio_file** adds an app.R file
+
 ```{r}
 golem::add_shinyappsio_file()
 ```
 
-## Create a docker file ---------------
+------------------------------------------------------------------------
+
+## Create a docker file
 
 **golem::add_dockerfile** creates a Dockerfile
+
 ```{r}
 golem::add_dockerfile()
 ```

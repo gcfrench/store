@@ -139,7 +139,7 @@ adelie |>
               expr = is_matching_fixed(species, "Adelie")) |>
   validate_if(description = "Check for compulsory substring value a single column",
               expr = is_matching_regex(sex, "male") | is.na(sex)) |>
-  validate_cols(description = "Check for compulsory restricted values in one or more columns",
+  validate_cols(description = "Check for compulsory restricted values in one or more columns (supply values as an external vector for four or more values)",
                 predicate = in_set("male", "female", allow.na = TRUE),
                 sex) |>
   validate_cols(description = "Check for compulsory restricted values not in one or more columns",
