@@ -46,6 +46,12 @@ usethis::create_package("C:/Files/packages/store")
 golem::create_golem("C:/Files/packages/shinystore")
 ```
 
+**usethis::use_blank_slate** turn off saving and restoring workspace between sessions
+
+```{r}
+usethis::use_blank_slate(scope = "project")
+```
+
 **usethis::use_devtools** adds devtools package to.Rprofile so loads on opening package ina an interactive session
 
 ```{r}
@@ -292,12 +298,6 @@ devtools::load_all()
 ------------------------------------------------------------------------
 
 ## Set environment
-
-**usethis::use_blank_slate** turn off saving and restoring workspace between sessions
-
-```{r}
-usethis::use_blank_slate(scope = "project")
-```
 
 ### Add to github
 
@@ -634,7 +634,7 @@ Build documentation and test functions, then run either **devtools::install** (*
 ```{r}
 devtools::document()
 devtools::test()
-devtoold::load_all()
+devtools::load_all()
 devtools::install()
 remotes::install_local()
 ```

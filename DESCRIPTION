@@ -2,12 +2,15 @@ Package: store
 Title: Store commonly used functions and lookups
 Version: 1.4.0
 Authors@R: 
-    person("Graham", "French", , "gcfrench@googlemail.com", role = c("aut", "cre"))
-Description: This package stores the commonly used functions and lookups,
-    along with function tests and documentation.  These can be then used
-    when creating new packages by copy and pasting the relevant R scripts
-    and associated test scripts into the new package, as well as updating
-    the pkgdown file.
+    person(given = "Graham",
+           family = "French",
+           role = c("aut", "cre"),
+           email = "gcfrench@googlemail.com")
+Description: This package stores the commonly used functions
+    and lookups, along with function tests and documentation.  These can
+    be then used when creating new packages by copy and pasting the
+    relevant R scripts and associated test scripts into the new package,
+    as well as updating the pkgdown file.
 License: CC0
 URL: https://gcfrench.github.io/store
 BugReports: https://github.com/gcfrench/store/issues
@@ -18,6 +21,8 @@ Imports:
     assertthat (>= 0.2.1),
     clipr,
     corrplot (>= 0.92),
+    daff,
+    data.validator,
     DBI (>= 1.1.2),
     dlookr (>= 0.5.6),
     dplyr (>= 1.0.8),
@@ -35,6 +40,7 @@ Imports:
     odbc (>= 1.3.3),
     openxlsx (>= 4.2.5),
     pdftools,
+    pkgdown,
     purrr (>= 0.3.4),
     quarto,
     R6 (>= 2.5.1),
@@ -51,7 +57,9 @@ Imports:
     tidyr (>= 1.2.0),
     tidyselect,
     units,
-    vctrs (>= 0.4.1)
+    vctrs (>= 0.4.1),
+    waldo,
+    tmap
 Suggests: 
     assertive,
     assertr,
@@ -63,15 +71,21 @@ Suggests:
     gt (>= 0.4.0),
     knitr (>= 1.38),
     lobstr,
+    lubridate,
     palmerpenguins (>= 0.1.0),
     pkgbuild,
-    pkgdown,
     raster,
     remotes,
     renv,
     rmarkdown (>= 2.13),
     testthat (>= 3.0.0),
-    usethis
+    usethis,
+    future,
+    igraph,
+    here,
+    furrr,
+    forcats,
+    pagedown
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

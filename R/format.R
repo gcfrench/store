@@ -241,7 +241,7 @@ add_tibble_to_list <- function(.data, .name) {
   .data <- .data %>%
     list() %>%
     purrr::set_names(.name) %>%
-    purrr::append(tibble_list, after = 0)
+    append(tibble_list, after = 0)
   assign("tibble_list", .data, envir = parent_environment)
   invisible(.data)
 }
