@@ -56,22 +56,28 @@ Imports:
     tibble,
     tidyr (>= 1.2.0),
     tidyselect,
+    tmap,
     units,
     vctrs (>= 0.4.1),
-    waldo,
-    tmap
+    waldo
 Suggests: 
     assertive,
     assertr,
     attachment,
     broom,
     devtools,
+    forcats,
+    furrr,
+    future,
     gitcreds,
     golem,
     gt (>= 0.4.0),
+    here,
+    igraph,
     knitr (>= 1.38),
     lobstr,
     lubridate,
+    pagedown,
     palmerpenguins (>= 0.1.0),
     pkgbuild,
     raster,
@@ -79,13 +85,7 @@ Suggests:
     renv,
     rmarkdown (>= 2.13),
     testthat (>= 3.0.0),
-    usethis,
-    future,
-    igraph,
-    here,
-    furrr,
-    forcats,
-    pagedown
+    usethis
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

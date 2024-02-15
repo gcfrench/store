@@ -140,7 +140,7 @@ usethis::use_data_raw("lookup_raw")
 **usethis::use_testthat** add the testthat directory used to contain the test scripts and testthat package to suggests field in the description file
 
 ```{r}
-usethis::use_testthat()
+usethis::use_testthat(edition = 3)
 ```
 
 **golem::use_recommended_tests** add the test folder and golem tests

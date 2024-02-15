@@ -106,12 +106,14 @@ adelie |>
 adelie |> 
   validate(name = "Missing values") |>
   validate_if(description = "Check for missing values in a single column",
-              expr = not_na(species)) |> 
+              expr = not_na(species)) |>
+  validate_if(description = "Check for non missing values in a single column",
+              expr = is.na(species)) |>
   validate_cols(description = "Check for any missing values in multiple columns",
                 predicate = not_na,
                 species, island) |> 
   validate_rows(description = "Check for all missing values in multiple columns",
-                row_reduction_fn = num_row_NAs,
+                row_reduction_fn = num_row_NAs, # function (x) {sum(is.na(x)}
                 predicate = within_bounds(lower.bound = 0, upper.bound = 4, include.upper = FALSE),
                 bill_length_mm:body_mass_g) |> 
   validate_rows(description = "Check for number of missing values across multiple columns",
@@ -136,10 +138,10 @@ adelie |>
                 predicate = within_bounds(lower.bound = 30, upper.bound = 50),
                 bill_length_mm) |>
   validate_if(description = "Check for compulsory value in a single column",
-              expr = is_matching_fixed(species, "Adelie")) |>
+              expr = is_matching_fixed(species, "Adelie")) |> # is_matching_regex(PATTERN)
   validate_if(description = "Check for compulsory substring value a single column",
               expr = is_matching_regex(sex, "male") | is.na(sex)) |>
-  validate_cols(description = "Check for compulsory restricted values in one or more columns (supply values as an external vector for four or more values)",
+  validate_cols(description = "Check for compulsory restricted values in one or more columns (supply values as an external vector for four or more values; is_matching_fixed | is_matching_regex does not apply as a predicate in validate_cols for across more than one column)",
                 predicate = in_set("male", "female", allow.na = TRUE),
                 sex) |>
   validate_cols(description = "Check for compulsory restricted values not in one or more columns",
