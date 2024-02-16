@@ -182,16 +182,17 @@ editor: visual
 
 ## Tasks and questions
 
-::: callout-tip
-## Icons
+This **tasks** section contains a list of tasks and questions, with their current status [^1]
 
-This **tasks** section contains a list of tasks and questions, with their current status
+[^1]:
+    ::: callout-tip
+    ## Current status icons
 
--   ✔️completed
--   ❗ awaiting completion
--   ✖️no action
--   ❓question to be answered
-:::
+    -   ✔️completed
+    -   ❗ awaiting completion
+    -   ✖️no action required
+    -   ❓question to be answered
+    :::
 
 ### YYYY-MM-DD
 ```
@@ -314,10 +315,10 @@ usethis::use_github()
 # usethis::create_github_token()
 ```
 
-**usethis::use_github_action** configures files to use github to host package website
+**usethis::use_pkgdown_github_pages()** configures files to use github to host package website
 
 ```{r}
-usethis::use_github_action("pkgdown")
+usethis::use_pkgdown_github_pages()
 ```
 
 ### Add coverage
