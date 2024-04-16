@@ -116,6 +116,9 @@ adelie |>
                 row_reduction_fn = num_row_NAs, # function (x) {sum(is.na(x)}
                 predicate = within_bounds(lower.bound = 0, upper.bound = 4, include.upper = FALSE),
                 bill_length_mm:body_mass_g) |> 
+  validate_cols(description = "Check for non missing values in multiple columns",
+                predicate = is.na,
+                species, island) |> 
   validate_rows(description = "Check for number of missing values across multiple columns",
                 row_reduction_fn = num_row_NAs,
                 predicate = in_set(0),

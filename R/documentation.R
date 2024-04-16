@@ -26,7 +26,7 @@ build_quarto_article <- function(all_files) {
     if (all_files) {
 
       # iterate through all quarto documents
-      fs::dir_ls("vignettes", glob = "*.qmd") |>
+      fs::dir_ls("vignettes", glob = "*.qmd", recurse = TRUE) |>
         purrr::walk(quarto_to_html)
     } else {
 
