@@ -1,0 +1,31 @@
+title: #title
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  
+reference:
+#database
+#quality_assurance
+#documentation
+
+navbar:
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: information
+      menu:
+      - text:
+        href:
+    - text: "lookups and functions"
+      href: reference/index.html
+    - text: "archive"
+      menu:
+      - text:
+        href:
+    - text: "tasks"
+      href: articles/tasks.html
+    - text: "versions"
+      href: news/index.html
+  right:
+    - icon: "fab fa-github fa-lg"
+      href: https://github.com/jncc/user-scripts/

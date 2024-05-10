@@ -1,6 +1,7 @@
 ## store 1.4.0
 
--   Updated **Run validation checks** document to use Appsilon's [data.validator](https://appsilon.github.io/data.validator/) package to run validation tests based on the [assertr](https://docs.ropensci.org/assertr/) package to create a html validation report. **unnest_failed_validation_results** function formats the failed validation results into a tibble
+-   Updated **Validation checks** document following archiving of the **assertive** packages on CRAN
+-   Updated **Validation checks** document to use Appsilon's [data.validator](https://appsilon.github.io/data.validator/) package to run validation tests based on the [assertr](https://docs.ropensci.org/assertr/) package to create a html validation report. **unnest_failed_validation_results** function formats the failed validation results into a tibble
 
 ## store 1.3.0 <font size="4">2023-08-31</font>
 

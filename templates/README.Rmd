@@ -1,0 +1,74 @@
+---
+output: github_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+------------------------------------------------------------------------
+
+<!-- badges: start -->
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+<!-- badges: end -->
+
+## Overview
+
+This data project contains the R scripts, functions and lookup tables used in the 
+the data management of this project, as well as FME Form workspaces and custom
+transformers, SQL files and Excel spreadsheets.
+
+## Installation
+
+The latest zipped package directory can be found on the network.
+
+Once downloaded onto your machine unzip this folder, add the project as
+a new project in RStudio and then install the required R packages from
+CRAN by running the following commands.
+
+```{r eval=FALSE}
+install.packages("renv")
+renv::activate()
+renv::restore()
+```
+
+Once these additional packages have been installed, run **Build-Install
+and Restart** in RStudio to build and install the package on your machine.
+
+The package documentation can be viewed by opening the **index.html**
+file, found in the docs folder, in your web browser.
+
+## Usage
+
+The documentation is split up into five main section
+
+The **information** section contains information documents relating to the project
+
+The **lookup and functions** section contains the lookup tables and functions used
+in the R package. These functions are found in the R folder of the project and data
+files in the data folder. The data-raw folder contains the R scripts and FME workspaces
+used to format the lookup tables. The tests folder contains the R testthat tests used
+to test the R functions.
+
+The **archive** section contains the R scripts and documents that are no longer 
+used within the project. These are found in the archives sub-folder of the vignettes
+folder.
+
+The **tasks** and **versions** sections list the ongoing and completed tasks
+and questions, as well as the package version and output dates.
+
+Network paths for this project are listed in the **config** file.
+
+## Publication
+
+This data project has been submitted to JNCC's user-scripts private
+repository on GitHub.

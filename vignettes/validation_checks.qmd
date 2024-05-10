@@ -28,7 +28,9 @@ suppressPackageStartupMessages({
   suppressWarnings({
     library(dplyr)
     library(assertr)
-    library(assertive)
+    library(assertive.properties)
+    library(assertive.strings)
+    library(assertive.types)
     library(assertthat)
     library(palmerpenguins)
     library(data.validator)
@@ -38,7 +40,35 @@ suppressPackageStartupMessages({
 
 ## Validation checks
 
-Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) package, with extra checks provided by the [assertive](https://cran.r-project.org/web/packages/assertive/vignettes/checklists.html) package.
+Data validation is performed using the [assertr](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html) package, with extra checks provided by the assertive package.
+
+::: {.callout-warning appearance="simple"}
+The assertive package and other associated assertive package was archived on CRAN on 2024-10-23.
+
+To use the following functions the associated assertive package will need to be installed from the CRAN archive in the following order
+
+```{r}
+#| eval: FALSE
+
+## is_true
+remotes::install_version(package = "assertive.base", version = "0.0-9", repos = "https://cloud.r-project.org")
+
+## has_elements
+remotes::install_version(package = "assertive.properties", version = "0.0-5", repos = "https://cloud.r-project.org")
+
+## is_an_integer
+remotes::install_version(package = "assertive.types", version = "0.0-3", repos = "https://cloud.r-project.org")
+
+## is_matching
+## is_matching_regex
+## is_not_matching_regex
+remotes::install_version(package = "assertive.strings", version = "0.0-3", repos = "https://cloud.r-project.org")
+
+## is_before
+remotes::install_version(package = "assertive.datetimes", version = "0.0-3", repos = "https://cloud.r-project.org")
+
+```
+:::
 
 Appsilon's [data.validator](https://appsilon.github.io/data.validator/index.html) package is used to create a validation report or export the validation results in a spreadsheet.
 
@@ -155,9 +185,12 @@ adelie |>
 
 ## Validation report
 
-```{r eval = FALSE}
+```{r}
+#| eval: FALSE
 unnest_failed_validation_results(report)
-save_report(report)
-save_report(report) # remove Registered S3 method message at top of report
-browseURL("validation_report.html")
+
+# save report results in error and has been commented out
+# save_report(report)
+# save_report(report) # remove Registered S3 method message at top of report
+# browseURL("validation_report.html")
 ```
