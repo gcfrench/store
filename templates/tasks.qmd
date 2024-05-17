@@ -2,6 +2,10 @@
 title: "tasks"
 author: "Graham French"
 date-modified: "`r lubridate::today()`"
+vignette: >
+  %\VignetteIndexEntry{tasks}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
 format: 
   html:
     toc: true
@@ -12,7 +16,23 @@ format:
       source: false
       toggle: true
       caption: "Show code"
-    embed-resources: true
+  typst:
+    papersize: a4
+    margin:
+      top: 1.5cm
+      bottom: 1.5cm
+      left: 2cm
+      right: 2cm
+    columns: 1
+    mainfont: "Verdana (sans serif)"
+    fontsize: 12pt
+    fig-format: svg
+    toc: false
+    toc-depth: 2
+    toc-title: Contents
+    number-sections: false
+    number-depth: 2
+    section-numbering: 1-1
   jira: default
   gfm: default
 execute: 
