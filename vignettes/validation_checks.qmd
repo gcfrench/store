@@ -2,6 +2,10 @@
 title: "Validation checks"
 author: "Graham French"
 date-modified: "`r lubridate::today()`"
+vignette: >
+  %\VignetteIndexEntry{Validation checks}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
 format: 
   html:
     toc: true
@@ -13,6 +17,12 @@ format:
       toggle: true
       caption: "Show code"
     embed-resources: true
+  typst:
+    margin:
+      top: 2cm
+      bottom: 2cm
+      left: 2cm
+      right: 2cm
   jira: default
   gfm: default
 execute: 
@@ -51,6 +61,7 @@ To use the following functions the associated assertive package will need to be 
 #| eval: FALSE
 
 ## is_true
+## is_not_na
 remotes::install_version(package = "assertive.base", version = "0.0-9", repos = "https://cloud.r-project.org")
 
 ## has_elements
@@ -65,6 +76,7 @@ remotes::install_version(package = "assertive.types", version = "0.0-3", repos =
 remotes::install_version(package = "assertive.strings", version = "0.0-3", repos = "https://cloud.r-project.org")
 
 ## is_before
+## is_after
 remotes::install_version(package = "assertive.datetimes", version = "0.0-3", repos = "https://cloud.r-project.org")
 
 ```

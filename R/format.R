@@ -189,6 +189,7 @@ extract_paragraph_delimited_list <- extract_delimited_list(delimiter = "\r\n\r\n
 #' @description
 #' This function prepends tibbles to a list, creating the list in the environment
 #' calling this function if not already present.
+#' @desc
 #'
 #' @details
 #' Adding a tibble to a list is an example of [assigning a variable to an environment](http://adv-r.had.co.nz/Environments.html).

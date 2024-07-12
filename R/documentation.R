@@ -20,18 +20,18 @@ build_quarto_article <- function(all_files) {
 
       # move html document to docs/articles folder
       fs::file_move(fs::path(directory_name, glue::glue("{file_name}.html")),
-                    fs::path("docs", "articles", glue::glue("{file_name}.html")))
+                    fs::path(here::here(), "docs", "articles", glue::glue("{file_name}.html")))
     }
 
     if (all_files) {
 
       # iterate through all quarto documents
-      fs::dir_ls("vignettes", glob = "*.qmd", recurse = TRUE) |>
+      fs::dir_ls("documentation", glob = "*.qmd") |>
         purrr::walk(quarto_to_html)
     } else {
 
       # choose single quarto document
-      fs::path(choose.files(default = "vignettes",
+      fs::path(choose.files(default = "documentation",
                             caption = "Select quarto document", multi = FALSE)) |>
         quarto_to_html()
     }
