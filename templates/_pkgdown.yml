@@ -13,14 +13,14 @@ navbar:
       href: index.html
     - text: information
       menu:
-      - text:
-        href:
+      - text: "Blank Document"
+        href: "articles/blank_document.html"
     - text: "lookups and functions"
       href: reference/index.html
     - text: "archive"
       menu:
-      - text:
-        href:
+      - text: "Blank archived document"
+        href: "articles/blank_archived_document.html"
     - text: "tasks"
       href: articles/tasks.html
     - text: "versions"
