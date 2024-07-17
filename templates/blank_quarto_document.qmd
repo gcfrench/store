@@ -1,0 +1,30 @@
+---
+title: "blank quarto document"
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true
+  typst:
+    margin:
+      top: 2cm
+      bottom: 2cm
+      left: 2cm
+      right: 2cm
+  jira: default
+  gfm: default
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
+---

@@ -1,0 +1,12 @@
+---
+title: "blank_quarto_vignette"
+output: quarto::html_vignette
+vignette: >
+  %\VignetteIndexEntry{blank_quarto_vignette}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup}
+library(test)
+```

@@ -1,0 +1,15 @@
+---
+title: "blank typst document"
+author: "Graham French"
+date: YYYY-MM-DD
+format: 
+  typst:
+    margin:
+      top: 2cm
+      bottom: 2cm
+      left: 2cm
+      right: 2cm
+execute: 
+  eval: false
+editor: visual
+---

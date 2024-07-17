@@ -26,12 +26,12 @@ build_quarto_article <- function(all_files) {
     if (all_files) {
 
       # iterate through all quarto documents
-      fs::dir_ls("documentation", glob = "*.qmd") |>
+      fs::dir_ls("quarto_docs", glob = "*.qmd") |>
         purrr::walk(quarto_to_html)
     } else {
 
       # choose single quarto document
-      fs::path(choose.files(default = "documentation",
+      fs::path(choose.files(default = "quarto_docs",
                             caption = "Select quarto document", multi = FALSE)) |>
         quarto_to_html()
     }

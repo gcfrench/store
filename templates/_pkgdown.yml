@@ -6,6 +6,7 @@ template:
 reference:
 #database
 #quality_assurance
+#documentation
 
 navbar:
   left:
