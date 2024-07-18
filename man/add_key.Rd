@@ -27,8 +27,8 @@ and the database connections string is added as a json string in the password di
 \seealso{
 Other keyring functions: 
 \code{\link{create_locked_keyring}()},
-\code{\link{delete_keyring}()},
 \code{\link{delete_key}()},
+\code{\link{delete_keyring}()},
 \code{\link{get_keyring_status}()},
 \code{\link{list_keyrings}()},
 \code{\link{list_keys}()},

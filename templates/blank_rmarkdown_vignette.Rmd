@@ -1,20 +1,36 @@
 ---
-title: "blank_rmarkdown_vignette"
+title: "Blank Rmarkdown vignette"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{blank_rmarkdown_vignette}
+  %\VignetteIndexEntry{Blank Rmarkdown vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r}
-#| include: false
+**Use pkgdown build_article with Quarto version 1.4**
+
+### YAML header text
+
+``` yaml
+title: "TITLE"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{TITLE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+```
+
+### Knitr chunk setup
+
+```{r knitr_chunk_setup}
 knitr::opts_chunk$set(
   eval = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
 ```
+
+### Package setup
 
 ```{r setup}
 library(test)

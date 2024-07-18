@@ -1,7 +1,34 @@
 ---
-title: "blank quarto document"
+title: "Blank Quarto document"
 author: "Graham French"
 date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
+---
+
+**Use pkgdown build_article with Quarto version 1.5+**
+
+### YAML header text
+
+``` yaml
+title: "TITLE"
+author: "Graham French"
+date-modified: "`r lubridate::today()`" # lubridate::today()
 format: 
   html:
     toc: true
@@ -27,4 +54,4 @@ knitr:
   opts_chunk:
     comment: "#>"
 editor: visual
----
+```

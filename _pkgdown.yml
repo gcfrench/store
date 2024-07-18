@@ -119,6 +119,7 @@ reference:
 - title: "Documentation"
   desc: "Functions used to create the package's documentation"
   contents:
+  - build_documentation
   - build_single_markdown_article
   - build_all_markdown_articles
   - build_single_quarto_article

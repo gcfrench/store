@@ -20,8 +20,8 @@ Each of these keys store a database connection string.
 Other keyring functions: 
 \code{\link{add_key}()},
 \code{\link{create_locked_keyring}()},
-\code{\link{delete_keyring}()},
 \code{\link{delete_key}()},
+\code{\link{delete_keyring}()},
 \code{\link{get_keyring_status}()},
 \code{\link{list_keyrings}()},
 \code{\link{lock_keyring}()},

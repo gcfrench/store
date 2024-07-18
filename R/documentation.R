@@ -127,7 +127,37 @@ build_single_markdown_article <- build_markdown_article(all_files = FALSE)
 #' @export
 build_all_markdown_articles <- build_markdown_article(all_files = TRUE)
 
+#' @title
+#' Create data project documentation
+#'
+#' @description
+#' This function creates the documentation pages for the data project
+#'
+#' @details
+#' Currently home page creation results in an unable to read RDS error and has been
+#' commented out
+#'
+#' @export
+build_documentation <- function() {
 
+  # remove previous site
+  pkgdown::clean_site()
+
+  # create Rmarkdown vignettes
+  pkgdown::build_articles()
+
+  # create quarto documents
+  build_all_quarto_articles()
+
+  # create function and lookup reference documentation
+  pkgdown::build_reference()
+
+  # create news
+  pkgdown::build_news()
+
+  # create home page
+  ## pkgdown::build_home()
+}
 
 
 

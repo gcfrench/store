@@ -14,14 +14,19 @@ navbar:
       href: index.html
     - text: information
       menu:
-      - text: "Blank Document"
-        href: "articles/blank_document.html"
+      - text: "Blank Rmarkdown vignette"
+        href: "articles/blank_rmarkdown_vignette.html"
+      - text: "Blank Quarto vignette"
+        href: "articles/blank_quarto_vignette.html"
+      - text: "Blank Quarto document"
+        href: "articles/blank_quarto_document.html"
+      - text: "Blank Typst document"
+        href: "articles/blank_typst_document.html"
     - text: "lookups and functions"
       href: reference/index.html
     - text: "archive"
       menu:
-      - text: "Blank archived document"
-        href: "articles/blank_archived_document.html"
+      - text: ""
     - text: "tasks"
       href: articles/tasks.html
     - text: "versions"

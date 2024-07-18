@@ -1,12 +1,37 @@
 ---
-title: "blank_quarto_vignette"
-output: quarto::html_vignette
-vignette: >
-  %\VignetteIndexEntry{blank_quarto_vignette}
-  %\VignetteEngine{quarto::html}
-  %\VignetteEncoding{UTF-8}
+title: "Blank Quarto vignette"
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true
 ---
 
-```{r setup}
+**Use pkgdown build_article with Quarto version 1.5+**
+
+### YAML header text
+
+``` yaml
+title: "TITLE"
+output: quarto::html_vignette
+vignette: >
+  %\VignetteIndexEntry{TITLE}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+```
+
+### Package setup
+
+```{r}
+#| label: "package_setup"
+
 library(test)
 ```
