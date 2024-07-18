@@ -140,6 +140,9 @@ build_all_markdown_articles <- build_markdown_article(all_files = TRUE)
 #' @export
 build_documentation <- function() {
 
+  # update package
+  devtools::load_all()
+
   # remove previous site
   pkgdown::clean_site()
 
@@ -156,7 +159,7 @@ build_documentation <- function() {
   pkgdown::build_news()
 
   # create home page
-  ## pkgdown::build_home()
+  pkgdown::build_home()
 }
 
 

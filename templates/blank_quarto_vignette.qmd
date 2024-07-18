@@ -13,7 +13,11 @@ format:
       toggle: true
       caption: "Show code"
     embed-resources: true
+execute: 
+  eval: false	
 ---
+
+
 
 **Use pkgdown build_article with Quarto version 1.5+**
 
@@ -33,5 +37,5 @@ vignette: >
 ```{r}
 #| label: "package_setup"
 
-library(test)
+library(dataproject)
 ```

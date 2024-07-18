@@ -33,5 +33,5 @@ knitr::opts_chunk$set(
 ### Package setup
 
 ```{r setup}
-library(test)
+library(dataproject)
 ```
