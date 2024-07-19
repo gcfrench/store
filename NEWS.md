@@ -1,6 +1,6 @@
 ## store 1.4.0
 
--   Add **build_documentation** function to build package's documentation pages, including quarto documents and vignettes
+-   Add **build_documentation** and **build_child_project** functions to build package's documentation pages, including quarto documents and vignettes, and update project before creating a backup child copy
 -   Updated **Validation checks** document following archiving of the **assertive** packages on CRAN
 -   Updated **Validation checks** document to use Appsilon's [data.validator](https://appsilon.github.io/data.validator/) package to run validation tests based on the [assertr](https://docs.ropensci.org/assertr/) package to create a html validation report. **unnest_failed_validation_results** function formats the failed validation results into a tibble
 

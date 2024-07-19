@@ -124,6 +124,7 @@ reference:
   - build_all_markdown_articles
   - build_single_quarto_article
   - build_all_quarto_articles
+  - build_child_project
 
 navbar:
   title: score

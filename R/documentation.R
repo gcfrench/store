@@ -162,8 +162,23 @@ build_documentation <- function() {
   pkgdown::build_home()
 }
 
+#' @title
+#' Build child project
+#'
+#' @description
+#' This function updates the package ready for backing up as a child project, including
+#' creating an up-to-date renv lock file and updating the package version
+#'
+#' @export
+build_child_project <- function() {
 
+  # update renv lock file
+  renv::snapshot(prompt = FALSE)
 
+  # update version
+  usethis::use_version(which = "patch")
+
+}
 
 
 
