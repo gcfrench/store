@@ -167,13 +167,17 @@ build_documentation <- function() {
 #'
 #' @description
 #' This function updates the package ready for backing up as a child project, including
-#' creating an up-to-date renv lock file and updating the package version
+#' creating an up-to-date renv lock file, checking for and adding package dependencies to
+#' the description file and updating the package version
 #'
 #' @export
 build_child_project <- function() {
 
   # update renv lock file
   renv::snapshot(prompt = FALSE)
+
+  # check and add missing package dependencies to description file
+  attachment::att_amend_desc()
 
   # update version
   usethis::use_version(which = "patch")
