@@ -20,9 +20,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ```
 
-### Knitr chunk setup
-
-```{r knitr_chunk_setup}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   eval = FALSE,
   collapse = TRUE,
@@ -33,5 +32,5 @@ knitr::opts_chunk$set(
 ### Package setup
 
 ```{r setup}
-library(dataproject)
+# library(DATAPROJECT_NAME)
 ```
