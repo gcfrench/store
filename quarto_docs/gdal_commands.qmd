@@ -1,18 +1,15 @@
 ---
 title: "GDAL commands"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{GDAL commands}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: html
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
 ---
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 > GDAL commands for importing and exporting spatial layers into SQL Server, PostGres and Spatialite
 

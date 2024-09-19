@@ -1,0 +1,16 @@
+format:
+  html:
+    grid:
+      sidebar-width: 150px
+      body-width: 850px
+      margin-width: 300px
+      gutter-width: 1rem
+    toc: true
+    code-fold: show
+    code-summary: "Code"
+    code-overflow: wrap
+    code-tools:
+      source: false
+      toggle: true
+      caption: "Show code"
+    embed-resources: true

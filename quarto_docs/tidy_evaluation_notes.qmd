@@ -1,19 +1,15 @@
 ---
-title: "Tidy evalulation notes"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Tidy evalulation notes}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "Tidy evaluation notes"
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: html
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  eval = TRUE,
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 ```{r}
 suppressWarnings({
@@ -245,7 +241,7 @@ penguins |>
                     unit = "gram")
 ```
 
--   quote constant parameters and unquote using **.data[[ ]]**
+-   quote constant parameters and unquote using **.data\[\[ \]\]**
 
 ```{r}
 # .data[[ ]] pronoun is used when parameter values are strings, to distinguish from using environment constant values identified by the .env pronoun 

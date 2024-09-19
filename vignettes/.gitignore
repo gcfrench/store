@@ -1,5 +1,4 @@
 *.html
 *.R
-example.Rmd
 vignettes/output/
 *.png

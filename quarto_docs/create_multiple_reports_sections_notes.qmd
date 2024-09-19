@@ -1,22 +1,15 @@
 ---
 title: "Create multiple reports and sections"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Create multiple reports and sections}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  markdown: 
-    wrap: 80
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: html
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
 ---
-
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  eval = FALSE,
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 This document goes through the R Markdown scripts used create multiple reports
 containing mulitple sections, by splitting and outputting data both within a

@@ -18,15 +18,20 @@ build_quarto_article <- function(all_files) {
       # render quarto document as html
       quarto::quarto_render(fs::path(directory_name, glue::glue("{file_name}.qmd")), output_format = "html")
 
-      # move html document to docs/articles folder
-      fs::file_move(fs::path(directory_name, glue::glue("{file_name}.html")),
-                    fs::path(here::here(), "docs", "articles", glue::glue("{file_name}.html")))
+      # move html document to docs/articles or docs/archive/articles folder
+      if (stringr::str_detect(directory_name, "archive")) {
+        fs::file_move(fs::path(directory_name, glue::glue("{file_name}.html")),
+                      fs::path(here::here(), "docs", "articles", "archive", glue::glue("{file_name}.html")))
+      } else {
+        fs::file_move(fs::path(directory_name, glue::glue("{file_name}.html")),
+                      fs::path(here::here(), "docs", "articles", glue::glue("{file_name}.html")))
+      }
     }
 
     if (all_files) {
 
       # iterate through all quarto documents
-      fs::dir_ls("quarto_docs", glob = "*.qmd") |>
+      fs::dir_ls("quarto_docs", glob = "*.qmd", recurse = TRUE) |>
         purrr::walk(quarto_to_html)
     } else {
 
@@ -183,14 +188,6 @@ build_child_project <- function() {
   usethis::use_version(which = "patch")
 
 }
-
-
-
-
-
-
-
-
 
 
 

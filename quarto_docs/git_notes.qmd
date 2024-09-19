@@ -1,19 +1,15 @@
 ---
 title: "Git and GitHub notes"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Git and GitHub notes}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: html
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
 ---
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  eval = FALSE,
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 These notes were made whilst going through Jenny Bryan's [Happy Git and GitHub for the useR](https://happygitwithr.com/) instructions.
 

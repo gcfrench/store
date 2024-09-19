@@ -1,19 +1,15 @@
 ---
 title: "PostgreSQL Database notes"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{PostgreSQL Database notes}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+author: "Graham French"
+date-modified: "`r lubridate::today()`"
+format: html
+execute: 
+  eval: false
+knitr:
+  opts_chunk:
+    comment: "#>"
+editor: visual
 ---
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  eval = FALSE,
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 ```{r eval=TRUE, echo=FALSE}
 # This is included to allow the markdown document to knit when eval = FALSE

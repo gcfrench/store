@@ -2,29 +2,7 @@
 title: "Validation checks"
 author: "Graham French"
 date-modified: "`r lubridate::today()`"
-vignette: >
-  %\VignetteIndexEntry{Validation checks}
-  %\VignetteEngine{quarto::html}
-  %\VignetteEncoding{UTF-8}
-format: 
-  html:
-    toc: true
-    code-fold: show
-    code-summary: "Code"
-    code-overflow: wrap
-    code-tools:
-      source: false
-      toggle: true
-      caption: "Show code"
-    embed-resources: true
-  typst:
-    margin:
-      top: 2cm
-      bottom: 2cm
-      left: 2cm
-      right: 2cm
-  jira: default
-  gfm: default
+format: html
 execute: 
   eval: false
 knitr:

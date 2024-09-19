@@ -1,4 +1,8 @@
-## store 1.4.0
+## store 1.5.0
+
+-   updated Rmarkdown vignettes to [quarto](https://quarto.org/) documents.
+
+## store 1.4.0 <font size="4">2024-09-19</font>
 
 -   Add **build_documentation** and **build_child_project** functions to build package's documentation pages, including quarto documents and vignettes, and update project before creating a backup child copy
 -   Updated **Validation checks** document following archiving of the **assertive** packages on CRAN
