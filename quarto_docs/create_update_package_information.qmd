@@ -659,8 +659,7 @@ devtools::build_readme()
 
 ## Send to another machine
 
-**pkgbuild::build** creates a bundled package (tar.gz file) from the source package to send to other machine
-**pkgbuild::build(binary = TRUE)** creates a binary package (.zip)
+**pkgbuild::build** creates a bundled package (tar.gz file) from the source package to send to other machine **pkgbuild::build(binary = TRUE)** creates a binary package (.zip)
 
 ```{r}
 # bundaled package

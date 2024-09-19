@@ -1,3 +1,5 @@
+# store 1.5.1
+
 ## store 1.5.0
 
 -   updated Rmarkdown vignettes to [quarto](https://quarto.org/) documents.

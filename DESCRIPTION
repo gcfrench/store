@@ -1,16 +1,13 @@
 Package: store
 Title: Store commonly used functions and lookups
-Version: 1.5.0
+Version: 1.5.1
 Authors@R: 
-    person(given = "Graham",
-           family = "French",
-           role = c("aut", "cre"),
-           email = "gcfrench@googlemail.com")
-Description: This package stores the commonly used functions
-    and lookups, along with function tests and documentation.  These can
-    be then used when creating new packages by copy and pasting the
-    relevant R scripts and associated test scripts into the new package,
-    as well as updating the pkgdown file.
+    person("Graham", "French", , "gcfrench@googlemail.com", role = c("aut", "cre"))
+Description: This package stores the commonly used functions and lookups,
+    along with function tests and documentation.  These can be then used
+    when creating new packages by copy and pasting the relevant R scripts
+    and associated test scripts into the new package, as well as updating
+    the pkgdown file.
 License: CC0
 URL: https://gcfrench.github.io/store
 BugReports: https://github.com/gcfrench/store/issues
@@ -19,17 +16,20 @@ Depends:
 Imports: 
     arrow,
     assertthat (>= 0.2.1),
+    attachment,
     clipr,
     corrplot (>= 0.92),
     daff,
     data.validator,
     DBI (>= 1.1.2),
+    devtools,
     dlookr (>= 0.5.6),
     dplyr (>= 1.0.8),
     fs (>= 1.5.2),
     ggplot2 (>= 3.3.5),
     glue (>= 1.6.2),
     gridExtra (>= 2.3),
+    here,
     httr (>= 1.4.2),
     inspectdf (>= 0.0.11),
     janitor,
@@ -47,6 +47,7 @@ Imports:
     ragg (>= 1.2.2),
     reactable (>= 0.2.3),
     readr (>= 2.1.2),
+    renv,
     rlang (>= 1.0.2),
     RMariaDB (>= 1.2.1),
     RPostgres (>= 1.4.3),
@@ -56,36 +57,13 @@ Imports:
     tibble,
     tidyr (>= 1.2.0),
     tidyselect,
-    tmap,
     units,
-    vctrs (>= 0.4.1),
-    waldo
+    usethis,
+    vctrs (>= 0.4.1)
 Suggests: 
-    assertive,
-    assertr,
-    attachment,
-    broom,
-    devtools,
-    forcats,
-    furrr,
-    future,
-    gitcreds,
-    golem,
-    gt (>= 0.4.0),
-    here,
-    igraph,
     knitr (>= 1.38),
-    lobstr,
-    lubridate,
-    pagedown,
-    palmerpenguins (>= 0.1.0),
-    pkgbuild,
-    raster,
-    remotes,
-    renv,
     rmarkdown (>= 2.13),
-    testthat (>= 3.0.0),
-    usethis
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
