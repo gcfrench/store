@@ -151,6 +151,8 @@ adelie |>
 ```{r}
 #| column: page-inset-right
 
+# Issue with using within_bounds predicate function, setting upper.bounds to more than 1,050,000 or Inf and allow.na = FALSE leads to Error in data.frame : arguments imply differing number of rows. Use validate_if with exp = FIELDNAME < 0 to set lower bound with no upper bound. This also includes equivalent of not_na failing missing values
+
 adelie |> 
   validate(name = "Restricted values") |> 
   validate_if(description = "Warn if values in a single column are above a defined value or are missing",
