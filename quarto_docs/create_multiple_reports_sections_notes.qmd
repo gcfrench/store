@@ -11,41 +11,27 @@ knitr:
 editor: visual
 ---
 
-This document goes through the R Markdown scripts used create multiple reports
-containing mulitple sections, by splitting and outputting data both within a
-single report and across multiple reports. The use of child documents within a
-report is further described in section 16.4 of Yihui Xie *et al.* [R Markdown
-Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/child-document.html).
+This document goes through the R Markdown scripts used create multiple reports containing mulitple sections, by splitting and outputting data both within a single report and across multiple reports. The use of child documents within a report is further described in section 16.4 of Yihui Xie *et al.* [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/child-document.html).
 
-This example generates a report for each penguin species' measurements, taken at
-each of their locations, with the measurements split by individual year within
-each report. The penguin measurements are taken from the palmerpenguins
-package's [penguin
-dataset](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html).
+This example generates a report for each penguin species' measurements, taken at each of their locations, with the measurements split by individual year within each report. The penguin measurements are taken from the palmerpenguins package's [penguin dataset](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html).
 
-Creating the reports requires two R Markdown scripts. The first R Markdown,
-extracts the unique list of parameters required to create each report, which in
-this example are the unique species and location names. These parameters are
-passed onto the second R Markdown script which then creates the report,
-splitting the report into child templates that produce each of the sections
-within the report. In the example this produces a table of penguin measurements
-for each year.
+Creating the reports requires two R Markdown scripts. The first R Markdown, extracts the unique list of parameters required to create each report, which in this example are the unique species and location names. These parameters are passed onto the second R Markdown script which then creates the report, splitting the report into child templates that produce each of the sections within the report. In the example this produces a table of penguin measurements for each year.
 
 ![](../man/figures/penguin_measurements_table.png){width="532"}
 
-Example table of penguin measurements, one of the yearly tables within a one of
-the penguin species on a particular island reports.
+Example table of penguin measurements, one of the yearly tables within a one of the penguin species on a particular island reports.
 
 ## First R Markdown script (**penguin_measurements_report_run)**
 
-This script is the one to run, iteratively passing the parameters into the
-second parameterized R Markdown script.
+This script is the one to run, iteratively passing the parameters into the second parameterized R Markdown script.
 
 ### YAML header
 
-    ---
-    output: html_document
-    ---
+```         
+---
+output: html_document
+---
+```
 
 ### Package libraries
 
@@ -63,8 +49,7 @@ suppressPackageStartupMessages({
 
 ### Create directory
 
-This creates the directory to save the reports, in this example a reports folder
-is created in the temporary directory.
+This creates the directory to save the reports, in this example a reports folder is created in the temporary directory.
 
 ```{r}
 dir_create(path(tempdir(), "reports"))
@@ -72,11 +57,7 @@ dir_create(path(tempdir(), "reports"))
 
 ### Run report function
 
-This function takes the penguin details and passes them onto the
-rmarkdown::render function to be used in the second parameterized R Markdown
-script. The function is wrapped by the purrr::safely function so that a report
-generating an error is skipped rather than stopping the code running through the
-later iterations.
+This function takes the penguin details and passes them onto the rmarkdown::render function to be used in the second parameterized R Markdown script. The function is wrapped by the purrr::safely function so that a report generating an error is skipped rather than stopping the code running through the later iterations.
 
 ```{r}
 #' @Title
@@ -108,9 +89,7 @@ safe_run_report <- safely(run_report)
 
 ### Get penguin details
 
-The species and island names for each penguin species on each island are
-individually passed into the **run_report** function to be used as parameters in
-the second parameterized R Markdown script.
+The species and island names for each penguin species on each island are individually passed into the **run_report** function to be used as parameters in the second parameterized R Markdown script.
 
 ```{r}
 penguin_details <- penguins %>% 
@@ -125,15 +104,16 @@ penguin_details %>%
 
 ### YAML header
 
-Penguins details passed in as parameters using the params section with
-NA_character\_ as the default.
+Penguins details passed in as parameters using the params section with NA_character\_ as the default.
 
-    ---
-    output: html_document
-    params:
-      species_name: NA_character_
-      island_name: NA_character_
-    ---
+```         
+---
+output: html_document
+params:
+  species_name: NA_character_
+  island_name: NA_character_
+---
+```
 
 ### Knitr options
 
@@ -160,8 +140,7 @@ suppressPackageStartupMessages({
 
 ### Get penguin details
 
-Penguins details taken from palmerpenguins' penguin dataset filtered on species
-and island name.
+Penguins details taken from palmerpenguins' penguin dataset filtered on species and island name.
 
 ```{r}
 # Assign parameterized values
@@ -182,9 +161,7 @@ year_value <- penguin_data %>%
 
 ### Report text
 
-Report text dynamically including the penguin's report species and island name,
-along with the year range over which the measurements were collected for this
-particular penguin species on a particular island.
+Report text dynamically including the penguin's report species and island name, along with the year range over which the measurements were collected for this particular penguin species on a particular island.
 
 ```{r eval=FALSE}
 ## `r species_name` penguins on `r island_name` island
@@ -242,9 +219,7 @@ table_measurements <- function(data){
 
 ### Child chunk R Markdown code
 
-Dynamically create a R Markdown code chunk to call the table measurements
-function, creating a table of penguin measurements for a particular year. The R
-Markdown chunk is created dynamically using the **knitr::knit_child** function.
+Dynamically create a R Markdown code chunk to call the table measurements function, creating a table of penguin measurements for a particular year. The R Markdown chunk is created dynamically using the **knitr::knit_child** function.
 
 ```{r results='asis'}
 #' @title

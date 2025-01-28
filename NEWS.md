@@ -1,6 +1,6 @@
-# store 1.5.1
+## store 1.5.2
 
-## store 1.5.0
+## store 1.5.0 <font size="4">2024-11-26</font>
 
 -   updated Rmarkdown vignettes to [quarto](https://quarto.org/) documents.
 

@@ -1,6 +1,6 @@
 Package: store
 Title: Store commonly used functions and lookups
-Version: 1.5.1
+Version: 1.5.2
 Authors@R: 
     person("Graham", "French", , "gcfrench@googlemail.com", role = c("aut", "cre"))
 Description: This package stores the commonly used functions and lookups,
